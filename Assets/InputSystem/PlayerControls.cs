@@ -136,6 +136,178 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SummonClone"",
+            ""id"": ""bbc6c3f2-d607-4eb2-99fd-0cecae19451c"",
+            ""actions"": [
+                {
+                    ""name"": ""InitiateSummon"",
+                    ""type"": ""Button"",
+                    ""id"": ""15f29e6b-8417-43f6-bdf9-449a1e2f32c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SummonLocationMouse"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""fb0ba0a8-b25b-4d49-bf85-78c22294885e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SummonSpawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""b47245b7-7c97-4efa-824b-15b350482538"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExitSummonLocation"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7b4ed52-ec4a-4f89-914c-bce74dd2c874"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExitCrystalIris"",
+                    ""type"": ""Button"",
+                    ""id"": ""51bf1880-6f7c-45f3-95ff-795a4aa0975a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SummonLocationGamepad"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""609baed9-e726-48fa-a89b-a640a907dafc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8ee77b07-1c30-4255-ae23-14bee4f68948"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SummonLocationMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a491595f-d6d6-4175-8c0a-9d8ed7293972"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SummonSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e26a3248-314e-43fa-9b6e-44ec44441afb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SummonSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c48c982-b200-48b6-b3b6-d78b0250ab21"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InitiateSummon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd38ac55-dce5-4057-a5f7-39d35c0c474c"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""InitiateSummon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2eb649f-7e3d-4892-b02d-fadd4e2cf0c4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExitSummonLocation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7722c407-f470-42ae-91fc-709545bb29e2"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ExitSummonLocation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5afeecf5-7b4f-4c16-acc4-f73d943f9d3a"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExitCrystalIris"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f09fbe0-ab2d-4d0a-9494-a1f97996bb56"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ExitCrystalIris"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f7ce01c-ad1a-4158-9134-378d493836cc"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=5,y=5)"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SummonLocationGamepad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -172,6 +344,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
+        // SummonClone
+        m_SummonClone = asset.FindActionMap("SummonClone", throwIfNotFound: true);
+        m_SummonClone_InitiateSummon = m_SummonClone.FindAction("InitiateSummon", throwIfNotFound: true);
+        m_SummonClone_SummonLocationMouse = m_SummonClone.FindAction("SummonLocationMouse", throwIfNotFound: true);
+        m_SummonClone_SummonSpawn = m_SummonClone.FindAction("SummonSpawn", throwIfNotFound: true);
+        m_SummonClone_ExitSummonLocation = m_SummonClone.FindAction("ExitSummonLocation", throwIfNotFound: true);
+        m_SummonClone_ExitCrystalIris = m_SummonClone.FindAction("ExitCrystalIris", throwIfNotFound: true);
+        m_SummonClone_SummonLocationGamepad = m_SummonClone.FindAction("SummonLocationGamepad", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +448,79 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // SummonClone
+    private readonly InputActionMap m_SummonClone;
+    private ISummonCloneActions m_SummonCloneActionsCallbackInterface;
+    private readonly InputAction m_SummonClone_InitiateSummon;
+    private readonly InputAction m_SummonClone_SummonLocationMouse;
+    private readonly InputAction m_SummonClone_SummonSpawn;
+    private readonly InputAction m_SummonClone_ExitSummonLocation;
+    private readonly InputAction m_SummonClone_ExitCrystalIris;
+    private readonly InputAction m_SummonClone_SummonLocationGamepad;
+    public struct SummonCloneActions
+    {
+        private @PlayerControls m_Wrapper;
+        public SummonCloneActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @InitiateSummon => m_Wrapper.m_SummonClone_InitiateSummon;
+        public InputAction @SummonLocationMouse => m_Wrapper.m_SummonClone_SummonLocationMouse;
+        public InputAction @SummonSpawn => m_Wrapper.m_SummonClone_SummonSpawn;
+        public InputAction @ExitSummonLocation => m_Wrapper.m_SummonClone_ExitSummonLocation;
+        public InputAction @ExitCrystalIris => m_Wrapper.m_SummonClone_ExitCrystalIris;
+        public InputAction @SummonLocationGamepad => m_Wrapper.m_SummonClone_SummonLocationGamepad;
+        public InputActionMap Get() { return m_Wrapper.m_SummonClone; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SummonCloneActions set) { return set.Get(); }
+        public void SetCallbacks(ISummonCloneActions instance)
+        {
+            if (m_Wrapper.m_SummonCloneActionsCallbackInterface != null)
+            {
+                @InitiateSummon.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateSummon;
+                @InitiateSummon.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateSummon;
+                @InitiateSummon.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateSummon;
+                @SummonLocationMouse.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonLocationMouse;
+                @SummonLocationMouse.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonLocationMouse;
+                @SummonLocationMouse.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonLocationMouse;
+                @SummonSpawn.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonSpawn;
+                @SummonSpawn.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonSpawn;
+                @SummonSpawn.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonSpawn;
+                @ExitSummonLocation.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitSummonLocation;
+                @ExitSummonLocation.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitSummonLocation;
+                @ExitSummonLocation.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitSummonLocation;
+                @ExitCrystalIris.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCrystalIris;
+                @ExitCrystalIris.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCrystalIris;
+                @ExitCrystalIris.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCrystalIris;
+                @SummonLocationGamepad.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonLocationGamepad;
+                @SummonLocationGamepad.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonLocationGamepad;
+                @SummonLocationGamepad.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonLocationGamepad;
+            }
+            m_Wrapper.m_SummonCloneActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @InitiateSummon.started += instance.OnInitiateSummon;
+                @InitiateSummon.performed += instance.OnInitiateSummon;
+                @InitiateSummon.canceled += instance.OnInitiateSummon;
+                @SummonLocationMouse.started += instance.OnSummonLocationMouse;
+                @SummonLocationMouse.performed += instance.OnSummonLocationMouse;
+                @SummonLocationMouse.canceled += instance.OnSummonLocationMouse;
+                @SummonSpawn.started += instance.OnSummonSpawn;
+                @SummonSpawn.performed += instance.OnSummonSpawn;
+                @SummonSpawn.canceled += instance.OnSummonSpawn;
+                @ExitSummonLocation.started += instance.OnExitSummonLocation;
+                @ExitSummonLocation.performed += instance.OnExitSummonLocation;
+                @ExitSummonLocation.canceled += instance.OnExitSummonLocation;
+                @ExitCrystalIris.started += instance.OnExitCrystalIris;
+                @ExitCrystalIris.performed += instance.OnExitCrystalIris;
+                @ExitCrystalIris.canceled += instance.OnExitCrystalIris;
+                @SummonLocationGamepad.started += instance.OnSummonLocationGamepad;
+                @SummonLocationGamepad.performed += instance.OnSummonLocationGamepad;
+                @SummonLocationGamepad.canceled += instance.OnSummonLocationGamepad;
+            }
+        }
+    }
+    public SummonCloneActions @SummonClone => new SummonCloneActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -290,5 +543,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface ISummonCloneActions
+    {
+        void OnInitiateSummon(InputAction.CallbackContext context);
+        void OnSummonLocationMouse(InputAction.CallbackContext context);
+        void OnSummonSpawn(InputAction.CallbackContext context);
+        void OnExitSummonLocation(InputAction.CallbackContext context);
+        void OnExitCrystalIris(InputAction.CallbackContext context);
+        void OnSummonLocationGamepad(InputAction.CallbackContext context);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class SummonCrystalIris : MonoBehaviour
 {
@@ -30,6 +31,18 @@ public class SummonCrystalIris : MonoBehaviour
 
     private Vector3 mPos;
     
+    public TextMeshProUGUI prototypeModeText;
+    public bool customMode;
+    public bool presetMode;
+    
+    public Transform[] spawnTriggers = new Transform[3];
+    public Transform[] cloneSpawns = new Transform[3];
+
+    public bool canSpawn;
+    public bool inCrystal;
+
+    private int[] whatSpawnToSummon = new int[3];
+    
     void Awake()
     {
         summonControls = new PlayerControls();
@@ -38,21 +51,37 @@ public class SummonCrystalIris : MonoBehaviour
         summonCursor.gameObject.SetActive(false);
         basicMovementIris = FindObjectOfType<BasicMovementIris>();
         deltaAccumulator = basicMovementIris.irisRB.transform.position;
+
+        prototypeModeText.text = "Please select a prototype mode...";
+        prototypeModeText.color = Color.red;
+        customMode = false;
+        presetMode = false;
+        
+        InstantiateSpawnTriggers(false);
+        InstantiateCloneSpawn(-1);
+
+        canSpawn = true;
+        inCrystal = false;
     }
     
     void FixedUpdate()
     {
         InitiateSummon();
         
-        if (canSummon == true)
+        if (canSummon)
         {
             SummonLocation();
+        }
+
+        if (canSpawn)
+        {
+            SpawnLocation();
         }
     }
 
     void InitiateSummon()
     {
-        if (initiateSummon.IsPressed() && canInitiate)
+        if (initiateSummon.IsPressed() && canInitiate && customMode)
         {
             canInitiate = false;
             canSummon = true;
@@ -62,6 +91,8 @@ public class SummonCrystalIris : MonoBehaviour
 
     void SummonLocation()
     {
+        if (customMode)
+        {
             summonCursor.gameObject.SetActive(true);
 
             GamepadLocation();
@@ -73,7 +104,7 @@ public class SummonCrystalIris : MonoBehaviour
                 canSummon = false;
                 summonCursor.gameObject.SetActive(false);
             }
-            
+
             if (exitSummonLocation.IsPressed())
             {
                 canInitiate = true;
@@ -81,6 +112,16 @@ public class SummonCrystalIris : MonoBehaviour
                 basicMovementIris.canMove = true;
                 summonCursor.gameObject.SetActive(false);
             }
+        }
+    }
+
+    void SpawnLocation()
+    {
+        if (presetMode && initiateSummon.IsPressed())
+        {
+            CheckSpawnsThenSummon();
+            Debug.Log("works");
+        }
     }
 
     void MouseLocation()
@@ -125,6 +166,9 @@ public class SummonCrystalIris : MonoBehaviour
     {
         Instantiate(CrystalIrisPrefab, spawnPos + Vector3.up, Quaternion.identity);
         basicMovementIris.canMove = false;
+        
+        canSpawn = false;
+        inCrystal = true;
     }
 
     private void OnEnable()
@@ -151,5 +195,105 @@ public class SummonCrystalIris : MonoBehaviour
         summonLocationGamepad.Disable();
         exitSummonLocation.Disable();
         summonClone.Disable();
+    }
+
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(20, 90, 300, 50), "Clone Prototype: Custom Spawn Location") && !inCrystal)
+        {
+            prototypeModeText.text = "Prototype Mode: Custom Spawn Location";
+            prototypeModeText.color = Color.green;
+
+            customMode = true;
+            presetMode = false;
+            
+            InstantiateSpawnTriggers(false);
+            InstantiateCloneSpawn(-1);
+        }
+        
+        if (GUI.Button(new Rect(20, 10, 300, 50), "Clone Prototype: Preset Spawn Location") && !inCrystal)
+        {
+            prototypeModeText.text = "Prototype Mode: Preset Spawn Location";
+            prototypeModeText.color = Color.green;
+            
+            presetMode = true;
+            customMode = false;
+            
+            InstantiateSpawnTriggers(true);
+
+        }
+    }
+
+    private void InstantiateSpawnTriggers(bool instantiate)
+    {
+        if (instantiate)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                spawnTriggers[i].GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+        
+        else if (!instantiate)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                spawnTriggers[i].GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+    }
+    
+    private void InstantiateCloneSpawn(int spawnNumber)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (spawnNumber == i)
+            {
+                cloneSpawns[i].GetComponent<MeshRenderer>().enabled = true;
+                whatSpawnToSummon[i] = 1;
+            }
+            else
+            {
+                cloneSpawns[i].GetComponent<MeshRenderer>().enabled = false;
+                whatSpawnToSummon[i] = 0;
+            }
+        }
+    }
+
+    private void CheckSpawnsThenSummon()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (whatSpawnToSummon[i] == 1)
+            {
+                cloneSpawns[i].GetComponent<MeshRenderer>().enabled = false;
+                
+                SummonClone(cloneSpawns[i].position);
+                
+                InstantiateSpawnTriggers(false);
+                canSpawn = false;
+                canInitiate = false;
+                inCrystal = true;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (presetMode && !inCrystal)
+        {
+            if (other.gameObject.CompareTag("SpawnTrigger1"))
+            {
+                InstantiateCloneSpawn(0);
+            }
+            else if (other.gameObject.CompareTag("SpawnTrigger2"))
+            {
+                InstantiateCloneSpawn(1);
+            }
+            else if (other.gameObject.CompareTag("SpawnTrigger3"))
+            {
+                InstantiateCloneSpawn(2);
+            }
+        }
     }
 }

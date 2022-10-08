@@ -24,6 +24,12 @@ public class ExitCrystalIris : MonoBehaviour
         {
             basicMovementIris.canMove = true;
             summonCrystalIris.canInitiate = true;
+            summonCrystalIris.canSpawn = true;
+            summonCrystalIris.inCrystal = false;
+            summonCrystalIris.presetMode = false;
+            summonCrystalIris.customMode = false;
+            summonCrystalIris.prototypeModeText.text = "Please select a prototype mode...";
+            summonCrystalIris.prototypeModeText.color = Color.red;
             Destroy(this.gameObject);
         }
     }

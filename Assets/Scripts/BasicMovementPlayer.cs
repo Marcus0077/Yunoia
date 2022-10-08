@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BasicMovementIris : MonoBehaviour
+public class BasicMovementPlayer : MonoBehaviour
 {
     // Input variables
     PlayerControls playerControls;
@@ -12,9 +12,11 @@ public class BasicMovementIris : MonoBehaviour
     private InputAction jump;
 
     // Movement variables
-    public Rigidbody irisRB;
+    public Rigidbody playerRB;
     private Vector2 moveDirection = Vector2.zero;
     public float moveSpeed;
+    public bool canMove;
+    public bool isFrozen;
 
     // Jump variables
     public LayerMask whatIsGround;
@@ -23,48 +25,55 @@ public class BasicMovementIris : MonoBehaviour
     private bool isGrounded;
     private float jumpTime;
 
-    public bool canMove;
-    public bool isFrozen;
-
+    // Get references and initialize variables when player spawns.
     void Awake()
     {
         playerControls = new PlayerControls();
+        
         moveSpeed = 4.0f;
         jumpForce = 3.0f;
+        
         canMove = true;
         isFrozen = false;
     }
     
     void FixedUpdate()
     {
+        // If player can move, unfreeze (except rotation) player and
+        // give them control.
         if (canMove == true)
         {
             if (isFrozen)
             {
-                irisRB.constraints = RigidbodyConstraints.FreezeRotation;
+                playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
             }
             
-            MoveIris();
+            MovePlayer();
         }
+        // If player cannot move, freeze player.
         else
         {
-            irisRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
             isFrozen = true;
         }
     }
 
-    void MoveIris()
+    // Applies gravity and movement velocity to player according to movement input.
+    // Also gives option to jump.
+    void MovePlayer()
     {
         moveDirection = move.ReadValue<Vector2>() * moveSpeed;
-        irisRB.velocity = new Vector3(-moveDirection.y, irisRB.velocity.y, moveDirection.x);
+        playerRB.velocity = new Vector3(-moveDirection.y, playerRB.velocity.y, moveDirection.x);
         
-        JumpIris();
+        JumpPlayer();
         
-        irisRB.AddForce(Physics.gravity * 1.5f * irisRB.mass); 
+        playerRB.AddForce(Physics.gravity * 1.5f * playerRB.mass); 
     }
 
-    void JumpIris()
+    // Applies jump force to player if they press the jump button and
+    // if they are on the ground.
+    void JumpPlayer()
     {
         RaycastHit hit;
         if (Physics.Raycast(groundPoint.position, Vector3.down, out hit, 0.3f, whatIsGround))
@@ -78,10 +87,11 @@ public class BasicMovementIris : MonoBehaviour
 
         if (jump.IsPressed() && isGrounded)
         {
-            irisRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+            playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
         }
     }
     
+    // Enable input action map controls.
     private void OnEnable()
     {
         move = playerControls.Movement.Move;
@@ -91,6 +101,7 @@ public class BasicMovementIris : MonoBehaviour
         jump.Enable();
     }
 
+    // Disable input action map controls.
     private void OnDisable()
     {
         move.Disable();

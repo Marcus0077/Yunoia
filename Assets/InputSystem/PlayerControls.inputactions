@@ -120,7 +120,7 @@
             "id": "bbc6c3f2-d607-4eb2-99fd-0cecae19451c",
             "actions": [
                 {
-                    "name": "InitiateSummon",
+                    "name": "InitiateCustomSummon",
                     "type": "Button",
                     "id": "15f29e6b-8417-43f6-bdf9-449a1e2f32c7",
                     "expectedControlType": "Button",
@@ -129,25 +129,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SummonLocationMouse",
-                    "type": "PassThrough",
-                    "id": "fb0ba0a8-b25b-4d49-bf85-78c22294885e",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SummonSpawn",
-                    "type": "Button",
-                    "id": "b47245b7-7c97-4efa-824b-15b350482538",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ExitSummonLocation",
+                    "name": "ExitCustomSummon",
                     "type": "Button",
                     "id": "f7b4ed52-ec4a-4f89-914c-bce74dd2c874",
                     "expectedControlType": "Button",
@@ -156,18 +138,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ExitCrystalIris",
-                    "type": "Button",
-                    "id": "51bf1880-6f7c-45f3-95ff-795a4aa0975a",
+                    "name": "CustomSummonMouse",
+                    "type": "PassThrough",
+                    "id": "fb0ba0a8-b25b-4d49-bf85-78c22294885e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CustomSummonGamepad",
+                    "type": "PassThrough",
+                    "id": "609baed9-e726-48fa-a89b-a640a907dafc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SummonLocationGamepad",
-                    "type": "PassThrough",
-                    "id": "609baed9-e726-48fa-a89b-a640a907dafc",
+                    "name": "SummonAClone",
+                    "type": "Button",
+                    "id": "b47245b7-7c97-4efa-824b-15b350482538",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitClone",
+                    "type": "Button",
+                    "id": "51bf1880-6f7c-45f3-95ff-795a4aa0975a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -191,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SummonLocationMouse",
+                    "action": "CustomSummonMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -202,18 +202,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SummonSpawn",
+                    "action": "SummonAClone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "e26a3248-314e-43fa-9b6e-44ec44441afb",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "SummonSpawn",
+                    "action": "SummonAClone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -224,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "InitiateSummon",
+                    "action": "InitiateCustomSummon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -235,29 +235,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "InitiateSummon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f2eb649f-7e3d-4892-b02d-fadd4e2cf0c4",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "ExitSummonLocation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7722c407-f470-42ae-91fc-709545bb29e2",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "ExitSummonLocation",
+                    "action": "InitiateCustomSummon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -268,7 +246,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ExitCrystalIris",
+                    "action": "ExitClone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -279,18 +257,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "ExitCrystalIris",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8f7ce01c-ad1a-4158-9134-378d493836cc",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "ScaleVector2(x=5,y=5)",
-                    "groups": "Controller",
-                    "action": "SummonLocationGamepad",
+                    "action": "ExitClone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -313,6 +280,39 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "SwitchPlaces",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f7ce01c-ad1a-4158-9134-378d493836cc",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=5,y=5)",
+                    "groups": "Controller",
+                    "action": "CustomSummonGamepad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2eb649f-7e3d-4892-b02d-fadd4e2cf0c4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ExitCustomSummon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7722c407-f470-42ae-91fc-709545bb29e2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ExitCustomSummon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

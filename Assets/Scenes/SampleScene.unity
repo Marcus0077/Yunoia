@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 356855714}
   - component: {fileID: 356855713}
   m_Layer: 0
-  m_Name: CloneSpawn3
+  m_Name: PresetSummonSpawn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -670,8 +670,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493955570}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.25, y: 10.436124, z: -15.31}
-  m_LocalScale: {x: 14.52917, y: 2.4738636, z: 1}
+  m_LocalPosition: {x: -9.36, y: 10.436124, z: -14.8}
+  m_LocalScale: {x: 22.775927, y: 2.4738636, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 200212501}
@@ -767,8 +767,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524650018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.93, y: 6.785435, z: -2.88}
-  m_LocalScale: {x: 2, y: 2, z: 1.60498}
+  m_LocalPosition: {x: -0.93, y: 6.785435, z: 4.38}
+  m_LocalScale: {x: 16.022346, y: 2, z: 7.547401}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1412688982}
@@ -865,7 +865,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620972008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: 10.436124, z: -8.71}
+  m_LocalPosition: {x: 0.27, y: 10.436124, z: -2.94}
   m_LocalScale: {x: 20.27996, y: 2.4738636, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 768669701}
   - component: {fileID: 768669700}
   m_Layer: 0
-  m_Name: SpawnTrigger2
+  m_Name: PresetSummonTrigger2
   m_TagString: SpawnTrigger2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 808098860}
   - component: {fileID: 808098859}
   m_Layer: 0
-  m_Name: SpawnTrigger1
+  m_Name: PresetSummonTrigger1
   m_TagString: SpawnTrigger1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,6 +1354,103 @@ Transform:
   m_Father: {fileID: 256750860}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &880275566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880275570}
+  - component: {fileID: 880275569}
+  - component: {fileID: 880275568}
+  - component: {fileID: 880275567}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: CloneWall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &880275567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880275566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &880275568
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880275566}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 811bc772e41a2804fbfd3d0a4054273d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &880275569
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880275566}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &880275570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880275566}
+  m_LocalRotation: {x: -0, y: 0.7123195, z: -0, w: 0.70185536}
+  m_LocalPosition: {x: 15.87, y: 1.11, z: 10.35}
+  m_LocalScale: {x: 2.96968, y: 1.7362505, z: 0.20732}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 90.848, z: 0}
 --- !u!1 &887897446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1644,7 @@ GameObject:
   - component: {fileID: 1020522120}
   - component: {fileID: 1020522119}
   m_Layer: 0
-  m_Name: CloneSpawn1
+  m_Name: PresetSummonSpawn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41625002, y: 0.8355576}
   m_AnchorMax: {x: 0.97625, y: 0.93777245}
-  m_AnchoredPosition: {x: 63, y: -362}
+  m_AnchoredPosition: {x: 63, y: -336}
   m_SizeDelta: {x: -248, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1112857525
@@ -1710,7 +1807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Timer Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1737,8 +1834,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1773,7 +1870,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 7.1832504, y: 0, z: -72.447754, w: 16.877457}
+  m_margin: {x: -87.939095, y: -4.4472485, z: -11.227158, w: 16.877457}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1998,7 +2095,7 @@ GameObject:
   - component: {fileID: 1350725913}
   - component: {fileID: 1350725915}
   m_Layer: 0
-  m_Name: Iris
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2062,7 +2159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350725907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.42, y: 0.794, z: 12.21}
+  m_LocalPosition: {x: 16.918, y: 0.794, z: 13.15}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2128,15 +2225,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26782891b3739c641b78001d99d48588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  irisRB: {fileID: 1350725913}
+  playerRB: {fileID: 1350725913}
   moveSpeed: 0
+  canMove: 0
+  isFrozen: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundPoint: {fileID: 1639398310}
   jumpForce: 0
-  canMove: 0
-  isFrozen: 0
 --- !u!65 &1350725915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2162,25 +2259,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd70cbc1da36f43b80acf35bbb5744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  summonCursor: {fileID: 1473282632}
-  canInitiate: 0
+  prototypeModeText: {fileID: 36700963}
+  ClonePrefab: {fileID: 5827308682441603353, guid: b8fbd0975a3b42b45a9a9f048c23c726, type: 3}
+  cloneSummoned: 0
+  customSummonCursor: {fileID: 1473282632}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  CrystalIrisPrefab: {fileID: 5827308682441603353, guid: b8fbd0975a3b42b45a9a9f048c23c726, type: 3}
-  prototypeModeText: {fileID: 36700963}
   customMode: 0
-  presetMode: 0
-  spawnTriggers:
+  canInitiateCustom: 0
+  presetSummonTriggers:
   - {fileID: 808098858}
   - {fileID: 768669699}
   - {fileID: 1537001137}
-  cloneSpawns:
+  presetSummonSpawns:
   - {fileID: 1020522117}
   - {fileID: 1362645469}
   - {fileID: 356855711}
-  canSpawn: 0
-  inCrystal: 0
+  presetMode: 0
+  canSummonPreset: 0
 --- !u!1 &1362645468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2290,7 @@ GameObject:
   - component: {fileID: 1362645472}
   - component: {fileID: 1362645471}
   m_Layer: 0
-  m_Name: CloneSpawn2
+  m_Name: PresetSummonSpawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2422,8 +2519,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449869133}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 9.68, y: 10.436124, z: -15.26}
-  m_LocalScale: {x: 14.678931, y: 2.4738636, z: 1}
+  m_LocalPosition: {x: 9.91, y: 10.436124, z: -15.75}
+  m_LocalScale: {x: 24.735466, y: 2.4738636, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 200212501}
@@ -2588,7 +2685,7 @@ GameObject:
   - component: {fileID: 1537001139}
   - component: {fileID: 1537001138}
   m_Layer: 0
-  m_Name: SpawnTrigger3
+  m_Name: PresetSummonTrigger3
   m_TagString: SpawnTrigger3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

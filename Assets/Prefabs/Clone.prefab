@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 5827308682441603359}
   - component: {fileID: 5827308682441603352}
   m_Layer: 0
-  m_Name: Crystal Iris
+  m_Name: Clone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,13 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  irisRB: {fileID: 5827308682441603359}
+  cloneRB: {fileID: 5827308682441603359}
   moveSpeed: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundPoint: {fileID: 5827308682340208283}
   jumpForce: 0
+  timerText: {fileID: 0}
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0

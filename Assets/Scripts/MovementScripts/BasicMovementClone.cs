@@ -5,7 +5,6 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using Unity.VisualScripting;
 
 public class BasicMovementClone : MonoBehaviour
 {

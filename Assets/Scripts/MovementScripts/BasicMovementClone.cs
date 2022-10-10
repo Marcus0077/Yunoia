@@ -8,8 +8,11 @@ using TMPro;
 
 public class BasicMovementClone : MonoBehaviour
 {
-    // UI Timer
-    public TextMeshProUGUI timerText;
+    // UI Cooldown Timer
+    public TextMeshProUGUI cooldownTimerText;
+    
+    // UI In Control
+    public TextMeshProUGUI inControlText;
     
     // Script references
     private BasicMovementPlayer basicMovementPlayer;
@@ -36,7 +39,7 @@ public class BasicMovementClone : MonoBehaviour
 
     // Determines if clone can switch positions with player
     private bool canSwitch;
-    
+
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
@@ -51,8 +54,12 @@ public class BasicMovementClone : MonoBehaviour
         cloneCanMove = true;
         canSwitch = true;
         
-        timerText = GameObject.FindGameObjectWithTag("Timer Text").GetComponent<TextMeshProUGUI>();
-        timerText.text = "Cooldown Timer: ";
+        cooldownTimerText = GameObject.FindGameObjectWithTag("Cooldown Timer").GetComponent<TextMeshProUGUI>();
+        cooldownTimerText.text = "Cooldown Timer: ";
+        
+        inControlText = GameObject.FindGameObjectWithTag("In Control Text").GetComponent<TextMeshProUGUI>();
+        inControlText.color = Color.magenta;
+        inControlText.text = "In Control: Clone";
     }
     
     void FixedUpdate()
@@ -124,22 +131,24 @@ public class BasicMovementClone : MonoBehaviour
         
         if (basicMovementPlayer.canMove == false)
         {
+            inControlText.text = "In Control: Player";
             basicMovementPlayer.canMove = true;
             cloneCanMove = false;
         }
         else if (cloneCanMove == false)
         { 
+            inControlText.text = "In Control: Clone";
             basicMovementPlayer.canMove = false; 
             cloneCanMove = true;
         }
 
         for (int i = 3; i > 0; i--)
         {
-            timerText.text = "Cooldown Timer: " + i;
+            cooldownTimerText.text = "Cooldown Timer: " + i;
             yield return new WaitForSeconds(1);
         }
         
-        timerText.text = "Cooldown Timer: ";
+        cooldownTimerText.text = "Cooldown Timer: ";
         canSwitch = true;
     }
 

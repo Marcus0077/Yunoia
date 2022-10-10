@@ -15,7 +15,7 @@ public class DoorDispersible : Dispersible
         door = doorDisp.Spawn(transform, doorStart);
     }
 
-    public override void HitAction(CharacterMove character, RaycastHit rayHit)
+    public override void HitAction(CharacterMoveOLDVERSION character, RaycastHit rayHit)
     {
         character.lightTarget = null;
         mat.color = doorDisp.newColor;

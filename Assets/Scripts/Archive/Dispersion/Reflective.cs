@@ -5,7 +5,7 @@ using UnityEngine;
 public class Reflective : Dispersible
 {
     Vector3 face, direction;
-    public override void HitAction(CharacterMove character, RaycastHit rayHit)
+    public override void HitAction(CharacterMoveOLDVERSION character, RaycastHit rayHit)
     {
         Reflective_Scriptable reflectiveDisp = (disp as Reflective_Scriptable);
         mat.color = reflectiveDisp.newColor;
@@ -14,7 +14,7 @@ public class Reflective : Dispersible
         Reflect(character, rayHit);
     }
 
-    public void Reflect(CharacterMove character, RaycastHit rayHit)
+    public void Reflect(CharacterMoveOLDVERSION character, RaycastHit rayHit)
     {
         character.lightTarget = null;
         Vector3 roundedAngle = new Vector3(Mathf.Round(rayHit.normal.x), Mathf.Round(rayHit.normal.y),Mathf.Round(rayHit.normal.z));

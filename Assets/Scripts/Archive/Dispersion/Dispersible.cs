@@ -13,7 +13,7 @@ public abstract class Dispersible : MonoBehaviour
         mat = GetComponent<Renderer>().material;
     }
 
-    public abstract void HitAction(CharacterMove character, RaycastHit rayHit);
+    public abstract void HitAction(CharacterMoveOLDVERSION character, RaycastHit rayHit);
 
     // Update is called once per frame
     void Update()

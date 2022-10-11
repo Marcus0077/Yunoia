@@ -41,11 +41,7 @@ public class AbilityPush : MonoBehaviour
         Transform shape;
         shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
         Destroy(shape.GetComponent<Collider>());
-        Vector3 scale = new Vector3();
-        scale.x = radius;
-        scale.y = radius;
-        scale.z = radius;
-        shape.localScale = scale;
+        shape.localScale = new Vector3(radius, radius, radius);
         shape.position = transform.position;
         shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse"); 
         shape.GetComponent<Renderer>().material.color = new Color(1, 1, 1, .5f);

@@ -356,6 +356,76 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Grapple",
+            "id": "7d6cb877-56dc-4baa-bb17-7bb236aa586a",
+            "actions": [
+                {
+                    "name": "ShootHook",
+                    "type": "Button",
+                    "id": "d8fe9231-f463-4da0-afac-847d15a63dd3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CancelHook",
+                    "type": "Button",
+                    "id": "5d6c3782-5563-4d9a-921c-f027647a9caf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d13403ba-52e8-42d9-93f1-467b72b4a8e2",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ShootHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c87cb85-8e1c-4d5c-864b-617008bbcd7b",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ShootHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c91f6ab7-e094-429b-9764-12a55c42223d",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CancelHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc941a43-8eec-40e3-95d7-d2441862c689",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CancelHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

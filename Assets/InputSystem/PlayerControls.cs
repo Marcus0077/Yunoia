@@ -345,7 +345,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""0e5b5e9c-05c9-4d6f-9163-184dbc39e3a7"",
             ""actions"": [
                 {
-                    ""name"": ""Pause Game"",
+                    ""name"": ""PauseGame"",
                     ""type"": ""Button"",
                     ""id"": ""32c4207e-b0f6-46a1-b93e-07cfd3a23ce5"",
                     ""expectedControlType"": ""Button"",
@@ -362,7 +362,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pause Game"",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -373,7 +373,77 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Pause Game"",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Grapple"",
+            ""id"": ""7d6cb877-56dc-4baa-bb17-7bb236aa586a"",
+            ""actions"": [
+                {
+                    ""name"": ""ShootHook"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8fe9231-f463-4da0-afac-847d15a63dd3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelHook"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d6c3782-5563-4d9a-921c-f027647a9caf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d13403ba-52e8-42d9-93f1-467b72b4a8e2"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShootHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c87cb85-8e1c-4d5c-864b-617008bbcd7b"",
+                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ShootHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c91f6ab7-e094-429b-9764-12a55c42223d"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc941a43-8eec-40e3-95d7-d2441862c689"",
+                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CancelHook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -425,7 +495,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_SummonClone_SwitchPlaces = m_SummonClone.FindAction("SwitchPlaces", throwIfNotFound: true);
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
-        m_PauseMenu_PauseGame = m_PauseMenu.FindAction("Pause Game", throwIfNotFound: true);
+        m_PauseMenu_PauseGame = m_PauseMenu.FindAction("PauseGame", throwIfNotFound: true);
+        // Grapple
+        m_Grapple = asset.FindActionMap("Grapple", throwIfNotFound: true);
+        m_Grapple_ShootHook = m_Grapple.FindAction("ShootHook", throwIfNotFound: true);
+        m_Grapple_CancelHook = m_Grapple.FindAction("CancelHook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -636,6 +710,47 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
+
+    // Grapple
+    private readonly InputActionMap m_Grapple;
+    private IGrappleActions m_GrappleActionsCallbackInterface;
+    private readonly InputAction m_Grapple_ShootHook;
+    private readonly InputAction m_Grapple_CancelHook;
+    public struct GrappleActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GrappleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ShootHook => m_Wrapper.m_Grapple_ShootHook;
+        public InputAction @CancelHook => m_Wrapper.m_Grapple_CancelHook;
+        public InputActionMap Get() { return m_Wrapper.m_Grapple; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GrappleActions set) { return set.Get(); }
+        public void SetCallbacks(IGrappleActions instance)
+        {
+            if (m_Wrapper.m_GrappleActionsCallbackInterface != null)
+            {
+                @ShootHook.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnShootHook;
+                @ShootHook.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnShootHook;
+                @ShootHook.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnShootHook;
+                @CancelHook.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+                @CancelHook.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+                @CancelHook.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+            }
+            m_Wrapper.m_GrappleActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ShootHook.started += instance.OnShootHook;
+                @ShootHook.performed += instance.OnShootHook;
+                @ShootHook.canceled += instance.OnShootHook;
+                @CancelHook.started += instance.OnCancelHook;
+                @CancelHook.performed += instance.OnCancelHook;
+                @CancelHook.canceled += instance.OnCancelHook;
+            }
+        }
+    }
+    public GrappleActions @Grapple => new GrappleActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -672,5 +787,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPauseMenuActions
     {
         void OnPauseGame(InputAction.CallbackContext context);
+    }
+    public interface IGrappleActions
+    {
+        void OnShootHook(InputAction.CallbackContext context);
+        void OnCancelHook(InputAction.CallbackContext context);
     }
 }

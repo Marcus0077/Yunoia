@@ -106,15 +106,7 @@ public class BasicMovementClone : MonoBehaviour
     // if they are on the ground.
     void JumpClone()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(groundPoint.position, Vector3.down, out hit, 0.3f, whatIsGround))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+        IsGrounded();
 
         if (jump.IsPressed() && isGrounded)
         {
@@ -180,5 +172,18 @@ public class BasicMovementClone : MonoBehaviour
         move.Disable();
         jump.Disable();
         switchPlaces.Disable();
+    }
+
+    private void IsGrounded()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(groundPoint.position, Vector3.down, out hit, 0.3f, whatIsGround))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 }

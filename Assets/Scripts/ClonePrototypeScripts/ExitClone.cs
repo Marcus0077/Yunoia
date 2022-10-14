@@ -14,6 +14,7 @@ public class ExitClone : MonoBehaviour
     // Script references
     private BasicMovementPlayer basicMovementPlayer;
     private BasicMovementClone basicMovementClone;
+    private SmoothCameraFollow smoothCameraFollow;
     private SummonClone summonClone;
     
     // Input variables
@@ -31,15 +32,15 @@ public class ExitClone : MonoBehaviour
     void Awake()
     {
         summonControls = new PlayerControls();
-        
-        summonClone = FindObjectOfType<SummonClone>();
-        
+
         basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         basicMovementClone = FindObjectOfType<BasicMovementClone>();
+        smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
+        summonClone = FindObjectOfType<SummonClone>();
 
         isRunning = false;
         despawnClone = false;
-        cloneActiveTimer = 10.0f;
+        cloneActiveTimer = 30.0f;
         
         activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
         activeTimerText.color = Color.white;
@@ -52,21 +53,18 @@ public class ExitClone : MonoBehaviour
         // reset prototype text, and destroy clone.
         if (exitClone.IsPressed() || despawnClone)
         {
+            summonClone.cloneSummoned = false;
             basicMovementPlayer.canMove = true;
             
-            summonClone.canInitiateCustom = true;
-            summonClone.canSummonPreset = true;
-            summonClone.cloneSummoned = false;
-            summonClone.presetMode = false;
-            summonClone.customMode = false;
-
+            smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+            
+            summonClone.guidanceText.text = "Welcome to the Clone Summon Prototype! " +
+                                            "Step on the yellow summoning plate to begin!";
+            
+            summonClone.cloneVersionText.text = "";
             basicMovementClone.inControlText.text = "";
-            basicMovementClone.cooldownTimerText.text = "";
             activeTimerText.text = "";
-            
-            summonClone.prototypeModeText.text = "Please select a prototype mode...";
-            summonClone.prototypeModeText.color = Color.red;
-            
+
             Destroy(this.gameObject);
         }
         // If clone is still active, count down.
@@ -93,8 +91,6 @@ public class ExitClone : MonoBehaviour
         }
     }
     
-    
- 
     IEnumerator Blink()
     {
         isRunning = true;

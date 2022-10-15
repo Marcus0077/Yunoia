@@ -10,6 +10,8 @@ public class AbilityPush : MonoBehaviour
     float chargeSpeed = 1, cooldown = 1;
     float chargeTime, timer = -1;
     bool ableToPush;
+    [SerializeField]
+    bool restored;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +69,10 @@ public class AbilityPush : MonoBehaviour
             {
                 timer = Time.time;
                 ableToPush = true;
+                if(!restored)
+                {
+                    PushTargets(minPush);
+                }
             }
             //start charging with animation
         }
@@ -74,7 +80,10 @@ public class AbilityPush : MonoBehaviour
         {
             chargeTime = (Time.time - timer)*chargeSpeed+minPush;
             //start animation
-            PushTargets(Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel+minPush));
+            if(restored)
+            {
+                PushTargets(Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush));
+            }
         }
     }
 }

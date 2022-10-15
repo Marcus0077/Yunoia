@@ -10,11 +10,14 @@ public class BasicMovementClone : MonoBehaviour
 {
     // UI In Control
     public TextMeshProUGUI inControlText;
-    
+
     // Script references
     private BasicMovementPlayer basicMovementPlayer;
     private SmoothCameraFollow smoothCameraFollow;
     private SummonClone summonClone;
+    private ExitClone exitClone;
+    private CombatHandler combatHandler;
+
     
     // Input variables
     PlayerControls playerControls;
@@ -38,13 +41,15 @@ public class BasicMovementClone : MonoBehaviour
 
     public GameObject Wall_1;
     public GameObject Wall_2;
-    
+
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
         basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
+        exitClone = FindObjectOfType<ExitClone>();
+        combatHandler = FindObjectOfType<CombatHandler>();
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
         Wall_2 = GameObject.FindWithTag("GoodWall2");
@@ -62,10 +67,13 @@ public class BasicMovementClone : MonoBehaviour
         
         moveSpeed = 4.0f;
         jumpForce = 3.0f;
+        combatHandler.cloneHP = 3;
+        
+        combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneIsFrozen = false;
         cloneCanMove = true;
-
+        
         inControlText = GameObject.FindGameObjectWithTag("In Control Text").GetComponent<TextMeshProUGUI>();
         inControlText.color = Color.magenta;
         inControlText.text = "In Control: Clone";
@@ -92,6 +100,11 @@ public class BasicMovementClone : MonoBehaviour
             cloneRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
                                    RigidbodyConstraints.FreezeRotation;
             cloneIsFrozen = true;
+        }
+
+        if (combatHandler.cloneHP <= 0)
+        {
+            exitClone.despawnClone = true;
         }
     }
 

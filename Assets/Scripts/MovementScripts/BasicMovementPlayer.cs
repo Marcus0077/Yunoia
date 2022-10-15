@@ -24,6 +24,8 @@ public class BasicMovementPlayer : MonoBehaviour
     public float jumpForce;
     private bool isGrounded;
     private float jumpTime;
+    
+    private Vector2 lookDirection = Vector2.zero;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -49,12 +51,14 @@ public class BasicMovementPlayer : MonoBehaviour
                 isFrozen = false;
             }
             
+            LookPlayer();
             MovePlayer();
         }
         // If player cannot move, freeze player.
         else
         {
-            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
+                                   RigidbodyConstraints.FreezeRotation;
             isFrozen = true;
         }
     }
@@ -81,6 +85,12 @@ public class BasicMovementPlayer : MonoBehaviour
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
         }
+    }
+
+    void LookPlayer()
+    {
+        if (move.IsPressed())
+            transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
     }
     
     // Enable input action map controls.

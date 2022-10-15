@@ -142,42 +142,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""bbc6c3f2-d607-4eb2-99fd-0cecae19451c"",
             ""actions"": [
                 {
-                    ""name"": ""InitiateCustomSummon"",
-                    ""type"": ""Button"",
-                    ""id"": ""15f29e6b-8417-43f6-bdf9-449a1e2f32c7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ExitCustomSummon"",
-                    ""type"": ""Button"",
-                    ""id"": ""f7b4ed52-ec4a-4f89-914c-bce74dd2c874"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CustomSummonMouse"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""fb0ba0a8-b25b-4d49-bf85-78c22294885e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CustomSummonGamepad"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""609baed9-e726-48fa-a89b-a640a907dafc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SummonAClone"",
                     ""type"": ""Button"",
                     ""id"": ""b47245b7-7c97-4efa-824b-15b350482538"",
@@ -208,17 +172,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8ee77b07-1c30-4255-ae23-14bee4f68948"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""CustomSummonMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a491595f-d6d6-4175-8c0a-9d8ed7293972"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -241,28 +194,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0c48c982-b200-48b6-b3b6-d78b0250ab21"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""InitiateCustomSummon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cd38ac55-dce5-4057-a5f7-39d35c0c474c"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""InitiateCustomSummon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5afeecf5-7b4f-4c16-acc4-f73d943f9d3a"",
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
@@ -275,7 +206,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5f09fbe0-ab2d-4d0a-9494-a1f97996bb56"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -297,44 +228,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f8603aad-e67b-4a7e-883c-d96e6324ccd1"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""SwitchPlaces"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8f7ce01c-ad1a-4158-9134-378d493836cc"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=5,y=5)"",
-                    ""groups"": ""Controller"",
-                    ""action"": ""CustomSummonGamepad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f2eb649f-7e3d-4892-b02d-fadd4e2cf0c4"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ExitCustomSummon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7722c407-f470-42ae-91fc-709545bb29e2"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""ExitCustomSummon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -486,10 +384,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         // SummonClone
         m_SummonClone = asset.FindActionMap("SummonClone", throwIfNotFound: true);
-        m_SummonClone_InitiateCustomSummon = m_SummonClone.FindAction("InitiateCustomSummon", throwIfNotFound: true);
-        m_SummonClone_ExitCustomSummon = m_SummonClone.FindAction("ExitCustomSummon", throwIfNotFound: true);
-        m_SummonClone_CustomSummonMouse = m_SummonClone.FindAction("CustomSummonMouse", throwIfNotFound: true);
-        m_SummonClone_CustomSummonGamepad = m_SummonClone.FindAction("CustomSummonGamepad", throwIfNotFound: true);
         m_SummonClone_SummonAClone = m_SummonClone.FindAction("SummonAClone", throwIfNotFound: true);
         m_SummonClone_ExitClone = m_SummonClone.FindAction("ExitClone", throwIfNotFound: true);
         m_SummonClone_SwitchPlaces = m_SummonClone.FindAction("SwitchPlaces", throwIfNotFound: true);
@@ -600,10 +494,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     // SummonClone
     private readonly InputActionMap m_SummonClone;
     private ISummonCloneActions m_SummonCloneActionsCallbackInterface;
-    private readonly InputAction m_SummonClone_InitiateCustomSummon;
-    private readonly InputAction m_SummonClone_ExitCustomSummon;
-    private readonly InputAction m_SummonClone_CustomSummonMouse;
-    private readonly InputAction m_SummonClone_CustomSummonGamepad;
     private readonly InputAction m_SummonClone_SummonAClone;
     private readonly InputAction m_SummonClone_ExitClone;
     private readonly InputAction m_SummonClone_SwitchPlaces;
@@ -611,10 +501,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         private @PlayerControls m_Wrapper;
         public SummonCloneActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @InitiateCustomSummon => m_Wrapper.m_SummonClone_InitiateCustomSummon;
-        public InputAction @ExitCustomSummon => m_Wrapper.m_SummonClone_ExitCustomSummon;
-        public InputAction @CustomSummonMouse => m_Wrapper.m_SummonClone_CustomSummonMouse;
-        public InputAction @CustomSummonGamepad => m_Wrapper.m_SummonClone_CustomSummonGamepad;
         public InputAction @SummonAClone => m_Wrapper.m_SummonClone_SummonAClone;
         public InputAction @ExitClone => m_Wrapper.m_SummonClone_ExitClone;
         public InputAction @SwitchPlaces => m_Wrapper.m_SummonClone_SwitchPlaces;
@@ -627,18 +513,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_SummonCloneActionsCallbackInterface != null)
             {
-                @InitiateCustomSummon.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateCustomSummon;
-                @InitiateCustomSummon.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateCustomSummon;
-                @InitiateCustomSummon.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateCustomSummon;
-                @ExitCustomSummon.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCustomSummon;
-                @ExitCustomSummon.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCustomSummon;
-                @ExitCustomSummon.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCustomSummon;
-                @CustomSummonMouse.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonMouse;
-                @CustomSummonMouse.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonMouse;
-                @CustomSummonMouse.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonMouse;
-                @CustomSummonGamepad.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonGamepad;
-                @CustomSummonGamepad.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonGamepad;
-                @CustomSummonGamepad.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonGamepad;
                 @SummonAClone.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonAClone;
                 @SummonAClone.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonAClone;
                 @SummonAClone.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonAClone;
@@ -652,18 +526,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             m_Wrapper.m_SummonCloneActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @InitiateCustomSummon.started += instance.OnInitiateCustomSummon;
-                @InitiateCustomSummon.performed += instance.OnInitiateCustomSummon;
-                @InitiateCustomSummon.canceled += instance.OnInitiateCustomSummon;
-                @ExitCustomSummon.started += instance.OnExitCustomSummon;
-                @ExitCustomSummon.performed += instance.OnExitCustomSummon;
-                @ExitCustomSummon.canceled += instance.OnExitCustomSummon;
-                @CustomSummonMouse.started += instance.OnCustomSummonMouse;
-                @CustomSummonMouse.performed += instance.OnCustomSummonMouse;
-                @CustomSummonMouse.canceled += instance.OnCustomSummonMouse;
-                @CustomSummonGamepad.started += instance.OnCustomSummonGamepad;
-                @CustomSummonGamepad.performed += instance.OnCustomSummonGamepad;
-                @CustomSummonGamepad.canceled += instance.OnCustomSummonGamepad;
                 @SummonAClone.started += instance.OnSummonAClone;
                 @SummonAClone.performed += instance.OnSummonAClone;
                 @SummonAClone.canceled += instance.OnSummonAClone;
@@ -776,10 +638,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     }
     public interface ISummonCloneActions
     {
-        void OnInitiateCustomSummon(InputAction.CallbackContext context);
-        void OnExitCustomSummon(InputAction.CallbackContext context);
-        void OnCustomSummonMouse(InputAction.CallbackContext context);
-        void OnCustomSummonGamepad(InputAction.CallbackContext context);
         void OnSummonAClone(InputAction.CallbackContext context);
         void OnExitClone(InputAction.CallbackContext context);
         void OnSwitchPlaces(InputAction.CallbackContext context);

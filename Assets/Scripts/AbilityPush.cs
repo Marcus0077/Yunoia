@@ -23,6 +23,7 @@ public class AbilityPush : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (var hitCollider in hitColliders)
         {
+            Debug.Log(hitCollider.name);
             Pushable pushedObj = hitCollider.GetComponent<Pushable>();
             if (pushedObj != null)
             {

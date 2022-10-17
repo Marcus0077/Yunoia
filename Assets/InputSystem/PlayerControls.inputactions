@@ -276,13 +276,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ExtendGrapple",
+                    "type": "Button",
+                    "id": "1fac779a-09f2-42f6-9d54-6c32a882dafc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "d13403ba-52e8-42d9-93f1-467b72b4a8e2",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -304,7 +313,7 @@
                 {
                     "name": "",
                     "id": "c91f6ab7-e094-429b-9764-12a55c42223d",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -320,6 +329,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "CancelHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87ccda8c-9d5e-4036-bcf4-01b27a5d090e",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ExtendGrapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5dc5281a-7ae4-4ad1-870d-7ba7993735bd",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ExtendGrapple",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

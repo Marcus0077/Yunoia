@@ -298,13 +298,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExtendGrapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fac779a-09f2-42f6-9d54-6c32a882dafc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""d13403ba-52e8-42d9-93f1-467b72b4a8e2"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -326,7 +335,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c91f6ab7-e094-429b-9764-12a55c42223d"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -342,6 +351,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""CancelHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87ccda8c-9d5e-4036-bcf4-01b27a5d090e"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExtendGrapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dc5281a-7ae4-4ad1-870d-7ba7993735bd"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ExtendGrapple"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -394,6 +425,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Grapple = asset.FindActionMap("Grapple", throwIfNotFound: true);
         m_Grapple_ShootHook = m_Grapple.FindAction("ShootHook", throwIfNotFound: true);
         m_Grapple_CancelHook = m_Grapple.FindAction("CancelHook", throwIfNotFound: true);
+        m_Grapple_ExtendGrapple = m_Grapple.FindAction("ExtendGrapple", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -578,12 +610,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IGrappleActions m_GrappleActionsCallbackInterface;
     private readonly InputAction m_Grapple_ShootHook;
     private readonly InputAction m_Grapple_CancelHook;
+    private readonly InputAction m_Grapple_ExtendGrapple;
     public struct GrappleActions
     {
         private @PlayerControls m_Wrapper;
         public GrappleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @ShootHook => m_Wrapper.m_Grapple_ShootHook;
         public InputAction @CancelHook => m_Wrapper.m_Grapple_CancelHook;
+        public InputAction @ExtendGrapple => m_Wrapper.m_Grapple_ExtendGrapple;
         public InputActionMap Get() { return m_Wrapper.m_Grapple; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -599,6 +633,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CancelHook.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
                 @CancelHook.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
                 @CancelHook.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+                @ExtendGrapple.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnExtendGrapple;
+                @ExtendGrapple.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnExtendGrapple;
+                @ExtendGrapple.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnExtendGrapple;
             }
             m_Wrapper.m_GrappleActionsCallbackInterface = instance;
             if (instance != null)
@@ -609,6 +646,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CancelHook.started += instance.OnCancelHook;
                 @CancelHook.performed += instance.OnCancelHook;
                 @CancelHook.canceled += instance.OnCancelHook;
+                @ExtendGrapple.started += instance.OnExtendGrapple;
+                @ExtendGrapple.performed += instance.OnExtendGrapple;
+                @ExtendGrapple.canceled += instance.OnExtendGrapple;
             }
         }
     }
@@ -650,5 +690,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnShootHook(InputAction.CallbackContext context);
         void OnCancelHook(InputAction.CallbackContext context);
+        void OnExtendGrapple(InputAction.CallbackContext context);
     }
 }

@@ -43,13 +43,14 @@ GameObject:
   - component: {fileID: 5827308682441603356}
   - component: {fileID: 5827308682441603357}
   - component: {fileID: 5827308682441603358}
+  - component: {fileID: 8960577420141974533}
   - component: {fileID: 6747851640279768848}
   - component: {fileID: 4153748680547471086}
   - component: {fileID: 5827308682441603359}
   - component: {fileID: 5827308682441603352}
   m_Layer: 0
   m_Name: Clone
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +151,18 @@ MonoBehaviour:
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8960577420141974533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9eceb5dd45902040a025d2c3318c192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6747851640279768848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inControlText: {fileID: 0}
   cloneRB: {fileID: 5827308682441603359}
   moveSpeed: 0
   whatIsGround:
@@ -169,7 +183,9 @@ MonoBehaviour:
     m_Bits: 64
   groundPoint: {fileID: 5827308682340208283}
   jumpForce: 0
-  timerText: {fileID: 0}
+  Wall_1: {fileID: 0}
+  Wall_2: {fileID: 0}
+  cloneHP: 0
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f88a84d9a5304b4c8806021c9a1788d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeTimerText: {fileID: 0}
+  despawnClone: 0
 --- !u!54 &5827308682441603359
 Rigidbody:
   m_ObjectHideFlags: 0

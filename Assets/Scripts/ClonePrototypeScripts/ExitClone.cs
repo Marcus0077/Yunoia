@@ -16,13 +16,14 @@ public class ExitClone : MonoBehaviour
     private BasicMovementClone basicMovementClone;
     private SmoothCameraFollow smoothCameraFollow;
     private SummonClone summonClone;
-    
+    private CombatHandler combatHandler;
+
     // Input variables
     PlayerControls summonControls;
     private InputAction exitClone;
 
     // Despawn clone conditional variable
-    private bool despawnClone;
+    public bool despawnClone;
     
     // Timer variables
     private float cloneActiveTimer;
@@ -37,7 +38,8 @@ public class ExitClone : MonoBehaviour
         basicMovementClone = FindObjectOfType<BasicMovementClone>();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
-
+        combatHandler = FindObjectOfType<CombatHandler>();
+            
         isRunning = false;
         despawnClone = false;
         cloneActiveTimer = 30.0f;
@@ -64,6 +66,7 @@ public class ExitClone : MonoBehaviour
             summonClone.cloneVersionText.text = "";
             basicMovementClone.inControlText.text = "";
             activeTimerText.text = "";
+            combatHandler.healthText.text = "";
 
             Destroy(this.gameObject);
         }

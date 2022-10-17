@@ -9,6 +9,10 @@ public class Grapple : MonoBehaviour
     [SerializeField] float stopDistance = 4f;
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
+    [SerializeField] float hookLife;
+    [SerializeField] float maxHookLife;
+    [SerializeField] Rigidbody playerRB;
+    [SerializeField] float changePerSecond;
 
     Hook hook;
     bool pulling;
@@ -17,6 +21,7 @@ public class Grapple : MonoBehaviour
     PlayerControls grappleControls;
     private InputAction shootHook;
     private InputAction cancelHook;
+    private InputAction extendGrapple;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +59,11 @@ public class Grapple : MonoBehaviour
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
         }
+
+        if (extendGrapple.IsPressed() && pulling == true)
+        {
+            playerRB.AddForce(Physics.gravity * 4.0f * playerRB.mass);
+        }
     }
 
     public void StartPull()
@@ -77,6 +87,20 @@ public class Grapple : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
+        if (pulling == true)
+        {
+            StartCoroutine(ExtendLifetime());
+        }
+        else
+        {
+            DestroyHook();
+        }
+    }
+
+    private IEnumerator ExtendLifetime()
+    {
+        yield return new WaitForSeconds(4f);
+
         DestroyHook();
     }
 
@@ -90,6 +114,9 @@ public class Grapple : MonoBehaviour
 
         cancelHook = grappleControls.Grapple.CancelHook;
         cancelHook.Enable();
+
+        extendGrapple = grappleControls.Grapple.ExtendGrapple;
+        extendGrapple.Enable();
     }
 
     // Disable input action map controls.
@@ -97,5 +124,6 @@ public class Grapple : MonoBehaviour
     {
         shootHook.Disable();
         cancelHook.Disable();
+        extendGrapple.Disable();
     }
 }

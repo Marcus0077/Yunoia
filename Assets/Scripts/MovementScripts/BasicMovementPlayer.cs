@@ -10,11 +10,13 @@ public class BasicMovementPlayer : MonoBehaviour
     PlayerControls playerControls;
     private InputAction move;
     private InputAction jump;
+    private InputAction crouch;
 
     // Movement variables
     public Rigidbody playerRB;
     private Vector2 moveDirection = Vector2.zero;
-    public float moveSpeed;
+    [SerializeField] public float moveSpeed;
+    [SerializeField] public float maxSpeed;
     public bool canMove;
     public bool isFrozen;
 
@@ -61,6 +63,11 @@ public class BasicMovementPlayer : MonoBehaviour
                                    RigidbodyConstraints.FreezeRotation;
             isFrozen = true;
         }
+
+        if (playerRB.velocity.magnitude > maxSpeed)
+        {
+            playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, maxSpeed);
+        }
     }
 
     // Applies gravity and movement velocity to player according to movement input.
@@ -90,7 +97,9 @@ public class BasicMovementPlayer : MonoBehaviour
     void LookPlayer()
     {
         if (move.IsPressed())
+        {
             transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
+        }
     }
     
     // Enable input action map controls.

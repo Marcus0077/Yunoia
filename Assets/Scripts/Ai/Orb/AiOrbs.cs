@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AiOrbs : MonoBehaviour
+public class AiOrbs : Pushable
 {
     NavMeshAgent aiController;
     [SerializeField]
@@ -30,7 +30,7 @@ public class AiOrbs : MonoBehaviour
     {
         if(other.gameObject == player)
         {
-            GameObject orb = Instantiate(stickyOrb, transform.position, transform.rotation, player.transform);
+            GameObject orb = Instantiate(stickyOrb, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -49,7 +49,7 @@ public class AiOrbs : MonoBehaviour
             }
         }
     }
-    
+
     void Update()
     {
         DistancePlayer();

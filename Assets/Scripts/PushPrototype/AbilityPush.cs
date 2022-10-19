@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AbilityPush : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class AbilityPush : MonoBehaviour
     int maxChargeLevel = 1, minPush = 1;
     [SerializeField]
     float chargeSpeed = 1, cooldown = 1;
-    float chargeTime, timer = -1;
-    bool ableToPush;
+    float chargeTime;
+    bool ableToPush = true;
     [SerializeField]
     bool restored;
+    PlayerControls pushControls;
+    private InputAction pushAction;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,6 @@ public class AbilityPush : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (var hitCollider in hitColliders)
         {
-            Debug.Log(hitCollider.name);
             Pushable pushedObj = hitCollider.GetComponent<Pushable>();
             if (pushedObj != null)
             {
@@ -58,33 +60,67 @@ public class AbilityPush : MonoBehaviour
         Destroy(shape.gameObject);
     }
 
+    private IEnumerator PushTimer()
+    {
+        ableToPush = false;
+        yield return new WaitForSeconds(cooldown);
+        chargeTime = Time.time; // held before cooldown ended, so start charging right when cooldown ends
+        ableToPush = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        
+    }
+
+    void PushPress()
+    {
+        if (ableToPush)
         {
-            if(Time.time - timer < cooldown)
-            {
-                ableToPush = false;
-            } else
-            {
-                timer = Time.time;
-                ableToPush = true;
-                if(!restored)
-                {
-                    PushTargets(minPush);
-                }
-            }
-            //start charging with animation
-        }
-        if (ableToPush && Input.GetKeyUp("space"))
-        {
-            chargeTime = (Time.time - timer)*chargeSpeed+minPush;
             //start animation
-            if(restored)
+            if (!restored)
             {
-                PushTargets(Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush));
+                PushTargets(minPush);
+                StartCoroutine(PushTimer());
             }
         }
+        chargeTime = Time.time;
+    }
+
+    void PushRelease()
+    {
+        if (ableToPush)
+        {
+            //start animation
+            if (restored)
+            {
+                chargeTime = (Time.time - chargeTime) * chargeSpeed + minPush;
+                Debug.Log(chargeTime);
+                PushTargets(Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush));
+                StartCoroutine(PushTimer());
+                chargeTime = Time.time;
+            }
+        }
+    }
+
+    void Awake()
+    {
+        pushControls = new PlayerControls();
+        pushAction = pushControls.Push.Push;
+        pushAction.performed += ctx => PushPress();
+        pushAction.canceled += ctx => PushRelease();
+    }
+
+    // Enable input action map controls.
+    private void OnEnable()
+    {
+        pushAction.Enable();
+    }
+
+    // Disable input action map controls.
+    private void OnDisable()
+    {
+        pushAction.Disable();
     }
 }

@@ -5,25 +5,39 @@ using UnityEngine;
 public class AiOrbsSticky : Pushable
 {
     [SerializeField]
-    GameObject orb;
+    GameObject orb, player;
+    Vector3 relativePosition;
+    bool attached = false;
+    [SerializeField]
+    float timeToTravel = 1;
+    WaitForSecondsRealtime waitForSecondsRealtime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        attached = true;
+        player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
+        relativePosition = transform.InverseTransformPoint(player.transform.position);
     }
 
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
-        base.Pushed(force, chargeLevel, totalCharges);
-        transform.parent = null;
-        StartCoroutine(SwapOrb());
-        //Destroy(gameObject);
+        base.Pushed(force, chargeLevel,totalCharges);
+        attached = false;
+        StartCoroutine(PushTimer());
     }
 
-    private IEnumerator SwapOrb()
+    public IEnumerator PushTimer()
     {
-        yield return new WaitForSeconds(1);
-        Instantiate(orb, transform.position, transform.rotation);
+        if (waitForSecondsRealtime == null)
+        {
+            waitForSecondsRealtime = new WaitForSecondsRealtime(timeToTravel);
+        }
+        else
+        {
+            waitForSecondsRealtime.waitTime = timeToTravel;
+        }
+        yield return waitForSecondsRealtime;
+        AiOrbs newOrb = Instantiate(orb, transform.position, transform.rotation).GetComponent<AiOrbs>();
         Destroy(gameObject);
     }
 
@@ -35,6 +49,13 @@ public class AiOrbsSticky : Pushable
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = rb.velocity / 1.005f;
+        if (attached)
+        {
+            transform.position = player.transform.position + relativePosition;
+        }
+        else
+        {
+            rb.velocity = rb.velocity / 1.005f;
+        }
     }
 }

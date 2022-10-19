@@ -377,6 +377,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Push"",
+            ""id"": ""cab184f3-6cc4-4c29-9dbb-045a557e2b46"",
+            ""actions"": [
+                {
+                    ""name"": ""Push"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0913a19-c5f3-48a5-bb17-1e76467c5eaf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0d161618-a1fc-4297-87da-a4e1e2697c51"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Push"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -426,6 +454,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Grapple_ShootHook = m_Grapple.FindAction("ShootHook", throwIfNotFound: true);
         m_Grapple_CancelHook = m_Grapple.FindAction("CancelHook", throwIfNotFound: true);
         m_Grapple_ExtendGrapple = m_Grapple.FindAction("ExtendGrapple", throwIfNotFound: true);
+        // Push
+        m_Push = asset.FindActionMap("Push", throwIfNotFound: true);
+        m_Push_Push = m_Push.FindAction("Push", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -653,6 +684,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public GrappleActions @Grapple => new GrappleActions(this);
+
+    // Push
+    private readonly InputActionMap m_Push;
+    private IPushActions m_PushActionsCallbackInterface;
+    private readonly InputAction m_Push_Push;
+    public struct PushActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PushActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Push => m_Wrapper.m_Push_Push;
+        public InputActionMap Get() { return m_Wrapper.m_Push; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PushActions set) { return set.Get(); }
+        public void SetCallbacks(IPushActions instance)
+        {
+            if (m_Wrapper.m_PushActionsCallbackInterface != null)
+            {
+                @Push.started -= m_Wrapper.m_PushActionsCallbackInterface.OnPush;
+                @Push.performed -= m_Wrapper.m_PushActionsCallbackInterface.OnPush;
+                @Push.canceled -= m_Wrapper.m_PushActionsCallbackInterface.OnPush;
+            }
+            m_Wrapper.m_PushActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Push.started += instance.OnPush;
+                @Push.performed += instance.OnPush;
+                @Push.canceled += instance.OnPush;
+            }
+        }
+    }
+    public PushActions @Push => new PushActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -691,5 +755,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnShootHook(InputAction.CallbackContext context);
         void OnCancelHook(InputAction.CallbackContext context);
         void OnExtendGrapple(InputAction.CallbackContext context);
+    }
+    public interface IPushActions
+    {
+        void OnPush(InputAction.CallbackContext context);
     }
 }

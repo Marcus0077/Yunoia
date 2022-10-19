@@ -10,11 +10,13 @@ public class BasicMovementPlayer : MonoBehaviour
     PlayerControls playerControls;
     private InputAction move;
     private InputAction jump;
+    private InputAction crouch;
 
     // Movement variables
     public Rigidbody playerRB;
     private Vector2 moveDirection = Vector2.zero;
-    public float moveSpeed;
+    [SerializeField] public float moveSpeed;
+    [SerializeField] public float maxSpeed;
     public bool canMove;
     public bool isFrozen;
 
@@ -24,6 +26,8 @@ public class BasicMovementPlayer : MonoBehaviour
     public float jumpForce;
     private bool isGrounded;
     private float jumpTime;
+    
+    private Vector2 lookDirection = Vector2.zero;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -49,13 +53,20 @@ public class BasicMovementPlayer : MonoBehaviour
                 isFrozen = false;
             }
             
+            LookPlayer();
             MovePlayer();
         }
         // If player cannot move, freeze player.
         else
         {
-            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
+                                   RigidbodyConstraints.FreezeRotation;
             isFrozen = true;
+        }
+
+        if (playerRB.velocity.magnitude > maxSpeed)
+        {
+            playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, maxSpeed);
         }
     }
 
@@ -75,19 +86,19 @@ public class BasicMovementPlayer : MonoBehaviour
     // if they are on the ground.
     void JumpPlayer()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(groundPoint.position, Vector3.down, out hit, 0.3f, whatIsGround))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+        IsGrounded();
 
         if (jump.IsPressed() && isGrounded)
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+        }
+    }
+
+    void LookPlayer()
+    {
+        if (move.IsPressed())
+        {
+            transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
         }
     }
     
@@ -106,5 +117,18 @@ public class BasicMovementPlayer : MonoBehaviour
     {
         move.Disable();
         jump.Disable();
+    }
+
+    private void IsGrounded()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(groundPoint.position, Vector3.down, out hit, 0.3f, whatIsGround))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 }

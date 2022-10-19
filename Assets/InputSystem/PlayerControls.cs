@@ -142,42 +142,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""bbc6c3f2-d607-4eb2-99fd-0cecae19451c"",
             ""actions"": [
                 {
-                    ""name"": ""InitiateCustomSummon"",
-                    ""type"": ""Button"",
-                    ""id"": ""15f29e6b-8417-43f6-bdf9-449a1e2f32c7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ExitCustomSummon"",
-                    ""type"": ""Button"",
-                    ""id"": ""f7b4ed52-ec4a-4f89-914c-bce74dd2c874"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CustomSummonMouse"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""fb0ba0a8-b25b-4d49-bf85-78c22294885e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CustomSummonGamepad"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""609baed9-e726-48fa-a89b-a640a907dafc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SummonAClone"",
                     ""type"": ""Button"",
                     ""id"": ""b47245b7-7c97-4efa-824b-15b350482538"",
@@ -208,17 +172,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8ee77b07-1c30-4255-ae23-14bee4f68948"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""CustomSummonMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a491595f-d6d6-4175-8c0a-9d8ed7293972"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -241,28 +194,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0c48c982-b200-48b6-b3b6-d78b0250ab21"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""InitiateCustomSummon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cd38ac55-dce5-4057-a5f7-39d35c0c474c"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""InitiateCustomSummon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5afeecf5-7b4f-4c16-acc4-f73d943f9d3a"",
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
@@ -275,7 +206,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5f09fbe0-ab2d-4d0a-9494-a1f97996bb56"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -297,44 +228,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f8603aad-e67b-4a7e-883c-d96e6324ccd1"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""SwitchPlaces"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8f7ce01c-ad1a-4158-9134-378d493836cc"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=5,y=5)"",
-                    ""groups"": ""Controller"",
-                    ""action"": ""CustomSummonGamepad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f2eb649f-7e3d-4892-b02d-fadd4e2cf0c4"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ExitCustomSummon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7722c407-f470-42ae-91fc-709545bb29e2"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""ExitCustomSummon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -345,7 +243,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""0e5b5e9c-05c9-4d6f-9163-184dbc39e3a7"",
             ""actions"": [
                 {
-                    ""name"": ""Pause Game"",
+                    ""name"": ""PauseGame"",
                     ""type"": ""Button"",
                     ""id"": ""32c4207e-b0f6-46a1-b93e-07cfd3a23ce5"",
                     ""expectedControlType"": ""Button"",
@@ -362,7 +260,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pause Game"",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -373,7 +271,108 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Pause Game"",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Grapple"",
+            ""id"": ""7d6cb877-56dc-4baa-bb17-7bb236aa586a"",
+            ""actions"": [
+                {
+                    ""name"": ""ShootHook"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8fe9231-f463-4da0-afac-847d15a63dd3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelHook"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d6c3782-5563-4d9a-921c-f027647a9caf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExtendGrapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fac779a-09f2-42f6-9d54-6c32a882dafc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d13403ba-52e8-42d9-93f1-467b72b4a8e2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShootHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c87cb85-8e1c-4d5c-864b-617008bbcd7b"",
+                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ShootHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c91f6ab7-e094-429b-9764-12a55c42223d"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc941a43-8eec-40e3-95d7-d2441862c689"",
+                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CancelHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87ccda8c-9d5e-4036-bcf4-01b27a5d090e"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExtendGrapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dc5281a-7ae4-4ad1-870d-7ba7993735bd"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ExtendGrapple"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -416,16 +415,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         // SummonClone
         m_SummonClone = asset.FindActionMap("SummonClone", throwIfNotFound: true);
-        m_SummonClone_InitiateCustomSummon = m_SummonClone.FindAction("InitiateCustomSummon", throwIfNotFound: true);
-        m_SummonClone_ExitCustomSummon = m_SummonClone.FindAction("ExitCustomSummon", throwIfNotFound: true);
-        m_SummonClone_CustomSummonMouse = m_SummonClone.FindAction("CustomSummonMouse", throwIfNotFound: true);
-        m_SummonClone_CustomSummonGamepad = m_SummonClone.FindAction("CustomSummonGamepad", throwIfNotFound: true);
         m_SummonClone_SummonAClone = m_SummonClone.FindAction("SummonAClone", throwIfNotFound: true);
         m_SummonClone_ExitClone = m_SummonClone.FindAction("ExitClone", throwIfNotFound: true);
         m_SummonClone_SwitchPlaces = m_SummonClone.FindAction("SwitchPlaces", throwIfNotFound: true);
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
-        m_PauseMenu_PauseGame = m_PauseMenu.FindAction("Pause Game", throwIfNotFound: true);
+        m_PauseMenu_PauseGame = m_PauseMenu.FindAction("PauseGame", throwIfNotFound: true);
+        // Grapple
+        m_Grapple = asset.FindActionMap("Grapple", throwIfNotFound: true);
+        m_Grapple_ShootHook = m_Grapple.FindAction("ShootHook", throwIfNotFound: true);
+        m_Grapple_CancelHook = m_Grapple.FindAction("CancelHook", throwIfNotFound: true);
+        m_Grapple_ExtendGrapple = m_Grapple.FindAction("ExtendGrapple", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -526,10 +526,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     // SummonClone
     private readonly InputActionMap m_SummonClone;
     private ISummonCloneActions m_SummonCloneActionsCallbackInterface;
-    private readonly InputAction m_SummonClone_InitiateCustomSummon;
-    private readonly InputAction m_SummonClone_ExitCustomSummon;
-    private readonly InputAction m_SummonClone_CustomSummonMouse;
-    private readonly InputAction m_SummonClone_CustomSummonGamepad;
     private readonly InputAction m_SummonClone_SummonAClone;
     private readonly InputAction m_SummonClone_ExitClone;
     private readonly InputAction m_SummonClone_SwitchPlaces;
@@ -537,10 +533,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         private @PlayerControls m_Wrapper;
         public SummonCloneActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @InitiateCustomSummon => m_Wrapper.m_SummonClone_InitiateCustomSummon;
-        public InputAction @ExitCustomSummon => m_Wrapper.m_SummonClone_ExitCustomSummon;
-        public InputAction @CustomSummonMouse => m_Wrapper.m_SummonClone_CustomSummonMouse;
-        public InputAction @CustomSummonGamepad => m_Wrapper.m_SummonClone_CustomSummonGamepad;
         public InputAction @SummonAClone => m_Wrapper.m_SummonClone_SummonAClone;
         public InputAction @ExitClone => m_Wrapper.m_SummonClone_ExitClone;
         public InputAction @SwitchPlaces => m_Wrapper.m_SummonClone_SwitchPlaces;
@@ -553,18 +545,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_SummonCloneActionsCallbackInterface != null)
             {
-                @InitiateCustomSummon.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateCustomSummon;
-                @InitiateCustomSummon.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateCustomSummon;
-                @InitiateCustomSummon.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnInitiateCustomSummon;
-                @ExitCustomSummon.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCustomSummon;
-                @ExitCustomSummon.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCustomSummon;
-                @ExitCustomSummon.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnExitCustomSummon;
-                @CustomSummonMouse.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonMouse;
-                @CustomSummonMouse.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonMouse;
-                @CustomSummonMouse.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonMouse;
-                @CustomSummonGamepad.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonGamepad;
-                @CustomSummonGamepad.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonGamepad;
-                @CustomSummonGamepad.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnCustomSummonGamepad;
                 @SummonAClone.started -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonAClone;
                 @SummonAClone.performed -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonAClone;
                 @SummonAClone.canceled -= m_Wrapper.m_SummonCloneActionsCallbackInterface.OnSummonAClone;
@@ -578,18 +558,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             m_Wrapper.m_SummonCloneActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @InitiateCustomSummon.started += instance.OnInitiateCustomSummon;
-                @InitiateCustomSummon.performed += instance.OnInitiateCustomSummon;
-                @InitiateCustomSummon.canceled += instance.OnInitiateCustomSummon;
-                @ExitCustomSummon.started += instance.OnExitCustomSummon;
-                @ExitCustomSummon.performed += instance.OnExitCustomSummon;
-                @ExitCustomSummon.canceled += instance.OnExitCustomSummon;
-                @CustomSummonMouse.started += instance.OnCustomSummonMouse;
-                @CustomSummonMouse.performed += instance.OnCustomSummonMouse;
-                @CustomSummonMouse.canceled += instance.OnCustomSummonMouse;
-                @CustomSummonGamepad.started += instance.OnCustomSummonGamepad;
-                @CustomSummonGamepad.performed += instance.OnCustomSummonGamepad;
-                @CustomSummonGamepad.canceled += instance.OnCustomSummonGamepad;
                 @SummonAClone.started += instance.OnSummonAClone;
                 @SummonAClone.performed += instance.OnSummonAClone;
                 @SummonAClone.canceled += instance.OnSummonAClone;
@@ -636,6 +604,55 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
+
+    // Grapple
+    private readonly InputActionMap m_Grapple;
+    private IGrappleActions m_GrappleActionsCallbackInterface;
+    private readonly InputAction m_Grapple_ShootHook;
+    private readonly InputAction m_Grapple_CancelHook;
+    private readonly InputAction m_Grapple_ExtendGrapple;
+    public struct GrappleActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GrappleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ShootHook => m_Wrapper.m_Grapple_ShootHook;
+        public InputAction @CancelHook => m_Wrapper.m_Grapple_CancelHook;
+        public InputAction @ExtendGrapple => m_Wrapper.m_Grapple_ExtendGrapple;
+        public InputActionMap Get() { return m_Wrapper.m_Grapple; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GrappleActions set) { return set.Get(); }
+        public void SetCallbacks(IGrappleActions instance)
+        {
+            if (m_Wrapper.m_GrappleActionsCallbackInterface != null)
+            {
+                @ShootHook.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnShootHook;
+                @ShootHook.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnShootHook;
+                @ShootHook.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnShootHook;
+                @CancelHook.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+                @CancelHook.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+                @CancelHook.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnCancelHook;
+                @ExtendGrapple.started -= m_Wrapper.m_GrappleActionsCallbackInterface.OnExtendGrapple;
+                @ExtendGrapple.performed -= m_Wrapper.m_GrappleActionsCallbackInterface.OnExtendGrapple;
+                @ExtendGrapple.canceled -= m_Wrapper.m_GrappleActionsCallbackInterface.OnExtendGrapple;
+            }
+            m_Wrapper.m_GrappleActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ShootHook.started += instance.OnShootHook;
+                @ShootHook.performed += instance.OnShootHook;
+                @ShootHook.canceled += instance.OnShootHook;
+                @CancelHook.started += instance.OnCancelHook;
+                @CancelHook.performed += instance.OnCancelHook;
+                @CancelHook.canceled += instance.OnCancelHook;
+                @ExtendGrapple.started += instance.OnExtendGrapple;
+                @ExtendGrapple.performed += instance.OnExtendGrapple;
+                @ExtendGrapple.canceled += instance.OnExtendGrapple;
+            }
+        }
+    }
+    public GrappleActions @Grapple => new GrappleActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -661,10 +678,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     }
     public interface ISummonCloneActions
     {
-        void OnInitiateCustomSummon(InputAction.CallbackContext context);
-        void OnExitCustomSummon(InputAction.CallbackContext context);
-        void OnCustomSummonMouse(InputAction.CallbackContext context);
-        void OnCustomSummonGamepad(InputAction.CallbackContext context);
         void OnSummonAClone(InputAction.CallbackContext context);
         void OnExitClone(InputAction.CallbackContext context);
         void OnSwitchPlaces(InputAction.CallbackContext context);
@@ -672,5 +685,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPauseMenuActions
     {
         void OnPauseGame(InputAction.CallbackContext context);
+    }
+    public interface IGrappleActions
+    {
+        void OnShootHook(InputAction.CallbackContext context);
+        void OnCancelHook(InputAction.CallbackContext context);
+        void OnExtendGrapple(InputAction.CallbackContext context);
     }
 }

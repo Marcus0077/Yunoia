@@ -52,8 +52,7 @@ public class AiOrbsSticky : Pushable
     {
         if (attached)
         {
-            //transform.position = player.transform.position - relativePosition;
-            transform.position = player.transform.position - new Vector3(relativePosition.x, relativePosition.y, relativePosition.z);//????
+            transform.position = player.transform.position - relativePosition;
         }
         else
         {

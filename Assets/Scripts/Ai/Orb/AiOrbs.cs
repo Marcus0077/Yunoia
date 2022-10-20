@@ -30,9 +30,21 @@ public class AiOrbs : Pushable
     {
         if(other.gameObject == player)
         {
-            GameObject orb = Instantiate(stickyOrb, transform.position, transform.rotation);
+            GameObject orb = Instantiate(stickyOrb, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+    }
+
+    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
+    {
+        AiOrbsSticky orb = Instantiate(stickyOrb, transform.position, transform.rotation).GetComponent<AiOrbsSticky>();
+        orb.Pushed(force, chargeLevel, totalCharges);
+        Destroy(gameObject);
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
     }
 
     void DistancePlayer()

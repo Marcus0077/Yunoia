@@ -14,15 +14,15 @@ public class AiOrbsSticky : Pushable
     // Start is called before the first frame update
     void Start()
     {
-        attached = true;
+        
         player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
         relativePosition = transform.InverseTransformPoint(player.transform.position);
     }
 
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
-        base.Pushed(force, chargeLevel,totalCharges);
         attached = false;
+        base.Pushed(force, chargeLevel,totalCharges);
         StartCoroutine(PushTimer());
     }
 
@@ -44,6 +44,7 @@ public class AiOrbsSticky : Pushable
     public override void Awake()
     {
         base.Awake();
+        attached = true;
     }
 
     // Update is called once per frame
@@ -51,7 +52,8 @@ public class AiOrbsSticky : Pushable
     {
         if (attached)
         {
-            transform.position = player.transform.position + relativePosition;
+            //transform.position = player.transform.position - relativePosition;
+            transform.position = player.transform.position - new Vector3(relativePosition.x, relativePosition.y, relativePosition.z);//????
         }
         else
         {

@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 6058649151128694942}
   - component: {fileID: 6058649151128694943}
   - component: {fileID: 6058649151128694936}
+  - component: {fileID: 2005601647888607439}
+  - component: {fileID: 6433212608311566367}
   m_Layer: 0
   m_Name: Breakable Wall
   m_TagString: Untagged
@@ -248,6 +250,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2005601647888607439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6058649151128694937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54b49a8a76dde745b8f3bca360fa2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 0
+  mat: {fileID: 2100000, guid: decd144a1585e1e47b676108a4140663, type: 2}
+--- !u!54 &6433212608311566367
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6058649151128694937}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6058649151189625744
 GameObject:
   m_ObjectHideFlags: 0

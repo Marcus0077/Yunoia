@@ -40,6 +40,7 @@ public class BasicMovementClone : MonoBehaviour
 
     // Temp object reference
     public GameObject Wall_1;
+    public GameObject Blocker3;
 
     // Clone version bool.
     public bool cloneRestored;
@@ -56,6 +57,7 @@ public class BasicMovementClone : MonoBehaviour
         combatHandler = FindObjectOfType<CombatHandler>();
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
+        Blocker3 = GameObject.FindWithTag("Blocker3");
 
         smoothCameraFollow.target = cloneRB.transform;
         
@@ -67,7 +69,7 @@ public class BasicMovementClone : MonoBehaviour
         
         //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
-        cloneRestored = false;
+        cloneRestored = true;
         cloneIsFrozen = false;
         cloneCanMove = true;
     }
@@ -109,7 +111,7 @@ public class BasicMovementClone : MonoBehaviour
             SwitchPlaces();
         }
         
-        
+        CheckRestoredWalls();
     }
 
     // Applies gravity and movement velocity to player according to movement input.
@@ -196,16 +198,27 @@ public class BasicMovementClone : MonoBehaviour
         switchPlaces.Disable();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger3"))
+        {
+            Blocker3.transform.position = new Vector3(Blocker3.transform.position.x - 3f,Blocker3.transform.position.y,
+                Blocker3.transform.position.z);
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger3"))
+        {
+            Blocker3.transform.position = new Vector3(Blocker3.transform.position.x + 3f,Blocker3.transform.position.y,
+                Blocker3.transform.position.z);
+        }
+    }
+
     void CheckRestoredWalls()
     {
-        if (cloneRestored)
-        {
-            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), true);
-        }
-        else
-        {
-            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), false);
-        }
+        Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), true);
     }
         
     private void IsGrounded()

@@ -10,7 +10,7 @@ public class AiOrbsSticky : Pushable
     bool attached = false;
     [SerializeField]
     float timeToTravel = 1;
-    WaitForSecondsRealtime waitForSecondsRealtime;
+    //WaitForSecondsRealtime waitForSecondsRealtime;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,15 +28,16 @@ public class AiOrbsSticky : Pushable
 
     public IEnumerator PushTimer()
     {
-        if (waitForSecondsRealtime == null)
-        {
-            waitForSecondsRealtime = new WaitForSecondsRealtime(timeToTravel);
-        }
-        else
-        {
-            waitForSecondsRealtime.waitTime = timeToTravel;
-        }
-        yield return waitForSecondsRealtime;
+        //if (waitForSecondsRealtime == null)
+        //{
+        //    waitForSecondsRealtime = new WaitForSecondsRealtime(timeToTravel);
+        //}
+        //else
+        //{
+        //    waitForSecondsRealtime.waitTime = timeToTravel;
+        //}
+        //yield return waitForSecondsRealtime;
+        yield return new WaitForSeconds(timeToTravel);
         AiOrbs newOrb = Instantiate(orb, transform.position, transform.rotation).GetComponent<AiOrbs>();
         Destroy(gameObject);
     }

@@ -15,6 +15,7 @@ public class PushableActivatable : Pushable
     {
         base.Pushed(force, chargeLevel, totalCharges);
         GetComponent<Renderer>().material.color = Color.blue;
+        GetComponent<Collider>().enabled = false;
     }
 
     public override void Awake()

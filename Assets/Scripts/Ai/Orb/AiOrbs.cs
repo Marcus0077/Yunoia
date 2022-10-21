@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class AiOrbs : Pushable
 {
-    NavMeshAgent aiController;
+    //NavMeshAgent aiController;
     [SerializeField]
     GameObject player, stickyOrb;
     [SerializeField]
-    float detectDistance;
+    float detectDistance, speed;
     // Start is called before the first frame update
     void Start()
     {
-        aiController = GetComponent<NavMeshAgent>();
+        //aiController = GetComponent<NavMeshAgent>();
         player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
     }
 
@@ -56,7 +56,8 @@ public class AiOrbs : Pushable
             {
                 if(hit.distance < detectDistance)
                 {
-                    aiController.destination = player.transform.position;
+                    //aiController.destination = player.transform.position;
+                    transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime * speed);
                 }
             }
         }

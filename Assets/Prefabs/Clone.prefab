@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3310278525112063601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224377010961569212}
+  m_Layer: 0
+  m_Name: shootTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &224377010961569212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3310278525112063601}
+  m_LocalRotation: {x: -0.14618188, y: -0.6662006, z: -0.277388, w: 0.6766562}
+  m_LocalPosition: {x: -0.04, y: 0.836, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5827308682441603347}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -34.571, y: -85.15, z: -12.671}
 --- !u!1 &5827308682340208260
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,6 +77,8 @@ GameObject:
   - component: {fileID: 8960577420141974533}
   - component: {fileID: 6747851640279768848}
   - component: {fileID: 4153748680547471086}
+  - component: {fileID: 307182109869249534}
+  - component: {fileID: 8397525453568900783}
   - component: {fileID: 5827308682441603359}
   - component: {fileID: 5827308682441603352}
   m_Layer: 0
@@ -68,6 +101,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5827308682340208283}
+  - {fileID: 224377010961569212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -175,7 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inControlText: {fileID: 0}
   cloneRB: {fileID: 5827308682441603359}
   moveSpeed: 0
   whatIsGround:
@@ -185,7 +218,6 @@ MonoBehaviour:
   jumpForce: 0
   Wall_1: {fileID: 0}
   Wall_2: {fileID: 0}
-  cloneHP: 0
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +230,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f88a84d9a5304b4c8806021c9a1788d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTimerText: {fileID: 0}
   despawnClone: 0
+--- !u!114 &307182109869249534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullSpeed: 0.3
+  stopDistance: 3
+  hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
+  shootTransform: {fileID: 224377010961569212}
+  hookLife: 5
+  maxHookLife: 0
+  playerRB: {fileID: 5827308682441603359}
+  changePerSecond: 0
+--- !u!114 &8397525453568900783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bbcd84588673dd47a1a9edf3ca04e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxChargeLevel: 1
+  minPush: 1
+  chargeSpeed: 1
+  cooldown: 1
+  restored: 0
 --- !u!54 &5827308682441603359
 Rigidbody:
   m_ObjectHideFlags: 0

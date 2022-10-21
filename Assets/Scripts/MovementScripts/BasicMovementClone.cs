@@ -8,9 +8,6 @@ using TMPro;
 
 public class BasicMovementClone : MonoBehaviour
 {
-    // UI In Control
-    public TextMeshProUGUI inControlText;
-
     // Script references
     private BasicMovementPlayer basicMovementPlayer;
     private SmoothCameraFollow smoothCameraFollow;
@@ -18,6 +15,7 @@ public class BasicMovementClone : MonoBehaviour
     private ExitClone exitClone;
     private CombatHandler combatHandler;
 
+    public GameObject Player;
     
     // Input variables
     PlayerControls playerControls;
@@ -39,12 +37,15 @@ public class BasicMovementClone : MonoBehaviour
     private bool isGrounded;
     private float jumpTime;
 
+    // Temp object references
     public GameObject Wall_1;
     public GameObject Wall_2;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
+        Player = GameObject.FindWithTag("Player");
+        
         basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
@@ -54,13 +55,6 @@ public class BasicMovementClone : MonoBehaviour
         Wall_1 = GameObject.FindWithTag("GoodWall1");
         Wall_2 = GameObject.FindWithTag("GoodWall2");
 
-        summonClone.guidanceText.text = "Right-Click (mouse) or press 'Y' (controller) " +
-                                        "to switch between the clone and the player! " +
-                                        "\n\n Press 'G' (keyboard) or 'B' (controller) to exit.";
-        
-        summonClone.cloneVersionText.text = "The muted clone can only move and jump, " +
-                                            "and cannot phase through the blue walls.";
-
         smoothCameraFollow.target = cloneRB.transform;
         
         playerControls = new PlayerControls();
@@ -69,14 +63,10 @@ public class BasicMovementClone : MonoBehaviour
         jumpForce = 3.0f;
         combatHandler.cloneHP = 3;
         
-        combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
+        //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneIsFrozen = false;
         cloneCanMove = true;
-        
-        inControlText = GameObject.FindGameObjectWithTag("In Control Text").GetComponent<TextMeshProUGUI>();
-        inControlText.color = Color.magenta;
-        inControlText.text = "In Control: Clone";
     }
     
     void FixedUpdate()
@@ -154,17 +144,27 @@ public class BasicMovementClone : MonoBehaviour
     {
         if (basicMovementPlayer.canMove == false)
         {
-            inControlText.text = "In Control: Player";
             basicMovementPlayer.canMove = true;
             cloneCanMove = false;
+            
+            this.GetComponent<Grapple>().enabled = false;
+            this.GetComponent<AbilityPush>().enabled = false;
+            
+            Player.GetComponent<Grapple>().enabled = true;
+            Player.GetComponent<AbilityPush>().enabled = true;
             
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
         }
         else if (cloneCanMove == false)
-        { 
-            inControlText.text = "In Control: Clone";
+        {
             basicMovementPlayer.canMove = false; 
             cloneCanMove = true;
+            
+            this.GetComponent<Grapple>().enabled = true;
+            this.GetComponent<AbilityPush>().enabled = true;
+            
+            Player.GetComponent<Grapple>().enabled = false;
+            Player.GetComponent<AbilityPush>().enabled = false;
 
             smoothCameraFollow.target = cloneRB.transform;
         }
@@ -189,31 +189,6 @@ public class BasicMovementClone : MonoBehaviour
         move.Disable();
         jump.Disable();
         switchPlaces.Disable();
-    }
-
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(25, 25, 125, 50), "Test Muted Clone"))
-        {
-            summonClone.cloneVersionText.text = "The muted clone can only move and jump, " +
-                                                "and cannot phase through the blue walls.";
-            
-            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                false);
-            Physics.IgnoreCollision(Wall_2.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                false);
-        }
-        
-        if (GUI.Button(new Rect(25, 100, 150, 50), "Test Restored Clone"))
-        {
-            summonClone.cloneVersionText.text = "The restored clone can move, jump " +
-                                                "and phase through the blue walls!";
-            
-            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                true);
-            Physics.IgnoreCollision(Wall_2.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                true);
-        }
     }
 
     private void IsGrounded()

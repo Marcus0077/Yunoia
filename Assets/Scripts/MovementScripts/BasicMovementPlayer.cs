@@ -132,12 +132,6 @@ public class BasicMovementPlayer : MonoBehaviour
             Blocker1.GetComponent<MeshRenderer>().enabled = false;
             Blocker1.GetComponent<Collider>().enabled = false;
         }
-        
-        if (other.CompareTag("BlockerTrigger2"))
-        {
-            Blocker2.GetComponent<MeshRenderer>().enabled = false;
-            Blocker2.GetComponent<Collider>().enabled = false;
-        }
     }
     
     private void OnTriggerExit(Collider other)
@@ -146,12 +140,6 @@ public class BasicMovementPlayer : MonoBehaviour
         {
             Blocker1.GetComponent<MeshRenderer>().enabled = true;
             Blocker1.GetComponent<Collider>().enabled = true;
-        }
-        
-        if (other.CompareTag("BlockerTrigger2"))
-        {
-            Blocker2.GetComponent<MeshRenderer>().enabled = true;
-            Blocker2.GetComponent<Collider>().enabled = true;
         }
     }
 

@@ -66,20 +66,13 @@ public class ExitClone : MonoBehaviour
             Player.GetComponent<Grapple>().enabled = true;
             Player.GetComponent<AbilityPush>().enabled = true;
 
-            if (basicMovementClone.isOnTrigger1)
-            {
-                basicMovementClone.Blocker1.GetComponent<MeshRenderer>().enabled = true;
-                basicMovementClone.Blocker1.GetComponent<Collider>().enabled = true;
-            }
-
             if (basicMovementClone.isOnTrigger2)
             {
                 basicMovementClone.Blocker2.GetComponent<MeshRenderer>().enabled = true;
                 basicMovementClone.Blocker2.GetComponent<Collider>().enabled = true;
             }
 
-            basicMovementClone.Blocker3.transform.position = new Vector3(basicMovementClone.Blocker3.transform.position.x + 3f,basicMovementClone.Blocker3.transform.position.y,
-                basicMovementClone.Blocker3.transform.position.z);
+            basicMovementClone.Blocker3.transform.position = basicMovementClone.blocker3InPos;
 
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
 

@@ -40,14 +40,15 @@ public class BasicMovementClone : MonoBehaviour
 
     // Temp object reference
     public GameObject Wall_1;
-    public GameObject Blocker1;
     public GameObject Blocker2;
     public GameObject Blocker3;
+    
+    public Vector3 blocker3InPos;
+    private Vector3 blocker3OutPos;
 
     // Clone version bool.
     public bool cloneRestored;
-
-    public bool isOnTrigger1;
+    
     public bool isOnTrigger2;
 
     // Get references and initialize variables when clone is instantiated.
@@ -60,11 +61,16 @@ public class BasicMovementClone : MonoBehaviour
         summonClone = FindObjectOfType<SummonClone>();
         exitClone = FindObjectOfType<ExitClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
+        
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
-        Blocker1 = GameObject.FindWithTag("Blocker1");
         Blocker2 = GameObject.FindWithTag("Blocker2");
         Blocker3 = GameObject.FindWithTag("Blocker3");
+        
+        blocker3InPos = Blocker3.transform.position;
+        blocker3OutPos = new Vector3(blocker3InPos.x - 3f, blocker3InPos.y,
+            blocker3InPos.z);
 
         smoothCameraFollow.target = cloneRB.transform;
         
@@ -79,8 +85,7 @@ public class BasicMovementClone : MonoBehaviour
         cloneRestored = true;
         cloneIsFrozen = false;
         cloneCanMove = true;
-
-        isOnTrigger1 = false;
+        
         isOnTrigger2 = false;
     }
     
@@ -212,18 +217,9 @@ public class BasicMovementClone : MonoBehaviour
     {
         if (other.CompareTag("BlockerTrigger3"))
         {
-            Blocker3.transform.position = new Vector3(Blocker3.transform.position.x - 3f,Blocker3.transform.position.y,
-                Blocker3.transform.position.z);
+            Blocker3.transform.position = blocker3OutPos;
         }
-        
-        if (other.CompareTag("BlockerTrigger1"))
-        {
-            isOnTrigger1 = true;
 
-            Blocker1.GetComponent<MeshRenderer>().enabled = false;
-            Blocker1.GetComponent<Collider>().enabled = false;
-        }
-        
         if (other.CompareTag("BlockerTrigger2"))
         {
             isOnTrigger2 = true;
@@ -237,18 +233,9 @@ public class BasicMovementClone : MonoBehaviour
     {
         if (other.CompareTag("BlockerTrigger3"))
         {
-            Blocker3.transform.position = new Vector3(Blocker3.transform.position.x + 3f,Blocker3.transform.position.y,
-                Blocker3.transform.position.z);
+            Blocker3.transform.position = blocker3InPos;
         }
-        
-        if (other.CompareTag("BlockerTrigger1"))
-        {
-            isOnTrigger1 = false;
-            
-            Blocker1.GetComponent<MeshRenderer>().enabled = true;
-            Blocker1.GetComponent<Collider>().enabled = true;
-        }
-        
+
         if (other.CompareTag("BlockerTrigger2"))
         {
             isOnTrigger2 = false;

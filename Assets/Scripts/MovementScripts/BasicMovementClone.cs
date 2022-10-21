@@ -40,10 +40,15 @@ public class BasicMovementClone : MonoBehaviour
 
     // Temp object reference
     public GameObject Wall_1;
+    public GameObject Blocker1;
+    public GameObject Blocker2;
     public GameObject Blocker3;
 
     // Clone version bool.
     public bool cloneRestored;
+
+    public bool isOnTrigger1;
+    public bool isOnTrigger2;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -57,6 +62,8 @@ public class BasicMovementClone : MonoBehaviour
         combatHandler = FindObjectOfType<CombatHandler>();
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
+        Blocker1 = GameObject.FindWithTag("Blocker1");
+        Blocker2 = GameObject.FindWithTag("Blocker2");
         Blocker3 = GameObject.FindWithTag("Blocker3");
 
         smoothCameraFollow.target = cloneRB.transform;
@@ -72,6 +79,9 @@ public class BasicMovementClone : MonoBehaviour
         cloneRestored = true;
         cloneIsFrozen = false;
         cloneCanMove = true;
+
+        isOnTrigger1 = false;
+        isOnTrigger2 = false;
     }
     
     void FixedUpdate()
@@ -205,6 +215,22 @@ public class BasicMovementClone : MonoBehaviour
             Blocker3.transform.position = new Vector3(Blocker3.transform.position.x - 3f,Blocker3.transform.position.y,
                 Blocker3.transform.position.z);
         }
+        
+        if (other.CompareTag("BlockerTrigger1"))
+        {
+            isOnTrigger1 = true;
+
+            Blocker1.GetComponent<MeshRenderer>().enabled = false;
+            Blocker1.GetComponent<Collider>().enabled = false;
+        }
+        
+        if (other.CompareTag("BlockerTrigger2"))
+        {
+            isOnTrigger2 = true;
+            
+            Blocker2.GetComponent<MeshRenderer>().enabled = false;
+            Blocker2.GetComponent<Collider>().enabled = false;
+        }
     }
     
     private void OnTriggerExit(Collider other)
@@ -213,6 +239,22 @@ public class BasicMovementClone : MonoBehaviour
         {
             Blocker3.transform.position = new Vector3(Blocker3.transform.position.x + 3f,Blocker3.transform.position.y,
                 Blocker3.transform.position.z);
+        }
+        
+        if (other.CompareTag("BlockerTrigger1"))
+        {
+            isOnTrigger1 = false;
+            
+            Blocker1.GetComponent<MeshRenderer>().enabled = true;
+            Blocker1.GetComponent<Collider>().enabled = true;
+        }
+        
+        if (other.CompareTag("BlockerTrigger2"))
+        {
+            isOnTrigger2 = false;
+            
+            Blocker2.GetComponent<MeshRenderer>().enabled = true;
+            Blocker2.GetComponent<Collider>().enabled = true;
         }
     }
 

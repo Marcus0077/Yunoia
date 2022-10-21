@@ -28,6 +28,9 @@ public class BasicMovementPlayer : MonoBehaviour
     private float jumpTime;
     
     private Vector2 lookDirection = Vector2.zero;
+    
+    public GameObject Blocker1;
+    public GameObject Blocker2;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -39,6 +42,9 @@ public class BasicMovementPlayer : MonoBehaviour
         
         canMove = true;
         isFrozen = false;
+        
+        Blocker1 = GameObject.FindWithTag("Blocker1");
+        Blocker2 = GameObject.FindWithTag("Blocker2");
     }
     
     void FixedUpdate()
@@ -117,6 +123,36 @@ public class BasicMovementPlayer : MonoBehaviour
     {
         move.Disable();
         jump.Disable();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger1"))
+        {
+            Blocker1.GetComponent<MeshRenderer>().enabled = false;
+            Blocker1.GetComponent<Collider>().enabled = false;
+        }
+        
+        if (other.CompareTag("BlockerTrigger2"))
+        {
+            Blocker2.GetComponent<MeshRenderer>().enabled = false;
+            Blocker2.GetComponent<Collider>().enabled = false;
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger1"))
+        {
+            Blocker1.GetComponent<MeshRenderer>().enabled = true;
+            Blocker1.GetComponent<Collider>().enabled = true;
+        }
+        
+        if (other.CompareTag("BlockerTrigger2"))
+        {
+            Blocker2.GetComponent<MeshRenderer>().enabled = true;
+            Blocker2.GetComponent<Collider>().enabled = true;
+        }
     }
 
     private void IsGrounded()

@@ -5,7 +5,8 @@ using UnityEngine;
 public class AiOrbsSticky : Pushable
 {
     [SerializeField]
-    GameObject orb, player;
+    GameObject orb;
+    public GameObject player;
     Vector3 relativePosition;
     bool attached = false;
     [SerializeField]
@@ -14,8 +15,8 @@ public class AiOrbsSticky : Pushable
     // Start is called before the first frame update
     void Start()
     {
-        
-        player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
+        if(player == null)
+            player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
         relativePosition = transform.InverseTransformPoint(player.transform.position);
     }
 
@@ -23,10 +24,10 @@ public class AiOrbsSticky : Pushable
     {
         attached = false;
         base.Pushed(force, chargeLevel,totalCharges);
-        StartCoroutine(PushTimer());
+        StartCoroutine(PushTimer(timeToTravel));
     }
 
-    public IEnumerator PushTimer()
+    public IEnumerator PushTimer(float time)
     {
         //if (waitForSecondsRealtime == null)
         //{
@@ -37,8 +38,9 @@ public class AiOrbsSticky : Pushable
         //    waitForSecondsRealtime.waitTime = timeToTravel;
         //}
         //yield return waitForSecondsRealtime;
-        yield return new WaitForSeconds(timeToTravel);
+        yield return new WaitForSeconds(time);
         AiOrbs newOrb = Instantiate(orb, transform.position, transform.rotation).GetComponent<AiOrbs>();
+        newOrb.GetComponent<AiOrbs>().player = player;
         Destroy(gameObject);
     }
 
@@ -53,7 +55,15 @@ public class AiOrbsSticky : Pushable
     {
         if (attached)
         {
-            transform.position = player.transform.position - relativePosition;
+            if(player == null)
+            {
+                attached = false;
+                StartCoroutine(PushTimer(0));
+            }
+            else
+            {
+                transform.position = player.transform.position - relativePosition;
+            }
         }
         else
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PushableActivatable : Pushable
 {
-
+    public Material mat;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,8 @@ public class PushableActivatable : Pushable
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
         base.Pushed(force, chargeLevel, totalCharges);
-        GetComponent<Renderer>().material.color = Color.blue;
+        //GetComponent<Renderer>().material.color = Color.blue;
+        GetComponent<Renderer>().material = mat;
         GetComponent<Collider>().enabled = false;
     }
 

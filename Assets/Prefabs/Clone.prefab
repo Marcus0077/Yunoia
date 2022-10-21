@@ -23,14 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3310278525112063601}
-  m_LocalRotation: {x: -0.14618188, y: -0.6662006, z: -0.277388, w: 0.6766562}
+  m_LocalRotation: {x: -0.2833269, y: 0.64786255, z: 0.1343166, w: 0.6942327}
   m_LocalPosition: {x: -0.04, y: 0.836, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5827308682441603347}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -34.571, y: -85.15, z: -12.671}
+  m_LocalEulerAnglesHint: {x: -34.571, y: 90, z: -12.671}
 --- !u!1 &5827308682340208260
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   cloneRB: {fileID: 5827308682441603359}
   moveSpeed: 0
   whatIsGround:
@@ -230,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f88a84d9a5304b4c8806021c9a1788d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   despawnClone: 0
 --- !u!114 &307182109869249534
 MonoBehaviour:

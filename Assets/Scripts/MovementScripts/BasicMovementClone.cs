@@ -112,7 +112,7 @@ public class BasicMovementClone : MonoBehaviour
     void MoveClone()
     {
         moveDirection = move.ReadValue<Vector2>() * moveSpeed;
-        cloneRB.velocity = new Vector3(moveDirection.x, cloneRB.velocity.y, moveDirection.y);
+        cloneRB.velocity = new Vector3(moveDirection.y, cloneRB.velocity.y, -moveDirection.x);
         
         JumpClone();
         

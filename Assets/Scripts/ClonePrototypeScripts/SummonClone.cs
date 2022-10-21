@@ -47,7 +47,7 @@ public class SummonClone : MonoBehaviour
         
         cloneSummoned = true;
         
-        Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.right, Quaternion.identity);
+        Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
     }
 
     // Enable input action map controls.

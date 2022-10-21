@@ -15,6 +15,7 @@ public class BasicMovementClone : MonoBehaviour
     private ExitClone exitClone;
     private CombatHandler combatHandler;
 
+    // Player game object reference.
     public GameObject Player;
     
     // Input variables
@@ -37,9 +38,11 @@ public class BasicMovementClone : MonoBehaviour
     private bool isGrounded;
     private float jumpTime;
 
-    // Temp object references
+    // Temp object reference
     public GameObject Wall_1;
-    public GameObject Wall_2;
+
+    // Clone version bool.
+    public bool cloneRestored;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -53,7 +56,6 @@ public class BasicMovementClone : MonoBehaviour
         combatHandler = FindObjectOfType<CombatHandler>();
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
-        Wall_2 = GameObject.FindWithTag("GoodWall2");
 
         smoothCameraFollow.target = cloneRB.transform;
         
@@ -65,6 +67,7 @@ public class BasicMovementClone : MonoBehaviour
         
         //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
+        cloneRestored = false;
         cloneIsFrozen = false;
         cloneCanMove = true;
     }
@@ -105,6 +108,8 @@ public class BasicMovementClone : MonoBehaviour
         {
             SwitchPlaces();
         }
+        
+        
     }
 
     // Applies gravity and movement velocity to player according to movement input.
@@ -191,6 +196,18 @@ public class BasicMovementClone : MonoBehaviour
         switchPlaces.Disable();
     }
 
+    void CheckRestoredWalls()
+    {
+        if (cloneRestored)
+        {
+            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), true);
+        }
+        else
+        {
+            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), false);
+        }
+    }
+        
     private void IsGrounded()
     {
         RaycastHit hit;

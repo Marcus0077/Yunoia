@@ -33,7 +33,7 @@ public class AiOrbsSticky : Pushable
 
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
-        if (player.GetComponent<BasicMovementPlayer>())
+        if (player.GetComponent<BasicMovementPlayer>() && attached)
         {
             player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
         }

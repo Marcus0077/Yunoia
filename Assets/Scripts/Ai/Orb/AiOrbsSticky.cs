@@ -18,10 +18,26 @@ public class AiOrbsSticky : Pushable
         if(player == null)
             player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
         relativePosition = transform.InverseTransformPoint(player.transform.position);
+        if (player.GetComponent<BasicMovementPlayer>())
+        {
+            player.GetComponent<BasicMovementPlayer>().AddMinion(1);
+        }
+        else
+        {
+            player.GetComponent<BasicMovementClone>().AddMinion(1);
+        }
     }
 
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
+        if (player.GetComponent<BasicMovementPlayer>())
+        {
+            player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
+        }
+        else
+        {
+            player.GetComponent<BasicMovementClone>().AddMinion(-1);
+        }
         attached = false;
         base.Pushed(force, chargeLevel,totalCharges);
         StartCoroutine(PushTimer(timeToTravel));

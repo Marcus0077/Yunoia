@@ -26,11 +26,15 @@ public class BasicMovementPlayer : MonoBehaviour
     public float jumpForce;
     private bool isGrounded;
     private float jumpTime;
-    
+
     private Vector2 lookDirection = Vector2.zero;
     
     public GameObject Blocker1;
     public GameObject Blocker2;
+
+    public int attachedMinionCount;
+    float logFormulaCoefficient;
+    float logFormulaModifier;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -45,6 +49,9 @@ public class BasicMovementPlayer : MonoBehaviour
         
         Blocker1 = GameObject.FindWithTag("Blocker1");
         Blocker2 = GameObject.FindWithTag("Blocker2");
+
+        logFormulaCoefficient = .6f;
+        logFormulaModifier = 2f;
     }
     
     void FixedUpdate()
@@ -80,12 +87,22 @@ public class BasicMovementPlayer : MonoBehaviour
     // Also gives option to jump.
     void MovePlayer()
     {
-        moveDirection = move.ReadValue<Vector2>() * moveSpeed;
+        moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
         playerRB.velocity = new Vector3(moveDirection.y, playerRB.velocity.y, -moveDirection.x);
         
         JumpPlayer();
-        
-        playerRB.AddForce(Physics.gravity * 1.5f * playerRB.mass); 
+
+        playerRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * playerRB.mass);
+    }
+
+    float CalcMinionMoveChange()
+    {
+        return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
+    }
+
+    public void AddMinion(int value)
+    {
+        attachedMinionCount += value;
     }
 
     // Applies jump force to player if they press the jump button and

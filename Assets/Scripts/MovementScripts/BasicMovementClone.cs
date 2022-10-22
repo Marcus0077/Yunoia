@@ -51,6 +51,10 @@ public class BasicMovementClone : MonoBehaviour
     
     public bool isOnTrigger2;
 
+    public int attachedMinionCount;
+    float logFormulaCoefficient;
+    float logFormulaModifier;
+
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
@@ -79,7 +83,10 @@ public class BasicMovementClone : MonoBehaviour
         moveSpeed = 4.0f;
         jumpForce = 3.0f;
         combatHandler.cloneHP = 3;
-        
+
+        logFormulaCoefficient = .6f;
+        logFormulaModifier = 2f;
+
         //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneRestored = true;
@@ -133,12 +140,22 @@ public class BasicMovementClone : MonoBehaviour
     // Also gives option to jump.
     void MoveClone()
     {
-        moveDirection = move.ReadValue<Vector2>() * moveSpeed;
+        moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
         cloneRB.velocity = new Vector3(moveDirection.y, cloneRB.velocity.y, -moveDirection.x);
         
         JumpClone();
         
-        cloneRB.AddForce(Physics.gravity * 1.5f * cloneRB.mass); 
+        cloneRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * cloneRB.mass); 
+    }
+
+    float CalcMinionMoveChange()
+    {
+        return Mathf.Max(0, Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
+    }
+
+    public void AddMinion(int value)
+    {
+        attachedMinionCount += value;
     }
 
     // Applies jump force to player if they press the jump button and

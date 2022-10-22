@@ -57,5 +57,9 @@ public class LevelSwitchManager : MonoBehaviour
             
             Player.transform.position = LevelStarts[3].position;
         }
+        else if (other.CompareTag("RestoredCloneEnd"))
+        {
+            
+        }
     }
 }

@@ -14,6 +14,8 @@ public class BasicMovementClone : MonoBehaviour
     private SummonClone summonClone;
     private ExitClone exitClone;
     private CombatHandler combatHandler;
+    private LevelSwitchManager levelSwitchManager;
+    public AbilityPush cloneAbilityPush;
 
     // Player game object reference.
     public GameObject Player;
@@ -66,6 +68,8 @@ public class BasicMovementClone : MonoBehaviour
         exitClone = FindObjectOfType<ExitClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
         
+        levelSwitchManager = FindObjectOfType<LevelSwitchManager>();
+        
         Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
@@ -94,6 +98,15 @@ public class BasicMovementClone : MonoBehaviour
         cloneCanMove = true;
         
         isOnTrigger2 = false;
+        
+        if (levelSwitchManager.pushRestored == true)
+        {
+            cloneAbilityPush.restored = true;
+        }
+        else
+        {
+            cloneAbilityPush.restored = false;
+        }
     }
     
     void FixedUpdate()

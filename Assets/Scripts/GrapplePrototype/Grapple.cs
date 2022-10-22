@@ -71,7 +71,7 @@ public class Grapple : MonoBehaviour
         pulling = true;
     }
 
-    private void DestroyHook()
+    public void DestroyHook()
     {
         if (hook == null)
         {

@@ -42,5 +42,10 @@ public class Hook : MonoBehaviour
 
             grapple.StartPull();
         }
+
+        if ((LayerMask.GetMask("Ground") & 1 << other.gameObject.layer) > 0)
+        {
+            grapple.DestroyHook();
+        }
     }
 }

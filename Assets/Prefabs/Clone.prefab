@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cloneAbilityPush: {fileID: 8397525453568900783}
   Player: {fileID: 0}
   cloneRB: {fileID: 5827308682441603359}
   moveSpeed: 0
@@ -218,7 +219,11 @@ MonoBehaviour:
   groundPoint: {fileID: 5827308682340208283}
   jumpForce: 0
   Wall_1: {fileID: 0}
+  Blocker2: {fileID: 0}
+  Blocker3: {fileID: 0}
+  blocker3InPos: {x: 0, y: 0, z: 0}
   cloneRestored: 0
+  isOnTrigger2: 0
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bbcd84588673dd47a1a9edf3ca04e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxChargeLevel: 1
-  minPush: 1
+  maxChargeLevel: 2
+  minPush: 2
   chargeSpeed: 1
   cooldown: 1
   restored: 0

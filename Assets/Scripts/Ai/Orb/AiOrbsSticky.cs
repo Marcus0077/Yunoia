@@ -17,7 +17,10 @@ public class AiOrbsSticky : Pushable
     {
         if(player == null)
             player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
+        Vector3 tempOriginalScale = transform.localScale;
+        transform.localScale = Vector3.one;
         relativePosition = transform.InverseTransformPoint(player.transform.position);
+        transform.localScale = tempOriginalScale;
         if (player.GetComponent<BasicMovementPlayer>())
         {
             player.GetComponent<BasicMovementPlayer>().AddMinion(1);

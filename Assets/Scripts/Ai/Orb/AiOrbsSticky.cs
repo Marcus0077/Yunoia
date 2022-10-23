@@ -37,7 +37,7 @@ public class AiOrbsSticky : Pushable
         {
             player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
         }
-        else
+        else if(attached)
         {
             player.GetComponent<BasicMovementClone>().AddMinion(-1);
         }

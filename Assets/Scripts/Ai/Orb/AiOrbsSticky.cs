@@ -25,7 +25,7 @@ public class AiOrbsSticky : Pushable
         {
             player.GetComponent<BasicMovementPlayer>().AddMinion(1);
         }
-        else
+        else if (player.GetComponent<BasicMovementClone>())
         {
             player.GetComponent<BasicMovementClone>().AddMinion(1);
         }
@@ -37,7 +37,7 @@ public class AiOrbsSticky : Pushable
         {
             player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
         }
-        else if(attached)
+        else if(player.GetComponent<BasicMovementClone>() && attached)
         {
             player.GetComponent<BasicMovementClone>().AddMinion(-1);
         }

@@ -85,7 +85,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator DestroyHookAfterLifetime()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.4f);
 
         if (pulling == true)
         {

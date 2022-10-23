@@ -31,7 +31,7 @@ public class Grapple : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (hook == null && shootHook.IsPressed())
         {

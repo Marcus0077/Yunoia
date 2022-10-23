@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SmoothCameraFollow : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class SmoothCameraFollow : MonoBehaviour
     private BasicMovementPlayer basicMovementPlayer;
     
     public Transform target;
+    PlayerControls playerControls;
+    public InputAction exit;
 
     [Range(-20f, 20f)]
     public float offsetX;
@@ -24,8 +27,17 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void Awake()
     {
+        playerControls = new PlayerControls();
         basicMovementPlayer = basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         target = basicMovementPlayer.playerRB.transform;
+    }
+
+    void Update()
+    {
+        if (exit.IsPressed())
+        {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
@@ -35,5 +47,16 @@ public class SmoothCameraFollow : MonoBehaviour
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
+    }
+
+    public void OnEnable()
+    {
+        exit = playerControls.Camera.Exit;
+        exit.Enable();
+    }
+
+    public void OnDisable()
+    {
+        exit.Disable();
     }
 }

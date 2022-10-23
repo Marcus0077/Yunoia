@@ -427,6 +427,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""cd282b85-df74-45b5-be42-c4317f1656a6"",
+            ""actions"": [
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""d480cade-cf9e-491b-bb4b-38cf7a297a93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e6908be3-402b-42d4-846d-9bbab1e4b7cd"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -479,6 +507,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Push
         m_Push = asset.FindActionMap("Push", throwIfNotFound: true);
         m_Push_Push = m_Push.FindAction("Push", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Exit = m_Camera.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -739,6 +770,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PushActions @Push => new PushActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private ICameraActions m_CameraActionsCallbackInterface;
+    private readonly InputAction m_Camera_Exit;
+    public struct CameraActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Exit => m_Wrapper.m_Camera_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            {
+                @Exit.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -781,5 +845,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPushActions
     {
         void OnPush(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnExit(InputAction.CallbackContext context);
     }
 }

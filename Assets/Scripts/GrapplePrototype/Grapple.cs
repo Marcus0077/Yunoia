@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    [SerializeField] float pullSpeed = 0.5f;
+    [SerializeField] float pullSpeed = 0.35f;
     [SerializeField] float stopDistance = 2.5f;
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
@@ -65,7 +65,7 @@ public class Grapple : MonoBehaviour
             playerRB.AddForce(Physics.gravity * 1.4f * playerRB.mass);
         }
 
-        if (playerRB.position.y > hook.transform.position.y)
+        if (hook != null && (playerRB.position.y > hook.transform.position.y))
         {
             DestroyHook();
         }

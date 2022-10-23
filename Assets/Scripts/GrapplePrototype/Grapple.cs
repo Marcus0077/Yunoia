@@ -64,6 +64,11 @@ public class Grapple : MonoBehaviour
         {
             playerRB.AddForce(Physics.gravity * 4.0f * playerRB.mass);
         }
+
+        if (playerRB.position.y > hook.transform.position.y)
+        {
+            DestroyHook();
+        }
     }
 
     public void StartPull()

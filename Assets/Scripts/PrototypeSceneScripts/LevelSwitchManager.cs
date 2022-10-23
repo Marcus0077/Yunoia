@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 public class LevelSwitchManager : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class LevelSwitchManager : MonoBehaviour
         }
         else if (other.CompareTag("RestoredCloneEnd"))
         {
-            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

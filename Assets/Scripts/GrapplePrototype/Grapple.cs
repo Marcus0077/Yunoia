@@ -62,7 +62,7 @@ public class Grapple : MonoBehaviour
 
         if (extendGrapple.IsPressed() && pulling == true)
         {
-            playerRB.AddForce(Physics.gravity * 4.0f * playerRB.mass);
+            playerRB.AddForce(Physics.gravity * 1.2f * playerRB.mass);
         }
 
         if (playerRB.position.y > hook.transform.position.y)

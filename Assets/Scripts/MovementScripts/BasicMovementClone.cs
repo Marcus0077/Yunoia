@@ -9,12 +9,12 @@ using TMPro;
 public class BasicMovementClone : MonoBehaviour
 {
     // Script references
-    private BasicMovementPlayer basicMovementPlayer;
-    private SmoothCameraFollow smoothCameraFollow;
-    private SummonClone summonClone;
-    private ExitClone exitClone;
-    private CombatHandler combatHandler;
-    private LevelSwitchManager levelSwitchManager;
+    public BasicMovementPlayer basicMovementPlayer;
+    public SmoothCameraFollow smoothCameraFollow;
+    public SummonClone summonClone;
+    public ExitClone exitClone;
+    public CombatHandler combatHandler;
+    public LevelSwitchManager levelSwitchManager;
     public AbilityPush cloneAbilityPush;
 
     // Player game object reference.
@@ -22,23 +22,23 @@ public class BasicMovementClone : MonoBehaviour
     
     // Input variables
     PlayerControls playerControls;
-    private InputAction move;
-    private InputAction jump;
-    private InputAction switchPlaces;
+    public InputAction move;
+    public InputAction jump;
+    public InputAction switchPlaces;
 
     // Movement variables
     public Rigidbody cloneRB;
-    private Vector2 moveDirection = Vector2.zero;
+    public Vector2 moveDirection = Vector2.zero;
     public float moveSpeed;
-    private bool cloneIsFrozen;
-    private bool cloneCanMove;
+    public bool cloneIsFrozen;
+    public bool cloneCanMove;
 
     // Jump variables
     public LayerMask whatIsGround;
     public Transform groundPoint;
     public float jumpForce;
-    private bool isGrounded;
-    private float jumpTime;
+    public bool isGrounded;
+    public float jumpTime;
 
     // Temp object reference
     public GameObject Wall_1;
@@ -46,7 +46,7 @@ public class BasicMovementClone : MonoBehaviour
     public GameObject Blocker3;
     
     public Vector3 blocker3InPos;
-    private Vector3 blocker3OutPos;
+    public Vector3 blocker3OutPos;
 
     // Clone version bool.
     public bool cloneRestored;

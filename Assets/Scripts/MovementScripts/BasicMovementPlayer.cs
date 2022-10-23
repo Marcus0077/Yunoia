@@ -8,13 +8,13 @@ public class BasicMovementPlayer : MonoBehaviour
 {
     // Input variables
     PlayerControls playerControls;
-    private InputAction move;
-    private InputAction jump;
-    private InputAction crouch;
+    public InputAction move;
+    public InputAction jump;
+    public InputAction crouch;
 
     // Movement variables
     public Rigidbody playerRB;
-    private Vector2 moveDirection = Vector2.zero;
+    public Vector2 moveDirection = Vector2.zero;
     [SerializeField] public float moveSpeed;
     [SerializeField] public float maxSpeed;
     public bool canMove;
@@ -24,10 +24,10 @@ public class BasicMovementPlayer : MonoBehaviour
     public LayerMask whatIsGround;
     public Transform groundPoint;
     public float jumpForce;
-    private bool isGrounded;
-    private float jumpTime;
+    public bool isGrounded;
+    public float jumpTime;
 
-    private Vector2 lookDirection = Vector2.zero;
+    public Vector2 lookDirection = Vector2.zero;
     
     public GameObject Blocker1;
     public GameObject Blocker2;

@@ -19,9 +19,9 @@ public class Grapple : MonoBehaviour
     Rigidbody rigid;
 
     PlayerControls grappleControls;
-    private InputAction shootHook;
-    private InputAction cancelHook;
-    private InputAction extendGrapple;
+    public InputAction shootHook;
+    public InputAction cancelHook;
+    public InputAction extendGrapple;
 
     // Start is called before the first frame update
     void Start()

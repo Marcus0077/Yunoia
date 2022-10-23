@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] float pullSpeed = 0.5f;
-    [SerializeField] float stopDistance = 4f;
+    [SerializeField] float stopDistance = 2.5f;
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
     [SerializeField] float hookLife;
@@ -85,7 +85,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator DestroyHookAfterLifetime()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
 
         if (pulling == true)
         {

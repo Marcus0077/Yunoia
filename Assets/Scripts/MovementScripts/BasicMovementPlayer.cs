@@ -42,7 +42,7 @@ public class BasicMovementPlayer : MonoBehaviour
         playerControls = new PlayerControls();
         
         moveSpeed = 4.0f;
-        jumpForce = 3.0f;
+        jumpForce = 1.2f;
         
         canMove = true;
         isFrozen = false;

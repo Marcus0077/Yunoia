@@ -309,19 +309,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicMovementPlayer: {fileID: 0}
+  smoothCameraFollow: {fileID: 0}
+  summonClone: {fileID: 0}
+  exitClone: {fileID: 0}
+  combatHandler: {fileID: 0}
+  levelSwitchManager: {fileID: 0}
   cloneAbilityPush: {fileID: 8397525453568900783}
   Player: {fileID: 0}
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3b35a7da-afeb-46b8-8509-846a450dcd08
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9bde0669-b27f-40d2-a4d1-24a1f2ce46fb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  switchPlaces:
+    m_Name: Switch Places
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6c850b4e-7e86-42bf-b3bd-7673315767be
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   cloneRB: {fileID: 5827308682441603359}
+  moveDirection: {x: 0, y: 0}
   moveSpeed: 0
+  cloneIsFrozen: 0
+  cloneCanMove: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundPoint: {fileID: 5827308682340208283}
   jumpForce: 0
+  isGrounded: 0
+  jumpTime: 0
   Wall_1: {fileID: 0}
   Blocker2: {fileID: 0}
   Blocker3: {fileID: 0}
   blocker3InPos: {x: 0, y: 0, z: 0}
+  blocker3OutPos: {x: 0, y: 0, z: 0}
   cloneRestored: 0
   isOnTrigger2: 0
   attachedMinionCount: 0
@@ -351,14 +390,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullSpeed: 0.3
-  stopDistance: 3
+  pullSpeed: 0.75
+  stopDistance: 2.5
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 224377010961569212}
   hookLife: 5
   maxHookLife: 0
   playerRB: {fileID: 5827308682441603359}
   changePerSecond: 0
+  shootHook:
+    m_Name: Shoot Hook
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2f7a63f9-b5b7-40dc-8b05-2488b5b6499a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  cancelHook:
+    m_Name: Cancel Hook
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 98cd0ecc-3450-4c99-8568-2de8831c0190
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  extendGrapple:
+    m_Name: Extend Grapple
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d669e60a-78ce-4a20-a798-85dc4effd7a9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &8397525453568900783
 MonoBehaviour:
   m_ObjectHideFlags: 0

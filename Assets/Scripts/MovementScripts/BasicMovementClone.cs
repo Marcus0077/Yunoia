@@ -85,7 +85,7 @@ public class BasicMovementClone : MonoBehaviour
         playerControls = new PlayerControls();
         
         moveSpeed = 4.0f;
-        jumpForce = 3.0f;
+        jumpForce = 1.2f;
         combatHandler.cloneHP = 3;
 
         logFormulaCoefficient = .6f;

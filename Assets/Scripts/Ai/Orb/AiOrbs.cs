@@ -5,16 +5,18 @@ using UnityEngine.AI;
 
 public class AiOrbs : Pushable
 {
-    NavMeshAgent aiController;
+    //NavMeshAgent aiController;
     [SerializeField]
-    GameObject player, stickyOrb;
+    GameObject stickyOrb;
+    public GameObject player;
     [SerializeField]
-    float detectDistance;
+    float detectDistance, speed;
     // Start is called before the first frame update
     void Start()
     {
-        aiController = GetComponent<NavMeshAgent>();
-        player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
+        //aiController = GetComponent<NavMeshAgent>();
+        if(player == null)
+            player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
     }
 
     //void OnCollisionEnter(Collision collision)
@@ -31,6 +33,7 @@ public class AiOrbs : Pushable
         if(other.gameObject == player)
         {
             GameObject orb = Instantiate(stickyOrb, transform.position, Quaternion.identity);
+            orb.GetComponent<AiOrbsSticky>().player = player;
             Destroy(gameObject);
         }
     }
@@ -38,6 +41,7 @@ public class AiOrbs : Pushable
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
         AiOrbsSticky orb = Instantiate(stickyOrb, transform.position, transform.rotation).GetComponent<AiOrbsSticky>();
+        orb.player = player;
         orb.Pushed(force, chargeLevel, totalCharges);
         Destroy(gameObject);
     }
@@ -50,15 +54,29 @@ public class AiOrbs : Pushable
     void DistancePlayer()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity))
+        GameObject closer = null;
+        float distance = 100;
+        foreach(AbilityPush play in Object.FindObjectsOfType<AbilityPush>())
         {
-            if (hit.transform.gameObject.GetComponent<AbilityPush>() != null)
+            if (Physics.Raycast(transform.position, play.gameObject.transform.position - transform.position, out hit, Mathf.Infinity))
             {
-                if(hit.distance < detectDistance)
+                if (hit.transform.gameObject.GetComponent<AbilityPush>() != null)
                 {
-                    aiController.destination = player.transform.position;
+                    if (hit.distance < detectDistance)
+                    {
+                        if(distance > hit.distance)
+                        {
+                            closer = hit.transform.gameObject;
+                        }
+                        //aiController.destination = player.transform.position;
+                    }
                 }
             }
+        }
+        if (closer != null)
+        {
+            player = closer;
+            transform.position = Vector3.Lerp(transform.position, closer.transform.position, Time.deltaTime * speed);
         }
     }
 

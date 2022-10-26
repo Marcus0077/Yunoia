@@ -8,13 +8,13 @@ public class BasicMovementPlayer : MonoBehaviour
 {
     // Input variables
     PlayerControls playerControls;
-    private InputAction move;
-    private InputAction jump;
-    private InputAction crouch;
+    public InputAction move;
+    public InputAction jump;
+    public InputAction crouch;
 
     // Movement variables
     public Rigidbody playerRB;
-    private Vector2 moveDirection = Vector2.zero;
+    public Vector2 moveDirection = Vector2.zero;
     [SerializeField] public float moveSpeed;
     [SerializeField] public float maxSpeed;
     public bool canMove;
@@ -24,10 +24,17 @@ public class BasicMovementPlayer : MonoBehaviour
     public LayerMask whatIsGround;
     public Transform groundPoint;
     public float jumpForce;
-    private bool isGrounded;
-    private float jumpTime;
+    public bool isGrounded;
+    public float jumpTime;
+
+    public Vector2 lookDirection = Vector2.zero;
     
-    private Vector2 lookDirection = Vector2.zero;
+    public GameObject Blocker1;
+    public GameObject Blocker2;
+
+    public int attachedMinionCount;
+    float logFormulaCoefficient;
+    float logFormulaModifier;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -35,10 +42,16 @@ public class BasicMovementPlayer : MonoBehaviour
         playerControls = new PlayerControls();
         
         moveSpeed = 4.0f;
-        jumpForce = 3.0f;
+        jumpForce = 1.2f;
         
         canMove = true;
         isFrozen = false;
+        
+        Blocker1 = GameObject.FindWithTag("Blocker1");
+        Blocker2 = GameObject.FindWithTag("Blocker2");
+
+        logFormulaCoefficient = .6f;
+        logFormulaModifier = 2f;
     }
     
     void FixedUpdate()
@@ -74,12 +87,22 @@ public class BasicMovementPlayer : MonoBehaviour
     // Also gives option to jump.
     void MovePlayer()
     {
-        moveDirection = move.ReadValue<Vector2>() * moveSpeed;
-        playerRB.velocity = new Vector3(-moveDirection.y, playerRB.velocity.y, moveDirection.x);
+        moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
+        playerRB.velocity = new Vector3(moveDirection.y, playerRB.velocity.y, -moveDirection.x);
         
         JumpPlayer();
-        
-        playerRB.AddForce(Physics.gravity * 1.5f * playerRB.mass); 
+
+        playerRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * playerRB.mass);
+    }
+
+    float CalcMinionMoveChange()
+    {
+        return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
+    }
+
+    public void AddMinion(int value)
+    {
+        attachedMinionCount += value;
     }
 
     // Applies jump force to player if they press the jump button and
@@ -117,6 +140,24 @@ public class BasicMovementPlayer : MonoBehaviour
     {
         move.Disable();
         jump.Disable();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger1"))
+        {
+            Blocker1.GetComponent<MeshRenderer>().enabled = false;
+            Blocker1.GetComponent<Collider>().enabled = false;
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger1"))
+        {
+            Blocker1.GetComponent<MeshRenderer>().enabled = true;
+            Blocker1.GetComponent<Collider>().enabled = true;
+        }
     }
 
     private void IsGrounded()

@@ -12,7 +12,7 @@ public class AbilityPush : MonoBehaviour
     float chargeTime;
     bool ableToPush = true;
     [SerializeField]
-    bool restored;
+    public bool restored;
     PlayerControls pushControls;
     private InputAction pushAction;
     // Start is called before the first frame update

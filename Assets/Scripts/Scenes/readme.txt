@@ -1,3 +1,0 @@
-Right now, the script for reflective Scriptable contains 2 angles from which light reflects from the shape, the two normal angles from the face that is reflective. i.e. a shape that reflects from the -z side and the positive x side would have 0,0,-1 and 1,0,0 in either of the parameters of face or direction.
-
-The door scriptable object has a reference to the door object it will displace and instantiate. It will contain the color of the crystal as well as the speed and direction the door will move. The door dispersible object will have the origin coordinates for that door.

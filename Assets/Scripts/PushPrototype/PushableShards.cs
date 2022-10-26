@@ -20,7 +20,7 @@ public class PushableShards : PushableAnimatable
         {
             for (int i = 0; i < shardCount; i++)
             {
-                Vector3 randPosition = (Random.Range(-1f, 1f) + transform.position.x) * Vector3.right + (Random.Range(-1f, 1f) + transform.position.y) * Vector3.up + (Random.Range(-1f, 1f) + transform.position.z) * Vector3.forward;
+                Vector3 randPosition = (Random.Range(-1f, 1f) + transform.position.x) * Vector3.right + transform.position.y * Vector3.up + (Random.Range(-1f, 1f) + transform.position.z) * Vector3.forward;
                 GameObject shardCopy = Instantiate(shard, randPosition, Quaternion.identity, transform);
                 Vector3 direction = shardCopy.transform.position - pusher.transform.position;
                 direction = direction.normalized;

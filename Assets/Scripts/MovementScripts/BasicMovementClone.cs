@@ -91,7 +91,7 @@ public class BasicMovementClone : MonoBehaviour
         logFormulaCoefficient = .6f;
         logFormulaModifier = 2f;
 
-        //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
+        combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneRestored = true;
         cloneIsFrozen = false;

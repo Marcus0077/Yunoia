@@ -31,19 +31,26 @@ public class AiOrbsSticky : Pushable
         }
     }
 
-    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
+    public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        if (player.GetComponent<BasicMovementPlayer>() && attached)
+        if(base.Pushed(force, chargeLevel, totalCharges, pusher))
         {
-            player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
+            if (player.GetComponent<BasicMovementPlayer>() && attached)
+            {
+                player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
+            }
+            else if (player.GetComponent<BasicMovementClone>() && attached)
+            {
+                player.GetComponent<BasicMovementClone>().AddMinion(-1);
+            }
+            attached = false;
+            StartCoroutine(PushTimer(timeToTravel));
+            return true;
         }
-        else if(player.GetComponent<BasicMovementClone>() && attached)
+        else
         {
-            player.GetComponent<BasicMovementClone>().AddMinion(-1);
+            return false;
         }
-        attached = false;
-        base.Pushed(force, chargeLevel,totalCharges, pusher);
-        StartCoroutine(PushTimer(timeToTravel));
     }
 
     public IEnumerator PushTimer(float time)

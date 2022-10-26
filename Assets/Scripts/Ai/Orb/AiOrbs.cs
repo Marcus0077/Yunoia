@@ -10,7 +10,7 @@ public class AiOrbs : Pushable
     GameObject stickyOrb;
     public GameObject player;
     [SerializeField]
-    float detectDistance, speed;
+    float detectDistance, movespeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +38,17 @@ public class AiOrbs : Pushable
         }
     }
 
-    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
+    public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        AiOrbsSticky orb = Instantiate(stickyOrb, transform.position, transform.rotation).GetComponent<AiOrbsSticky>();
-        orb.player = player;
-        orb.Pushed(force, chargeLevel, totalCharges, pusher);
-        Destroy(gameObject);
+        if(chargeLevel >= reqChargeLevel)
+        {
+            AiOrbsSticky orb = Instantiate(stickyOrb, transform.position, transform.rotation).GetComponent<AiOrbsSticky>();
+            orb.player = player;
+            orb.Pushed(force, chargeLevel, totalCharges, pusher);
+            Destroy(gameObject);
+            return true;
+        }
+        return false;
     }
 
     public override void Awake()
@@ -64,7 +69,7 @@ public class AiOrbs : Pushable
                 {
                     if (hit.distance < detectDistance)
                     {
-                        if(distance > hit.distance)
+                        if (distance > hit.distance)
                         {
                             closer = hit.transform.gameObject;
                         }
@@ -75,8 +80,9 @@ public class AiOrbs : Pushable
         }
         if (closer != null)
         {
+            Debug.Log(closer);
             player = closer;
-            transform.position = Vector3.Lerp(transform.position, closer.transform.position, Time.deltaTime * speed);
+            transform.position = Vector3.Lerp(transform.position, closer.transform.position, Time.deltaTime * movespeed);
         }
     }
 

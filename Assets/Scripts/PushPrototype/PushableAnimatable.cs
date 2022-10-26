@@ -12,24 +12,38 @@ public class PushableAnimatable : Pushable
         
     }
 
-    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
+    public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        base.Pushed(force, chargeLevel, totalCharges, pusher);
-        StartCoroutine(DisplayAnimation());
+        bool toBeDestroyed = data.doDestroy;
+        data.doDestroy = false;
+        if (base.Pushed(force, chargeLevel, totalCharges, pusher))
+        {
+            data.doDestroy = toBeDestroyed;
+            StartCoroutine(DisplayAnimation());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    protected IEnumerator WaitForAnimation(string boolName)
+    protected IEnumerator WaitForAnimation()
     {
         do
         {
             yield return null;
-        } while (anim.GetBool(boolName)); //animation end behavior is set bool to false? or i can destroy in behavior instead of these coroutines
+        } while (anim.GetBool(data.animationBool)); //animation end behavior is set bool to false? or i can destroy in behavior instead of these coroutines
     }
 
     public virtual IEnumerator DisplayAnimation()
     {
-        anim.SetBool("break", true);
-        yield return WaitForAnimation("break"); // have real name
+        anim.SetBool(data.animationBool, true);
+        yield return WaitForAnimation(); // have real name
+        if(data.doDestroy)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public override void Awake()

@@ -2676,11 +2676,11 @@ GameObject:
   - component: {fileID: 8204129998314279596}
   - component: {fileID: 8204129998314279597}
   - component: {fileID: 8204129998314279598}
-  - component: {fileID: 5242114114377454417}
   - component: {fileID: 8204129998314279599}
   - component: {fileID: 8204129998314279592}
   - component: {fileID: 1353929238597083573}
   - component: {fileID: 1976662473}
+  - component: {fileID: 6540674399680567321}
   m_Layer: 0
   m_Name: Break Wall (1)
   m_TagString: Untagged
@@ -2947,20 +2947,6 @@ MonoBehaviour:
     RefIds:
     - rid: 8158780157339893789
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
---- !u!114 &5242114114377454417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8204129998314279594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b54b49a8a76dde745b8f3bca360fa2b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 0
-  mat: {fileID: 2100000, guid: 63a2463ab3526e24e8782bcb22e03b1e, type: 2}
 --- !u!23 &8204129998314279599
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3040,6 +3026,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.154326, y: 5.4755516, z: 9.797604}
   m_Center: {x: -4.488244, y: 2.7377758, z: 4.8987412}
+--- !u!114 &6540674399680567321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204129998314279594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383247e2e04d89b4d806067e27e4c18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 1
+  reqChargeLevel: 1
+  data: {fileID: 11400000, guid: 9fdbca6f967237248a07655ee7911f93, type: 2}
 --- !u!1 &8204129998458274176
 GameObject:
   m_ObjectHideFlags: 0

@@ -110,7 +110,8 @@ GameObject:
   - component: {fileID: 1892298797521922524}
   - component: {fileID: 5336736205147315411}
   - component: {fileID: 3122829092548868028}
-  - component: {fileID: 2175420743007987115}
+  - component: {fileID: 953639871936264337}
+  - component: {fileID: 978491343136796505}
   m_Layer: 0
   m_Name: Breakable Wall (9)
   m_TagString: Untagged
@@ -212,7 +213,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2175420743007987115
+--- !u!114 &953639871936264337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,11 +222,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515135136369264271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff08d296e9772f940874bec145742901, type: 3}
+  m_Script: {fileID: 11500000, guid: 383247e2e04d89b4d806067e27e4c18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
-  mat: {fileID: 2100000, guid: 63a2463ab3526e24e8782bcb22e03b1e, type: 2}
+  reqChargeLevel: 1
+  data: {fileID: 11400000, guid: 5f74b9d6f98ebb145a08c9482c846a5a, type: 2}
+--- !u!114 &978491343136796505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515135136369264271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383247e2e04d89b4d806067e27e4c18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 1
+  reqChargeLevel: 1
+  data: {fileID: 0}
 --- !u!1 &1872654891453688838
 GameObject:
   m_ObjectHideFlags: 0
@@ -4362,7 +4379,7 @@ GameObject:
   - component: {fileID: 6064922969240377317}
   - component: {fileID: 3083878712443936736}
   - component: {fileID: 1355515327798967937}
-  - component: {fileID: 7735505021854781610}
+  - component: {fileID: 5174373861476747004}
   m_Layer: 0
   m_Name: Breakable Wall (8)
   m_TagString: Untagged
@@ -4464,7 +4481,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7735505021854781610
+--- !u!114 &5174373861476747004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4473,11 +4490,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7780821727592905850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff08d296e9772f940874bec145742901, type: 3}
+  m_Script: {fileID: 11500000, guid: 383247e2e04d89b4d806067e27e4c18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
-  mat: {fileID: 2100000, guid: 63a2463ab3526e24e8782bcb22e03b1e, type: 2}
+  reqChargeLevel: 1
+  data: {fileID: 11400000, guid: 5f74b9d6f98ebb145a08c9482c846a5a, type: 2}
 --- !u!1 &7960497363140308122
 GameObject:
   m_ObjectHideFlags: 0

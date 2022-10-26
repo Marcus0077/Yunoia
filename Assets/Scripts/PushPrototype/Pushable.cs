@@ -18,7 +18,7 @@ public class Pushable : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public virtual void Pushed(Vector3 force, int chargeLevel, int totalCharges)
+    public virtual void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
         float chargeMultiplier = chargeLevel / (float)totalCharges;
         rb.AddForce(force * velocity * chargeMultiplier, ForceMode.VelocityChange);

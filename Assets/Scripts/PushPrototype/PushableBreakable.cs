@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushableBigWall : Pushable
+public class PushableBreakable : PushableAnimatable
 {
-    public Material mat;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,13 +12,14 @@ public class PushableBigWall : Pushable
 
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        if(chargeLevel>1)
-        {
-            base.Pushed(force, chargeLevel, totalCharges, pusher);
-            //GetComponent<Renderer>().material.color = Color.blue;
-            GetComponent<Renderer>().material = mat;
-            GetComponent<Collider>().enabled = false;
-        }
+        base.Pushed(force, chargeLevel, totalCharges, pusher);
+    }
+
+    public override IEnumerator DisplayAnimation()
+    {
+        anim.SetBool("break", true);
+        yield return WaitForAnimation("break"); // have real name
+        Destroy(gameObject);
     }
 
     public override void Awake()

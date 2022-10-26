@@ -11,9 +11,9 @@ public class PushableActivatable : Pushable
         
     }
 
-    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
+    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        base.Pushed(force, chargeLevel, totalCharges);
+        base.Pushed(force, chargeLevel, totalCharges, pusher);
         //GetComponent<Renderer>().material.color = Color.blue;
         GetComponent<Renderer>().material = mat;
         GetComponent<Collider>().enabled = false;

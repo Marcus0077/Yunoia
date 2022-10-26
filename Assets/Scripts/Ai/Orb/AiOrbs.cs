@@ -38,11 +38,11 @@ public class AiOrbs : Pushable
         }
     }
 
-    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
+    public override void Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
         AiOrbsSticky orb = Instantiate(stickyOrb, transform.position, transform.rotation).GetComponent<AiOrbsSticky>();
         orb.player = player;
-        orb.Pushed(force, chargeLevel, totalCharges);
+        orb.Pushed(force, chargeLevel, totalCharges, pusher);
         Destroy(gameObject);
     }
 

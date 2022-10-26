@@ -16,14 +16,16 @@ public class AbilityPush : MonoBehaviour
     PlayerControls pushControls;
     private InputAction pushAction;
     public int pushedLevel;
+    public float range;
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    void PushTargets(float range)
+    void PushTargets()
     {
+        pushedLevel = (int)range + 1 - minPush;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (var hitCollider in hitColliders)
         {
@@ -35,7 +37,7 @@ public class AbilityPush : MonoBehaviour
                 float distance = Vector3.Distance(pushedObj.transform.position, transform.position);
                 float proximityMultiplier = range / distance;
                 //float chargeMultiplier = (range + 1 - minPush) / (float)(maxChargeLevel + 1);
-                pushedObj.Pushed(proximityMultiplier * direction, (int)range + 1 - minPush, maxChargeLevel + 1);//casted to int because chargeLevel should be flat numbers not a float
+                pushedObj.Pushed(proximityMultiplier * direction, pushedLevel, maxChargeLevel + 1, gameObject);//casted to int because chargeLevel should be flat numbers not a float
             }
         }
         if (!restored)
@@ -117,7 +119,8 @@ public class AbilityPush : MonoBehaviour
             //start animation
             if (!restored)
             {
-                PushTargets(minPush);
+                range = minPush;
+                PushTargets();
                 StartCoroutine(PushTimer());
             } else
             {
@@ -136,7 +139,8 @@ public class AbilityPush : MonoBehaviour
             if (restored)
             {
                 chargeTime = (Time.time - chargeTime) * chargeSpeed + minPush;
-                PushTargets(Mathf.Clamp(chargeTime, minPush, maxChargeLevel + minPush));
+                range = Mathf.Clamp(chargeTime, minPush, maxChargeLevel + minPush);
+                PushTargets();
                 StartCoroutine(PushTimer());
                 chargeTime = Time.time;
             }

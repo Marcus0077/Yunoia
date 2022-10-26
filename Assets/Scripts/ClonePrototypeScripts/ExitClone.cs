@@ -9,7 +9,7 @@ using TMPro;
 public class ExitClone : MonoBehaviour
 {
     // UI Active Timer
-    public TextMeshProUGUI activeTimerText;
+    //public TextMeshProUGUI activeTimerText;
     
     // Script references
     private BasicMovementPlayer basicMovementPlayer;
@@ -17,6 +17,9 @@ public class ExitClone : MonoBehaviour
     private SmoothCameraFollow smoothCameraFollow;
     private SummonClone summonClone;
     private CombatHandler combatHandler;
+    
+    // Player reference
+    public GameObject Player;
 
     // Input variables
     PlayerControls summonControls;
@@ -33,6 +36,8 @@ public class ExitClone : MonoBehaviour
     void Awake()
     {
         summonControls = new PlayerControls();
+        
+        Player = GameObject.FindWithTag("Player");
 
         basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         basicMovementClone = FindObjectOfType<BasicMovementClone>();
@@ -44,9 +49,9 @@ public class ExitClone : MonoBehaviour
         despawnClone = false;
         cloneActiveTimer = 30.0f;
         
-        activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
-        activeTimerText.color = Color.white;
-        activeTimerText.text = "Active Timer: ";
+        //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
+        //activeTimerText.color = Color.white;
+        //activeTimerText.text = "Active Timer: ";
     }
     
     void FixedUpdate()
@@ -58,15 +63,18 @@ public class ExitClone : MonoBehaviour
             summonClone.cloneSummoned = false;
             basicMovementPlayer.canMove = true;
             
+            Player.GetComponent<Grapple>().enabled = true;
+            Player.GetComponent<AbilityPush>().enabled = true;
+
+            if (basicMovementClone.isOnTrigger2)
+            {
+                basicMovementClone.Blocker2.GetComponent<MeshRenderer>().enabled = true;
+                basicMovementClone.Blocker2.GetComponent<Collider>().enabled = true;
+            }
+
+            basicMovementClone.Blocker3.transform.position = basicMovementClone.blocker3InPos;
+
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
-            
-            summonClone.guidanceText.text = "Welcome to the Clone Summon Prototype! " +
-                                            "Step on the yellow summoning plate to begin!";
-            
-            summonClone.cloneVersionText.text = "";
-            basicMovementClone.inControlText.text = "";
-            activeTimerText.text = "";
-            combatHandler.healthText.text = "";
 
             Destroy(this.gameObject);
         }
@@ -74,7 +82,7 @@ public class ExitClone : MonoBehaviour
         else
         {
             cloneActiveTimer -= Time.deltaTime;
-            activeTimerText.text = "Active Timer: " + Math.Round(cloneActiveTimer, 2); 
+            //activeTimerText.text = "Active Timer: " + Math.Round(cloneActiveTimer, 2); 
         }
 
         // If clone is not active, despawn it.
@@ -85,7 +93,7 @@ public class ExitClone : MonoBehaviour
         // If 5 seconds are left, turn active time red and make clone blink.
         else if (cloneActiveTimer < 5.01)
         {
-            activeTimerText.color = Color.red;
+            //activeTimerText.color = Color.red;
 
             if (!isRunning)
             {

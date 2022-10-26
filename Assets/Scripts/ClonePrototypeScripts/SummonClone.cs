@@ -18,21 +18,10 @@ public class SummonClone : MonoBehaviour
     // Clone Summon variables
     public GameObject ClonePrefab;
     public bool cloneSummoned;
-    public bool canSummon;
-    
-    public TextMeshProUGUI guidanceText;
-    public TextMeshProUGUI cloneVersionText;
-
 
     // Get references and initialize variables when player spawns.
     void Awake()
     {
-        guidanceText = GameObject.FindGameObjectWithTag("GuidanceText").GetComponent<TextMeshProUGUI>();
-        guidanceText.text = "Welcome to the Clone Summon Prototype! Step on the yellow summoning plate to begin!";
-        
-        cloneVersionText = GameObject.FindGameObjectWithTag("CloneVersionText").GetComponent<TextMeshProUGUI>();
-        cloneVersionText.text = "";
-        
         basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         basicMovementClone = FindObjectOfType<BasicMovementClone>();
 
@@ -43,7 +32,7 @@ public class SummonClone : MonoBehaviour
 
     void Update()
     {
-        if (canSummon && !cloneSummoned && summonAClone.WasPressedThisFrame())
+        if (!cloneSummoned && summonAClone.WasPressedThisFrame())
         {
             SummonAClone();
         }
@@ -53,30 +42,12 @@ public class SummonClone : MonoBehaviour
     void SummonAClone()
     {
         basicMovementPlayer.canMove = false;
+        this.GetComponent<Grapple>().enabled = false;
+        this.GetComponent<AbilityPush>().enabled = false;
         
         cloneSummoned = true;
         
-        Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.right, Quaternion.identity);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("SpawnTrigger")  && !cloneSummoned)
-        {
-            canSummon = true;
-            
-            guidanceText.text = "Left-Click (mouse) or press 'X' (controller) to summon a clone!";
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("SpawnTrigger") && !cloneSummoned)
-        {
-            canSummon = false;
-            
-            guidanceText.text = "Welcome to the Clone Summon Prototype! Step on the yellow summoning plate to begin!";
-        }
+        Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
     }
 
     // Enable input action map controls.

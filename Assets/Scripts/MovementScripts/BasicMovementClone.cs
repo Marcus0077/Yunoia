@@ -8,75 +8,105 @@ using TMPro;
 
 public class BasicMovementClone : MonoBehaviour
 {
-    // UI In Control
-    public TextMeshProUGUI inControlText;
-
     // Script references
-    private BasicMovementPlayer basicMovementPlayer;
-    private SmoothCameraFollow smoothCameraFollow;
-    private SummonClone summonClone;
-    private ExitClone exitClone;
-    private CombatHandler combatHandler;
+    public BasicMovementPlayer basicMovementPlayer;
+    public SmoothCameraFollow smoothCameraFollow;
+    public SummonClone summonClone;
+    public ExitClone exitClone;
+    public CombatHandler combatHandler;
+    public LevelSwitchManager levelSwitchManager;
+    public AbilityPush cloneAbilityPush;
 
+    // Player game object reference.
+    public GameObject Player;
     
     // Input variables
     PlayerControls playerControls;
-    private InputAction move;
-    private InputAction jump;
-    private InputAction switchPlaces;
+    public InputAction move;
+    public InputAction jump;
+    public InputAction switchPlaces;
 
     // Movement variables
     public Rigidbody cloneRB;
-    private Vector2 moveDirection = Vector2.zero;
+    public Vector2 moveDirection = Vector2.zero;
     public float moveSpeed;
-    private bool cloneIsFrozen;
-    private bool cloneCanMove;
+    public bool cloneIsFrozen;
+    public bool cloneCanMove;
 
     // Jump variables
     public LayerMask whatIsGround;
     public Transform groundPoint;
     public float jumpForce;
-    private bool isGrounded;
-    private float jumpTime;
+    public bool isGrounded;
+    public float jumpTime;
 
+    // Temp object reference
     public GameObject Wall_1;
-    public GameObject Wall_2;
+    public GameObject Blocker2;
+    public GameObject Blocker3;
+    
+    public Vector3 blocker3InPos;
+    public Vector3 blocker3OutPos;
+
+    // Clone version bool.
+    public bool cloneRestored;
+    
+    public bool isOnTrigger2;
+
+    public int attachedMinionCount;
+    float logFormulaCoefficient;
+    float logFormulaModifier;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
+        Player = GameObject.FindWithTag("Player");
+        
         basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
         exitClone = FindObjectOfType<ExitClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
+        
+        levelSwitchManager = FindObjectOfType<LevelSwitchManager>();
+        
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
 
         Wall_1 = GameObject.FindWithTag("GoodWall1");
-        Wall_2 = GameObject.FindWithTag("GoodWall2");
-
-        summonClone.guidanceText.text = "Right-Click (mouse) or press 'Y' (controller) " +
-                                        "to switch between the clone and the player! " +
-                                        "\n\n Press 'G' (keyboard) or 'B' (controller) to exit.";
+        Blocker2 = GameObject.FindWithTag("Blocker2");
+        Blocker3 = GameObject.FindWithTag("Blocker3");
         
-        summonClone.cloneVersionText.text = "The muted clone can only move and jump, " +
-                                            "and cannot phase through the blue walls.";
+        blocker3InPos = Blocker3.transform.position;
+        blocker3OutPos = new Vector3(blocker3InPos.x - 3f, blocker3InPos.y,
+            blocker3InPos.z);
 
         smoothCameraFollow.target = cloneRB.transform;
         
         playerControls = new PlayerControls();
         
         moveSpeed = 4.0f;
-        jumpForce = 3.0f;
+        jumpForce = 1.2f;
         combatHandler.cloneHP = 3;
-        
-        combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
+        logFormulaCoefficient = .6f;
+        logFormulaModifier = 2f;
+
+        //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
+
+        cloneRestored = true;
         cloneIsFrozen = false;
         cloneCanMove = true;
         
-        inControlText = GameObject.FindGameObjectWithTag("In Control Text").GetComponent<TextMeshProUGUI>();
-        inControlText.color = Color.magenta;
-        inControlText.text = "In Control: Clone";
+        isOnTrigger2 = false;
+        
+        if (levelSwitchManager.pushRestored == true)
+        {
+            cloneAbilityPush.restored = true;
+        }
+        else
+        {
+            cloneAbilityPush.restored = false;
+        }
     }
     
     void FixedUpdate()
@@ -115,18 +145,30 @@ public class BasicMovementClone : MonoBehaviour
         {
             SwitchPlaces();
         }
+        
+        CheckRestoredWalls();
     }
 
     // Applies gravity and movement velocity to player according to movement input.
     // Also gives option to jump.
     void MoveClone()
     {
-        moveDirection = move.ReadValue<Vector2>() * moveSpeed;
-        cloneRB.velocity = new Vector3(-moveDirection.y, cloneRB.velocity.y, moveDirection.x);
+        moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
+        cloneRB.velocity = new Vector3(moveDirection.y, cloneRB.velocity.y, -moveDirection.x);
         
         JumpClone();
         
-        cloneRB.AddForce(Physics.gravity * 1.5f * cloneRB.mass); 
+        cloneRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * cloneRB.mass); 
+    }
+
+    float CalcMinionMoveChange()
+    {
+        return Mathf.Max(0, Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
+    }
+
+    public void AddMinion(int value)
+    {
+        attachedMinionCount += value;
     }
 
     // Applies jump force to player if they press the jump button and
@@ -154,17 +196,27 @@ public class BasicMovementClone : MonoBehaviour
     {
         if (basicMovementPlayer.canMove == false)
         {
-            inControlText.text = "In Control: Player";
             basicMovementPlayer.canMove = true;
             cloneCanMove = false;
+            
+            this.GetComponent<Grapple>().enabled = false;
+            this.GetComponent<AbilityPush>().enabled = false;
+            
+            Player.GetComponent<Grapple>().enabled = true;
+            Player.GetComponent<AbilityPush>().enabled = true;
             
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
         }
         else if (cloneCanMove == false)
-        { 
-            inControlText.text = "In Control: Clone";
+        {
             basicMovementPlayer.canMove = false; 
             cloneCanMove = true;
+            
+            this.GetComponent<Grapple>().enabled = true;
+            this.GetComponent<AbilityPush>().enabled = true;
+            
+            Player.GetComponent<Grapple>().enabled = false;
+            Player.GetComponent<AbilityPush>().enabled = false;
 
             smoothCameraFollow.target = cloneRB.transform;
         }
@@ -191,31 +243,43 @@ public class BasicMovementClone : MonoBehaviour
         switchPlaces.Disable();
     }
 
-    private void OnGUI()
+    private void OnTriggerEnter(Collider other)
     {
-        if (GUI.Button(new Rect(25, 25, 125, 50), "Test Muted Clone"))
+        if (other.CompareTag("BlockerTrigger3"))
         {
-            summonClone.cloneVersionText.text = "The muted clone can only move and jump, " +
-                                                "and cannot phase through the blue walls.";
-            
-            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                false);
-            Physics.IgnoreCollision(Wall_2.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                false);
+            Blocker3.transform.position = blocker3OutPos;
         }
-        
-        if (GUI.Button(new Rect(25, 100, 150, 50), "Test Restored Clone"))
+
+        if (other.CompareTag("BlockerTrigger2"))
         {
-            summonClone.cloneVersionText.text = "The restored clone can move, jump " +
-                                                "and phase through the blue walls!";
+            isOnTrigger2 = true;
             
-            Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                true);
-            Physics.IgnoreCollision(Wall_2.GetComponent<Collider>(), this.GetComponent<Collider>(), 
-                true);
+            Blocker2.GetComponent<MeshRenderer>().enabled = false;
+            Blocker2.GetComponent<Collider>().enabled = false;
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("BlockerTrigger3"))
+        {
+            Blocker3.transform.position = blocker3InPos;
+        }
+
+        if (other.CompareTag("BlockerTrigger2"))
+        {
+            isOnTrigger2 = false;
+            
+            Blocker2.GetComponent<MeshRenderer>().enabled = true;
+            Blocker2.GetComponent<Collider>().enabled = true;
         }
     }
 
+    void CheckRestoredWalls()
+    {
+        Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), true);
+    }
+        
     private void IsGrounded()
     {
         RaycastHit hit;

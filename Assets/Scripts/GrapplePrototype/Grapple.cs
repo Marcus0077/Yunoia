@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    [SerializeField] float pullSpeed = 0.5f;
-    [SerializeField] float stopDistance = 4f;
+    [SerializeField] float pullSpeed = 0.75f;
+    [SerializeField] float stopDistance = 2.5f;
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
     [SerializeField] float hookLife;
@@ -19,9 +19,9 @@ public class Grapple : MonoBehaviour
     Rigidbody rigid;
 
     PlayerControls grappleControls;
-    private InputAction shootHook;
-    private InputAction cancelHook;
-    private InputAction extendGrapple;
+    public InputAction shootHook;
+    public InputAction cancelHook;
+    public InputAction extendGrapple;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Grapple : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (hook == null && shootHook.IsPressed())
         {
@@ -59,10 +59,15 @@ public class Grapple : MonoBehaviour
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
         }
-
+        
         if (extendGrapple.IsPressed() && pulling == true)
         {
-            playerRB.AddForce(Physics.gravity * 4.0f * playerRB.mass);
+            playerRB.AddForce(Physics.gravity * 6.5f * playerRB.mass);
+        }
+
+        if (hook != null && (playerRB.position.y > hook.transform.position.y))
+        {
+            DestroyHook();
         }
     }
 
@@ -85,7 +90,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator DestroyHookAfterLifetime()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
 
         if (pulling == true)
         {

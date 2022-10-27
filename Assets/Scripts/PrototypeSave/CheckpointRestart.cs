@@ -17,9 +17,9 @@ public class CheckpointRestart : MonoBehaviour
 
     void Awake()
     {
-        if (PlayerPrefs.GetInt("CheckpointSaved",0) != 0)
+        if (DataManager.gameData.checkpointed)
         {
-            transform.position = new Vector3(PlayerPrefs.GetFloat("TempX"), PlayerPrefs.GetFloat("TempY"), PlayerPrefs.GetFloat("TempZ"));
+            transform.position = DataManager.gameData.position;
         }
         checkpointControls = new PlayerControls();
         restartAction = checkpointControls.Checkpoint.Restart;

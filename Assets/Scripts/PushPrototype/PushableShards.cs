@@ -24,7 +24,8 @@ public class PushableShards : PushableAnimatable
             {
                 Vector3 randPosition = (Random.Range(-spawnDistance, spawnDistance) + transform.position.x) * Vector3.right + transform.position.y * Vector3.up + (Random.Range(-spawnDistance, spawnDistance) + transform.position.z) * Vector3.forward;
                 GameObject shardCopy = Instantiate(shard, randPosition, Quaternion.identity, transform);
-                Vector3 direction = shardCopy.transform.position - pusher.transform.position;
+                Vector3 direction = shardCopy.transform.position - transform.position; // explode outwards
+                //Vector3 direction = shardCopy.transform.position - pusher.transform.position; explode away from push
                 direction = direction.normalized;
                 float distance = Vector3.Distance(shardCopy.transform.position, pusher.transform.position);
                 shardCopy.GetComponent<Pushable>().Pushed(pusher.GetComponent<AbilityPush>().range / distance * direction * shardCopy.GetComponent<Pushable>().pushSpeed * chargeLevel / totalCharges, chargeLevel, totalCharges, pusher);

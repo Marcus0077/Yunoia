@@ -5,13 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    void Awake()
+    {
+        DataManager.ReadFile();
+    }
     // Sets prototype scene to active and set time scale to normal when play button is pressed.
     public void PlayGame()
     {
         Time.timeScale = 1f;
-        if(PlayerPrefs.GetInt("Level",-1) != -1)
+        if(DataManager.gameData.level != -1)
         {
-            SceneManager.LoadScene(PlayerPrefs.GetInt("Level"));
+            SceneManager.LoadScene(DataManager.gameData.level);
         } else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

@@ -17,11 +17,8 @@ public class Checkpoint : MonoBehaviour
             GameObject hit = contact.otherCollider.gameObject;
             if (hit.tag == "Player")
             {
-                PlayerPrefs.SetInt("CheckpointSaved", 1);
-                PlayerPrefs.SetFloat("TempX", transform.position.x);
-                PlayerPrefs.SetFloat("TempY", transform.position.y+GetComponent<Collider>().bounds.size.y/2+hit.GetComponent<Collider>().bounds.size.y / 2);
-                PlayerPrefs.SetFloat("TempZ", transform.position.z);
-                Debug.Log(transform.position.y + GetComponent<Collider>().bounds.size.y / 2);
+                DataManager.gameData.checkpointed = true;
+                DataManager.gameData.position = transform.position + (Vector3.up * (GetComponent<Collider>().bounds.size.y / 2 + hit.GetComponent<Collider>().bounds.size.y / 2));
             }
         }
     }

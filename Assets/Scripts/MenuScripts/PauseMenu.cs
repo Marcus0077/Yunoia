@@ -58,15 +58,16 @@ public class PauseMenu : MonoBehaviour
     // Load main menu when menu button is pressed.
     public void ReturnToMainMenu()
     {
-        PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
+        DataManager.gameData.level = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(0);
     }
     
     // Quit application when quit button is pressed.
     public void QuitGame()
     {
-        PlayerPrefs.SetInt("Level",SceneManager.GetActiveScene().buildIndex);
+        DataManager.gameData.level = SceneManager.GetActiveScene().buildIndex;
         Debug.Log("Quit Button Works!");
+        DataManager.WriteFile();
         Application.Quit();
     }
 

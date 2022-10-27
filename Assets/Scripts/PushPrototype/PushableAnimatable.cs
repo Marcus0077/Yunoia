@@ -6,6 +6,7 @@ using UnityEngine;
 public class PushableAnimatable : Pushable
 {
     protected Animator anim;
+    bool toBeDestroyed;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,11 +15,9 @@ public class PushableAnimatable : Pushable
 
     public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        bool toBeDestroyed = data.doDestroy;
-        data.doDestroy = false;
+        toBeDestroyed = data.doDestroy;
         if (base.Pushed(force, chargeLevel, totalCharges, pusher))
         {
-            data.doDestroy = toBeDestroyed;
             if(toBeDestroyed)
             {
                 GetComponent<Collider>().enabled = false;
@@ -28,7 +27,6 @@ public class PushableAnimatable : Pushable
         }
         else
         {
-            data.doDestroy = toBeDestroyed;
             return false;
         }
     }
@@ -45,7 +43,7 @@ public class PushableAnimatable : Pushable
     {
         anim.SetBool(data.animationBool, true);
         yield return WaitForAnimation(); // have real name
-        if(data.doDestroy)
+        if(toBeDestroyed)
         {
             Destroy(gameObject);
         }

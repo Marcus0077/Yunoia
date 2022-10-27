@@ -68,7 +68,7 @@ public class PushableFunction : ScriptableObject
     {
         if(activatable)
         {
-            if (destroy)
+            if (destroy && !animation)
             {
                 Destroy(pushedObj);
                 return;
@@ -77,6 +77,7 @@ public class PushableFunction : ScriptableObject
             {
                 pushedObj.GetComponent<Renderer>().material.SetColor("_Color", color);
             }
+            pushedObj.GetComponent<Pushable>().Activate();
         }
     }
 }

@@ -51,4 +51,9 @@ public class Pushable : MonoBehaviour
             return false;
         }
     }
+
+    public virtual void Activate()
+    {
+        
+    }
 }

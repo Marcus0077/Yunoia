@@ -19,6 +19,10 @@ public class PushableAnimatable : Pushable
         if (base.Pushed(force, chargeLevel, totalCharges, pusher))
         {
             data.doDestroy = toBeDestroyed;
+            if(toBeDestroyed)
+            {
+                GetComponent<Collider>().enabled = false;
+            }
             StartCoroutine(DisplayAnimation());
             return true;
         }

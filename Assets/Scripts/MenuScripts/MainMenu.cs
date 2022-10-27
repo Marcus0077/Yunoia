@@ -9,7 +9,13 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if(PlayerPrefs.GetInt("Level",-1) != -1)
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetInt("Level"));
+        } else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
     
     // Exits application when quit button is pressed.

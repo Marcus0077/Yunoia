@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CheckpointRestart : MonoBehaviour
 {
@@ -10,15 +11,16 @@ public class CheckpointRestart : MonoBehaviour
 
     void Restart()
     {
-        if(PlayerPrefs.GetInt("CheckpointSaved") != 0)
-        {
-            transform.position = new Vector3(PlayerPrefs.GetFloat("TempX"), PlayerPrefs.GetFloat("TempY"), PlayerPrefs.GetFloat("TempZ"));
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
 
     void Awake()
     {
+        if (PlayerPrefs.GetInt("CheckpointSaved",0) != 0)
+        {
+            transform.position = new Vector3(PlayerPrefs.GetFloat("TempX"), PlayerPrefs.GetFloat("TempY"), PlayerPrefs.GetFloat("TempZ"));
+        }
         checkpointControls = new PlayerControls();
         restartAction = checkpointControls.Checkpoint.Restart;
         restartAction.performed += ctx => Restart();

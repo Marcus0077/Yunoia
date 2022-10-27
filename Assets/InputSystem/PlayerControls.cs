@@ -455,6 +455,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Checkpoint"",
+            ""id"": ""0616ba54-f363-417b-8fbe-9380266c1987"",
+            ""actions"": [
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""952c450e-fe78-458f-bb82-c51217e48b78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1071a47d-fd58-4f92-b6d1-7084d488eeb6"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -510,6 +538,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Exit = m_Camera.FindAction("Exit", throwIfNotFound: true);
+        // Checkpoint
+        m_Checkpoint = asset.FindActionMap("Checkpoint", throwIfNotFound: true);
+        m_Checkpoint_Restart = m_Checkpoint.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -803,6 +834,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Checkpoint
+    private readonly InputActionMap m_Checkpoint;
+    private ICheckpointActions m_CheckpointActionsCallbackInterface;
+    private readonly InputAction m_Checkpoint_Restart;
+    public struct CheckpointActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CheckpointActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Restart => m_Wrapper.m_Checkpoint_Restart;
+        public InputActionMap Get() { return m_Wrapper.m_Checkpoint; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CheckpointActions set) { return set.Get(); }
+        public void SetCallbacks(ICheckpointActions instance)
+        {
+            if (m_Wrapper.m_CheckpointActionsCallbackInterface != null)
+            {
+                @Restart.started -= m_Wrapper.m_CheckpointActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_CheckpointActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_CheckpointActionsCallbackInterface.OnRestart;
+            }
+            m_Wrapper.m_CheckpointActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
+            }
+        }
+    }
+    public CheckpointActions @Checkpoint => new CheckpointActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -849,5 +913,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface ICameraActions
     {
         void OnExit(InputAction.CallbackContext context);
+    }
+    public interface ICheckpointActions
+    {
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

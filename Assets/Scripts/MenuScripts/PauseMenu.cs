@@ -68,6 +68,11 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     // Enable input action map controls.
     private void OnEnable()
     {

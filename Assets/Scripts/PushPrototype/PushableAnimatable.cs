@@ -28,6 +28,7 @@ public class PushableAnimatable : Pushable
         }
         else
         {
+            data.doDestroy = toBeDestroyed;
             return false;
         }
     }

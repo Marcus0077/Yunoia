@@ -344,11 +344,23 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  dash:
+    m_Name: Dash
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fb52ee98-032a-4ede-b23d-e613592af1b3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   cloneRB: {fileID: 5827308682441603359}
   moveDirection: {x: 0, y: 0}
+  lookDirection: {x: 0, y: 0}
   moveSpeed: 0
+  maxSpeed: 0
   cloneIsFrozen: 0
   cloneCanMove: 0
+  accelerationValue: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -356,14 +368,15 @@ MonoBehaviour:
   jumpForce: 0
   isGrounded: 0
   jumpTime: 0
+  isOnTrigger2: 0
   Wall_1: {fileID: 0}
   Blocker2: {fileID: 0}
   Blocker3: {fileID: 0}
   blocker3InPos: {x: 0, y: 0, z: 0}
   blocker3OutPos: {x: 0, y: 0, z: 0}
   cloneRestored: 0
-  isOnTrigger2: 0
   attachedMinionCount: 0
+  moveStartTimeDivider: 0.05
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f88a84d9a5304b4c8806021c9a1788d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeTimerText: {fileID: 0}
   Player: {fileID: 0}
   despawnClone: 0
 --- !u!114 &307182109869249534

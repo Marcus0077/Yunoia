@@ -66,6 +66,8 @@ public class BasicMovementClone : MonoBehaviour
     // Dash Variables
     private float dashCooldown;
     private bool dashAccelerate;
+    
+    public float moveStartTimeDivider;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -253,7 +255,14 @@ public class BasicMovementClone : MonoBehaviour
     void LookClone()
     {
         if (move.IsPressed())
-            transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
+        {
+            //transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
+
+            float angle = (float) (Math.Atan2(moveDirection.x, moveDirection.y) * 180) / (float) Math.PI;
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), 
+                Time.deltaTime / moveStartTimeDivider);
+        }
     }
 
     // Switch clone and player control depending on which is

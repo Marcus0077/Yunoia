@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PushablePlatform : Pushable
 {
+    
     void OnTriggerEnter(Collider other)
     {
         GameObject hit = other.gameObject;
@@ -41,6 +42,6 @@ public class PushablePlatform : Pushable
                 }
             }
         }
-            
+        CapSpeed();
     }
 }

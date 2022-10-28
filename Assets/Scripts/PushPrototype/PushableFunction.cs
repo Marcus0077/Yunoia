@@ -8,6 +8,8 @@ public class PushableFunction : ScriptableObject
     [SerializeField]
     float velocity = 1;
     [SerializeField]
+    float maxVelocity;
+    [SerializeField]
     int reqCharge = 1;
     [SerializeField]
     bool activatable, changeColor, destroy, animation;
@@ -37,6 +39,18 @@ public class PushableFunction : ScriptableObject
         set
         {
             velocity = value;
+        }
+    }
+
+    public float maxSpeed
+    {
+        get
+        {
+            return maxVelocity;
+        }
+        set
+        {
+            maxVelocity = value;
         }
     }
 

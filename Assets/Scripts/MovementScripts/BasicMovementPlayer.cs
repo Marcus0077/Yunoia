@@ -88,7 +88,7 @@ public class BasicMovementPlayer : MonoBehaviour
     void MovePlayer()
     {
         moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
-        playerRB.velocity = new Vector3(moveDirection.y, playerRB.velocity.y + (Physics.gravity.y * Time.deltaTime * TimeCalcMinionMoveChange()), -moveDirection.x);
+        playerRB.velocity = new Vector3(moveDirection.y, playerRB.velocity.y + (Physics.gravity.y * Time.deltaTime * CalcMinionMoveChange()), -moveDirection.x);
         
         JumpPlayer();
 

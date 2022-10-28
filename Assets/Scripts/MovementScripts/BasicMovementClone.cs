@@ -8,6 +8,8 @@ using TMPro;
 
 public class BasicMovementClone : MonoBehaviour
 {
+    private TextMeshProUGUI dashCooldownUI;
+    
     // Script references
     public BasicMovementPlayer basicMovementPlayer;
     public SmoothCameraFollow smoothCameraFollow;
@@ -25,13 +27,17 @@ public class BasicMovementClone : MonoBehaviour
     public InputAction move;
     public InputAction jump;
     public InputAction switchPlaces;
+    public InputAction dash;
 
     // Movement variables
     public Rigidbody cloneRB;
     public Vector2 moveDirection = Vector2.zero;
+    public Vector2 lookDirection = Vector2.zero;
     public float moveSpeed;
+    public float maxSpeed;
     public bool cloneIsFrozen;
     public bool cloneCanMove;
+    public float accelerationValue;
 
     // Jump variables
     public LayerMask whatIsGround;
@@ -40,7 +46,8 @@ public class BasicMovementClone : MonoBehaviour
     public bool isGrounded;
     public float jumpTime;
 
-    // Temp object reference
+    // Temp Object References
+    public bool isOnTrigger2;
     public GameObject Wall_1;
     public GameObject Blocker2;
     public GameObject Blocker3;
@@ -50,12 +57,15 @@ public class BasicMovementClone : MonoBehaviour
 
     // Clone version bool.
     public bool cloneRestored;
-    
-    public bool isOnTrigger2;
 
+    // Minion Variables
     public int attachedMinionCount;
     float logFormulaCoefficient;
     float logFormulaModifier;
+    
+    // Dash Variables
+    private float dashCooldown;
+    private bool dashAccelerate;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -84,19 +94,23 @@ public class BasicMovementClone : MonoBehaviour
         
         playerControls = new PlayerControls();
         
-        moveSpeed = 4.0f;
+        moveSpeed = 4f;
+        maxSpeed = 18f;
         jumpForce = 1.2f;
+        accelerationValue = 1f;
         combatHandler.cloneHP = 3;
 
         logFormulaCoefficient = .6f;
         logFormulaModifier = 2f;
 
+        dashCooldownUI = GameObject.FindGameObjectWithTag("Dash Cooldown").GetComponent<TextMeshProUGUI>();
+        dashCooldownUI.text = "Dash Cooldown: Ready";
         combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneRestored = true;
         cloneIsFrozen = false;
         cloneCanMove = true;
-        
+        dashAccelerate = false;
         isOnTrigger2 = false;
         
         if (levelSwitchManager.pushRestored == true)
@@ -111,8 +125,77 @@ public class BasicMovementClone : MonoBehaviour
     
     void FixedUpdate()
     {
-        // If clone can move, unfreeze (except rotation) clone and
-        // give them control.
+        MoveClone();
+    }
+
+    private void Update()
+    {
+        SwitchPlaces();
+        ActivateDash();
+        CheckRestoredWalls();
+    }
+    
+    void DecelerateDash()
+    {
+        if (accelerationValue > 1f)
+        {
+            accelerationValue -= 0.02f * accelerationValue;
+        }
+    }
+    
+    void AccelerateDash()
+    {
+        if (accelerationValue < 2.5f)
+        {
+            accelerationValue = 2.5f;
+        }
+        else if (accelerationValue < 5f)
+        {
+            accelerationValue += 0.05f * accelerationValue;
+        }
+    }
+    
+    void ActivateDash()
+    {
+        if (dash.WasPressedThisFrame() && move.IsPressed() && dashCooldown <= 0 && !cloneIsFrozen)
+        {
+            dashAccelerate = true;
+            
+            dashCooldown = 3f;
+        }
+    }
+    
+    void DashClone()
+    {
+        if (dashAccelerate)
+        {
+            AccelerateDash();
+
+            if (accelerationValue >= 5f)
+            {
+                dashAccelerate = false;
+            }
+        }
+        else if (!dashAccelerate)
+        {
+            DecelerateDash();
+        }
+
+        if (dashCooldown > 0)
+        {
+            dashCooldown -= Time.deltaTime;
+            dashCooldownUI.text = "Dash Cooldown: " + Math.Round(dashCooldown, 2);
+        }
+        else
+        {
+            dashCooldownUI.text = "Dash Cooldown: Ready";
+        }
+    }
+
+    // Applies gravity and movement velocity to player according to movement input.
+    // Also gives option to jump.
+    void MoveClone()
+    {
         if (cloneCanMove == true)
         {
             if (cloneIsFrozen)
@@ -121,44 +204,28 @@ public class BasicMovementClone : MonoBehaviour
                 cloneIsFrozen = false;
             }
             
+            moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
+        
+            cloneRB.velocity = new Vector3(moveDirection.y * accelerationValue, cloneRB.velocity.y, -moveDirection.x * accelerationValue);
+        
             LookClone();
-            MoveClone();
+            JumpClone();
         }
-        // If clone cannot move, freeze clone.
         else
         {
             cloneRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
                                    RigidbodyConstraints.FreezeRotation;
             cloneIsFrozen = true;
         }
+        
+        DashClone();
 
-        if (combatHandler.cloneHP <= 0)
+        cloneRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * cloneRB.mass);
+        
+        if (cloneRB.velocity.magnitude > maxSpeed)
         {
-            exitClone.despawnClone = true;
+            cloneRB.velocity = Vector3.ClampMagnitude(cloneRB.velocity, maxSpeed);
         }
-    }
-
-    private void Update()
-    {
-        // Switch player and clone positions if switchPlaces button is pressed.
-        if (switchPlaces.WasPressedThisFrame())
-        {
-            SwitchPlaces();
-        }
-        
-        CheckRestoredWalls();
-    }
-
-    // Applies gravity and movement velocity to player according to movement input.
-    // Also gives option to jump.
-    void MoveClone()
-    {
-        moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
-        cloneRB.velocity = new Vector3(moveDirection.y, cloneRB.velocity.y, -moveDirection.x);
-        
-        JumpClone();
-        
-        cloneRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * cloneRB.mass); 
     }
 
     float CalcMinionMoveChange()
@@ -194,31 +261,34 @@ public class BasicMovementClone : MonoBehaviour
     // Applies 3 second cooldown timer to switch.
     private void SwitchPlaces()
     {
-        if (basicMovementPlayer.canMove == false)
+        if (switchPlaces.WasPressedThisFrame())
         {
-            basicMovementPlayer.canMove = true;
-            cloneCanMove = false;
-            
-            this.GetComponent<Grapple>().enabled = false;
-            this.GetComponent<AbilityPush>().enabled = false;
-            
-            Player.GetComponent<Grapple>().enabled = true;
-            Player.GetComponent<AbilityPush>().enabled = true;
-            
-            smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
-        }
-        else if (cloneCanMove == false)
-        {
-            basicMovementPlayer.canMove = false; 
-            cloneCanMove = true;
-            
-            this.GetComponent<Grapple>().enabled = true;
-            this.GetComponent<AbilityPush>().enabled = true;
-            
-            Player.GetComponent<Grapple>().enabled = false;
-            Player.GetComponent<AbilityPush>().enabled = false;
+            if (basicMovementPlayer.playerCanMove == false)
+            {
+                basicMovementPlayer.playerCanMove = true;
+                cloneCanMove = false;
 
-            smoothCameraFollow.target = cloneRB.transform;
+                this.GetComponent<Grapple>().enabled = false;
+                this.GetComponent<AbilityPush>().enabled = false;
+
+                Player.GetComponent<Grapple>().enabled = true;
+                Player.GetComponent<AbilityPush>().enabled = true;
+
+                smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+            }
+            else if (cloneCanMove == false)
+            {
+                basicMovementPlayer.playerCanMove = false;
+                cloneCanMove = true;
+
+                this.GetComponent<Grapple>().enabled = true;
+                this.GetComponent<AbilityPush>().enabled = true;
+
+                Player.GetComponent<Grapple>().enabled = false;
+                Player.GetComponent<AbilityPush>().enabled = false;
+
+                smoothCameraFollow.target = cloneRB.transform;
+            }
         }
     }
 
@@ -233,6 +303,9 @@ public class BasicMovementClone : MonoBehaviour
 
         switchPlaces = playerControls.SummonClone.SwitchPlaces;
         switchPlaces.Enable();
+
+        dash = playerControls.Movement.Dash;
+        dash.Enable();
     }
     
     // Disable input action map controls.
@@ -241,6 +314,7 @@ public class BasicMovementClone : MonoBehaviour
         move.Disable();
         jump.Disable();
         switchPlaces.Disable();
+        dash.Disable();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "998dddb2-3a18-4160-a0ba-37d51978ade0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -112,6 +121,28 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ab0fc30-e8eb-4a5f-9783-f31676be3779",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "508e2ff9-9da3-44a4-b5c0-580512e291e2",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -151,7 +182,7 @@
                 {
                     "name": "",
                     "id": "a491595f-d6d6-4175-8c0a-9d8ed7293972",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -195,7 +226,7 @@
                 {
                     "name": "",
                     "id": "e6418500-4128-41a3-9de9-929c42a69c1a",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -324,7 +355,7 @@
                 {
                     "name": "",
                     "id": "fc941a43-8eec-40e3-95d7-d2441862c689",
-                    "path": "<XInputController>/rightShoulder",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -346,7 +377,7 @@
                 {
                     "name": "",
                     "id": "5dc5281a-7ae4-4ad1-870d-7ba7993735bd",
-                    "path": "<Gamepad>/rightStickPress",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",

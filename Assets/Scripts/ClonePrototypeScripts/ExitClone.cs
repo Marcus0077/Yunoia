@@ -60,7 +60,7 @@ public class ExitClone : MonoBehaviour
         if (exitClone.IsPressed() || despawnClone)
         {
             summonClone.cloneSummoned = false;
-            basicMovementPlayer.canMove = true;
+            basicMovementPlayer.playerCanMove = true;
             
             Player.GetComponent<Grapple>().enabled = true;
             Player.GetComponent<AbilityPush>().enabled = true;

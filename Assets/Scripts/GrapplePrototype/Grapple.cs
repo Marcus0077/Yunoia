@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
@@ -22,6 +23,9 @@ public class Grapple : MonoBehaviour
     public InputAction shootHook;
     public InputAction cancelHook;
     public InputAction extendGrapple;
+    
+    // Additions from Will :)
+    private bool releasedHook = false; // input testing
 
     // Start is called before the first frame update
     void Start()
@@ -41,9 +45,10 @@ public class Grapple : MonoBehaviour
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
         }
-        else if (hook != null && cancelHook.IsPressed())
+        else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
         {
-            DestroyHook();
+            DestroyHook(); 
+            releasedHook = false; // input testing
         }
 
         if (!pulling || hook == null)
@@ -69,6 +74,15 @@ public class Grapple : MonoBehaviour
         {
             DestroyHook();
         }
+    }
+
+    private void Update()
+    {
+        // Possibly destroy hook when shoot button is release?
+        // if (shootHook.WasReleasedThisFrame())
+        // {
+        //     releasedHook = true;
+        // }
     }
 
     public void StartPull()

@@ -37,6 +37,8 @@ public class BasicMovementPlayer : MonoBehaviour
     public GameObject Blocker1;
     public GameObject Blocker2;
 
+    public GameObject Ball;
+
     // Minion Variables
     public int attachedMinionCount;
     float logFormulaCoefficient;
@@ -44,14 +46,17 @@ public class BasicMovementPlayer : MonoBehaviour
 
     // Dash Variables
     private float dashCooldown;
-    private bool dashAccelerate;
-    
+    private int dashAccelerate;
+
+    private SmoothCameraFollow smoothCameraFollow;
+
     public float moveStartTimeDivider;
 
     // Get references and initialize variables when player spawns.
     void Awake()
     {
         playerControls = new PlayerControls();
+        smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
 
         dashCooldownUI = GameObject.FindGameObjectWithTag("Dash Cooldown").GetComponent<TextMeshProUGUI>();
         dashCooldownUI.text = "Dash Cooldown: Ready";
@@ -64,7 +69,7 @@ public class BasicMovementPlayer : MonoBehaviour
 
         playerCanMove = true;
         playerIsFrozen = false;
-        dashAccelerate = false;
+        dashAccelerate = 0;
 
         Blocker1 = GameObject.FindWithTag("Blocker1");
         Blocker2 = GameObject.FindWithTag("Blocker2");
@@ -88,6 +93,10 @@ public class BasicMovementPlayer : MonoBehaviour
         if (accelerationValue > 1f)
         {
             accelerationValue -= 0.02f * accelerationValue;
+        }
+        else
+        {
+            dashAccelerate = 0;
         }
     }
     
@@ -164,7 +173,7 @@ public class BasicMovementPlayer : MonoBehaviour
     {
         if (dash.WasPressedThisFrame() && move.IsPressed() && dashCooldown <= 0 && !playerIsFrozen)
         {
-            dashAccelerate = true;
+            dashAccelerate = 1;
             
             dashCooldown = 3f;
         }
@@ -172,16 +181,16 @@ public class BasicMovementPlayer : MonoBehaviour
     
     void DashPlayer()
     {
-        if (dashAccelerate)
+        if (dashAccelerate == 1)
         {
             AccelerateDash();
 
             if (accelerationValue >= 5f)
             {
-                dashAccelerate = false;
+                dashAccelerate = 2;
             }
         }
-        else if (!dashAccelerate)
+        else if (dashAccelerate == 2)
         {
             DecelerateDash();
         }
@@ -204,10 +213,12 @@ public class BasicMovementPlayer : MonoBehaviour
         {
             //transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
 
-            float angle = (float) (Math.Atan2(moveDirection.x, moveDirection.y) * 180) / (float) Math.PI;
+            float playerAngle = (float) (Math.Atan2(moveDirection.x, moveDirection.y) * 180) / (float) Math.PI;
             
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), 
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, playerAngle, 0), 
                 Time.deltaTime / moveStartTimeDivider);
+            
         }
     }
     
@@ -239,8 +250,18 @@ public class BasicMovementPlayer : MonoBehaviour
             Blocker1.GetComponent<MeshRenderer>().enabled = false;
             Blocker1.GetComponent<Collider>().enabled = false;
         }
+
+        if (other.CompareTag("HigherView"))
+        {
+            smoothCameraFollow.HigherAngleCamera();
+        }
+
+        if (other.CompareTag("RegularView"))
+        {
+            smoothCameraFollow.RegularAngleCamera();
+        }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("BlockerTrigger1"))

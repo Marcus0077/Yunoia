@@ -57,7 +57,7 @@ public class ExitClone : MonoBehaviour
     {
         // Allow player to move, reset summonClone script boolean values, 
         // reset prototype text, and destroy clone.
-        if (exitClone.IsPressed() || despawnClone)
+        if (despawnClone)
         {
             summonClone.cloneSummoned = false;
             basicMovementPlayer.playerCanMove = true;
@@ -103,7 +103,15 @@ public class ExitClone : MonoBehaviour
             }
         }
     }
-    
+
+    private void Update()
+    {
+        if (exitClone.WasPressedThisFrame() && summonClone.cloneSummoned)
+        {
+            despawnClone = true;
+        }
+    }
+
     IEnumerator Blink()
     {
         isRunning = true;

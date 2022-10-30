@@ -41,7 +41,7 @@ public class SummonClone : MonoBehaviour
     // Summon a clone at a specified location, freeze player, and deactivate summon control.
     void SummonAClone()
     {
-        basicMovementPlayer.playerCanMove = false;
+        basicMovementPlayer.canMove = false;
         this.GetComponent<Grapple>().enabled = false;
         this.GetComponent<AbilityPush>().enabled = false;
         

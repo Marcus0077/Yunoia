@@ -7,11 +7,8 @@ using TMPro;
 public class CombatHandler : MonoBehaviour
 {
     // Health UI Text
-    public TextMeshProUGUI healthText;
+    //public TextMeshProUGUI healthText;
     
-    // Active Timer Text UI
-    public TextMeshProUGUI activeTimerText;
-
     public int cloneHP;
 
     private bool isRunning;
@@ -22,11 +19,8 @@ public class CombatHandler : MonoBehaviour
     
     void Awake()
     {
-        healthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
-        activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
-        healthText.text = "";
-        activeTimerText.text = "";
-        
+        //healthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
+        //healthText.text = "";
 
         changeCloneColor = new Color(1f, .8f, .3f, .7f);
         changeAIColor = Color.black;
@@ -55,7 +49,7 @@ public class CombatHandler : MonoBehaviour
             changeAIColor = Color.red;
             changeCloneColor = Color.red;
             cloneHP -= 1;
-            healthText.text = "Clone Health: " + cloneHP + "/3";
+            //healthText.text = "Clone Health: " + cloneHP + "/3";
             yield return new WaitForSeconds(0.25f);
         }
 

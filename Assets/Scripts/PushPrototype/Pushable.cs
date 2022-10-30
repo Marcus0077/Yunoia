@@ -42,7 +42,10 @@ public class Pushable : MonoBehaviour
         {
             Constraints();
             totalVelocity = 0;
-            rb.isKinematic = false;
+            if(velocity>0)
+            {
+                rb.isKinematic = false;
+            }
             if (!pushed || data.canStack)
             {
                 pushed = true;

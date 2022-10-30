@@ -126,12 +126,12 @@ public class Pushable : MonoBehaviour
             }
             if (queuedVelocity <= 0)
             {
-                if (rb.velocity.magnitude > 0)
+                if (rb.velocity.magnitude > 0.05f)
                 {
                     rb.velocity = new Vector3(
-                            signs.x * Mathf.Max(Mathf.Abs(rb.velocity.x) - data.maxSpeed * data.drag * Time.deltaTime,0),
-                            signs.y * Mathf.Max(Mathf.Abs(rb.velocity.y) - data.maxSpeed * data.drag * Time.deltaTime,0),
-                            signs.z * Mathf.Max(Mathf.Abs(rb.velocity.z) - data.maxSpeed * data.drag * Time.deltaTime,0)
+                            signs.x * Mathf.Max(Mathf.Abs(rb.velocity.x) - Mathf.Abs(rb.velocity.x) * data.drag * Time.deltaTime,0),
+                            signs.y * Mathf.Max(Mathf.Abs(rb.velocity.y) - Mathf.Abs(rb.velocity.y) * data.drag * Time.deltaTime,0),
+                            signs.z * Mathf.Max(Mathf.Abs(rb.velocity.z) - Mathf.Abs(rb.velocity.z) * data.drag * Time.deltaTime,0)
                         );
                 }
                 else
@@ -160,7 +160,7 @@ public class Pushable : MonoBehaviour
             }
             else
             {
-                queuedVelocity -= data.drag * Time.deltaTime;
+                queuedVelocity -= data.maxSpeed * data.drag * Time.deltaTime;
                 rb.velocity = pushDirection * data.maxSpeed;
             }
         }

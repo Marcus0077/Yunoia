@@ -32,8 +32,8 @@ public class AbilityPush : MonoBehaviour
             Pushable pushedObj = hitCollider.GetComponent<Pushable>();
             if (pushedObj != null)
             {
-                Vector3 direction = pushedObj.transform.position - transform.position;
-                direction = new Vector3(direction.x, 0, direction.z).normalized;
+                Vector3 direction = (pushedObj.transform.position - transform.position).normalized;
+                //direction = new Vector3(direction.x, direction.y, direction.z).normalized;
                 float distance = Vector3.Distance(pushedObj.transform.position, transform.position);
                 float proximityMultiplier = range / distance;
                 //float chargeMultiplier = (range + 1 - minPush) / (float)(maxChargeLevel + 1);
@@ -82,7 +82,6 @@ public class AbilityPush : MonoBehaviour
             shape.position = transform.position;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        Debug.Log(radius);
         yield return new WaitForSeconds(1);
         Destroy(shape.gameObject);
     }

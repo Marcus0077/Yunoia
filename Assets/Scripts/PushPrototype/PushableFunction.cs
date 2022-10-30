@@ -6,13 +6,11 @@ using UnityEngine;
 public class PushableFunction : ScriptableObject
 {
     [SerializeField]
-    float velocity = 1;
-    [SerializeField]
-    float maxVelocity;
+    float velocity = 1, maxVelocity, dragVelocity;
     [SerializeField]
     int reqCharge = 1;
     [SerializeField]
-    bool activatable, changeColor, destroy, animation;
+    bool activatable, changeColor, destroy, animation, canReturn, constraintX, constraintY, constraintZ, stackPush = true;
     [SerializeField]
     Color color;
     [SerializeField]
@@ -30,6 +28,38 @@ public class PushableFunction : ScriptableObject
         }
     }
 
+    public bool returning
+    {
+        get
+        {
+            return canReturn;
+        }
+        set
+        {
+            canReturn = value;
+        }
+    }
+
+    public bool canStack
+    {
+        get
+        {
+            return stackPush;
+        }
+        set
+        {
+            stackPush = value;
+        }
+    }
+
+    public Vector3 constraints
+    {
+        get
+        {
+            return new Vector3(constraintX.GetHashCode(),constraintY.GetHashCode(), constraintZ.GetHashCode());
+        }
+    }
+
     public float pushSpeed
     { 
         get 
@@ -39,6 +69,18 @@ public class PushableFunction : ScriptableObject
         set
         {
             velocity = value;
+        }
+    }
+
+    public float drag
+    {
+        get
+        {
+            return dragVelocity;
+        }
+        set
+        {
+            dragVelocity = value;
         }
     }
 

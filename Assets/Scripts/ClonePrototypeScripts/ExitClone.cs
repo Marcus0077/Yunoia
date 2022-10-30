@@ -8,8 +8,8 @@ using TMPro;
 
 public class ExitClone : MonoBehaviour
 {
-    // UI Active Timer
-    //public TextMeshProUGUI activeTimerText;
+    // UI Clone Active Timer
+    public TextMeshProUGUI activeTimerText;
     
     // Script references
     private BasicMovementPlayer basicMovementPlayer;
@@ -49,19 +49,18 @@ public class ExitClone : MonoBehaviour
         despawnClone = false;
         cloneActiveTimer = 30.0f;
         
-        //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
-        //activeTimerText.color = Color.white;
-        //activeTimerText.text = "Active Timer: ";
+        activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
+        activeTimerText.color = Color.white;
     }
     
     void FixedUpdate()
     {
         // Allow player to move, reset summonClone script boolean values, 
         // reset prototype text, and destroy clone.
-        if (exitClone.IsPressed() || despawnClone)
+        if (despawnClone)
         {
             summonClone.cloneSummoned = false;
-            basicMovementPlayer.canMove = true;
+            basicMovementPlayer.playerCanMove = true;
             
             Player.GetComponent<Grapple>().enabled = true;
             Player.GetComponent<AbilityPush>().enabled = true;
@@ -71,6 +70,9 @@ public class ExitClone : MonoBehaviour
                 basicMovementClone.Blocker2.GetComponent<MeshRenderer>().enabled = true;
                 basicMovementClone.Blocker2.GetComponent<Collider>().enabled = true;
             }
+
+            activeTimerText.text = "";
+            combatHandler.healthText.text = "";
 
             basicMovementClone.Blocker3.transform.position = basicMovementClone.blocker3InPos;
 
@@ -82,7 +84,7 @@ public class ExitClone : MonoBehaviour
         else
         {
             cloneActiveTimer -= Time.deltaTime;
-            //activeTimerText.text = "Active Timer: " + Math.Round(cloneActiveTimer, 2); 
+            activeTimerText.text = "Clone Despawns In: " + Math.Round(cloneActiveTimer, 2); 
         }
 
         // If clone is not active, despawn it.
@@ -93,7 +95,7 @@ public class ExitClone : MonoBehaviour
         // If 5 seconds are left, turn active time red and make clone blink.
         else if (cloneActiveTimer < 5.01)
         {
-            //activeTimerText.color = Color.red;
+            activeTimerText.color = Color.red;
 
             if (!isRunning)
             {
@@ -101,7 +103,15 @@ public class ExitClone : MonoBehaviour
             }
         }
     }
-    
+
+    private void Update()
+    {
+        if (exitClone.WasPressedThisFrame() && summonClone.cloneSummoned)
+        {
+            despawnClone = true;
+        }
+    }
+
     IEnumerator Blink()
     {
         isRunning = true;

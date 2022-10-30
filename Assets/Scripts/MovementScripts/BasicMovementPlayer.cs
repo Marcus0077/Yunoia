@@ -1,24 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BasicMovementPlayer : MonoBehaviour
 {
+    private TextMeshProUGUI dashCooldownUI;
+        
     // Input variables
     PlayerControls playerControls;
     public InputAction move;
     public InputAction jump;
-    public InputAction crouch;
+    public InputAction dash;
 
     // Movement variables
     public Rigidbody playerRB;
     public Vector2 moveDirection = Vector2.zero;
-    [SerializeField] public float moveSpeed;
-    [SerializeField] public float maxSpeed;
-    public bool canMove;
-    public bool isFrozen;
+    public Vector2 lookDirection = Vector2.zero;
+    public float moveSpeed;
+    public float maxSpeed;
+    public float accelerationValue;
+    public bool playerCanMove;
+    public bool playerIsFrozen;
 
     // Jump variables
     public LayerMask whatIsGround;
@@ -27,26 +33,44 @@ public class BasicMovementPlayer : MonoBehaviour
     public bool isGrounded;
     public float jumpTime;
 
-    public Vector2 lookDirection = Vector2.zero;
-    
+    // Temp Object References
     public GameObject Blocker1;
     public GameObject Blocker2;
 
+    public GameObject Ball;
+
+    // Minion Variables
     public int attachedMinionCount;
     float logFormulaCoefficient;
     float logFormulaModifier;
+
+    // Dash Variables
+    private float dashCooldown;
+    private int dashAccelerate;
+
+    private SmoothCameraFollow smoothCameraFollow;
+
+    public float moveStartTimeDivider;
 
     // Get references and initialize variables when player spawns.
     void Awake()
     {
         playerControls = new PlayerControls();
+        smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
+
+        dashCooldownUI = GameObject.FindGameObjectWithTag("Dash Cooldown").GetComponent<TextMeshProUGUI>();
+        dashCooldownUI.text = "Dash Cooldown: Ready";
         
-        moveSpeed = 4.0f;
+        moveSpeed = 4f;
+        maxSpeed = 18f;
         jumpForce = 1.2f;
-        
-        canMove = true;
-        isFrozen = false;
-        
+        accelerationValue = 1f;
+        dashCooldown = 0f;
+
+        playerCanMove = true;
+        playerIsFrozen = false;
+        dashAccelerate = 0;
+
         Blocker1 = GameObject.FindWithTag("Blocker1");
         Blocker2 = GameObject.FindWithTag("Blocker2");
 
@@ -56,30 +80,35 @@ public class BasicMovementPlayer : MonoBehaviour
     
     void FixedUpdate()
     {
-        // If player can move, unfreeze (except rotation) player and
-        // give them control.
-        if (canMove == true)
+        MovePlayer();
+    }
+
+    private void Update()
+    {
+        ActivateDash();
+    }
+
+    void DecelerateDash()
+    {
+        if (accelerationValue > 1f)
         {
-            if (isFrozen)
-            {
-                playerRB.constraints = RigidbodyConstraints.FreezeRotation;
-                isFrozen = false;
-            }
-            
-            LookPlayer();
-            MovePlayer();
+            accelerationValue -= 0.02f * accelerationValue;
         }
-        // If player cannot move, freeze player.
         else
         {
-            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
-                                   RigidbodyConstraints.FreezeRotation;
-            isFrozen = true;
+            dashAccelerate = 0;
         }
-
-        if (playerRB.velocity.magnitude > maxSpeed)
+    }
+    
+    void AccelerateDash()
+    {
+        if (accelerationValue < 2.5f)
         {
-            playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, maxSpeed);
+            accelerationValue = 2.5f;
+        }
+        else if (accelerationValue < 5f)
+        {
+            accelerationValue += 0.05f * accelerationValue;
         }
     }
 
@@ -87,12 +116,35 @@ public class BasicMovementPlayer : MonoBehaviour
     // Also gives option to jump.
     void MovePlayer()
     {
-        moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
-        playerRB.velocity = new Vector3(moveDirection.y, playerRB.velocity.y, -moveDirection.x);
+        if (playerCanMove == true)
+        {
+            if (playerIsFrozen)
+            {
+                playerRB.constraints = RigidbodyConstraints.FreezeRotation;
+                playerIsFrozen = false;
+            }
+            
+            moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
+            playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
         
-        JumpPlayer();
+            LookPlayer();
+            JumpPlayer();
+        }
+        else
+        {
+            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
+                                   RigidbodyConstraints.FreezeRotation;
+            playerIsFrozen = true;
+        }
+        
+        DashPlayer();
 
         playerRB.AddForce(Physics.gravity * (1.5f + CalcMinionMoveChange()) * playerRB.mass);
+        
+        if (playerRB.velocity.magnitude > maxSpeed)
+        {
+            playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, maxSpeed);
+        }
     }
 
     float CalcMinionMoveChange()
@@ -117,11 +169,56 @@ public class BasicMovementPlayer : MonoBehaviour
         }
     }
 
+    void ActivateDash()
+    {
+        if (dash.WasPressedThisFrame() && move.IsPressed() && dashCooldown <= 0 && !playerIsFrozen)
+        {
+            dashAccelerate = 1;
+            
+            dashCooldown = 3f;
+        }
+    }
+    
+    void DashPlayer()
+    {
+        if (dashAccelerate == 1)
+        {
+            AccelerateDash();
+
+            if (accelerationValue >= 5f)
+            {
+                dashAccelerate = 2;
+            }
+        }
+        else if (dashAccelerate == 2)
+        {
+            DecelerateDash();
+        }
+
+        if (dashCooldown > 0)
+        {
+            dashCooldown -= Time.deltaTime;
+            dashCooldownUI.text = "Dash Cooldown: " + Math.Round(dashCooldown, 2);
+        }
+        else
+        {
+            dashCooldownUI.text = "Dash Cooldown: Ready";
+        }
+    }
+
+    // Player looks in the direction they are moving.
     void LookPlayer()
     {
         if (move.IsPressed())
         {
-            transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
+            //transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
+
+            float playerAngle = (float) (Math.Atan2(moveDirection.x, moveDirection.y) * 180) / (float) Math.PI;
+            
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, playerAngle, 0), 
+                Time.deltaTime / moveStartTimeDivider);
+            
         }
     }
     
@@ -133,6 +230,9 @@ public class BasicMovementPlayer : MonoBehaviour
 
         jump = playerControls.Movement.Jump;
         jump.Enable();
+
+        dash = playerControls.Movement.Dash;
+        dash.Enable();
     }
 
     // Disable input action map controls.
@@ -140,6 +240,7 @@ public class BasicMovementPlayer : MonoBehaviour
     {
         move.Disable();
         jump.Disable();
+        dash.Disable();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -149,8 +250,18 @@ public class BasicMovementPlayer : MonoBehaviour
             Blocker1.GetComponent<MeshRenderer>().enabled = false;
             Blocker1.GetComponent<Collider>().enabled = false;
         }
+
+        if (other.CompareTag("HigherView"))
+        {
+            smoothCameraFollow.HigherAngleCamera();
+        }
+
+        if (other.CompareTag("RegularView"))
+        {
+            smoothCameraFollow.RegularAngleCamera();
+        }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("BlockerTrigger1"))

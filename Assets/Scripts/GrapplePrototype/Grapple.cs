@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
@@ -15,19 +16,22 @@ public class Grapple : MonoBehaviour
     [SerializeField] float changePerSecond;
 
     Hook hook;
-    bool pulling;
+    bool grappleActive;
     Rigidbody rigid;
 
     PlayerControls grappleControls;
     public InputAction shootHook;
     public InputAction cancelHook;
     public InputAction extendGrapple;
+    
+    // Additions from Will :)
+    private bool releasedHook = false; // input testing
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        pulling = false;
+        grappleActive = false;
     }
 
     // Update is called once per frame
@@ -36,17 +40,18 @@ public class Grapple : MonoBehaviour
         if (hook == null && shootHook.IsPressed())
         {
             StopAllCoroutines();
-            pulling = false;
+            grappleActive = false;
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
         }
-        else if (hook != null && cancelHook.IsPressed())
+        else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
         {
-            DestroyHook();
+            DestroyHook(); 
+            releasedHook = false; // input testing
         }
 
-        if (!pulling || hook == null)
+        if (!grappleActive || hook == null)
         {
             return;
         }
@@ -60,7 +65,7 @@ public class Grapple : MonoBehaviour
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
         }
         
-        if (extendGrapple.IsPressed() && pulling == true)
+        if (extendGrapple.IsPressed() && grappleActive == true)
         {
             playerRB.AddForce(Physics.gravity * 6.5f * playerRB.mass);
         }
@@ -71,9 +76,18 @@ public class Grapple : MonoBehaviour
         }
     }
 
-    public void StartPull()
+    private void Update()
     {
-        pulling = true;
+        // Possibly destroy hook when shoot button is release?
+        // if (shootHook.WasReleasedThisFrame())
+        // {
+        //     releasedHook = true;
+        // }
+    }
+
+    public void StartGrapple()
+    {
+        grappleActive = true;
     }
 
     public void DestroyHook()
@@ -83,7 +97,7 @@ public class Grapple : MonoBehaviour
             return;
         }
 
-        pulling = false;
+        grappleActive = false;
         Destroy(hook.gameObject);
         hook = null;
     }
@@ -92,7 +106,7 @@ public class Grapple : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
 
-        if (pulling == true)
+        if (grappleActive == true)
         {
             StartCoroutine(ExtendLifetime());
         }
@@ -107,6 +121,11 @@ public class Grapple : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         DestroyHook();
+    }
+
+    public void StartPull()
+    {
+        
     }
 
     // Enable input action map controls.

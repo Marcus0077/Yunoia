@@ -104,27 +104,23 @@ public class Pushable : MonoBehaviour
         {
             if (totalVelocity == 0)
             {
-                Debug.Log("start");
                 signs = new Vector3(Mathf.Sign(rb.velocity.x), Mathf.Sign(rb.velocity.y), Mathf.Sign(rb.velocity.z));
                 pushDirection = rb.velocity.normalized;
                 if (canReturn)
                 {
                     if (rb.velocity.magnitude > data.maxSpeed)
                     {
-                        Debug.Log("fast");
                         totalVelocity = rb.velocity.magnitude;
                         queuedVelocity = rb.velocity.magnitude - data.maxSpeed;
                     }
                     else
                     {
-                        Debug.Log("slow");
                         totalVelocity = rb.velocity.magnitude;
                     }
 
                 }
                 else if (!canReturn)
                 {
-                    Debug.Log("no return");
                     totalVelocity = -1;
                 }
             }
@@ -132,7 +128,6 @@ public class Pushable : MonoBehaviour
             {
                 if (rb.velocity.magnitude > 0)
                 {
-                    Debug.Log("slowing");
                     rb.velocity = new Vector3(
                             signs.x * Mathf.Max(Mathf.Abs(rb.velocity.x) - data.maxSpeed * data.drag * Time.deltaTime,0),
                             signs.y * Mathf.Max(Mathf.Abs(rb.velocity.y) - data.maxSpeed * data.drag * Time.deltaTime,0),
@@ -143,7 +138,6 @@ public class Pushable : MonoBehaviour
                 {
                     if (canReturn)
                     {
-                        Debug.Log("pivot");
                         queuedVelocity = Mathf.Max(totalVelocity - data.maxSpeed,0);
                         if(queuedVelocity <= 0)
                         {
@@ -159,7 +153,6 @@ public class Pushable : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("stopping");
                         pushed = false;
                         rb.isKinematic = true;
                     }
@@ -167,7 +160,6 @@ public class Pushable : MonoBehaviour
             }
             else
             {
-                Debug.Log("moving");
                 queuedVelocity -= data.drag * Time.deltaTime;
                 rb.velocity = pushDirection * data.maxSpeed;
             }

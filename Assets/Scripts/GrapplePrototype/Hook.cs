@@ -18,7 +18,6 @@ public class Hook : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
         rigid.AddForce(transform.forward * hookForce, ForceMode.Impulse);
-
     }
 
     // Update is called once per frame
@@ -40,7 +39,7 @@ public class Hook : MonoBehaviour
             rigid.useGravity = false;
             rigid.isKinematic = true;
 
-            grapple.StartPull();
+            grapple.StartGrapple();
         }
 
         if ((LayerMask.GetMask("Ground") & 1 << other.gameObject.layer) > 0)
@@ -51,6 +50,11 @@ public class Hook : MonoBehaviour
         if ((LayerMask.GetMask("Wall") & 1 << other.gameObject.layer) > 0)
         {
             grapple.DestroyHook();
+        }
+
+        if ((LayerMask.GetMask("Pull") & 1 << other.gameObject.layer) > 0)
+        {
+
         }
     }
 }

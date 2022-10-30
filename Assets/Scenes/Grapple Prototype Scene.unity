@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06657225, g: 0.08295699, b: 0.11537994, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -187,16 +187,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26782891b3739c641b78001d99d48588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c2624430-b487-461d-b040-ddf6a81aa5d2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 39705086-c8da-4984-b830-349140dd7eca
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  dash:
+    m_Name: Dash
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 14d7a6c0-349d-44f0-a845-05b969d20fd7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   playerRB: {fileID: 140735920}
+  moveDirection: {x: 0, y: 0}
+  lookDirection: {x: 0, y: 0}
   moveSpeed: 0
   maxSpeed: 18
-  canMove: 0
-  isFrozen: 0
+  accelerationValue: 0
+  playerCanMove: 0
+  playerIsFrozen: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundPoint: {fileID: 1889734544}
   jumpForce: 0
+  isGrounded: 0
+  jumpTime: 0
+  Blocker1: {fileID: 0}
+  Blocker2: {fileID: 0}
+  Ball: {fileID: 0}
+  attachedMinionCount: 0
+  moveStartTimeDivider: 0
 --- !u!114 &140735923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +349,36 @@ MonoBehaviour:
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 269554874}
   hookLife: 5
+  maxHookLife: 0
   playerRB: {fileID: 140735920}
+  changePerSecond: 0
+  shootHook:
+    m_Name: Shoot Hook
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 44cd8194-2c0b-477f-9c26-db2768b4b375
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  cancelHook:
+    m_Name: Cancel Hook
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6081d8d0-2928-45ee-9d80-a46cf0d2cf33
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  extendGrapple:
+    m_Name: Extend Grapple
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f8b2eabc-a971-472e-b949-f72237d24dd7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &269554873
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,10 +799,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  exit:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   offsetX: 13.5
   offsetY: 5.5
   offsetZ: 0
+  rotationOffsetX: 0
+  rotationOffsetY: 0
+  rotationOffsetZ: 0
   offset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
   smoothSpeed: 0.1256
 --- !u!1 &1323230777
 GameObject:

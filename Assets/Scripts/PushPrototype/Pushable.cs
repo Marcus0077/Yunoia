@@ -43,8 +43,6 @@ public class Pushable : MonoBehaviour
             Constraints();
             totalVelocity = 0;
             rb.isKinematic = false;
-            //skip = 
-            //rb.AddForce(force * velocity * chargeMultiplier, ForceMode.VelocityChange);
             if (!pushed || data.canStack)
             {
                 pushed = true;
@@ -59,7 +57,6 @@ public class Pushable : MonoBehaviour
             {
                 canReturn = data.returning;
             }
-            //CapSpeed();
             if (data != null)
             {
                 data.OnPush(gameObject);
@@ -174,26 +171,6 @@ public class Pushable : MonoBehaviour
                 queuedVelocity -= data.drag * Time.deltaTime;
                 rb.velocity = pushDirection * data.maxSpeed;
             }
-            //if (rb.velocity.magnitude <= data.maxSpeed)
-            //{
-            //    if (queuedVelocity > 0 && rb.velocity.magnitude != data.maxSpeed)
-            //    {
-            //        float usedVelocity = data.maxSpeed - Mathf.Abs(rb.velocity.magnitude);
-            //        queuedVelocity += rb.velocity.magnitude - data.maxSpeed;
-            //        rb.velocity = rb.velocity.normalized * data.maxSpeed;
-            //    }
-            //    else if(queuedVelocity <= 0 && canReturn)
-            //    {
-            //        queuedVelocity = totalVelocity;
-            //        rb.velocity *= -1;
-            //        canReturn = false;
-            //    }
-            //}
-            //else
-            //{
-            //    totalVelocity = queuedVelocity = rb.velocity.magnitude - data.maxSpeed;
-            //    rb.velocity = rb.velocity.normalized * data.maxSpeed;
-            //}
         }
 
     }
@@ -203,14 +180,6 @@ public class Pushable : MonoBehaviour
         if(pushed)
         {
             CapSpeed();
-            //if(skip)
-            //{
-            //    skip = false;
-            //}
-            //else
-            //{
-            //    CapSpeed();
-            //}
         }
     }
 }

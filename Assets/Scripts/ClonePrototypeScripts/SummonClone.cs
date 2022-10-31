@@ -19,6 +19,9 @@ public class SummonClone : MonoBehaviour
     public GameObject ClonePrefab;
     public bool cloneSummoned;
 
+    public LayerMask ground;
+    public LayerMask wall;
+
     // Get references and initialize variables when player spawns.
     void Awake()
     {
@@ -36,18 +39,34 @@ public class SummonClone : MonoBehaviour
         {
             SummonAClone();
         }
+        
     }
     
     // Summon a clone at a specified location, freeze player, and deactivate summon control.
     void SummonAClone()
     {
-        basicMovementPlayer.playerCanMove = false;
-        this.GetComponent<Grapple>().enabled = false;
-        this.GetComponent<AbilityPush>().enabled = false;
+        Vector3 rightOfPlayer = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z - 1f);
         
-        cloneSummoned = true;
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, Vector3.back * 1.25f, Color.green, 2f);
+        Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
         
-        Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
+        
+        if (Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f, wall) || !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.25f, ground))
+        {
+            Debug.Log("Did Hit");
+        }
+        else
+        {
+            basicMovementPlayer.playerCanMove = false;
+            this.GetComponent<Grapple>().enabled = false;
+            this.GetComponent<AbilityPush>().enabled = false;
+        
+            cloneSummoned = true;
+        
+            Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
+        }
     }
 
     // Enable input action map controls.

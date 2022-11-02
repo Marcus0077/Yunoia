@@ -172,12 +172,13 @@ GameObject:
   - component: {fileID: 5827308682441603357}
   - component: {fileID: 5827308682441603358}
   - component: {fileID: 8960577420141974533}
-  - component: {fileID: 6747851640279768848}
   - component: {fileID: 4153748680547471086}
   - component: {fileID: 307182109869249534}
   - component: {fileID: 8397525453568900783}
   - component: {fileID: 5827308682441603359}
   - component: {fileID: 5827308682441603352}
+  - component: {fileID: -8715429646849006418}
+  - component: {fileID: 8898106702094236184}
   m_Layer: 0
   m_Name: Clone
   m_TagString: Clone
@@ -297,86 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9eceb5dd45902040a025d2c3318c192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6747851640279768848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5827308682441603353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd91a1819191f82458a53121bafa2557, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basicMovementPlayer: {fileID: 0}
-  smoothCameraFollow: {fileID: 0}
-  summonClone: {fileID: 0}
-  exitClone: {fileID: 0}
-  combatHandler: {fileID: 0}
-  levelSwitchManager: {fileID: 0}
-  cloneAbilityPush: {fileID: 8397525453568900783}
-  Player: {fileID: 0}
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 3b35a7da-afeb-46b8-8509-846a450dcd08
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  jump:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 9bde0669-b27f-40d2-a4d1-24a1f2ce46fb
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  switchPlaces:
-    m_Name: Switch Places
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6c850b4e-7e86-42bf-b3bd-7673315767be
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  dash:
-    m_Name: Dash
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: fb52ee98-032a-4ede-b23d-e613592af1b3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  cloneRB: {fileID: 5827308682441603359}
-  moveDirection: {x: 0, y: 0}
-  lookDirection: {x: 0, y: 0}
-  moveSpeed: 0
-  maxSpeed: 0
-  cloneIsFrozen: 0
-  cloneCanMove: 0
-  accelerationValue: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  groundPoint: {fileID: 5827308682340208283}
-  jumpForce: 0
-  isGrounded: 0
-  jumpTime: 0
-  isOnTrigger2: 0
-  Wall_1: {fileID: 0}
-  Blocker2: {fileID: 0}
-  Blocker3: {fileID: 0}
-  blocker3InPos: {x: 0, y: 0, z: 0}
-  blocker3OutPos: {x: 0, y: 0, z: 0}
-  cloneRestored: 0
-  attachedMinionCount: 0
-  moveStartTimeDivider: 0.05
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +406,98 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &-8715429646849006418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4f2e08a9856f014397c94d52a8dfd11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4db58e61-8dfc-465f-b640-438bf1d160ec
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a4caaac5-2ac9-4994-8982-301c5908801f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  dash:
+    m_Name: Dash
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e5c433ed-d9e3-4477-bc9f-4bf0496e147f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  playerRB: {fileID: 5827308682441603359}
+  moveDirection: {x: 0, y: 0}
+  lookDirection: {x: 0, y: 0}
+  moveSpeed: 0
+  maxSpeed: 0
+  accelerationValue: 0
+  canMove: 0
+  isFrozen: 0
+  moveStartTimeDivider: 0.05
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  groundPoint: {fileID: 5827308682340208283}
+  jumpForce: 0
+  isGrounded: 0
+  attachedMinionCount: 0
+--- !u!114 &8898106702094236184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d75b8997c34ac40bf3fc6b949a492e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicMovementPlayer: {fileID: 0}
+  basicMovementClone: {fileID: 0}
+  smoothCameraFollow: {fileID: 0}
+  summonClone: {fileID: 0}
+  exitClone: {fileID: 0}
+  combatHandler: {fileID: 0}
+  levelSwitchManager: {fileID: 0}
+  cloneAbilityPush: {fileID: 8397525453568900783}
+  Player: {fileID: 0}
+  switchPlaces:
+    m_Name: Switch Places
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6b1add39-53c5-4647-a5b1-b6174e20fa4a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  isOnTrigger2: 0
+  Wall_1: {fileID: 0}
+  Blocker2: {fileID: 0}
+  Blocker3: {fileID: 0}
+  blocker3InPos: {x: 0, y: 0, z: 0}
+  blocker3OutPos: {x: 0, y: 0, z: 0}
+  cloneRestored: 0
 --- !u!1 &6116912473069196089
 GameObject:
   m_ObjectHideFlags: 0

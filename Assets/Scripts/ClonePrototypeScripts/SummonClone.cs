@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class SummonClone : MonoBehaviour
 {
     // Script references
-    private BasicMovementPlayer basicMovementPlayer;
-    private BasicMovementClone basicMovementClone;
+    private BasicMovement basicMovementPlayer;
 
     // Input variables
     PlayerControls summonControls;
@@ -25,8 +25,7 @@ public class SummonClone : MonoBehaviour
     // Get references and initialize variables when player spawns.
     void Awake()
     {
-        basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
-        basicMovementClone = FindObjectOfType<BasicMovementClone>();
+        basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
 
         summonControls = new PlayerControls();
         
@@ -59,7 +58,7 @@ public class SummonClone : MonoBehaviour
         }
         else
         {
-            basicMovementPlayer.playerCanMove = false;
+            basicMovementPlayer.canMove = false;
             this.GetComponent<Grapple>().enabled = false;
             this.GetComponent<AbilityPush>().enabled = false;
         

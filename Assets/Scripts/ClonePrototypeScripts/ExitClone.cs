@@ -12,11 +12,12 @@ public class ExitClone : MonoBehaviour
     public TextMeshProUGUI activeTimerText;
     
     // Script references
-    private BasicMovementPlayer basicMovementPlayer;
-    private BasicMovementClone basicMovementClone;
+    private BasicMovement basicMovementPlayer;
+    private BasicMovement basicMovementClone;
     private SmoothCameraFollow smoothCameraFollow;
     private SummonClone summonClone;
     private CombatHandler combatHandler;
+    private CloneInteractions cloneInteractions;
     
     // Player reference
     public GameObject Player;
@@ -39,8 +40,9 @@ public class ExitClone : MonoBehaviour
         
         Player = GameObject.FindWithTag("Player");
 
-        basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
-        basicMovementClone = FindObjectOfType<BasicMovementClone>();
+        basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
+        basicMovementClone = GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>();
+        cloneInteractions = FindObjectOfType<CloneInteractions>();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
@@ -60,21 +62,21 @@ public class ExitClone : MonoBehaviour
         if (despawnClone)
         {
             summonClone.cloneSummoned = false;
-            basicMovementPlayer.playerCanMove = true;
+            basicMovementPlayer.canMove = true;
             
             Player.GetComponent<Grapple>().enabled = true;
             Player.GetComponent<AbilityPush>().enabled = true;
 
-            if (basicMovementClone.isOnTrigger2)
+            if (cloneInteractions.isOnTrigger2)
             {
-                basicMovementClone.Blocker2.GetComponent<MeshRenderer>().enabled = true;
-                basicMovementClone.Blocker2.GetComponent<Collider>().enabled = true;
+                cloneInteractions.Blocker2.GetComponent<MeshRenderer>().enabled = true;
+                cloneInteractions.Blocker2.GetComponent<Collider>().enabled = true;
             }
 
             activeTimerText.text = "";
             combatHandler.healthText.text = "";
 
-            basicMovementClone.Blocker3.transform.position = basicMovementClone.blocker3InPos;
+            cloneInteractions.Blocker3.transform.position = cloneInteractions.blocker3InPos;
 
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
 

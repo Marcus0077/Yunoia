@@ -7,9 +7,10 @@ using UnityEngine.InputSystem;
 public class SmoothCameraFollow : MonoBehaviour
 {
     // Script references
-    private BasicMovementPlayer basicMovementPlayer;
+    private BasicMovement basicMovementPlayer;
     
     public Transform target;
+    
     PlayerControls playerControls;
     public InputAction exit;
 
@@ -36,7 +37,7 @@ public class SmoothCameraFollow : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        basicMovementPlayer = basicMovementPlayer = FindObjectOfType<BasicMovementPlayer>();
+        basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
         target = basicMovementPlayer.playerRB.transform;
     }
 

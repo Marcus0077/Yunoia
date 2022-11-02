@@ -10,35 +10,40 @@ public class AbilityPush : MonoBehaviour
     [SerializeField]
     float chargeSpeed = 1, cooldown = 1;
     float chargeTime;
-    bool ableToPush = true;
+    bool ableToPush = true, charging = false;
     [SerializeField]
     public bool restored;
     PlayerControls pushControls;
     private InputAction pushAction;
+    public int pushedLevel;
+    public float range;
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    void PushTargets(float range)
+    void PushTargets()
     {
+        pushedLevel = (int)range + 1 - minPush;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (var hitCollider in hitColliders)
         {
             Pushable pushedObj = hitCollider.GetComponent<Pushable>();
             if (pushedObj != null)
             {
-                Vector3 direction = pushedObj.transform.position - transform.position;
-                direction = new Vector3(direction.x, 0, direction.z).normalized;
+                Vector3 direction = (pushedObj.transform.position - transform.position).normalized;
+                //direction = new Vector3(direction.x, direction.y, direction.z).normalized;
                 float distance = Vector3.Distance(pushedObj.transform.position, transform.position);
                 float proximityMultiplier = range / distance;
                 //float chargeMultiplier = (range + 1 - minPush) / (float)(maxChargeLevel + 1);
-                pushedObj.Pushed(proximityMultiplier * direction, (int)range + 1 - minPush, maxChargeLevel + 1);
+                pushedObj.Pushed(proximityMultiplier * direction, pushedLevel, maxChargeLevel + 1, gameObject);//casted to int because chargeLevel should be flat numbers not a float
             }
-                
         }
-        RenderVolume(range*2);
+        if (!restored)
+        {
+            RenderVolume(range * 2);
+        }
     }
 
     void RenderVolume(float radius)
@@ -49,9 +54,36 @@ public class AbilityPush : MonoBehaviour
         shape.localScale = new Vector3(radius, radius, radius);
         shape.position = transform.position;
         shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse"); 
-        shape.GetComponent<Renderer>().material.color = new Color(1, 1, 1, .5f);
+        shape.GetComponent<Renderer>().material.color = new Color(1, .3f, .3f, .2f);
         shape.GetComponent<Renderer>().enabled = true;
         StartCoroutine(EraseRender(shape)); // erase after 1 second
+    }
+
+    private IEnumerator RenderChargeVolume()
+    {
+        Transform shape;
+        shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+        Destroy(shape.GetComponent<Collider>());
+        shape.position = transform.position;
+        shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
+        shape.GetComponent<Renderer>().material.color = new Color(1, 1, 1, .5f);
+        shape.GetComponent<Renderer>().enabled = true;
+        float radius = minPush;
+        float timeCharging = Time.time;
+        while (charging)
+        {
+            timeCharging = (Time.time - chargeTime) * chargeSpeed + minPush;
+            //int radius = 2*Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush);
+            radius = Mathf.Clamp(timeCharging, minPush, maxChargeLevel + minPush);
+            pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
+            shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2*pushedLevel), 1f / (2*pushedLevel), .2f + (.1f * pushedLevel));
+            radius *= 2;
+            shape.localScale = new Vector3(radius, radius, radius);
+            shape.position = transform.position;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        yield return new WaitForSeconds(1);
+        Destroy(shape.gameObject);
     }
 
     private IEnumerator EraseRender(Transform shape)
@@ -64,40 +96,50 @@ public class AbilityPush : MonoBehaviour
     {
         ableToPush = false;
         yield return new WaitForSeconds(cooldown);
-        chargeTime = Time.time; // held before cooldown ended, so start charging right when cooldown ends
+        if (restored && charging)
+        {
+            chargeTime = Time.time; // held before cooldown ended, so start charging right when cooldown ends
+            StartCoroutine(RenderChargeVolume());
+        }
         ableToPush = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void PushPress()
     {
+        charging = true;
         if (ableToPush)
         {
             //start animation
             if (!restored)
             {
-                PushTargets(minPush);
+                range = minPush;
+                PushTargets();
                 StartCoroutine(PushTimer());
+            } else
+            {
+                chargeTime = Time.time;
+                StartCoroutine(RenderChargeVolume());
             }
         }
-        chargeTime = Time.time;
     }
 
     void PushRelease()
     {
+        charging = false;
         if (ableToPush)
         {
             //start animation
             if (restored)
             {
                 chargeTime = (Time.time - chargeTime) * chargeSpeed + minPush;
-                Debug.Log(chargeTime);
-                PushTargets(Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush));
+                range = Mathf.Clamp(chargeTime, minPush, maxChargeLevel + minPush);
+                PushTargets();
                 StartCoroutine(PushTimer());
                 chargeTime = Time.time;
             }

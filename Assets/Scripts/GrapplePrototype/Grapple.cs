@@ -17,6 +17,7 @@ public class Grapple : MonoBehaviour
 
     Hook hook;
     bool grappleActive;
+    bool ready = true;
     Rigidbody rigid;
 
     PlayerControls grappleControls;
@@ -37,10 +38,8 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (hook == null && shootHook.IsPressed())
+        if (hook == null && shootHook.IsPressed() && ready == true)
         {
-            StopAllCoroutines();
-            grappleActive = false;
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
@@ -67,11 +66,17 @@ public class Grapple : MonoBehaviour
         
         if (extendGrapple.IsPressed() && grappleActive == true)
         {
-            playerRB.AddForce(Physics.gravity * 6.5f * playerRB.mass);
+            playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
         }
 
         if (hook != null && (playerRB.position.y > hook.transform.position.y))
         {
+            DestroyHook();
+        }
+
+        if (!shootHook.IsPressed() && hook != null)
+        {
+            StopAllCoroutines();
             DestroyHook();
         }
     }
@@ -87,6 +92,7 @@ public class Grapple : MonoBehaviour
 
     public void StartGrapple()
     {
+        ready = false;
         grappleActive = true;
     }
 
@@ -97,9 +103,11 @@ public class Grapple : MonoBehaviour
             return;
         }
 
+        ready = false;
         grappleActive = false;
         Destroy(hook.gameObject);
         hook = null;
+        StartCoroutine(GrappleCooldown());
     }
 
     private IEnumerator DestroyHookAfterLifetime()
@@ -126,6 +134,13 @@ public class Grapple : MonoBehaviour
     public void StartPull()
     {
         
+    }
+
+    private IEnumerator GrappleCooldown()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        ready = true;
     }
 
     // Enable input action map controls.

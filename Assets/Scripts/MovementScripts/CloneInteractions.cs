@@ -82,6 +82,7 @@ public class CloneInteractions : MonoBehaviour
     }
     
 
+    // Called each frame.
     private void Update()
     {
         SwitchPlaces();
@@ -90,7 +91,6 @@ public class CloneInteractions : MonoBehaviour
 
     // Switch clone and player control depending on which is
     // currently in control.
-    // Applies 3 second cooldown timer to switch.
     private void SwitchPlaces()
     {
         if (switchPlaces.WasPressedThisFrame())
@@ -137,6 +137,7 @@ public class CloneInteractions : MonoBehaviour
         switchPlaces.Disable();
     }
 
+    // Determines if clone is on a pressure plate in prototype (temporary).
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BlockerTrigger3"))
@@ -153,6 +154,7 @@ public class CloneInteractions : MonoBehaviour
         }
     }
     
+    // Determines if clone has exited a pressure plate in prototype (temporary).
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("BlockerTrigger3"))
@@ -169,6 +171,7 @@ public class CloneInteractions : MonoBehaviour
         }
     }
 
+    // Allows clone to phase through the translucent green wall in prototype (temporary).
     void CheckRestoredWalls()
     {
         Physics.IgnoreCollision(Wall_1.GetComponent<Collider>(), this.GetComponent<Collider>(), true);

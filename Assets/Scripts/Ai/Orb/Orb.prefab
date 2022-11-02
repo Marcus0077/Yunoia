@@ -134,11 +134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d7618a2cf75914180d7252029ceaa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1
+  queuedVelocity: 0
+  totalVelocity: 0
+  canReturn: 0
+  data: {fileID: 11400000, guid: c32fe07262072254eac942f608092932, type: 2}
   stickyOrb: {fileID: 1477132796423374369, guid: 3fdc031cc8fbfdf45ab1988d423254de, type: 3}
   player: {fileID: 0}
   detectDistance: 5
-  speed: 2
+  movespeed: 1
 --- !u!54 &5619543599113332176
 Rigidbody:
   m_ObjectHideFlags: 0

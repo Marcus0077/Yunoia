@@ -55,10 +55,40 @@ public class ExitClone : MonoBehaviour
         activeTimerText.color = Color.white;
     }
     
+    // Called between frames.
     void FixedUpdate()
     {
-        // Allow player to move, reset summonClone script boolean values, 
-        // reset prototype text, and destroy clone.
+        CheckCloneDespawn();
+    }
+
+    // Counts down clone timer, starting at 30 seconds.
+    // At 5 seconds, makes the clone blink on and off and turn the 
+    // timer text red.
+    private void CloneCountdownTimer()
+    {
+        cloneActiveTimer -= Time.deltaTime;
+        activeTimerText.text = "Clone Despawns In: " + Math.Round(cloneActiveTimer, 2); 
+        
+        if (cloneActiveTimer <= 0)
+        {
+            despawnClone = true;
+        }
+        else if (cloneActiveTimer < 5.01)
+        {
+            activeTimerText.color = Color.red;
+
+            if (!isRunning)
+            {
+                StartCoroutine(Blink());
+            }
+        }
+    }
+
+    // Despawns clone, resets triggers, takes away clone UI text, and gives control
+    // back to player if 'despawnClone' boolean value is true.
+    // If clone is not yet despawned, countdown the clone timer until it does.
+    private void CheckCloneDespawn()
+    {
         if (despawnClone)
         {
             summonClone.cloneSummoned = false;
@@ -82,30 +112,13 @@ public class ExitClone : MonoBehaviour
 
             Destroy(this.gameObject);
         }
-        // If clone is still active, count down.
         else
         {
-            cloneActiveTimer -= Time.deltaTime;
-            activeTimerText.text = "Clone Despawns In: " + Math.Round(cloneActiveTimer, 2); 
-        }
-
-        // If clone is not active, despawn it.
-        if (cloneActiveTimer <= 0)
-        {
-            despawnClone = true;
-        }
-        // If 5 seconds are left, turn active time red and make clone blink.
-        else if (cloneActiveTimer < 5.01)
-        {
-            activeTimerText.color = Color.red;
-
-            if (!isRunning)
-            {
-                StartCoroutine(Blink());
-            }
+            CloneCountdownTimer();
         }
     }
 
+    // Called each frame.
     private void Update()
     {
         if (exitClone.WasPressedThisFrame() && summonClone.cloneSummoned)
@@ -114,6 +127,7 @@ public class ExitClone : MonoBehaviour
         }
     }
 
+    // Flashes the clone's renderer on and off.
     IEnumerator Blink()
     {
         isRunning = true;
@@ -139,9 +153,9 @@ public class ExitClone : MonoBehaviour
         exitClone.Disable();
     }
 
+    // Destroys clone if it runs into a "Bad Wall"
     private void OnCollisionEnter(Collision collision)
     {
-        // Allow clone to pass through special walls.
         if (collision.gameObject.tag == "BadWall")
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());

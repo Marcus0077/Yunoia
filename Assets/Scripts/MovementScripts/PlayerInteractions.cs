@@ -16,7 +16,7 @@ public class PlayerInteractions : MonoBehaviour
         Blocker1 = GameObject.FindWithTag("Blocker1");
     }
 
-    // Player Specific
+    // Determines if player is on a pressure plate in prototype (temporary).
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BlockerTrigger1"))
@@ -26,7 +26,7 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    // Player Specific
+    // Determines if player has exited a pressure plate in prototype (temporary).
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("BlockerTrigger1"))

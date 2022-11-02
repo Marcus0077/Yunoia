@@ -21,25 +21,25 @@ public class AiOrbsSticky : Pushable
         transform.localScale = Vector3.one;
         relativePosition = transform.InverseTransformPoint(player.transform.position);
         transform.localScale = tempOriginalScale;
-        if (player.GetComponent<BasicMovementPlayer>())
+        if (player.GetComponent<BasicMovement>())
         {
-            player.GetComponent<BasicMovementPlayer>().AddMinion(1);
+            player.GetComponent<BasicMovement>().AddMinion(1);
         }
-        else if (player.GetComponent<BasicMovementClone>())
+        else if (player.GetComponent<BasicMovement>())
         {
-            player.GetComponent<BasicMovementClone>().AddMinion(1);
+            player.GetComponent<BasicMovement>().AddMinion(1);
         }
     }
 
     public override void Pushed(Vector3 force, int chargeLevel, int totalCharges)
     {
-        if (player.GetComponent<BasicMovementPlayer>() && attached)
+        if (player.GetComponent<BasicMovement>() && attached)
         {
-            player.GetComponent<BasicMovementPlayer>().AddMinion(-1);
+            player.GetComponent<BasicMovement>().AddMinion(-1);
         }
-        else if(player.GetComponent<BasicMovementClone>() && attached)
+        else if(player.GetComponent<BasicMovement>() && attached)
         {
-            player.GetComponent<BasicMovementClone>().AddMinion(-1);
+            player.GetComponent<BasicMovement>().AddMinion(-1);
         }
         attached = false;
         base.Pushed(force, chargeLevel,totalCharges);

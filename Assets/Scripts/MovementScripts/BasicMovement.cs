@@ -70,16 +70,19 @@ public class BasicMovement : MonoBehaviour
         logFormulaModifier = 2f;
     }
     
+    // Called between frames.
     void FixedUpdate()
     {
         MovePlayer();
     }
 
+    // Called each frame.
     private void Update()
     {
         ActivateDash();
     }
 
+    // Decelerates player to normal speed after dashing.
     void DecelerateDash()
     {
         if (accelerationValue > 1f)
@@ -92,6 +95,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
     
+    // Accelerates player to a set speed while dashing.
     void AccelerateDash()
     {
         if (accelerationValue < 2.5f)
@@ -105,7 +109,9 @@ public class BasicMovement : MonoBehaviour
     }
 
     // Applies gravity and movement velocity to player according to movement input.
-    // Also gives option to jump.
+    // Freezes player or clone depending on which one is currently active.
+    // Applies look rotation depending on player's movement direction.
+    // Gives options to jump and dash.
     void MovePlayer()
     {
         if (canMove == true)
@@ -161,6 +167,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
+    // Initiates dash sequence.
     void ActivateDash()
     {
         if (dash.WasPressedThisFrame() && move.IsPressed() && dashCooldown <= 0 && !isFrozen)
@@ -171,6 +178,9 @@ public class BasicMovement : MonoBehaviour
         }
     }
     
+    // Goes through dash sequence, accelerating then decelerating the player, 
+    // all while applying a 3 second cooldown, which allows dash to be activated
+    // again once the cooldown reaches 0.
     void DashPlayer()
     {
         if (dashAccelerate == 1)
@@ -198,13 +208,12 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
-    // Player looks in the direction they are moving.
+    // Player looks in the direction they are moving, smoothly according to the angles
+    // between last look rotation and current movement direction.
     void LookPlayer()
     {
         if (move.IsPressed())
         {
-            //transform.forward = new Vector3(moveDirection.x, 0f, moveDirection.y);
-
             float playerAngle = (float) (Math.Atan2(moveDirection.x, moveDirection.y) * 180) / (float) Math.PI;
             
             
@@ -235,6 +244,7 @@ public class BasicMovement : MonoBehaviour
         dash.Disable();
     }
     
+    // Changes camera position and rotation depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("HigherView"))
@@ -248,6 +258,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
     
+    // Determines if player is on the ground or not.
     private void IsGrounded()
     {
         RaycastHit hit;

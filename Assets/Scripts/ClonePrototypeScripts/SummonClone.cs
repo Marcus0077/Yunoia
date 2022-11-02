@@ -19,6 +19,7 @@ public class SummonClone : MonoBehaviour
     public GameObject ClonePrefab;
     public bool cloneSummoned;
 
+    // LayerMask variables
     public LayerMask ground;
     public LayerMask wall;
 
@@ -32,6 +33,7 @@ public class SummonClone : MonoBehaviour
         cloneSummoned = false;
     }
 
+    // Called each frame.
     void Update()
     {
         if (!cloneSummoned && summonAClone.WasPressedThisFrame())
@@ -41,7 +43,9 @@ public class SummonClone : MonoBehaviour
         
     }
     
-    // Summon a clone at a specified location, freeze player, and deactivate summon control.
+    // Summon a clone at a specified location if they are not too close to a wall 
+    // and if the clone will spawn on the ground.
+    // Freezes player and deactivates ability to summon a clone.
     void SummonAClone()
     {
         Vector3 rightOfPlayer = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z - 1f);

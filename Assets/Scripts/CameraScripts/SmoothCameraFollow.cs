@@ -25,6 +25,7 @@ public class SmoothCameraFollow : MonoBehaviour
     
     // Rotation offset variables
     public Vector3 rotationOffset;
+    
     [Range(-180f, 180f)]
     public float rotationOffsetX;
     [Range(-180f, 180f)]
@@ -75,7 +76,7 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         rotationOffset = new Vector3(rotationOffsetX, rotationOffsetY, rotationOffsetZ);
         
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), smoothSpeed * 10);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), smoothSpeed * 0.75f);
     }
 
     // Sets camera angle to a further and higher position and rotation.

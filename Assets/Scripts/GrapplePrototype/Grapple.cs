@@ -81,15 +81,6 @@ public class Grapple : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // Possibly destroy hook when shoot button is release?
-        // if (shootHook.WasReleasedThisFrame())
-        // {
-        //     releasedHook = true;
-        // }
-    }
-
     public void StartGrapple()
     {
         ready = false;

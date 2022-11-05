@@ -79,7 +79,7 @@ public class ExitClone : MonoBehaviour
 
             if (!isRunning)
             {
-                StartCoroutine(Blink());
+                //StartCoroutine(Blink());
             }
         }
     }

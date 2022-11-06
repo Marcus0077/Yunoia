@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Items/Settings.uss?fileID=7433441132597879392&amp;guid=9e6ca170558952b488b2a88c45cf1531&amp;type=3#Settings" />
+    <ui:VisualElement name="Screen" style="width: 100%; height: 100%; align-items: center; justify-content: flex-end; padding-left: 35px; padding-right: 35px; padding-top: 35px; padding-bottom: 35px; flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="LeftSide" style="flex-grow: 1; flex-direction: column; width: 100%; justify-content: center; height: 80%;">
+            <ui:Label text="Volume" display-tooltip-when-elided="true" name="Volume" class="textStyle" style="margin-bottom: 40px;" />
+            <ui:Slider picking-mode="Ignore" label="Master Volume" value="42" high-value="100" name="MasterSlider" class="sliderStyle" />
+            <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="100" name="BGMSlider" class="sliderStyle" />
+            <ui:Slider picking-mode="Ignore" label="Sound Effects" value="42" high-value="100" name="SFXSlider" class="sliderStyle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightSide" style="height: 40%; width: 100%; flex-grow: 1; justify-content: flex-start;">
+            <ui:Label text="Gamma" display-tooltip-when-elided="true" name="Gamma" class="textStyle" style="justify-content: center;" />
+            <ui:Slider picking-mode="Ignore" label="Gamma Level" value="42" high-value="100" name="GammaSlider" class="sliderStyle" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Back" display-tooltip-when-elided="true" name="ReturnButton" class="buttonStyle" style="align-items: center; justify-content: flex-start;" />
+</ui:UXML>

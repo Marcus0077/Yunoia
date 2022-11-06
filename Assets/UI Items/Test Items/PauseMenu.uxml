@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Settings" src="project://database/Assets/UI%20Items/Settings.uxml?fileID=9197481963319205126&amp;guid=a2357dc3fa4d3144992ee853085eca63&amp;type=3#Settings" />
+    <Style src="project://database/Assets/UI%20Items/PauseMenu.uss?fileID=7433441132597879392&amp;guid=8b534385051796245a5f7af1c3fa0553&amp;type=3#PauseMenu" />
+    <ui:VisualElement name="Screen" style="flex-grow: 1; flex-direction: column; display: flex; width: 100%; height: 100%;">
+        <ui:VisualElement name="Container" style="height: 100%; width: 500px; align-items: flex-start; justify-content: flex-start; flex-grow: 1; flex-direction: column;">
+            <ui:Label text="PAUSED" display-tooltip-when-elided="true" name="PauseText" class="PauseTitle" style="margin-left: 50px; margin-top: 25px;" />
+            <ui:Button text="Resume" display-tooltip-when-elided="true" name="ResumeButton" class="PauseButton" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton" class="PauseButton" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="PauseButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Instance template="Settings" name="Settings" style="display: none; width: 100%; height: 100%;" />
+</ui:UXML>

@@ -7,7 +7,10 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] float pullSpeed = 0.75f;
+    //[SerializeField] float horizontalPullSpeed = 5.0f;
     [SerializeField] float stopDistance = 2.5f;
+    //[SerializeField] float taughtDistance = 5.0f;
+    //[SerializeField] float horizontalYankDistance = 3.0f;
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
     [SerializeField] float hookLife;
@@ -44,6 +47,7 @@ public class Grapple : MonoBehaviour
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
         }
+        // Old
         else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
         {
             DestroyHook(); 
@@ -55,6 +59,7 @@ public class Grapple : MonoBehaviour
             return;
         }
 
+        // Old
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
         {
             DestroyHook();
@@ -63,7 +68,27 @@ public class Grapple : MonoBehaviour
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
         }
-        
+
+        // Updated
+        /*if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance)
+        {
+            return;
+        }
+        else
+        {
+            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
+        }*/
+
+        /*if (Math.Abs(transform.position.x - hook.transform.position.x) <= horizontalYankDistance)
+        {
+            return;
+        }
+        else
+        {
+            rigid.AddRelativeForce(rigid.transform.forward);
+        }*/
+
+        // Old
         if (extendGrapple.IsPressed() && grappleActive == true)
         {
             playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
@@ -129,7 +154,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator GrappleCooldown()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
 
         ready = true;
     }

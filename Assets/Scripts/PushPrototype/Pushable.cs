@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Pushable : MonoBehaviour
@@ -36,10 +37,23 @@ public class Pushable : MonoBehaviour
         }
     }
 
+    IEnumerator EnableNav()
+    {
+        yield return new WaitForSeconds(.5f);
+        rb.constraints |= RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        //GetComponent<NavMeshAgent>().enabled = true;
+    }
+
     public virtual bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
         if(chargeLevel >= reqChargeLevel)
         {
+            if(GetComponent<NavMeshAgent>() != null)
+            {
+                //GetComponent<NavMeshAgent>().enabled = false;
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionX & ~RigidbodyConstraints.FreezePositionY & ~RigidbodyConstraints.FreezePositionZ;
+                StartCoroutine(EnableNav());
+            }
             Constraints();
             totalVelocity = 0;
             if(velocity > 0)

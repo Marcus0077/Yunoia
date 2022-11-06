@@ -6,6 +6,8 @@ public class CloneCombat : MonoBehaviour
 {
     private CombatHandler combatHandler;
     private ExitClone exitClone;
+
+    public GameObject cloneHead;
     
     void Awake()
     {
@@ -17,7 +19,7 @@ public class CloneCombat : MonoBehaviour
     
     void FixedUpdate()
     {
-        this.GetComponent<Renderer>().material.color = combatHandler.changeCloneColor;
+        cloneHead.GetComponent<Renderer>().material.color = combatHandler.changeCloneColor;
 
         if (combatHandler.cloneHP <= 0)
         {

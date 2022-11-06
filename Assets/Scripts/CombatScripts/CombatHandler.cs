@@ -28,7 +28,7 @@ public class CombatHandler : MonoBehaviour
         activeTimerText.text = "";
         
 
-        changeCloneColor = new Color(1f, .8f, .3f, .7f);
+        changeCloneColor = new Color(1f, 1f, 1f, .3f);
         changeAIColor = Color.black;
         
         isRunning = false;
@@ -53,14 +53,14 @@ public class CombatHandler : MonoBehaviour
         if (inCombat)
         {
             changeAIColor = Color.red;
-            changeCloneColor = Color.red;
+            changeCloneColor = new Color(1f, 0f, 0f, .3f);
             cloneHP -= 1;
             healthText.text = "Clone Health: " + cloneHP + "/3";
             yield return new WaitForSeconds(0.25f);
         }
 
-            changeAIColor = Color.black;
-        changeCloneColor = new Color(1f, .8f, .3f, .7f);
+        changeAIColor = Color.black;
+        changeCloneColor = new Color(1f, 1f, 1f, .3f);
         yield return new WaitForSeconds(1f);
 
         isRunning = false;

@@ -11,6 +11,7 @@ public class PushablePlatform : Pushable
         GameObject hit = other.gameObject;
         if (hit.tag == "Player" || hit.tag == "Clone")
         {
+            Debug.Log("a");
             prevPosition = transform.position;
         }
     }

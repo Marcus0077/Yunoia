@@ -33,9 +33,12 @@ public class SmoothCameraFollow : MonoBehaviour
     [Range(-180f, 180f)]
     public float rotationOffsetZ;
 
-    // Camera smoothing variable
-    [Range(0.05f, 0.25f)]
-    public float smoothSpeed;
+    // Camera smoothing variables
+    [Range(0.001f, 0.1f)]
+    public float positionSmoothSpeed;
+    
+    [Range(0.001f, 0.1f)]
+    public float rotationSmoothSpeed;
 
     // Get references and initialize variables when camera is activated.
     private void Awake()
@@ -68,7 +71,7 @@ public class SmoothCameraFollow : MonoBehaviour
         positionOffset = new Vector3(positionOffsetX, positionOffsetY, positionOffsetZ);
 
         Vector3 desiredPosition = target.position + positionOffset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, positionSmoothSpeed);
         transform.position = smoothedPosition;
     }
 
@@ -76,14 +79,14 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         rotationOffset = new Vector3(rotationOffsetX, rotationOffsetY, rotationOffsetZ);
         
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), smoothSpeed * 0.75f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), rotationSmoothSpeed);
     }
 
     // Sets camera angle to a further and higher position and rotation.
     public void HigherAngleCamera()
     {
-        positionOffsetX = -12;
-        positionOffsetY = 4;
+        positionOffsetX = -15;
+        positionOffsetY = 4.5f;
         positionOffsetZ = 0;
 
         rotationOffsetX = 10;

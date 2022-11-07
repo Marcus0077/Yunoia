@@ -87,6 +87,7 @@ public class CheatMenu : MonoBehaviour
             }
         }
         inputField.text = "";
+        inputField.ActivateInputField();
     }
 
     public void UpdateHistory(string text)
@@ -123,15 +124,6 @@ public class CheatMenu : MonoBehaviour
                 inputField.text = clipboard[selected];
             }
             
-        }
-    }
-
-    public void ProcessEvent(Event e)
-    {
-        if (e != null && e.isKey && e.type.Equals(EventType.KeyDown) && e.keyCode == KeyCode.DownArrow)
-        {
-            Debug.Log("a");
-            e.Use();
         }
     }
 

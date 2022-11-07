@@ -514,6 +514,76 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Cheat"",
+            ""id"": ""aa32ae28-3184-4703-8e2c-994370aac848"",
+            ""actions"": [
+                {
+                    ""name"": ""Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""18087739-7811-4182-8f72-15076eecd191"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""History"",
+                    ""type"": ""Value"",
+                    ""id"": ""5c17fc59-0217-438e-af87-7a624d1bc5cd"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""65abaaff-35ce-4aca-9b18-328d9ebb1994"",
+                    ""path"": ""<Keyboard>/backslash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""9109b364-48a4-4905-89b9-69093524f34a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""History"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e9190506-d4a6-42dc-a6b0-69442ab42a8a"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""History"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3a5d0860-1d12-4d9c-a362-555de63ead25"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""History"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -573,6 +643,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Checkpoint
         m_Checkpoint = asset.FindActionMap("Checkpoint", throwIfNotFound: true);
         m_Checkpoint_Restart = m_Checkpoint.FindAction("Restart", throwIfNotFound: true);
+        // Cheat
+        m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
+        m_Cheat_Toggle = m_Cheat.FindAction("Toggle", throwIfNotFound: true);
+        m_Cheat_History = m_Cheat.FindAction("History", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -907,6 +981,47 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CheckpointActions @Checkpoint => new CheckpointActions(this);
+
+    // Cheat
+    private readonly InputActionMap m_Cheat;
+    private ICheatActions m_CheatActionsCallbackInterface;
+    private readonly InputAction m_Cheat_Toggle;
+    private readonly InputAction m_Cheat_History;
+    public struct CheatActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CheatActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Toggle => m_Wrapper.m_Cheat_Toggle;
+        public InputAction @History => m_Wrapper.m_Cheat_History;
+        public InputActionMap Get() { return m_Wrapper.m_Cheat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CheatActions set) { return set.Get(); }
+        public void SetCallbacks(ICheatActions instance)
+        {
+            if (m_Wrapper.m_CheatActionsCallbackInterface != null)
+            {
+                @Toggle.started -= m_Wrapper.m_CheatActionsCallbackInterface.OnToggle;
+                @Toggle.performed -= m_Wrapper.m_CheatActionsCallbackInterface.OnToggle;
+                @Toggle.canceled -= m_Wrapper.m_CheatActionsCallbackInterface.OnToggle;
+                @History.started -= m_Wrapper.m_CheatActionsCallbackInterface.OnHistory;
+                @History.performed -= m_Wrapper.m_CheatActionsCallbackInterface.OnHistory;
+                @History.canceled -= m_Wrapper.m_CheatActionsCallbackInterface.OnHistory;
+            }
+            m_Wrapper.m_CheatActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Toggle.started += instance.OnToggle;
+                @Toggle.performed += instance.OnToggle;
+                @Toggle.canceled += instance.OnToggle;
+                @History.started += instance.OnHistory;
+                @History.performed += instance.OnHistory;
+                @History.canceled += instance.OnHistory;
+            }
+        }
+    }
+    public CheatActions @Cheat => new CheatActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -958,5 +1073,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface ICheckpointActions
     {
         void OnRestart(InputAction.CallbackContext context);
+    }
+    public interface ICheatActions
+    {
+        void OnToggle(InputAction.CallbackContext context);
+        void OnHistory(InputAction.CallbackContext context);
     }
 }

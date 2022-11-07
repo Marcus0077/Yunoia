@@ -47,6 +47,8 @@ public class CheatMenu : MonoBehaviour
     public void Selected()
     {
         cg.alpha = .75f;
+        cg.interactable = false;
+        inputField.ActivateInputField();
     }
 
     public void Deselected()

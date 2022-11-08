@@ -17,6 +17,7 @@ public class AbilityPush : MonoBehaviour
     private InputAction pushAction;
     public int pushedLevel;
     public float range;
+    Transform shape;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +49,6 @@ public class AbilityPush : MonoBehaviour
 
     void RenderVolume(float radius)
     {
-        Transform shape;
         shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
         Destroy(shape.GetComponent<Collider>());
         shape.localScale = new Vector3(radius, radius, radius);
@@ -57,6 +57,11 @@ public class AbilityPush : MonoBehaviour
         shape.GetComponent<Renderer>().material.color = new Color(1, .3f, .3f, .2f);
         shape.GetComponent<Renderer>().enabled = true;
         StartCoroutine(EraseRender(shape)); // erase after 1 second
+    }
+
+    public void DestroyShape()
+    {
+        Destroy(shape.gameObject);
     }
 
     private IEnumerator RenderChargeVolume()

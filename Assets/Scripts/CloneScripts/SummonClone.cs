@@ -19,6 +19,8 @@ public class SummonClone : MonoBehaviour
     public GameObject ClonePrefab;
     public GameObject clone;
     public bool cloneSummoned;
+    public float cooldown = 0;
+    float cdRemaining;
 
     // LayerMask variables
     public LayerMask ground;
@@ -65,7 +67,7 @@ public class SummonClone : MonoBehaviour
         {
             this.GetComponent<Grapple>().DestroyHook();
             this.GetComponent<AbilityPush>().DestroyShape();
-            
+
             basicMovementPlayer.canMove = false;
             this.GetComponent<Grapple>().enabled = false;
             this.GetComponent<AbilityPush>().enabled = false;
@@ -73,9 +75,32 @@ public class SummonClone : MonoBehaviour
             cloneSummoned = true;
         
             clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
+            StartCoroutine(Cooldown());
         }
     }
-    
+
+    private IEnumerator Cooldown()
+    {
+        cdRemaining = cooldown;
+        while (cdRemaining > 0)
+        {
+            cdRemaining -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    public float CooldownRemaining()
+    {
+        if (cdRemaining > 0)
+        {
+            return cdRemaining;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     // Enable input action map controls.
     private void OnEnable()
     {

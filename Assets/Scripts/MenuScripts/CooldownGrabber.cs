@@ -12,14 +12,14 @@ public class CooldownGrabber : MonoBehaviour
     {
         pushFromPlayer = GetComponent<AbilityPush>();
         cloneFromPlayer = GetComponent<SummonClone>();
-
+        grappleFromPlayer = GetComponent<Grapple>();
     }
 
     public float GetCD(string ability)
     {
         if(ability == "push")
         {
-            if(cloneFromPlayer.cloneSummoned)
+            if(cloneFromPlayer.cloneSummoned && cloneFromPlayer.clone.GetComponent<BasicMovement>().canMove)
             {
                 return cloneFromPlayer.clone.GetComponent<AbilityPush>().CooldownRemaining();
             }
@@ -30,20 +30,18 @@ public class CooldownGrabber : MonoBehaviour
         }
         else if(ability == "clone")
         {
-            // return some value some function that returns cooldown of clone
-            return -1; //temporary value until function is added
+            return cloneFromPlayer.CooldownRemaining();
         }
         else if(ability == "grapple")
         {
-            if (cloneFromPlayer.cloneSummoned)
+            if (cloneFromPlayer.cloneSummoned && cloneFromPlayer.clone.GetComponent<BasicMovement>().canMove)
             {
-                //return cloneFromPlayer.clone.GetComponent<Grapple>().FunctionToGetCooldown();
+                return cloneFromPlayer.clone.GetComponent<Grapple>().CooldownRemaining();
             }
             else
             {
-                //return grappleFromPlayer.FunctionToGetCooldown();
+                return grappleFromPlayer.CooldownRemaining();
             }
-            return -1; //temporary value until function is added
         }
         else
         {

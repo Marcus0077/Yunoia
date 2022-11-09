@@ -19,6 +19,8 @@ public class Grapple : MonoBehaviour
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
     [SerializeField] float changePerSecond;
+    [SerializeField] float grappleCooldown = 1;
+    float cdRemaining;
 
     Hook hook;
     bool grappleActive;
@@ -163,9 +165,25 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator GrappleCooldown()
     {
-        yield return new WaitForSeconds(1.0f);
-
+        cdRemaining = grappleCooldown;
+        while(cdRemaining > 0)
+        {
+            cdRemaining -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
         ready = true;
+    }
+
+    public float CooldownRemaining()
+    {
+        if (cdRemaining > 0)
+        {
+            return cdRemaining;
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     // Enable input action map controls.

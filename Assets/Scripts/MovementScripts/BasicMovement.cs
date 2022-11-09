@@ -208,6 +208,18 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
+    public float CooldownRemaining()
+    {
+        if (dashCooldown > 0)
+        {
+            return dashCooldown;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     // Player looks in the direction they are moving, smoothly according to the angles
     // between last look rotation and current movement direction.
     void LookPlayer()

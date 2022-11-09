@@ -185,12 +185,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullSpeed: 0.75
+  reelSpeed: 0.7
+  horizontalPullSpeed: 5
   stopDistance: 2.5
+  taughtDistance: 5
+  horizontalYankDistance: 3
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 224377010961569212}
   hookLife: 5
   maxHookLife: 0
   playerRB: {fileID: 5827308682441603359}
+  player: {fileID: 0}
   changePerSecond: 0
   shootHook:
     m_Name: Shoot Hook
@@ -339,10 +344,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  isOnTrigger2: 0
-  Wall_1: {fileID: 0}
-  Blocker2: {fileID: 0}
-  Blocker3: {fileID: 0}
   blocker3InPos: {x: 0, y: 0, z: 0}
   blocker3OutPos: {x: 0, y: 0, z: 0}
   cloneRestored: 0
@@ -353,7 +354,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5827308682441603353}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 000423fd202578e43a819bd16b50ce16, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.52888936

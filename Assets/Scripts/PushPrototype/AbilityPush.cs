@@ -18,6 +18,7 @@ public class AbilityPush : MonoBehaviour
     public int pushedLevel;
     public float range;
     Transform shape;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +54,7 @@ public class AbilityPush : MonoBehaviour
         Destroy(shape.GetComponent<Collider>());
         shape.localScale = new Vector3(radius, radius, radius);
         shape.position = transform.position;
-        shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse"); 
+        shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
         shape.GetComponent<Renderer>().material.color = new Color(1, .3f, .3f, .2f);
         shape.GetComponent<Renderer>().enabled = true;
         StartCoroutine(EraseRender(shape)); // erase after 1 second
@@ -61,12 +62,14 @@ public class AbilityPush : MonoBehaviour
 
     public void DestroyShape()
     {
-        Destroy(shape.gameObject);
+        if (shape != null)
+        {
+            Destroy(shape.gameObject);
+        }
     }
 
     private IEnumerator RenderChargeVolume()
     {
-        Transform shape;
         shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
         Destroy(shape.GetComponent<Collider>());
         shape.position = transform.position;
@@ -88,13 +91,21 @@ public class AbilityPush : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         yield return new WaitForSeconds(1);
-        Destroy(shape.gameObject);
+
+        if (shape != null)
+        {
+            Destroy(shape.gameObject);
+        }
     }
 
     private IEnumerator EraseRender(Transform shape)
     {
         yield return new WaitForSeconds(1);
-        Destroy(shape.gameObject);
+
+        if (shape != null)
+        {
+            Destroy(shape.gameObject);
+        }
     }
 
     private IEnumerator PushTimer()

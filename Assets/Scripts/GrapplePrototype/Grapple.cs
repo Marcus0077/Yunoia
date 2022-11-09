@@ -7,7 +7,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] float pullSpeed = 0.3f;
-    [SerializeField] float reelSpeed = 0.7f;
+    [SerializeField] float reelSpeed = 10.0f;
     [SerializeField] float horizontalPullSpeed = 5.0f;
     [SerializeField] float stopDistance = 2.5f;
     [SerializeField] float taughtDistance = 5.0f;
@@ -17,6 +17,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] float hookLife;
     [SerializeField] float maxHookLife;
     [SerializeField] Rigidbody playerRB;
+    [SerializeField] BasicMovement player;
     [SerializeField] float changePerSecond;
 
     Hook hook;
@@ -61,7 +62,7 @@ public class Grapple : MonoBehaviour
         }
         
         // Updated - Press Shoot again to 'reel' in
-        if (grappleActive && shootHook.IsPressed())
+        if (grappleActive && shootHook.IsPressed() && player.isGrounded)
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * reelSpeed, ForceMode.Impulse);
         }
@@ -75,17 +76,8 @@ public class Grapple : MonoBehaviour
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
         }*/
-        
-        // Updated
-        if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance)
-        {
-            return;
-        }
-        else
-        {
-            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
-        }
 
+        /*
         if (Math.Abs(transform.position.x - hook.transform.position.x) <= horizontalYankDistance)
         {
             return;
@@ -93,7 +85,7 @@ public class Grapple : MonoBehaviour
         else
         {
             rigid.AddRelativeForce(rigid.transform.forward);
-        }
+        }*/
 
         // Old
         /*if (extendGrapple.IsPressed() && grappleActive == true)
@@ -104,6 +96,15 @@ public class Grapple : MonoBehaviour
         if (hook != null && (playerRB.position.y > hook.transform.position.y))
         {
             DestroyHook();
+        }
+
+        if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance)
+        {
+            return;
+        }
+        else
+        {
+            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
         }
     }
 
@@ -170,9 +171,6 @@ public class Grapple : MonoBehaviour
 
         cancelHook = grappleControls.Grapple.CancelHook;
         cancelHook.Enable();
-
-        extendGrapple = grappleControls.Grapple.ExtendGrapple;
-        extendGrapple.Enable();
     }
 
     // Disable input action map controls.
@@ -180,6 +178,5 @@ public class Grapple : MonoBehaviour
     {
         shootHook.Disable();
         cancelHook.Disable();
-        extendGrapple.Disable();
     }
 }

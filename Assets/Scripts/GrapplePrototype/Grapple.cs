@@ -47,24 +47,25 @@ public class Grapple : MonoBehaviour
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
         }
-        // Old
-        /*else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
+        // Old/Updated
+        else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
         {
             DestroyHook(); 
             releasedHook = false; // input testing
-        }*/
-        else if (!shootHook.IsPressed() && hook != null)
-        {
-            StopAllCoroutines();
-            DestroyHook();
         }
 
         if (!grappleActive || hook == null)
         {
             return;
         }
+        
+        // Updated - Press Shoot again to 'reel' in
+        /*if (grappleActive && shootHook.IsPressed())
+        {
+            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
+        }*/
 
-        /*// Old
+        /* Old
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
         {
             DestroyHook();

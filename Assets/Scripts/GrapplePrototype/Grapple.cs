@@ -7,7 +7,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] float pullSpeed = 0.3f;
-    [SerializeField] float reelSpeed = 10.0f;
+    [SerializeField] float reelSpeed = 0.5f;
     [SerializeField] float horizontalPullSpeed = 5.0f;
     [SerializeField] float stopDistance = 2.5f;
     [SerializeField] float taughtDistance = 5.0f;
@@ -62,9 +62,9 @@ public class Grapple : MonoBehaviour
         }
         
         // Updated - Press Shoot again to 'reel' in
-        if (grappleActive && shootHook.IsPressed() && player.isGrounded)
+        if (grappleActive && shootHook.IsPressed())
         {
-            rigid.AddForce((hook.transform.position - transform.position).normalized * reelSpeed, ForceMode.Impulse);
+            StartCoroutine(StartReel());
         }
 
         
@@ -147,6 +147,13 @@ public class Grapple : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         DestroyHook();
+    }
+
+    private IEnumerator StartReel()
+    {
+        rigid.AddForce((hook.transform.position - transform.position).normalized * reelSpeed, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(1.0f);
     }
 
     public void StartPull()

@@ -17,6 +17,7 @@ public class AbilityPush : MonoBehaviour
     private InputAction pushAction;
     public int pushedLevel;
     public float range;
+    public float cdRemaining;
     Transform shape;
     // Start is called before the first frame update
     void Start()
@@ -100,13 +101,31 @@ public class AbilityPush : MonoBehaviour
     private IEnumerator PushTimer()
     {
         ableToPush = false;
-        yield return new WaitForSeconds(cooldown);
-        if (restored && charging)
+        cdRemaining = cooldown;
+        while(cdRemaining > 0)
+        {
+            cdRemaining -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        if(restored && charging)
         {
             chargeTime = Time.time; // held before cooldown ended, so start charging right when cooldown ends
             StartCoroutine(RenderChargeVolume());
         }
+        cdRemaining = -1;
         ableToPush = true;
+    }
+
+    public float CooldownRemaining()
+    {
+        if(cdRemaining > 0)
+        {
+            return cdRemaining;
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     // Update is called once per frame

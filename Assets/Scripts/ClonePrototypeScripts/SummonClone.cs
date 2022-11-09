@@ -17,6 +17,7 @@ public class SummonClone : MonoBehaviour
 
     // Clone Summon variables
     public GameObject ClonePrefab;
+    public GameObject clone;
     public bool cloneSummoned;
 
     // LayerMask variables
@@ -68,7 +69,7 @@ public class SummonClone : MonoBehaviour
         
             cloneSummoned = true;
         
-            Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
+            clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
         }
     }
     

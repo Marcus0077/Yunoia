@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8325761764747410606}
   - component: {fileID: 8325761764747410605}
   - component: {fileID: 8325761764747410604}
+  - component: {fileID: 5933028472978193901}
   - component: {fileID: 8325761764747410595}
   - component: {fileID: 8325761764747410594}
   - component: {fileID: 8325761764747410516}
@@ -205,12 +206,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullSpeed: 0.75
+  reelSpeed: 0.7
+  horizontalPullSpeed: 5
   stopDistance: 2.5
+  taughtDistance: 5
+  horizontalYankDistance: 3
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 8325761764601099076}
   hookLife: 5
   maxHookLife: 0
   playerRB: {fileID: 8325761764747410595}
+  player: {fileID: 0}
   changePerSecond: 0
   shootHook:
     m_Name: Shoot Hook
@@ -258,6 +264,21 @@ MonoBehaviour:
   restored: 0
   pushedLevel: 0
   range: 0
+  cdRemaining: 0
+--- !u!114 &5933028472978193901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325761764747410593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b170bb3add68cd4699d61cf4a6c8955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushFromPlayer: {fileID: 0}
+  cloneFromPlayer: {fileID: 0}
 --- !u!54 &8325761764747410595
 Rigidbody:
   m_ObjectHideFlags: 0

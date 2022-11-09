@@ -9,6 +9,7 @@ public class MenuTransition : MonoBehaviour
     public float xSize;
     public float ySize;
     public CanvasGroup bg;
+    public GameObject prevMenu;
 
     public void Awake()
     {
@@ -27,5 +28,12 @@ public class MenuTransition : MonoBehaviour
     {
         transform.LeanScale(Vector2.zero, 0.8f).setEaseInBack();
         bg.LeanAlpha(0, 0.5f);
+        StartCoroutine(NextMenu(0.8f));
+    }
+
+    private IEnumerator NextMenu(float time)
+    {
+        yield return new WaitForSeconds(time);
+        prevMenu.SetActive(true);
     }
 }

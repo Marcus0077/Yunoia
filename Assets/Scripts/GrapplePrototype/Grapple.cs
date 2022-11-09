@@ -7,10 +7,10 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] float pullSpeed = 0.75f;
-    //[SerializeField] float horizontalPullSpeed = 5.0f;
+    [SerializeField] float horizontalPullSpeed = 5.0f;
     [SerializeField] float stopDistance = 2.5f;
-    //[SerializeField] float taughtDistance = 5.0f;
-    //[SerializeField] float horizontalYankDistance = 3.0f;
+    [SerializeField] float taughtDistance = 5.0f;
+    [SerializeField] float horizontalYankDistance = 3.0f;
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
     [SerializeField] float hookLife;
@@ -48,10 +48,15 @@ public class Grapple : MonoBehaviour
             StartCoroutine(DestroyHookAfterLifetime());
         }
         // Old
-        else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
+        /*else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
         {
             DestroyHook(); 
             releasedHook = false; // input testing
+        }*/
+        else if (!shootHook.IsPressed() && hook != null)
+        {
+            StopAllCoroutines();
+            DestroyHook();
         }
 
         if (!grappleActive || hook == null)
@@ -59,7 +64,7 @@ public class Grapple : MonoBehaviour
             return;
         }
 
-        // Old
+        /*// Old
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
         {
             DestroyHook();
@@ -67,41 +72,35 @@ public class Grapple : MonoBehaviour
         else
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
-        }
+        }*/
 
         // Updated
-        /*if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance)
+        if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance)
         {
             return;
         }
         else
         {
-            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
-        }*/
+            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
+        }
 
-        /*if (Math.Abs(transform.position.x - hook.transform.position.x) <= horizontalYankDistance)
+        if (Math.Abs(transform.position.x - hook.transform.position.x) <= horizontalYankDistance)
         {
             return;
         }
         else
         {
             rigid.AddRelativeForce(rigid.transform.forward);
-        }*/
+        }
 
         // Old
-        if (extendGrapple.IsPressed() && grappleActive == true)
+        /*if (extendGrapple.IsPressed() && grappleActive == true)
         {
             playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
-        }
+        }*/
 
         if (hook != null && (playerRB.position.y > hook.transform.position.y))
         {
-            DestroyHook();
-        }
-
-        if (!shootHook.IsPressed() && hook != null)
-        {
-            StopAllCoroutines();
             DestroyHook();
         }
     }

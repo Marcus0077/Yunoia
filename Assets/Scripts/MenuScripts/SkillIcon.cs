@@ -11,7 +11,8 @@ public class SkillIcon : MonoBehaviour
     [SerializeField]
     RawImage cover;
     [SerializeField]
-    string ability;
+    AbilityType ability;
+    enum AbilityType { push, grapple, clone, dash };
     CooldownGrabber cooldown;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class SkillIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float value = cooldown.GetCD(ability);
+        float value = cooldown.GetCD(ability.ToString());
         if(value > 0)
         {
             cooldownText.text = (value).ToString("F1");

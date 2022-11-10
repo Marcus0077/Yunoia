@@ -30,7 +30,7 @@ public class SkillIcon : MonoBehaviour
             if (cover.color.a < .3f)
             {
                 Color currColor = cover.color;
-                currColor.a = .3f;
+                currColor.a = 1f;
                 cover.color = currColor;
             }
         }

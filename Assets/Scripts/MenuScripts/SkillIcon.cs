@@ -24,14 +24,22 @@ public class SkillIcon : MonoBehaviour
     void Update()
     {
         float value = cooldown.GetCD(ability.ToString());
-        if(value > 0)
+        if (value > 0)
         {
             cooldownText.text = (value).ToString("F1");
-            cover.CrossFadeAlpha(1, 0, true);
-        } else
+            if (cover.color.a < .3f)
+            {
+                Color currColor = cover.color;
+                currColor.a = .3f;
+                cover.color = currColor;
+            }
+        }
+        else if(cooldownText.text != "")
         {
             cooldownText.text = "";
-            cover.CrossFadeAlpha(0, 0, true);
+            Color currColor = cover.color;
+            currColor.a = 0;
+            cover.color = currColor;
         }
     }
 }

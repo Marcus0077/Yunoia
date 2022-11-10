@@ -5,9 +5,12 @@ using UnityEngine;
 public class CooldownGrabber : MonoBehaviour
 {
     AbilityPush pushFromPlayer;
+    AbilityPush pushFromClone;
     SummonClone cloneFromPlayer;
     Grapple grappleFromPlayer;
+    Grapple grappleFromClone;
     BasicMovement dashFromPlayer;
+    BasicMovement dashFromClone;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +24,9 @@ public class CooldownGrabber : MonoBehaviour
     {
         if(ability == "push")
         {
-            if(cloneFromPlayer.cloneSummoned && cloneFromPlayer.clone.GetComponent<BasicMovement>().canMove)
+            if(cloneFromPlayer.cloneSummoned && dashFromClone.canMove)
             {
-                return cloneFromPlayer.clone.GetComponent<AbilityPush>().CooldownRemaining();
+                return pushFromClone.CooldownRemaining();
             }
             else
             {
@@ -36,9 +39,9 @@ public class CooldownGrabber : MonoBehaviour
         }
         else if(ability == "grapple")
         {
-            if (cloneFromPlayer.cloneSummoned && cloneFromPlayer.clone.GetComponent<BasicMovement>().canMove)
+            if (cloneFromPlayer.cloneSummoned && dashFromClone.canMove)
             {
-                return cloneFromPlayer.clone.GetComponent<Grapple>().CooldownRemaining();
+                return grappleFromClone.CooldownRemaining();
             }
             else
             {
@@ -47,9 +50,9 @@ public class CooldownGrabber : MonoBehaviour
         }
         else if(ability == "dash")
         {
-            if (cloneFromPlayer.cloneSummoned && cloneFromPlayer.clone.GetComponent<BasicMovement>().canMove)
+            if (cloneFromPlayer.cloneSummoned && dashFromClone.canMove)
             {
-                return cloneFromPlayer.clone.GetComponent<BasicMovement>().CooldownRemaining();
+                return dashFromClone.CooldownRemaining();
             }
             else
             {
@@ -63,8 +66,19 @@ public class CooldownGrabber : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (cloneFromPlayer.cloneSummoned && dashFromClone == null)
+        {
+            dashFromClone = cloneFromPlayer.clone.GetComponent<BasicMovement>();
+            pushFromClone = cloneFromPlayer.clone.GetComponent<AbilityPush>();
+            grappleFromClone = cloneFromPlayer.clone.GetComponent<Grapple>();
+        }
+        else if (!cloneFromPlayer.cloneSummoned && dashFromClone != null)
+        {
+            dashFromClone = null;
+            pushFromClone = null;
+            grappleFromClone = null;
+        }
     }
 }

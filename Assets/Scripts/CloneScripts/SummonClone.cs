@@ -51,7 +51,8 @@ public class SummonClone : MonoBehaviour
     // Freezes player and deactivates ability to summon a clone.
     void SummonAClone()
     {
-        Vector3 rightOfPlayer = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z - 1f);
+        Vector3 rightOfPlayer = new Vector3(transform.position.x, transform.position.y - 0.25f, 
+            transform.position.z - 1f);
         
         RaycastHit hit;
 
@@ -59,7 +60,8 @@ public class SummonClone : MonoBehaviour
         Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
         
         
-        if (Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f, wall) || !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.25f, ground))
+        if (Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f, wall) || 
+            !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.25f, ground))
         {
             Debug.Log("Did Hit");
         }
@@ -74,7 +76,8 @@ public class SummonClone : MonoBehaviour
         
             cloneSummoned = true;
         
-            clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, Quaternion.identity);
+            clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, 
+                Quaternion.identity);
             StartCoroutine(Cooldown());
         }
     }

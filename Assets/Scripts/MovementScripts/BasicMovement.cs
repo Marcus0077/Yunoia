@@ -58,10 +58,10 @@ public class BasicMovement : MonoBehaviour
         
         moveSpeed = 4f;
         maxSpeed = 18f;
-        jumpForce = 1.2f;
+        jumpForce = 8f;
         accelerationValue = 1f;
         dashCooldown = 0f;
-
+        
         canMove = true;
         isFrozen = false;
         dashAccelerate = 0;
@@ -79,6 +79,7 @@ public class BasicMovement : MonoBehaviour
     // Called each frame.
     private void Update()
     {
+        JumpPlayer();
         ActivateDash();
     }
 
@@ -126,7 +127,6 @@ public class BasicMovement : MonoBehaviour
             playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
         
             LookPlayer();
-            JumpPlayer();
         }
         else
         {
@@ -161,7 +161,7 @@ public class BasicMovement : MonoBehaviour
     {
         IsGrounded();
 
-        if (jump.IsPressed() && isGrounded)
+        if (jump.WasPressedThisFrame() && isGrounded && canMove)
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
         }
@@ -274,7 +274,27 @@ public class BasicMovement : MonoBehaviour
     private void IsGrounded()
     {
         RaycastHit hit;
-        if (Physics.Raycast(groundPoint.position, Vector3.down, out hit, 0.3f, whatIsGround))
+
+        Vector3 groundPointRight = new Vector3(groundPoint.position.x, groundPoint.position.y + 0.2f, 
+            groundPoint.position.z - 0.4f);
+        Vector3 groundPointLeft = new Vector3(groundPoint.position.x, groundPoint.position.y + 0.2f, 
+            groundPoint.position.z + 0.4f);
+        Vector3 groundPointTop = new Vector3(groundPoint.position.x + 0.4f, groundPoint.position.y + 0.2f, 
+            groundPoint.position.z);
+        Vector3 groundPointBottom = new Vector3(groundPoint.position.x - 0.4f, groundPoint.position.y + 0.2f, 
+            groundPoint.position.z);
+        
+        
+        Debug.DrawRay(groundPointRight, Vector3.down * 0.3f, Color.green, 0.5f);
+        Debug.DrawRay(groundPointLeft, Vector3.down * 0.3f, Color.green, 0.5f);
+        Debug.DrawRay(groundPointTop, Vector3.down * 0.3f, Color.green, 0.5f);
+        Debug.DrawRay(groundPointBottom, Vector3.down * 0.3f, Color.green, 0.5f);
+        
+        
+        if ((Physics.Raycast(groundPointRight, Vector3.down, out hit, 0.5f, whatIsGround) || 
+            Physics.Raycast(groundPointLeft, Vector3.down, out hit, 0.5f, whatIsGround) || 
+            Physics.Raycast(groundPointTop, Vector3.down, out hit, 0.5f, whatIsGround) || 
+            Physics.Raycast(groundPointBottom, Vector3.down, out hit, 0.5f, whatIsGround)))
         {
             isGrounded = true;
         }

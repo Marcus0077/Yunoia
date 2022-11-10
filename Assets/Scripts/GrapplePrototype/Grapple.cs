@@ -8,24 +8,26 @@ public class Grapple : MonoBehaviour
 {
     [SerializeField] float pullSpeed = 0.3f;
     [SerializeField] float reelSpeed = 0.7f;
-    [SerializeField] float horizontalPullSpeed = 5.0f;
     [SerializeField] float stopDistance = 2.5f;
     [SerializeField] float taughtDistance = 5.0f;
-    [SerializeField] float horizontalYankDistance = 3.0f;
+
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
-    [SerializeField] float hookLife;
-    [SerializeField] float maxHookLife;
+
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
     [SerializeField] float changePerSecond;
     [SerializeField] float grappleCooldown = 1;
     float cdRemaining;
 
+    [SerializeField] float horizontalPullSpeed = 0.5f;
+
     Hook hook;
+    [SerializeField] float hookLife;
+    [SerializeField] float maxHookLife;
     bool grappleActive;
     bool ready = true;
-    Rigidbody rigid;
+    //public bool pullable = false;
 
     PlayerControls grappleControls;
     public InputAction shootHook;
@@ -38,7 +40,6 @@ public class Grapple : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigid = GetComponent<Rigidbody>();
         grappleActive = false;
     }
 
@@ -57,18 +58,17 @@ public class Grapple : MonoBehaviour
             DestroyHook(); 
             releasedHook = false; // input testing
         }
-
+        
         if (!grappleActive || hook == null)
         {
             return;
         }
         
-        // Updated - Press Shoot again to 'reel' in
-        if (grappleActive && shootHook.IsPressed())
+        // Updated - Press Shoot again to 'reel' in if connected to 'GrapplePull' points
+        if (grappleActive && shootHook.IsPressed() && player.isGrounded)
         {
-            rigid.AddForce((hook.transform.position - transform.position).normalized * reelSpeed, ForceMode.Impulse);
+            playerRB.AddForce((hook.transform.position - transform.position) * reelSpeed, ForceMode.Impulse);
         }
-
         
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
         {
@@ -95,7 +95,7 @@ public class Grapple : MonoBehaviour
             playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
         }*/
 
-        if (hook != null && (playerRB.position.y > hook.transform.position.y))
+        if (hook != null && (playerRB.position.y > (hook.transform.position.y - 1)))
         {
             DestroyHook();
         }
@@ -106,7 +106,7 @@ public class Grapple : MonoBehaviour
         }
         else
         {
-            rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
+            playerRB.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
         }
     }
 
@@ -124,7 +124,9 @@ public class Grapple : MonoBehaviour
         }
 
         ready = false;
+        //pullable = false;
         grappleActive = false;
+
         Destroy(hook.gameObject);
         hook = null;
         StartCoroutine(GrappleCooldown());
@@ -132,7 +134,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator DestroyHookAfterLifetime()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
 
         if (grappleActive == true)
         {
@@ -146,7 +148,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator ExtendLifetime()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
 
         DestroyHook();
     }
@@ -172,6 +174,8 @@ public class Grapple : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         ready = true;
+
+        StopAllCoroutines();
     }
 
     public float CooldownRemaining()

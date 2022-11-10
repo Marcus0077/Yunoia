@@ -42,6 +42,15 @@ public class Hook : MonoBehaviour
             grapple.StartGrapple();
         }
 
+        if ((LayerMask.GetMask("GrapplePull") & 1 << other.gameObject.layer) > 0)
+        {
+            rigid.useGravity = false;
+            rigid.isKinematic = true;
+            //grapple.pullable = true;
+
+            grapple.StartGrapple();
+        }
+
         if ((LayerMask.GetMask("Ground") & 1 << other.gameObject.layer) > 0)
         {
             grapple.DestroyHook();
@@ -50,11 +59,6 @@ public class Hook : MonoBehaviour
         if ((LayerMask.GetMask("Wall") & 1 << other.gameObject.layer) > 0)
         {
             grapple.DestroyHook();
-        }
-
-        if ((LayerMask.GetMask("Pull") & 1 << other.gameObject.layer) > 0)
-        {
-
         }
     }
 }

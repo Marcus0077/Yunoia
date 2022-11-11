@@ -1077,6 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16dd38f668709d4992b04cc3c9bc554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inSettings: 0
   xSize: 0.6
   ySize: 0.6
   bg: {fileID: 120777813}
@@ -13867,6 +13868,18 @@ MonoBehaviour:
       - m_Target: {fileID: 881048216}
         m_TargetAssemblyTypeName: OnButtonHover, Assembly-CSharp
         m_MethodName: OnHoverExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1772516127}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26809,6 +26822,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   pauseMenu: {fileID: 241321803}
+  menuTransition: {fileID: 120777812}
 --- !u!4 &1772516128
 Transform:
   m_ObjectHideFlags: 0

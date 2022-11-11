@@ -15,15 +15,13 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     private bool isPaused;
 
-    private MenuTransition menuTransition;
+    public MenuTransition menuTransition;
 
     private void Start()
     {
         playerControls = new PlayerControls();
         pause = playerControls.PauseMenu.PauseGame;
         pause.Enable();
-
-        menuTransition = FindObjectOfType<MenuTransition>();
         
         pauseMenu.SetActive(false);
         isPaused = false;
@@ -38,11 +36,11 @@ public class PauseMenu : MonoBehaviour
     {
         if (pause.WasPressedThisFrame())
         {
-            if ((!isPaused && menuTransition == null) || (menuTransition != null && !menuTransition.inSettings && !isPaused))
+            if (!isPaused && !menuTransition.inSettings)
             {
                 Pause();
             }
-            else if (isPaused)
+            else if (isPaused && !menuTransition.inSettings)
             {
                 Resume();
             }

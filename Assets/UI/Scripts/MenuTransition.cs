@@ -33,13 +33,12 @@ public class MenuTransition : MonoBehaviour
         transform.LeanScale(Vector2.zero, 0.8f).setEaseInBack().setIgnoreTimeScale(true);
         bg.LeanAlpha(0, 0.5f).setIgnoreTimeScale(true);
         StartCoroutine(NextMenu(0.8f));
-
-        inSettings = false;
     }
 
     private IEnumerator NextMenu(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
+        inSettings = false;
         prevMenu.SetActive(true);
     }
 }

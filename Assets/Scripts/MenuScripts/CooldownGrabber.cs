@@ -22,6 +22,11 @@ public class CooldownGrabber : MonoBehaviour
 
     public float GetCD(string ability)
     {
+        if(cloneFromPlayer.cloneSummoned)
+        {
+            SetClone();
+        }
+
         if(ability == "push")
         {
             if(cloneFromPlayer.cloneSummoned && dashFromClone.canMove)
@@ -65,8 +70,7 @@ public class CooldownGrabber : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void SetClone()
     {
         if (cloneFromPlayer.cloneSummoned && dashFromClone == null)
         {
@@ -80,5 +84,11 @@ public class CooldownGrabber : MonoBehaviour
             pushFromClone = null;
             grappleFromClone = null;
         }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        SetClone();
     }
 }

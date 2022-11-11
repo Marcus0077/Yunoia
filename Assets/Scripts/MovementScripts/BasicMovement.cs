@@ -44,7 +44,6 @@ public class BasicMovement : MonoBehaviour
     private SmoothCameraFollow smoothCameraFollow;
     
     // Text UI References
-    private TextMeshProUGUI dashCooldownUI;
 
 
     // Get references and initialize variables when player spawns.
@@ -53,9 +52,6 @@ public class BasicMovement : MonoBehaviour
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
 
-        dashCooldownUI = GameObject.FindGameObjectWithTag("Dash Cooldown").GetComponent<TextMeshProUGUI>();
-        dashCooldownUI.text = "Dash Cooldown: Ready";
-        
         moveSpeed = 4f;
         maxSpeed = 18f;
         jumpForce = 8f;
@@ -200,11 +196,6 @@ public class BasicMovement : MonoBehaviour
         if (dashCooldown > 0)
         {
             dashCooldown -= Time.deltaTime;
-            dashCooldownUI.text = "Dash Cooldown: " + Math.Round(dashCooldown, 2);
-        }
-        else
-        {
-            dashCooldownUI.text = "Dash Cooldown: Ready";
         }
     }
 

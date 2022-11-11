@@ -8,78 +8,47 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    // Pause menu variables
-    public static bool gameIsPaused;
-    public GameObject PauseMenuUI;
-    
     // Input variables
     PlayerControls playerControls;
-    private InputAction pauseGame;
-    
-    private void Awake()
+    public InputAction pause;
+
+    public GameObject pauseMenu;
+    private bool isPaused;
+
+    private void Start()
     {
         playerControls = new PlayerControls();
+        pause = playerControls.PauseMenu.PauseGame;
+        
+        isPaused = false;
     }
 
-    void Update()
+    private void Update()
     {
-        // When pause button is pressed:
-        // Resume is game is already paused.
-        // Pause if game is not paused.
-        if (pauseGame.WasPressedThisFrame())
+        if (pause.WasPressedThisFrame())
         {
-            if (gameIsPaused)
+            
+            Debug.Log("works");
+            
+            if (!isPaused)
             {
-                Resume();
+                
             }
-            else
+            else if (isPaused)
             {
-                Pause();
+                
             }
         }
     }
 
-    // Resume game; set normal time and deactivate pause values.
-    public void Resume()
-    {
-        PauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        gameIsPaused = false;
-    }
-    
-    // Pause game; freeze time and activate pause values.
-    void Pause()
-    {
-        PauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        gameIsPaused = true;
-    }
-    
-    // Load main menu when menu button is pressed.
-    public void ReturnToMainMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
-    
-    // Quit application when quit button is pressed.
-    public void QuitGame()
-    {
-        Debug.Log("Quit Button Works!");
-        Application.Quit();
-    }
-
-    // Enable input action map controls.
     private void OnEnable()
     {
-        pauseGame = playerControls.PauseMenu.PauseGame;
-        pauseGame.Enable();
-
+        
+        pause.Enable();
     }
 
-    // Disable input action map controls.
     private void OnDisable()
     {
-        pauseGame.Disable();
-
+        pause.Disable();
     }
 }

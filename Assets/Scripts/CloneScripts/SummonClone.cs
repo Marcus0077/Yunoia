@@ -60,7 +60,7 @@ public class SummonClone : MonoBehaviour
         Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
         
         
-        if (Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f, wall) || 
+        if (Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f) || 
             !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.25f, ground))
         {
             Debug.Log("Did Hit");

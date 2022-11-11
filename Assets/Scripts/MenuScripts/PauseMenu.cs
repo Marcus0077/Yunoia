@@ -15,38 +15,56 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     private bool isPaused;
 
+    private MenuTransition menuTransition;
+
     private void Start()
     {
         playerControls = new PlayerControls();
         pause = playerControls.PauseMenu.PauseGame;
+        pause.Enable();
+
+        menuTransition = FindObjectOfType<MenuTransition>();
         
+        pauseMenu.SetActive(false);
         isPaused = false;
     }
 
     private void Update()
     {
+        PauseGame();
+    }
+
+    public void PauseGame()
+    {
         if (pause.WasPressedThisFrame())
         {
-            
-            Debug.Log("works");
-            
-            if (!isPaused)
+            if ((!isPaused && menuTransition == null) || (menuTransition != null && !menuTransition.inSettings && !isPaused))
             {
-                
+                Pause();
             }
             else if (isPaused)
             {
-                
+                Resume();
             }
         }
     }
 
-    private void OnEnable()
+    public void Pause()
     {
-        
-        pause.Enable();
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+
+        isPaused = true;
     }
 
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+
+        isPaused = false;
+    }
+    
     private void OnDisable()
     {
         pause.Disable();

@@ -82,6 +82,7 @@ public class BasicMovement : MonoBehaviour
         {
             animator.SetBool("Idle", true);
             animator.SetBool("Run", false);
+            animator.SetBool("Leap", false);
         }
     }
 
@@ -174,6 +175,10 @@ public class BasicMovement : MonoBehaviour
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
             jumpSound.Play();
+
+            animator.SetBool("Idle", false);
+            animator.SetBool("Run", false);
+            animator.SetBool("Leap", true);
         }
     }
 
@@ -240,6 +245,7 @@ public class BasicMovement : MonoBehaviour
 
             animator.SetBool("Idle", false);
             animator.SetBool("Run", true);
+            animator.SetBool("Leap", false);
             
         }
     }
@@ -282,6 +288,7 @@ public class BasicMovement : MonoBehaviour
     // Determines if player is on the ground or not.
     private void IsGrounded()
     {
+
         RaycastHit hit;
 
         Vector3 groundPointRight = new Vector3(groundPoint.position.x, groundPoint.position.y + 0.2f, 
@@ -306,6 +313,8 @@ public class BasicMovement : MonoBehaviour
             Physics.Raycast(groundPointBottom, Vector3.down, out hit, 0.5f, whatIsGround)))
         {
             isGrounded = true;
+
+            animator.SetBool("Leap", false);
         }
         else
         {

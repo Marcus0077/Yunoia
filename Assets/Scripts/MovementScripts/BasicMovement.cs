@@ -45,6 +45,8 @@ public class BasicMovement : MonoBehaviour
 
     [SerializeField] private AudioSource dashSound;
     [SerializeField] private AudioSource jumpSound;
+
+    [SerializeField] private Animator animator;
     
     // Text UI References
 
@@ -54,6 +56,8 @@ public class BasicMovement : MonoBehaviour
     {
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
+
+        animator = GetComponent<Animator>();
 
         moveSpeed = 4f;
         maxSpeed = 18f;
@@ -73,6 +77,12 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+        
+        if (!move.IsPressed())
+        {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Run", false);
+        }
     }
 
     // Called each frame.
@@ -227,6 +237,9 @@ public class BasicMovement : MonoBehaviour
             
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, playerAngle, 0), 
                 Time.deltaTime / moveStartTimeDivider);
+
+            animator.SetBool("Idle", false);
+            animator.SetBool("Run", true);
             
         }
     }

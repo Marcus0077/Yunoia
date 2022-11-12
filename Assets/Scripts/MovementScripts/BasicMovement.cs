@@ -239,14 +239,12 @@ public class BasicMovement : MonoBehaviour
         {
             float playerAngle = (float) (Math.Atan2(moveDirection.x, moveDirection.y) * 180) / (float) Math.PI;
             
-            
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, playerAngle, 0), 
                 Time.deltaTime / moveStartTimeDivider);
 
             animator.SetBool("Idle", false);
             animator.SetBool("Run", true);
             animator.SetBool("Leap", false);
-            
         }
     }
     

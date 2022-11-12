@@ -593,6 +593,7 @@ GameObject:
   - component: {fileID: -8715429646849006418}
   - component: {fileID: 8898106702094236184}
   - component: {fileID: 4181361517068783824}
+  - component: {fileID: 3907015306594202212}
   m_Layer: 0
   m_Name: Clone
   m_TagString: Clone
@@ -839,6 +840,7 @@ MonoBehaviour:
   attachedMinionCount: 0
   dashSound: {fileID: 3583609977508913977}
   jumpSound: {fileID: 3240785294556916506}
+  animator: {fileID: 0}
 --- !u!114 &8898106702094236184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,6 +899,26 @@ CapsuleCollider:
   m_Height: 2.706643
   m_Direction: 1
   m_Center: {x: -0.04094124, y: 0.1626563, z: 0.025522232}
+--- !u!95 &3907015306594202212
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ae1296d532b4c141a7941ca015e87ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5932479400658946558
 GameObject:
   m_ObjectHideFlags: 0

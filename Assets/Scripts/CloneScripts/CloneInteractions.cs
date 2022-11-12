@@ -17,6 +17,7 @@ public class CloneInteractions : MonoBehaviour
     public CombatHandler combatHandler;
     public LevelSwitchManager levelSwitchManager;
     public AbilityPush cloneAbilityPush;
+    public Lever lever;
 
     // Player game object reference.
     public GameObject Player;
@@ -24,12 +25,15 @@ public class CloneInteractions : MonoBehaviour
     // Input variables
     PlayerControls playerControls;
     public InputAction switchPlaces;
+    public InputAction press;
 
     public Vector3 blocker3InPos;
     public Vector3 blocker3OutPos;
 
     // Clone version bool.
     public bool cloneRestored;
+
+    public bool canPress;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -58,6 +62,7 @@ public class CloneInteractions : MonoBehaviour
         combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneRestored = true;
+        canPress = false;
 
         if (levelSwitchManager.pushRestored == true)
         {
@@ -74,6 +79,11 @@ public class CloneInteractions : MonoBehaviour
     private void Update()
     {
         SwitchPlaces();
+
+        if (canPress && press.WasPressedThisFrame() && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
+        {
+            lever.isActivated = true;
+        }
     }
 
     // Switch clone and player control depending on which is
@@ -116,17 +126,29 @@ public class CloneInteractions : MonoBehaviour
             }
         }
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Lever"))
+        {
+            lever = other.GetComponent<Lever>();
+        }
+    }
 
     // Enable input action map controls.
     private void OnEnable()
     {
         switchPlaces = playerControls.SummonClone.SwitchPlaces;
         switchPlaces.Enable();
+
+        press = playerControls.Interaction.Press;
+        press.Enable();
     }
     
     // Disable input action map controls.
     private void OnDisable()
     {
         switchPlaces.Disable();
+        press.Disable();
     }
 }

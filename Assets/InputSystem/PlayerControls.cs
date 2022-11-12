@@ -553,6 +553,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Interaction"",
+            ""id"": ""5773e0cf-4322-4bce-9512-ca7c8cda8578"",
+            ""actions"": [
+                {
+                    ""name"": ""Press"",
+                    ""type"": ""Button"",
+                    ""id"": ""916635f9-c96f-4408-adad-710af085a2be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b50ea658-4d19-440e-b669-21473f22a0f9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -615,6 +643,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
         m_Cheat_Toggle = m_Cheat.FindAction("Toggle", throwIfNotFound: true);
         m_Cheat_History = m_Cheat.FindAction("History", throwIfNotFound: true);
+        // Interaction
+        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_Press = m_Interaction.FindAction("Press", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -982,6 +1013,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CheatActions @Cheat => new CheatActions(this);
+
+    // Interaction
+    private readonly InputActionMap m_Interaction;
+    private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_Press;
+    public struct InteractionActions
+    {
+        private @PlayerControls m_Wrapper;
+        public InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Press => m_Wrapper.m_Interaction_Press;
+        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionActions instance)
+        {
+            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
+            {
+                @Press.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
+                @Press.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
+                @Press.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
+            }
+            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Press.started += instance.OnPress;
+                @Press.performed += instance.OnPress;
+                @Press.canceled += instance.OnPress;
+            }
+        }
+    }
+    public InteractionActions @Interaction => new InteractionActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1037,5 +1101,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnToggle(InputAction.CallbackContext context);
         void OnHistory(InputAction.CallbackContext context);
+    }
+    public interface IInteractionActions
+    {
+        void OnPress(InputAction.CallbackContext context);
     }
 }

@@ -15,7 +15,6 @@ public class CloneInteractions : MonoBehaviour
     public SummonClone summonClone;
     public ExitClone exitClone;
     public CombatHandler combatHandler;
-    public LevelSwitchManager levelSwitchManager;
     public AbilityPush cloneAbilityPush;
     public Lever lever;
 
@@ -46,9 +45,7 @@ public class CloneInteractions : MonoBehaviour
         summonClone = FindObjectOfType<SummonClone>();
         exitClone = FindObjectOfType<ExitClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
-        
-        levelSwitchManager = FindObjectOfType<LevelSwitchManager>();
-        
+
         Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
         
         //blocker3OutPos = new Vector3(blocker3InPos.x - 3f, blocker3InPos.y,
@@ -63,15 +60,6 @@ public class CloneInteractions : MonoBehaviour
 
         cloneRestored = true;
         canPress = false;
-
-        if (levelSwitchManager.pushRestored == true)
-        {
-            cloneAbilityPush.restored = true;
-        }
-        else
-        {
-            cloneAbilityPush.restored = false;
-        }
     }
     
 

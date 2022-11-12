@@ -47,8 +47,6 @@ public class BasicMovement : MonoBehaviour
     [SerializeField] private AudioSource jumpSound;
 
     [SerializeField] private Animator animator;
-    
-    // Text UI References
 
 
     // Get references and initialize variables when player spawns.

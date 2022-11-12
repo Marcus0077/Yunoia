@@ -42,6 +42,8 @@ public class BasicMovement : MonoBehaviour
     
     // Camera Reference
     private SmoothCameraFollow smoothCameraFollow;
+
+    [SerializeField] private AudioSource dashSound;
     
     // Text UI References
 
@@ -168,8 +170,9 @@ public class BasicMovement : MonoBehaviour
     {
         if (dash.WasPressedThisFrame() && move.IsPressed() && dashCooldown <= 0 && !isFrozen)
         {
+            dashSound.Play();
+
             dashAccelerate = 1;
-            
             dashCooldown = 3f;
         }
     }

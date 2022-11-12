@@ -26,6 +26,8 @@ public class SummonClone : MonoBehaviour
     public LayerMask ground;
     public LayerMask wall;
 
+    [SerializeField] AudioSource cloneSound;
+
     // Get references and initialize variables when player spawns.
     void Awake()
     {
@@ -41,6 +43,7 @@ public class SummonClone : MonoBehaviour
     {
         if (!cloneSummoned && summonAClone.WasPressedThisFrame())
         {
+            cloneSound.Play();
             SummonAClone();
         }
         

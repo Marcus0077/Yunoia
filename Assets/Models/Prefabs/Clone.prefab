@@ -186,17 +186,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pullSpeed: 0.75
   reelSpeed: 0.7
-  horizontalPullSpeed: 5
   stopDistance: 2.5
   taughtDistance: 5
-  horizontalYankDistance: 3
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 224377010961569212}
-  hookLife: 5
-  maxHookLife: 0
   playerRB: {fileID: 5827308682441603359}
   player: {fileID: 0}
   changePerSecond: 0
+  grappleCooldown: 1
+  horizontalPullSpeed: 5
+  hookLife: 5
+  maxHookLife: 0
   shootHook:
     m_Name: Shoot Hook
     m_Type: 0
@@ -224,6 +224,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  shoot: {fileID: 0}
+  yank: {fileID: 0}
 --- !u!114 &8397525453568900783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +245,8 @@ MonoBehaviour:
   restored: 0
   pushedLevel: 0
   range: 0
+  cdRemaining: 0
+  source: {fileID: 0}
 --- !u!54 &5827308682441603359
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -314,6 +318,7 @@ MonoBehaviour:
   jumpForce: 0
   isGrounded: 0
   attachedMinionCount: 0
+  dashSound: {fileID: 0}
 --- !u!114 &8898106702094236184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +339,7 @@ MonoBehaviour:
   combatHandler: {fileID: 0}
   levelSwitchManager: {fileID: 0}
   cloneAbilityPush: {fileID: 8397525453568900783}
+  lever: {fileID: 0}
   Player: {fileID: 0}
   switchPlaces:
     m_Name: Switch Places
@@ -344,9 +350,19 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  press:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: da50cc92-3b92-470e-9c50-eb0d7c771642
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   blocker3InPos: {x: 0, y: 0, z: 0}
   blocker3OutPos: {x: 0, y: 0, z: 0}
   cloneRestored: 0
+  canPress: 0
 --- !u!136 &4181361517068783824
 CapsuleCollider:
   m_ObjectHideFlags: 0

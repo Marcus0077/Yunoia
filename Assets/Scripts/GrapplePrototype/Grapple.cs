@@ -33,6 +33,9 @@ public class Grapple : MonoBehaviour
     public InputAction shootHook;
     public InputAction cancelHook;
     public InputAction extendGrapple;
+
+    [SerializeField] private AudioSource shoot;
+    [SerializeField] private AudioSource yank;
     
     // Additions from Will :)
     private bool releasedHook = false; // input testing
@@ -49,6 +52,7 @@ public class Grapple : MonoBehaviour
         if (hook == null && shootHook.IsPressed() && ready == true)
         {
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
+            shoot.Play();
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
         }
@@ -68,6 +72,7 @@ public class Grapple : MonoBehaviour
         if (grappleActive && shootHook.IsPressed() && player.isGrounded)
         {
             playerRB.AddForce((hook.transform.position - transform.position) * reelSpeed, ForceMode.Impulse);
+            yank.Play();
         }
         
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)

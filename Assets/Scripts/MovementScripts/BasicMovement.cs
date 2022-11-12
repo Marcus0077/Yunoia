@@ -119,15 +119,10 @@ public class BasicMovement : MonoBehaviour
             {
                 playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
-                SetIdle(true);
-                SetRun(false);
             }
             
             moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
             playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
-
-            SetIdle(false);
-            SetRun(true);
         
             LookPlayer();
         }
@@ -136,9 +131,6 @@ public class BasicMovement : MonoBehaviour
             playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
                                    RigidbodyConstraints.FreezeRotation;
             isFrozen = true;
-            
-            SetIdle(true);
-            SetRun(false);
         }
         
         DashPlayer();
@@ -170,7 +162,6 @@ public class BasicMovement : MonoBehaviour
         if (jump.WasPressedThisFrame() && isGrounded && canMove)
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
-            SetJump(true);
         }
     }
 
@@ -276,8 +267,6 @@ public class BasicMovement : MonoBehaviour
     // Determines if player is on the ground or not.
     private void IsGrounded()
     {
-        SetJump(false);
-
         RaycastHit hit;
 
         Vector3 groundPointRight = new Vector3(groundPoint.position.x, groundPoint.position.y + 0.2f, 

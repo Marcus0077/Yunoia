@@ -19,6 +19,8 @@ public class AbilityPush : MonoBehaviour
     public float range;
     public float cdRemaining;
     Transform shape;
+
+    [SerializeField] private AudioSource source;
     
     // Start is called before the first frame update
     void Start()
@@ -85,7 +87,7 @@ public class AbilityPush : MonoBehaviour
             //int radius = 2*Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush);
             radius = Mathf.Clamp(timeCharging, minPush, maxChargeLevel + minPush);
             pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
-            shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2*pushedLevel), 1f / (2*pushedLevel), .2f + (.1f * pushedLevel));
+            shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2 * pushedLevel), 1f / ( 2* pushedLevel), .2f + (.1f * pushedLevel));
             radius *= 2;
             shape.localScale = new Vector3(radius, radius, radius);
             shape.position = transform.position;
@@ -167,6 +169,9 @@ public class AbilityPush : MonoBehaviour
     void PushRelease()
     {
         charging = false;
+
+        source.Play();
+
         if (ableToPush)
         {
             //start animation

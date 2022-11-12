@@ -113,6 +113,8 @@ public class AbilityPush : MonoBehaviour
 
     private IEnumerator PushTimer()
     {
+        source.Play();
+        
         ableToPush = false;
         cdRemaining = cooldown;
         while(cdRemaining > 0)
@@ -169,9 +171,7 @@ public class AbilityPush : MonoBehaviour
     void PushRelease()
     {
         charging = false;
-
-        source.Play();
-
+        
         if (ableToPush)
         {
             //start animation

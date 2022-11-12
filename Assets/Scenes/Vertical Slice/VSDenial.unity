@@ -39629,7 +39629,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1719684008}
   - component: {fileID: 1719684006}
-  - component: {fileID: 1719684007}
   m_Layer: 0
   m_Name: SFX
   m_TagString: Untagged
@@ -39733,23 +39732,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1719684007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719684005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55d23bd2ff93e340a55cc4c1c40ddd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  masSlider: {fileID: 0}
-  bgmAudio: {fileID: 0}
-  sfxAudio: []
 --- !u!4 &1719684008
 Transform:
   m_ObjectHideFlags: 0
@@ -42747,6 +42729,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.28000003, y: 0.32999998, z: 0.020000001}
   m_Center: {x: -0.14000002, y: 0.16529313, z: 0}
+--- !u!1 &1870847624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6829496297130234795, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
+  m_PrefabInstance: {fileID: 2116586656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1870847630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870847624}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955a6e96b69e001438e7ab1cd3709072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Counterpart: {fileID: 0}
+  Door: {fileID: 0}
+  isActivated: 0
+  leverTimer: 0
 --- !u!4 &1874918203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5e8ddc2f581efc49b5c67617d912451, type: 3}

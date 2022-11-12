@@ -6688,7 +6688,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh140350
+  m_Name: pb_Mesh26412
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7039,7 +7039,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8143048211367026947, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1966812864}
+    m_RemovedComponents:
+    - {fileID: 4820381847206201786, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
 --- !u!43 &517546227
 Mesh:
@@ -21432,7 +21437,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh140114
+  m_Name: pb_Mesh26174
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -29630,6 +29635,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.45064658, z: 0.030000003}
   m_Center: {x: -0.16, y: 0.22532329, z: -0.0150000015}
+--- !u!1 &1966812862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9110515214924016217, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+  m_PrefabInstance: {fileID: 516430985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1966812864
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966812862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b514805422d8d194fa21668d86a3e816, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1969939407
 GameObject:
   m_ObjectHideFlags: 0

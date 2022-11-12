@@ -44,6 +44,7 @@ public class BasicMovement : MonoBehaviour
     private SmoothCameraFollow smoothCameraFollow;
 
     [SerializeField] private AudioSource dashSound;
+    [SerializeField] private AudioSource jumpSound;
     
     // Text UI References
 
@@ -162,6 +163,7 @@ public class BasicMovement : MonoBehaviour
         if (jump.WasPressedThisFrame() && isGrounded && canMove)
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+            jumpSound.Play();
         }
     }
 

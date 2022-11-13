@@ -43,7 +43,6 @@ public class SummonClone : MonoBehaviour
     {
         if (!cloneSummoned && summonAClone.WasPressedThisFrame())
         {
-            cloneSound.Play();
             SummonAClone();
         }
         
@@ -70,6 +69,8 @@ public class SummonClone : MonoBehaviour
         }
         else
         {
+            cloneSound.Play();
+            
             this.GetComponent<Grapple>().DestroyHook();
             this.GetComponent<AbilityPush>().DestroyShape();
 

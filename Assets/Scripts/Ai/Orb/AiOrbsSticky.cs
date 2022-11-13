@@ -8,7 +8,9 @@ public class AiOrbsSticky : Pushable
     GameObject orb;
     public GameObject player;
     Vector3 relativePosition;
+    float relativeRot;
     bool attached = false;
+    int pushedCount = 0;
     [SerializeField]
     float timeToTravel = 1;
     //WaitForSecondsRealtime waitForSecondsRealtime;
@@ -19,8 +21,10 @@ public class AiOrbsSticky : Pushable
             player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
         Vector3 tempOriginalScale = transform.localScale;
         transform.localScale = Vector3.one;
-        relativePosition = transform.InverseTransformPoint(player.transform.position);
+        //relativePosition = player.transform.InverseTransformPoint(transform.position);
+        relativePosition = player.transform.position - transform.position;
         transform.localScale = tempOriginalScale;
+        relativeRot = player.transform.eulerAngles.y;
         if (player.GetComponent<BasicMovement>())
         {
             player.GetComponent<BasicMovement>().AddMinion(1);
@@ -64,10 +68,15 @@ public class AiOrbsSticky : Pushable
         //    waitForSecondsRealtime.waitTime = timeToTravel;
         //}
         //yield return waitForSecondsRealtime;
+        pushedCount++;
+        int pushIndex = pushedCount;
         yield return new WaitForSeconds(time);
-        AiOrbs newOrb = Instantiate(orb, transform.position, transform.rotation).GetComponent<AiOrbs>();
-        newOrb.GetComponent<AiOrbs>().player = player;
-        Destroy(gameObject);
+        if (pushedCount == pushIndex)
+        {
+            AiOrbs newOrb = Instantiate(orb, transform.position, transform.rotation).GetComponent<AiOrbs>();
+            newOrb.GetComponent<AiOrbs>().player = player;
+            Destroy(gameObject);
+        }
     }
 
     public override void Awake()
@@ -88,7 +97,7 @@ public class AiOrbsSticky : Pushable
             }
             else
             {
-                transform.position = player.transform.position - relativePosition;
+                transform.position = player.transform.position - Quaternion.Euler(0, player.transform.eulerAngles.y - relativeRot, 0) * relativePosition;
             }
         }
         else

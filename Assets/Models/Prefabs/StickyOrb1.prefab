@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1477132796423374375}
   - component: {fileID: 6785803136186538771}
   - component: {fileID: 1662594713053135307}
-  - component: {fileID: -2861751566632423361}
+  - component: {fileID: 5944651348933298921}
   m_Layer: 0
-  m_Name: StickyOrb
+  m_Name: StickyOrb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1477132796423374369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 5.303256, y: 5.303256, z: 5.303256}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477132796423374369}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 6237772747231132303, guid: 0d62098e83635ab489d6a33c27ec7f5d, type: 3}
 --- !u!23 &1477132796423374375
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 228cbbfcb6e34c9438e40eac3cd52ba5, type: 2}
+  - {fileID: 2100000, guid: 530c6dae16d0fdd4eae16b325bf3beb1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   totalVelocity: 0
   canReturn: 0
   data: {fileID: 11400000, guid: c32fe07262072254eac942f608092932, type: 2}
-  orb: {fileID: 5619543599113332185, guid: 6b20e9369ccbff94b86870a82d6a9c0a, type: 3}
+  orb: {fileID: 5568504409342811825, guid: b091480638a148b40a9ec01e6eb04fb6, type: 3}
   player: {fileID: 0}
   timeToTravel: 2
 --- !u!54 &1662594713053135307
@@ -121,7 +121,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &-2861751566632423361
+--- !u!135 &5944651348933298921
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,5 +132,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.041420963
+  m_Center: {x: -0.000000007450581, y: 0, z: 0}

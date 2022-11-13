@@ -32,8 +32,8 @@ public class AiOrbs : Pushable
     {
         if(other.gameObject == player)
         {
-            GameObject orb = Instantiate(stickyOrb, transform.position, Quaternion.identity);
-            orb.GetComponent<AiOrbsSticky>().player = player;
+            AiOrbsSticky orb = Instantiate(stickyOrb, transform.position, transform.rotation).GetComponent<AiOrbsSticky>();
+            orb.player = player;
             Destroy(gameObject);
         }
     }
@@ -83,6 +83,7 @@ public class AiOrbs : Pushable
             Debug.Log(closer);
             player = closer;
             transform.position = Vector3.Lerp(transform.position, closer.transform.position, Time.deltaTime * movespeed);
+            transform.LookAt(closer.transform);
         }
     }
 

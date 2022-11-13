@@ -40,12 +40,15 @@ public class BasicMovement : MonoBehaviour
     private float dashCooldown;
     private int dashAccelerate;
     
-    // Camera Reference
+    // Camera Variables
     private SmoothCameraFollow smoothCameraFollow;
+    public string curCamState;
 
+    // Sound Variables
     [SerializeField] private AudioSource dashSound;
     [SerializeField] private AudioSource jumpSound;
 
+    // Animation Variables
     [SerializeField] private Animator animator;
 
 
@@ -56,6 +59,15 @@ public class BasicMovement : MonoBehaviour
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
 
         animator = GetComponent<Animator>();
+
+        if (this.CompareTag("Player"))
+        {
+            curCamState = "RegularView";
+        }
+        else
+        {
+            curCamState = GameObject.FindWithTag("Player").GetComponent<BasicMovement>().curCamState;
+        }
 
         moveSpeed = 4f;
         maxSpeed = 18f;
@@ -75,6 +87,7 @@ public class BasicMovement : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+        CheckCameraState();
         
         if (!move.IsPressed())
         {
@@ -89,6 +102,25 @@ public class BasicMovement : MonoBehaviour
     {
         JumpPlayer();
         ActivateDash();
+    }
+
+    void CheckCameraState()
+    {
+        if (canMove)
+        {
+            if (curCamState == "RegularView")
+            {
+                smoothCameraFollow.RegularAngleCamera();
+            }
+            else if (curCamState == "HigherView")
+            {
+                smoothCameraFollow.HigherAngleCamera();
+            }
+            else if (curCamState == "WideView")
+            {
+                smoothCameraFollow.WideAngleCamera();
+            }
+        }
     }
 
     // Decelerates player to normal speed after dashing.
@@ -279,6 +311,13 @@ public class BasicMovement : MonoBehaviour
         {
             smoothCameraFollow.RegularAngleCamera();
         }
+        
+        if (other.CompareTag("WideView"))
+        {
+            smoothCameraFollow.WideAngleCamera();
+        }
+        
+        curCamState = other.tag;
     }
     
     // Determines if player is on the ground or not.

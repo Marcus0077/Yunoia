@@ -110,7 +110,7 @@ public class ExitClone : MonoBehaviour
                 lever.activateText.enabled = false;
                 lever.isClone = false;
             }
-            
+
             this.GetComponent<Grapple>().DestroyHook();
             this.GetComponent<AbilityPush>().DestroyShape();
             

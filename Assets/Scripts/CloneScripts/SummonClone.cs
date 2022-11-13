@@ -62,7 +62,7 @@ public class SummonClone : MonoBehaviour
         Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
         
         
-        if (Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f) || 
+        if ((Physics.Raycast(transform.position, Vector3.back, out hit, 1.25f) && !hit.collider.isTrigger) || 
             !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.25f, ground))
         {
             Debug.Log("Did Hit");
@@ -81,7 +81,7 @@ public class SummonClone : MonoBehaviour
             cloneSummoned = true;
         
             clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + Vector3.back, 
-                Quaternion.identity);
+                Quaternion.LookRotation(-Vector3.forward));
             StartCoroutine(Cooldown());
         }
     }

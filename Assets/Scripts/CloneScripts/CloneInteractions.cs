@@ -27,9 +27,6 @@ public class CloneInteractions : MonoBehaviour
     public InputAction switchPlaces;
     public InputAction press;
 
-    public Vector3 blocker3InPos;
-    public Vector3 blocker3OutPos;
-
     // Clone version bool.
     public bool cloneRestored;
 
@@ -40,6 +37,8 @@ public class CloneInteractions : MonoBehaviour
     void Awake()
     {
         Player = GameObject.FindWithTag("Player");
+
+        cloneAbilityPush.restored = Player.GetComponent<AbilityPush>().restored;
         
         basicMovementPlayer = Player.GetComponent<BasicMovement>();
         basicMovementClone = this.GetComponent<BasicMovement>();
@@ -49,9 +48,6 @@ public class CloneInteractions : MonoBehaviour
         combatHandler = FindObjectOfType<CombatHandler>();
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
-        
-        //blocker3OutPos = new Vector3(blocker3InPos.x - 3f, blocker3InPos.y,
-            //blocker3InPos.z);
 
         smoothCameraFollow.target = this.transform;
         

@@ -81,6 +81,21 @@ public class SmoothCameraFollow : MonoBehaviour
         
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), rotationSmoothSpeed);
     }
+    
+    public void WideAngleCamera()
+    {
+        rotationSmoothSpeed = 0.01f;
+        
+        positionOffsetX = -18;
+        positionOffsetY = 6f;
+        positionOffsetZ = 0;
+
+        rotationOffsetX = 0;
+        rotationOffsetY = 90;
+        rotationOffsetZ = 0;
+
+        rotationSmoothSpeed = 0.025f;
+    }
 
     // Sets camera angle to a further and higher position and rotation.
     public void HigherAngleCamera()

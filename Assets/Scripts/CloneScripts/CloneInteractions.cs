@@ -76,7 +76,10 @@ public class CloneInteractions : MonoBehaviour
             {
                 lever.isActivated = true;
             }
-            else if (door != null && door.canInteract)
+        }
+        else if (canPressDoor && press.WasPressedThisFrame())
+        {
+            if (door != null && door.canInteract)
             {
                 door.Open();
             }

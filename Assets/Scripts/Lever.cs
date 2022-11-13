@@ -52,8 +52,8 @@ public class Lever : MonoBehaviour
 
             if (Counterpart.GetComponent<Lever>().isActivated && leverTimer > 0)
             {
-                // Complete = true;
-                // Counterpart.GetComponent<Lever>().Complete = true;
+                 Complete = true;
+                 Counterpart.GetComponent<Lever>().Complete = true;
                 
                 Door.GetComponent<Collider>().enabled = false;
                 Door.GetComponent<Renderer>().enabled = false;

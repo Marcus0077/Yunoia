@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     PlayerControls playerControls;
     public InputAction pause;
 
-    public GameObject pauseMenu;
+    public GameObject pauseMenu, BGBlur;
     private bool isPaused;
 
     public MenuTransition menuTransition;
@@ -50,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        BGBlur.SetActive(true);
         Time.timeScale = 0;
 
         isPaused = true;
@@ -58,6 +59,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        BGBlur.SetActive(false);
         Time.timeScale = 1;
 
         isPaused = false;

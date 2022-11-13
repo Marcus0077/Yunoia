@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class DoorDisperse : MonoBehaviour
 {
     bool move = false;
     int flip = -1;

@@ -17,6 +17,7 @@ public class CloneInteractions : MonoBehaviour
     public CombatHandler combatHandler;
     public AbilityPush cloneAbilityPush;
     public Lever lever;
+    public Door door;
 
     // Player game object reference.
     public GameObject Player;
@@ -68,9 +69,16 @@ public class CloneInteractions : MonoBehaviour
     {
         SwitchPlaces();
 
-        if (canPress && press.WasPressedThisFrame() && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
+        if (canPress && press.WasPressedThisFrame())
         {
-            lever.isActivated = true;
+            if (lever != null && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
+            {
+                lever.isActivated = true;
+            }
+            else if (door != null && door.canInteract)
+            {
+                door.Open();
+            }
         }
     }
 
@@ -120,6 +128,10 @@ public class CloneInteractions : MonoBehaviour
         if (other.CompareTag("Lever"))
         {
             lever = other.GetComponent<Lever>();
+        }
+        else if (other.CompareTag("Door"))
+        {
+            door = other.GetComponent<Door>();
         }
     }
 

@@ -6,7 +6,7 @@ public class DoorDispersible : Dispersible
 {
     [SerializeField]
     Vector3 doorStart;
-    Door door;
+    DoorDisperse door;
     DispersibleDoor_Scriptable doorDisp;
     new void Start()
     {

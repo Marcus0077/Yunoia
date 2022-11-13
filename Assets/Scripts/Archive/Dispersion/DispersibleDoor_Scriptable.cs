@@ -4,7 +4,7 @@ using UnityEngine;
 public class DispersibleDoor_Scriptable : Dispersible_Scriptable
 {
     [SerializeField]
-    Door door;
+    DoorDisperse door;
     [SerializeField]
     float time, doorSpeed;
     [SerializeField]
@@ -24,8 +24,8 @@ public class DispersibleDoor_Scriptable : Dispersible_Scriptable
         get { return dir; }
         private set { dir = value; }
     }
-    public Door Spawn(Transform parent, Vector3 position)
+    public DoorDisperse Spawn(Transform parent, Vector3 position)
     {
-        return Instantiate(door, position, parent.rotation, parent) as Door;
+        return Instantiate(door, position, parent.rotation, parent) as DoorDisperse;
     }
 }

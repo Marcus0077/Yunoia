@@ -11,7 +11,8 @@ public class PlayerInteractions : MonoBehaviour
     public bool canPress;
 
     public Lever lever;
-    
+    public Door door;
+
     PlayerControls playerControls;
     public InputAction switchPlaces;
     public InputAction press;
@@ -28,9 +29,16 @@ public class PlayerInteractions : MonoBehaviour
 
     private void Update()
     {
-        if (canPress && press.WasPressedThisFrame() && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
+        if (canPress && press.WasPressedThisFrame())
         {
-            lever.isActivated = true;
+            if (lever != null && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
+            {
+                lever.isActivated = true;
+            }
+            else if (door != null && door.canInteract)
+            {
+                door.Open();
+            }
         }
     }
 
@@ -39,6 +47,10 @@ public class PlayerInteractions : MonoBehaviour
         if (other.CompareTag("Lever"))
         {
             lever = other.GetComponent<Lever>();
+        }
+        else if (other.CompareTag("Door"))
+        {
+            door = other.GetComponent<Door>();
         }
     }
 

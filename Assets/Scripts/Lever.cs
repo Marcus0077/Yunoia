@@ -54,9 +54,10 @@ public class Lever : MonoBehaviour
             {
                 // Complete = true;
                 // Counterpart.GetComponent<Lever>().Complete = true;
-                
-                Door.GetComponent<Collider>().enabled = false;
-                Door.GetComponent<Renderer>().enabled = false;
+
+                //Door.GetComponent<Collider>().enabled = false;
+                //Door.GetComponent<Renderer>().enabled = false;
+                Door.GetComponent<Door>().Open();
                 
                 activateText.enabled = false;
             }

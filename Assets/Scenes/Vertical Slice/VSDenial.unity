@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018887, b: 0.13381043, a: 1}
+  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018898, b: 0.13381043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804445680587551984, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.81
+      value: -14.82
       objectReference: {fileID: 0}
     - target: {fileID: 1804445680587551984, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_LocalRotation.w
@@ -193,6 +193,14 @@ PrefabInstance:
     - target: {fileID: 1804445680587551994, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_Name
       value: Player Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2436935515624299212, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.062
+      objectReference: {fileID: 0}
+    - target: {fileID: 2436935515624299212, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.609
       objectReference: {fileID: 0}
     - target: {fileID: 2839228618449278175, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_Volume
@@ -1992,6 +2000,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310959961}
   m_CullTransparentMesh: 1
+--- !u!114 &339451898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2718214356379496606, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+  m_PrefabInstance: {fileID: 509733174756239150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &345486426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,6 +2403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorArch_LoganO_11.5.22 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8873529551058057983, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+      propertyPath: canInteract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
 --- !u!4 &393553498 stripped
@@ -2401,7 +2424,7 @@ PrefabInstance:
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 1084869552}
+      objectReference: {fileID: 1259638306}
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Counterpart
       value: 
@@ -2754,7 +2777,7 @@ PrefabInstance:
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 1084869552}
+      objectReference: {fileID: 1259638306}
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Counterpart
       value: 
@@ -2853,7 +2876,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34880
+  m_Name: pb_Mesh215284
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3488,7 +3511,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34172
+  m_Name: pb_Mesh214576
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4047,7 +4070,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34616
+  m_Name: pb_Mesh215020
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4654,7 +4677,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34412
+  m_Name: pb_Mesh214816
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4871,6 +4894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorArch_LoganO_11.5.22 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8873529551058057983, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+      propertyPath: canInteract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
 --- !u!4 &738098451 stripped
@@ -4884,7 +4911,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35146
+  m_Name: pb_Mesh215558
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6258,7 +6285,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35078
+  m_Name: pb_Mesh215490
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7899,11 +7926,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &1084869552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6030629155064625993, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
-  m_PrefabInstance: {fileID: 738098450}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1086531154
 GameObject:
   m_ObjectHideFlags: 0
@@ -9011,7 +9033,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35022
+  m_Name: pb_Mesh215426
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10001,6 +10023,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244434317}
   m_CullTransparentMesh: 1
+--- !u!1 &1259638306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 509733175617221909, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+  m_PrefabInstance: {fileID: 738098450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263488572
 GameObject:
   m_ObjectHideFlags: 0
@@ -10424,7 +10451,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34200
+  m_Name: pb_Mesh214604
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10866,7 +10893,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34918
+  m_Name: pb_Mesh215322
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13773,7 +13800,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34718
+  m_Name: pb_Mesh215122
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14985,6 +15012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a3c20cc4af2644a928a58af16ae880, type: 3}
+--- !u!95 &1733468699 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 509733175617221907, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+  m_PrefabInstance: {fileID: 509733174756239150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1734373864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5094766106654324547, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
@@ -15290,7 +15322,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34814
+  m_Name: pb_Mesh215218
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16796,7 +16828,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34686
+  m_Name: pb_Mesh215090
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17128,7 +17160,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34756
+  m_Name: pb_Mesh215160
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17286,6 +17318,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2037555118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 509733175617221909, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+  m_PrefabInstance: {fileID: 393553497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2048885449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17679,7 +17716,7 @@ PrefabInstance:
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 1908385896}
+      objectReference: {fileID: 2037555118}
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Counterpart
       value: 
@@ -17896,6 +17933,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorArch_LoganO_11.5.22
       objectReference: {fileID: 0}
+    - target: {fileID: 1727756380527091063, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1733468699}
+    - target: {fileID: 1727756380527091063, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
+      propertyPath: activateText
+      value: 
+      objectReference: {fileID: 339451898}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
 --- !u!4 &543450652514707139 stripped
@@ -18270,7 +18315,7 @@ PrefabInstance:
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 1908385896}
+      objectReference: {fileID: 2037555118}
     - target: {fileID: 1616357361003672887, guid: 311e614bc5df3b147a9d4efd05afd89c, type: 3}
       propertyPath: Counterpart
       value: 

@@ -18,6 +18,8 @@ public class ExitClone : MonoBehaviour
     private SummonClone summonClone;
     private CombatHandler combatHandler;
     private CloneInteractions cloneInteractions;
+    private PressurePlate pressurePlate;
+    private Lever lever;
     
     // Player reference
     public GameObject Player;
@@ -33,8 +35,8 @@ public class ExitClone : MonoBehaviour
     private float cloneActiveTimer;
     private bool isRunning;
 
-    private PressurePlate pressurePlate;
     private bool isOnPressurePlate;
+    private bool isOnLever;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -45,12 +47,14 @@ public class ExitClone : MonoBehaviour
 
         basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
         basicMovementClone = GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>();
+        
         cloneInteractions = FindObjectOfType<CloneInteractions>();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
 
         isOnPressurePlate = false;
+        isOnLever = false;
         isRunning = false;
         despawnClone = false;
         cloneActiveTimer = 30.0f;
@@ -99,6 +103,12 @@ public class ExitClone : MonoBehaviour
             {
                 pressurePlate.AppearWall();
                 pressurePlate.isClone = false;
+            }
+
+            if (isOnLever)
+            {
+                lever.activateText.enabled = false;
+                lever.isClone = false;
             }
             
             this.GetComponent<Grapple>().DestroyHook();
@@ -162,10 +172,13 @@ public class ExitClone : MonoBehaviour
     {
         if (other.CompareTag("PressurePlate"))
         {
-            Debug.Log("clone works");
-            
             pressurePlate = other.GetComponent<PressurePlate>();
             isOnPressurePlate = true;
+        }
+        else if (other.CompareTag("Lever"))
+        {
+            lever = other.GetComponent<Lever>();
+            isOnLever = true;
         }
     }
 
@@ -174,6 +187,7 @@ public class ExitClone : MonoBehaviour
         if (other.CompareTag("PressurePlate"))
         {
             isOnPressurePlate = false;
+            isOnLever = false;
         }
     }
 }

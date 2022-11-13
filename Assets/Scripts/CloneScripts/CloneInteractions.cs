@@ -34,6 +34,7 @@ public class CloneInteractions : MonoBehaviour
     public bool cloneRestored;
 
     public bool canPress;
+    public bool canPressDoor;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()

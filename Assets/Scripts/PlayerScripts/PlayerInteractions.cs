@@ -9,6 +9,7 @@ using TMPro;
 public class PlayerInteractions : MonoBehaviour
 {
     public bool canPress;
+    public bool canPressDoor;
 
     public Lever lever;
     public Door door;

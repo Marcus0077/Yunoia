@@ -50,7 +50,7 @@ public class Door : MonoBehaviour
                 activateText.enabled = true;
 
             playerInteractions = other.GetComponent<PlayerInteractions>();
-            playerInteractions.canPress = true;
+            playerInteractions.canPressDoor = true;
 
             isPlayer = true;
         }
@@ -60,7 +60,7 @@ public class Door : MonoBehaviour
                 activateText.enabled = true;
 
             cloneInteractions = other.GetComponent<CloneInteractions>();
-            cloneInteractions.canPress = true;
+            cloneInteractions.canPressDoor = true;
 
             isClone = true;
         }
@@ -71,12 +71,12 @@ public class Door : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayer = false;
-            playerInteractions.canPress = false;
+            playerInteractions.canPressDoor = false;
         }
         else if (other.CompareTag("Clone"))
         {
             isClone = false;
-            cloneInteractions.canPress = false;
+            cloneInteractions.canPressDoor = false;
             
         }
         if (!isPlayer && !isClone && canInteract && activateText != null)

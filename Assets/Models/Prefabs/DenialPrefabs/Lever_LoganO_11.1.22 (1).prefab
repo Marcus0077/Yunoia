@@ -119,17 +119,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2957162497425208361}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -21.5}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 0, z: -19.307}
   m_LocalScale: {x: 0.029976007, y: 0.03004045, z: 0.029976001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8003401389841387429}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -406.00027, y: -176.00009}
+  m_AnchoredPosition: {x: -405.26, y: -177.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2285435191365813073
@@ -162,8 +162,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press E to pull lever
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82d215b8636ad724791361ac28f6066b, type: 2}
+  m_sharedMaterial: {fileID: -3301640088622963473, guid: 82d215b8636ad724791361ac28f6066b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 5620473005364014585}
   - component: {fileID: 1616357361003672887}
   - component: {fileID: 666308050380896054}
+  - component: {fileID: 8134635546710338515}
   m_Layer: 0
   m_Name: Lever_LoganO_11.1.22 (1)
   m_TagString: Lever
@@ -300,8 +301,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17762713, y: 0.09846424, z: 0.20329654}
-  m_Center: {x: -0.0016459585, y: 0.04015158, z: -0.00013596218}
+  m_Size: {x: 0.17762722, y: 0.1150185, z: 0.20329654}
+  m_Center: {x: -0.0016459625, y: 0.048428714, z: -0.00013596218}
+--- !u!65 &8134635546710338515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094766106654324547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.043190036, y: 0.106437005, z: 0.10404808}
+  m_Center: {x: -0.00045061213, y: 0.03560698, z: 0.0075744116}
 --- !u!1 &5148429085810221262
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,14 +688,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8792084632217547632}
-  m_LocalRotation: {x: -0.3186169, y: 0.3186169, z: -0.6312553, w: 0.6312553}
+  m_LocalRotation: {x: -0.21807535, y: 0.21807535, z: -0.672639, w: 0.672639}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8570932, y: 0.857093, z: 0.96370244}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5833593819222912740}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 35.926, z: -90}
 --- !u!33 &2247717964664303950
 MeshFilter:
   m_ObjectHideFlags: 0

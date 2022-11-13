@@ -35,7 +35,7 @@ public class Lever : MonoBehaviour
         isClone = false;
         Complete = false;
 
-        leverTimer = 1f;
+        leverTimer = 1.5f;
     }
 
     // Update is called once per frame
@@ -68,7 +68,7 @@ public class Lever : MonoBehaviour
                 
                 Counterpart.GetComponent<Lever>().isActivated = false;
                 isActivated = false;
-                leverTimer = 1f;
+                leverTimer = 1.5f;
             }
         }
     }

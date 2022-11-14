@@ -87,7 +87,7 @@ public class BasicMovement : MonoBehaviour
         MovePlayer();
         CheckCameraState();
         
-        if (move.IsPressed())
+        if (move.IsPressed() && canMove)
         {
             animator.SetBool("IsWalking",true);
         }
@@ -204,7 +204,7 @@ public class BasicMovement : MonoBehaviour
         if (jump.WasPressedThisFrame() && isGrounded && canMove)
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
-            jumpSound.Play();
+            //jumpSound.Play();
 
             //animator.SetBool("Idle", false);
             //animator.SetBool("Run", false);

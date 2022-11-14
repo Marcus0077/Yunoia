@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.044268563, g: 0.07019419, b: 0.13365021, a: 1}
+  m_IndirectSpecularColor: {r: 0.0442983, g: 0.07018901, b: 0.13381043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -190,6 +190,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LeverAudio
       objectReference: {fileID: 0}
+    - target: {fileID: 4820381847206201786, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638416190864512325, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2845f27723a1d7f448380b2a5949a1a6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
 --- !u!43 &10885598
@@ -12913,6 +12921,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4706656119230803732, guid: d57b4e732ca0e5e4da0bbb7b0fbc020a, type: 3}
   m_PrefabInstance: {fileID: 1172348017}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1178748693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1804445680587551994, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+  m_PrefabInstance: {fileID: 3184693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1178748705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178748693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f87838697fdb3448ed356b7f41bf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1181479563
 GameObject:
   m_ObjectHideFlags: 0

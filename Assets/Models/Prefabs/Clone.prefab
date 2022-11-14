@@ -837,6 +837,7 @@ MonoBehaviour:
   jumpForce: 0
   isGrounded: 0
   attachedMinionCount: 0
+  curCamState: 
   dashSound: {fileID: 3583609977508913977}
   jumpSound: {fileID: 3240785294556916506}
   animator: {fileID: 0}
@@ -858,9 +859,9 @@ MonoBehaviour:
   summonClone: {fileID: 0}
   exitClone: {fileID: 0}
   combatHandler: {fileID: 0}
-  levelSwitchManager: {fileID: 0}
   cloneAbilityPush: {fileID: 8397525453568900783}
   lever: {fileID: 0}
+  door: {fileID: 0}
   Player: {fileID: 0}
   switchPlaces:
     m_Name: Switch Places
@@ -880,10 +881,9 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  blocker3InPos: {x: 0, y: 0, z: 0}
-  blocker3OutPos: {x: 0, y: 0, z: 0}
   cloneRestored: 0
   canPress: 0
+  canPressDoor: 0
 --- !u!136 &4181361517068783824
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -894,10 +894,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 000423fd202578e43a819bd16b50ce16, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.52888936
-  m_Height: 2.706643
+  m_Radius: 0.4845175
+  m_Height: 2.3642097
   m_Direction: 1
-  m_Center: {x: -0.04094124, y: 0.1626563, z: 0.025522232}
+  m_Center: {x: -0.040941246, y: -0.008557427, z: -0.07351326}
 --- !u!95 &3907015306594202212
 Animator:
   serializedVersion: 4

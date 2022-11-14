@@ -158,7 +158,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""508e2ff9-9da3-44a4-b5c0-580512e291e2"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -215,7 +215,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e26a3248-314e-43fa-9b6e-44ec44441afb"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -237,7 +237,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5f09fbe0-ab2d-4d0a-9494-a1f97996bb56"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -259,7 +259,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f8603aad-e67b-4a7e-883c-d96e6324ccd1"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -346,7 +346,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6c87cb85-8e1c-4d5c-864b-617008bbcd7b"",
-                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -407,22 +407,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""86617339-653a-401a-800f-020af9f50db2"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Push"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interaction"",
+            ""id"": ""5773e0cf-4322-4bce-9512-ca7c8cda8578"",
+            ""actions"": [
+                {
+                    ""name"": ""Press"",
+                    ""type"": ""Button"",
+                    ""id"": ""916635f9-c96f-4408-adad-710af085a2be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b50ea658-4d19-440e-b669-21473f22a0f9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5199d8f2-973f-4f6b-b772-62676af20b52"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""id"": ""6f7d96a9-6089-4eb9-af33-42005ee9d691"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Push"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Press"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -450,6 +478,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e2cb8cb-9053-44e6-a507-36b5c84e9200"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -553,34 +592,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
-        },
-        {
-            ""name"": ""Interaction"",
-            ""id"": ""5773e0cf-4322-4bce-9512-ca7c8cda8578"",
-            ""actions"": [
-                {
-                    ""name"": ""Press"",
-                    ""type"": ""Button"",
-                    ""id"": ""916635f9-c96f-4408-adad-710af085a2be"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""b50ea658-4d19-440e-b669-21473f22a0f9"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Press"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -633,6 +644,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Push
         m_Push = asset.FindActionMap("Push", throwIfNotFound: true);
         m_Push_Push = m_Push.FindAction("Push", throwIfNotFound: true);
+        // Interaction
+        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_Press = m_Interaction.FindAction("Press", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Exit = m_Camera.FindAction("Exit", throwIfNotFound: true);
@@ -643,9 +657,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
         m_Cheat_Toggle = m_Cheat.FindAction("Toggle", throwIfNotFound: true);
         m_Cheat_History = m_Cheat.FindAction("History", throwIfNotFound: true);
-        // Interaction
-        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
-        m_Interaction_Press = m_Interaction.FindAction("Press", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -907,6 +918,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     }
     public PushActions @Push => new PushActions(this);
 
+    // Interaction
+    private readonly InputActionMap m_Interaction;
+    private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_Press;
+    public struct InteractionActions
+    {
+        private @PlayerControls m_Wrapper;
+        public InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Press => m_Wrapper.m_Interaction_Press;
+        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionActions instance)
+        {
+            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
+            {
+                @Press.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
+                @Press.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
+                @Press.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
+            }
+            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Press.started += instance.OnPress;
+                @Press.performed += instance.OnPress;
+                @Press.canceled += instance.OnPress;
+            }
+        }
+    }
+    public InteractionActions @Interaction => new InteractionActions(this);
+
     // Camera
     private readonly InputActionMap m_Camera;
     private ICameraActions m_CameraActionsCallbackInterface;
@@ -1013,39 +1057,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CheatActions @Cheat => new CheatActions(this);
-
-    // Interaction
-    private readonly InputActionMap m_Interaction;
-    private IInteractionActions m_InteractionActionsCallbackInterface;
-    private readonly InputAction m_Interaction_Press;
-    public struct InteractionActions
-    {
-        private @PlayerControls m_Wrapper;
-        public InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Press => m_Wrapper.m_Interaction_Press;
-        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
-        public void SetCallbacks(IInteractionActions instance)
-        {
-            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
-            {
-                @Press.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
-                @Press.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
-                @Press.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnPress;
-            }
-            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Press.started += instance.OnPress;
-                @Press.performed += instance.OnPress;
-                @Press.canceled += instance.OnPress;
-            }
-        }
-    }
-    public InteractionActions @Interaction => new InteractionActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1089,6 +1100,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnPush(InputAction.CallbackContext context);
     }
+    public interface IInteractionActions
+    {
+        void OnPress(InputAction.CallbackContext context);
+    }
     public interface ICameraActions
     {
         void OnExit(InputAction.CallbackContext context);
@@ -1101,9 +1116,5 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnToggle(InputAction.CallbackContext context);
         void OnHistory(InputAction.CallbackContext context);
-    }
-    public interface IInteractionActions
-    {
-        void OnPress(InputAction.CallbackContext context);
     }
 }

@@ -342,10 +342,10 @@ public class BasicMovement : MonoBehaviour
         Debug.DrawRay(groundPointBottom, Vector3.down * 0.3f, Color.green, 0.5f);
         
         
-        if ((Physics.Raycast(groundPointRight, Vector3.down, out hit, 0.5f, whatIsGround) || 
-            Physics.Raycast(groundPointLeft, Vector3.down, out hit, 0.5f, whatIsGround) || 
-            Physics.Raycast(groundPointTop, Vector3.down, out hit, 0.5f, whatIsGround) || 
-            Physics.Raycast(groundPointBottom, Vector3.down, out hit, 0.5f, whatIsGround)))
+        if ((Physics.Raycast(groundPointRight, Vector3.down, out hit, 0.3f, whatIsGround) || 
+            Physics.Raycast(groundPointLeft, Vector3.down, out hit, 0.3f, whatIsGround) || 
+            Physics.Raycast(groundPointTop, Vector3.down, out hit, 0.3f, whatIsGround) || 
+            Physics.Raycast(groundPointBottom, Vector3.down, out hit, 0.3f, whatIsGround)))
         {
             isGrounded = true;
 

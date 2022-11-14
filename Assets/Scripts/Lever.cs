@@ -25,15 +25,20 @@ public class Lever : MonoBehaviour
 
     public Animator animator;
 
+    public AudioSource audioSource;
+    public AudioClip leverSound;
+    private bool audioPlayed;
+
     // Start is called before the first frame update
     void Start()
     {
         activateText.enabled = false;
-        
+
         isActivated = false;
         isPlayer = false;
         isClone = false;
         Complete = false;
+        audioPlayed = false;
 
         leverTimer = 1.5f;
     }
@@ -44,6 +49,13 @@ public class Lever : MonoBehaviour
         if (isActivated)
         {
             animator.SetBool("PullLever", true);
+
+            if (!audioPlayed)
+            {
+                audioSource.PlayOneShot(leverSound);
+
+                audioPlayed = true;
+            }
 
             if (!Counterpart.GetComponent<Lever>().isActivated && !Complete)
             {
@@ -56,10 +68,7 @@ public class Lever : MonoBehaviour
                 Counterpart.GetComponent<Lever>().Complete = true;
 
                 Door.GetComponent<Door>().Open();
-                
-                //Door.GetComponent<Collider>().enabled = false;
-                //Door.GetComponent<Renderer>().enabled = false;
-                
+
                 activateText.enabled = false;
             }
             else if (leverTimer <= 0)
@@ -67,6 +76,8 @@ public class Lever : MonoBehaviour
                 animator.SetBool("PullLever", false);
                 
                 Counterpart.GetComponent<Lever>().isActivated = false;
+
+                audioPlayed = false;
                 isActivated = false;
                 leverTimer = 1.5f;
             }

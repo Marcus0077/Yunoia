@@ -25,6 +25,11 @@ public class Door : MonoBehaviour
 
     public void Open()
     {
+        if (activateText != null)
+        {
+            Destroy(activateText);
+        }
+        
         animator.SetTrigger("DoorOpen");
     }
 

@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
 
     public void ToMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
     }
 }

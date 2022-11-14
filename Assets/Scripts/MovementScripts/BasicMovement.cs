@@ -58,8 +58,6 @@ public class BasicMovement : MonoBehaviour
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
 
-        animator = GetComponent<Animator>();
-
         if (this.CompareTag("Player"))
         {
             curCamState = "RegularView";
@@ -89,11 +87,13 @@ public class BasicMovement : MonoBehaviour
         MovePlayer();
         CheckCameraState();
         
-        if (!move.IsPressed())
+        if (move.IsPressed())
         {
-            //animator.SetBool("Idle", true);
-            //animator.SetBool("Run", false);
-            //animator.SetBool("Leap", false);
+            animator.SetBool("IsWalking",true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
         }
     }
 
@@ -162,7 +162,7 @@ public class BasicMovement : MonoBehaviour
                 playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
             }
-            
+
             moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
             playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
         

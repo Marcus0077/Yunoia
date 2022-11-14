@@ -15,15 +15,15 @@ public class AnimationStateController : MonoBehaviour
     void Update()
     {
         bool forwardPressed = Input.GetKey("w");
-        bool isWalking = animator.GetBool("isWalking");
+        bool IsWalking = animator.GetBool("IsWalking");
 
-        if (!isWalking && forwardPressed)
+        if (!IsWalking && forwardPressed)
         {
-            animator.SetBool("isWalking",true);
+            animator.SetBool("IsWalking",true);
         }
-        if(isWalking && !forwardPressed)
+        if(IsWalking && !forwardPressed)
         {
-            animator.SetBool("isWalking",false);
+            animator.SetBool("IsWalking",false);
         }
     }
 }

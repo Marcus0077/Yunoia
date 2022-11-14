@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0442983, g: 0.07018901, b: 0.13381043, a: 1}
+  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018887, b: 0.13381043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,6 +195,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7638416190864512325, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638416190864512325, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2845f27723a1d7f448380b2a5949a1a6, type: 2}
+    - target: {fileID: 8226423009662187413, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2845f27723a1d7f448380b2a5949a1a6, type: 2}
@@ -12933,7 +12941,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178748693}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22f87838697fdb3448ed356b7f41bf6a, type: 3}
   m_Name: 
@@ -22208,6 +22216,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7035547642867367602, guid: 5f4e9f9719b0687418c43c46a2bd8bb6, type: 3}
   m_PrefabInstance: {fileID: 1899470352}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1904430664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9110515214924016217, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+  m_PrefabInstance: {fileID: 3184693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1904430667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904430664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f87838697fdb3448ed356b7f41bf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1911871947
 Mesh:
   m_ObjectHideFlags: 0

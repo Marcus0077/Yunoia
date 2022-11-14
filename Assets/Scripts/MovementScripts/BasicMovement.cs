@@ -91,9 +91,9 @@ public class BasicMovement : MonoBehaviour
         
         if (!move.IsPressed())
         {
-            animator.SetBool("Idle", true);
-            animator.SetBool("Run", false);
-            animator.SetBool("Leap", false);
+            //animator.SetBool("Idle", true);
+            //animator.SetBool("Run", false);
+            //animator.SetBool("Leap", false);
         }
     }
 
@@ -206,9 +206,9 @@ public class BasicMovement : MonoBehaviour
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
             jumpSound.Play();
 
-            animator.SetBool("Idle", false);
-            animator.SetBool("Run", false);
-            animator.SetBool("Leap", true);
+            //animator.SetBool("Idle", false);
+            //animator.SetBool("Run", false);
+            //animator.SetBool("Leap", true);
         }
     }
 
@@ -272,9 +272,9 @@ public class BasicMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, playerAngle, 0), 
                 Time.deltaTime / moveStartTimeDivider);
 
-            animator.SetBool("Idle", false);
-            animator.SetBool("Run", true);
-            animator.SetBool("Leap", false);
+            //animator.SetBool("Idle", false);
+            //animator.SetBool("Run", true);
+            //animator.SetBool("Leap", false);
         }
     }
     
@@ -349,7 +349,7 @@ public class BasicMovement : MonoBehaviour
         {
             isGrounded = true;
 
-            animator.SetBool("Leap", false);
+            //animator.SetBool("Leap", false);
         }
         else
         {

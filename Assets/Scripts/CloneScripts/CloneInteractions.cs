@@ -33,6 +33,9 @@ public class CloneInteractions : MonoBehaviour
     public bool canPress;
     public bool canPressDoor;
 
+    public GameObject duplicateParticles;
+    private float footPos;
+
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
@@ -58,6 +61,8 @@ public class CloneInteractions : MonoBehaviour
 
         cloneRestored = true;
         canPress = false;
+
+        footPos = duplicateParticles.transform.position.y;
     }
     
 
@@ -80,6 +85,11 @@ public class CloneInteractions : MonoBehaviour
                 door.Open();
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        duplicateParticles.transform.position = new Vector3(duplicateParticles.transform.position.x, footPos, duplicateParticles.transform.position.z);
     }
 
     // Switch clone and player control depending on which is

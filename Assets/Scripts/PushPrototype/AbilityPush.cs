@@ -20,6 +20,8 @@ public class AbilityPush : MonoBehaviour
     public float cdRemaining;
     Transform shape;
 
+    public GameObject pushEffect;
+
     [SerializeField] private AudioSource source;
     
     // Start is called before the first frame update
@@ -53,6 +55,8 @@ public class AbilityPush : MonoBehaviour
 
     void RenderVolume(float radius)
     {
+        Instantiate(pushEffect, this.transform.position, Quaternion.identity);
+        
         shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
         Destroy(shape.GetComponent<Collider>());
         shape.localScale = new Vector3(radius, radius, radius);
@@ -81,6 +85,9 @@ public class AbilityPush : MonoBehaviour
         shape.GetComponent<Renderer>().enabled = true;
         float radius = minPush;
         float timeCharging = Time.time;
+
+        Instantiate(pushEffect, this.transform.position, Quaternion.identity);
+        
         while (charging)
         {
             timeCharging = (Time.time - chargeTime) * chargeSpeed + minPush;
@@ -89,6 +96,7 @@ public class AbilityPush : MonoBehaviour
             pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
             shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2 * pushedLevel), 1f / ( 2* pushedLevel), .2f + (.1f * pushedLevel));
             radius *= 2;
+
             shape.localScale = new Vector3(radius, radius, radius);
             shape.position = transform.position;
             yield return new WaitForSeconds(Time.deltaTime);

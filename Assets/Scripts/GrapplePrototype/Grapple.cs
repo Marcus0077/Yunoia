@@ -40,6 +40,8 @@ public class Grapple : MonoBehaviour
     // Additions from Will :)
     private bool releasedHook = false; // input testing
 
+    public GameObject grappleLaunch;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,9 @@ public class Grapple : MonoBehaviour
         {
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
             shoot.Play();
+
+            Instantiate(grappleLaunch, shootTransform.position, this.transform.rotation);
+
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
         }

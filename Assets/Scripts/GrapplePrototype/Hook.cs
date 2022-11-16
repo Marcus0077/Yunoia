@@ -10,6 +10,8 @@ public class Hook : MonoBehaviour
     Rigidbody rigid;
     LineRenderer lineRenderer;
 
+    public GameObject grappleAttach;
+
     // Start is called before the first frame update
     public void Initialize(Grapple grapple, Transform shootTransform)
     {
@@ -39,6 +41,8 @@ public class Hook : MonoBehaviour
             rigid.useGravity = false;
             rigid.isKinematic = true;
 
+            Instantiate(grappleAttach, transform.position, Quaternion.identity);
+
             grapple.StartGrapple();
         }
 
@@ -47,6 +51,8 @@ public class Hook : MonoBehaviour
             rigid.useGravity = false;
             rigid.isKinematic = true;
             //grapple.pullable = true;
+            
+            Instantiate(grappleAttach, transform.position, Quaternion.identity);
 
             grapple.StartGrapple();
         }

@@ -11,6 +11,7 @@ public class AiOrbs : Pushable
     public GameObject player;
     [SerializeField]
     float detectDistance, movespeed;
+
     // Start is called before the first frame update
     void Start()
     {

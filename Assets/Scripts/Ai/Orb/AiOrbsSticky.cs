@@ -13,6 +13,10 @@ public class AiOrbsSticky : Pushable
     int pushedCount = 0;
     [SerializeField]
     float timeToTravel = 1;
+
+    [SerializeField] AudioSource attachSound;
+    [SerializeField] AudioSource detachSound;
+
     //WaitForSecondsRealtime waitForSecondsRealtime;
     // Start is called before the first frame update
     void Start()
@@ -48,6 +52,9 @@ public class AiOrbsSticky : Pushable
                 player.GetComponent<BasicMovement>().AddMinion(-1);
             }
             attached = false;
+
+            detachSound.Play();
+
             StartCoroutine(PushTimer(timeToTravel));
             return true;
         }
@@ -83,6 +90,8 @@ public class AiOrbsSticky : Pushable
     {
         base.Awake();
         attached = true;
+
+        attachSound.Play();
     }
 
     // Update is called once per frame

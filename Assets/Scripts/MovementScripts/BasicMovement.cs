@@ -101,7 +101,7 @@ public class BasicMovement : MonoBehaviour
             animator.SetBool("IsWalking", false);
         }
 
-        /*if (move.IsPressed() && runSoundOneCanPlay && isGrounded)
+        if (move.IsPressed() && runSoundOneCanPlay && isGrounded)
         {
             runSoundOne.Play();
             runSoundOneCanPlay = false;
@@ -112,7 +112,7 @@ public class BasicMovement : MonoBehaviour
             runSoundTwo.Play();
             runSoundTwoCanPlay = false;
             StartCoroutine(RunSoundTwoDelay());
-        }*/
+        }
     }
 
     // Called each frame.

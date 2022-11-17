@@ -47,6 +47,11 @@ public class BasicMovement : MonoBehaviour
     // Sound Variables
     [SerializeField] private AudioSource dashSound;
     [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource runSoundOne;
+    [SerializeField] private AudioSource runSoundTwo;
+
+    private bool runSoundOneCanPlay = true;
+    private bool runSoundTwoCanPlay = false;
 
     // Animation Variables
     [SerializeField] private Animator animator;
@@ -94,6 +99,19 @@ public class BasicMovement : MonoBehaviour
         else
         {
             animator.SetBool("IsWalking", false);
+        }
+
+        if (move.IsPressed() && runSoundOneCanPlay)
+        {
+            runSoundOne.Play();
+            runSoundOneCanPlay = false;
+            StartCoroutine(RunSoundOneDelay());
+        }
+        else if (move.IsPressed() && runSoundTwoCanPlay)
+        {
+            runSoundTwo.Play();
+            runSoundTwoCanPlay = false;
+            StartCoroutine(RunSoundTwoDelay());
         }
     }
 
@@ -355,5 +373,19 @@ public class BasicMovement : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    private IEnumerator RunSoundOneDelay()
+    {
+        yield return new WaitForSeconds(0.68f);
+        
+        runSoundTwoCanPlay = true;
+    }
+
+    private IEnumerator RunSoundTwoDelay()
+    {
+        yield return new WaitForSeconds(0.68f);
+
+        runSoundOneCanPlay = true;
     }
 }

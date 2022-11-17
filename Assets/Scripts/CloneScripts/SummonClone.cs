@@ -27,6 +27,7 @@ public class SummonClone : MonoBehaviour
     public LayerMask wall;
 
     [SerializeField] AudioSource cloneSound;
+    [SerializeField] Animator uiAnim;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -84,8 +85,12 @@ public class SummonClone : MonoBehaviour
         
             clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + (Vector3.back + new Vector3(0f, 0f, -.75f)), 
                 Quaternion.LookRotation(-Vector3.forward));
+                clone.GetComponent<CloneInteractions>().anim = uiAnim;
+                clone.GetComponent<ExitClone>().anim = uiAnim;
+                uiAnim.SetBool("isClone", true);
             StartCoroutine(Cooldown());
         }
+
     }
 
     private IEnumerator Cooldown()

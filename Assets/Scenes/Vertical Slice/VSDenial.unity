@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1804445680587551989, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: uiAnim
+      value: 
+      objectReference: {fileID: 1456223628}
     - target: {fileID: 1804445680587551990, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: pullSpeed
       value: 0.3
@@ -18623,7 +18627,6 @@ GameObject:
   - component: {fileID: 1456223624}
   - component: {fileID: 1456223627}
   - component: {fileID: 1456223628}
-  - component: {fileID: 1456223629}
   m_Layer: 5
   m_Name: Clone Icon
   m_TagString: Untagged
@@ -18722,21 +18725,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1456223629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456223621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4c8e302e28588843b6d71ab08a0242f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownText: {fileID: 0}
-  cover: {fileID: 0}
-  ability: 2
 --- !u!4 &1456443902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4706656119230803732, guid: d57b4e732ca0e5e4da0bbb7b0fbc020a, type: 3}

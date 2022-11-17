@@ -37,7 +37,7 @@ public class CloneInteractions : MonoBehaviour
     private float footPos;
 
     //Clone UI Experiment here
-    [SerializeField] private Animator anim;
+    public Animator anim;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()

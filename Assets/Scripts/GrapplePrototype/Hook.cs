@@ -46,11 +46,11 @@ public class Hook : MonoBehaviour
             grapple.StartGrapple();
         }
 
-        if ((LayerMask.GetMask("GrapplePull") & 1 << other.gameObject.layer) > 0)
+        if ((LayerMask.GetMask("GrappleYank") & 1 << other.gameObject.layer) > 0)
         {
             rigid.useGravity = false;
             rigid.isKinematic = true;
-            //grapple.pullable = true;
+            grapple.yankHook = true;
             
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 

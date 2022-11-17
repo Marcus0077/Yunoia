@@ -94,20 +94,20 @@ public class BasicMovement : MonoBehaviour
         
         if (move.IsPressed() && canMove)
         {
-            animator.SetBool("IsWalking",true);
+            animator.SetBool("IsWalking", true);
         }
         else
         {
             animator.SetBool("IsWalking", false);
         }
 
-        if (move.IsPressed() && runSoundOneCanPlay)
+        if (move.IsPressed() && runSoundOneCanPlay && isGrounded)
         {
             runSoundOne.Play();
             runSoundOneCanPlay = false;
             StartCoroutine(RunSoundOneDelay());
         }
-        else if (move.IsPressed() && runSoundTwoCanPlay)
+        else if (move.IsPressed() && runSoundTwoCanPlay && isGrounded)
         {
             runSoundTwo.Play();
             runSoundTwoCanPlay = false;
@@ -223,10 +223,6 @@ public class BasicMovement : MonoBehaviour
         {
             playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
             //jumpSound.Play();
-
-            //animator.SetBool("Idle", false);
-            //animator.SetBool("Run", false);
-            //animator.SetBool("Leap", true);
         }
     }
 

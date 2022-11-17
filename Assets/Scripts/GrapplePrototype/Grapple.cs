@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    [SerializeField] float pullSpeed = 0.3f;
-    [SerializeField] float reelSpeed = 0.7f;
+    [SerializeField] float swingSpeed = 0.3f;
+    [SerializeField] float yankSpeedStrong = 0.7f;
+    [SerializeField] float yankSpeedWeak = 0.7f;
     [SerializeField] float stopDistance = 2.5f;
     [SerializeField] float taughtDistance = 5.0f;
 
@@ -27,7 +28,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] float maxHookLife;
     bool grappleActive;
     bool ready = true;
-    //public bool pullable = false;
+    public bool yankHook = false;
 
     PlayerControls grappleControls;
     public InputAction shootHook;
@@ -73,11 +74,22 @@ public class Grapple : MonoBehaviour
             return;
         }
         
-        // Updated - Press Shoot again to 'reel' in if connected to 'GrapplePull' points
-        if (grappleActive && shootHook.IsPressed() && player.isGrounded)
+        // Updated - Press Shoot again to 'yank' if connected to 'GrappleYank' points
+        if (yankHook)
         {
-            playerRB.AddForce((hook.transform.position - transform.position) * reelSpeed, ForceMode.Impulse);
-            yank.Play();
+            if (grappleActive && shootHook.IsPressed() && player.isGrounded)
+            {
+                playerRB.AddForce((hook.transform.position - transform.position) * yankSpeedStrong, ForceMode.Impulse);
+                yank.Play();
+            }
+        }
+        else if (!yankHook)
+        {
+            if (grappleActive && shootHook.IsPressed() && player.isGrounded)
+            {
+                playerRB.AddForce((hook.transform.position - transform.position) * yankSpeedWeak, ForceMode.Impulse);
+                yank.Play();
+            }
         }
         
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
@@ -110,13 +122,13 @@ public class Grapple : MonoBehaviour
             DestroyHook();
         }
 
-        if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance)
+        if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || player.isGrounded)
         {
             return;
         }
         else
         {
-            playerRB.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
+            playerRB.AddForce((hook.transform.position - transform.position).normalized * swingSpeed, ForceMode.Impulse);
         }
     }
 

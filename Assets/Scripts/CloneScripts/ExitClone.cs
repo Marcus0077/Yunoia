@@ -11,6 +11,9 @@ public class ExitClone : MonoBehaviour
     // UI Clone Active Timer
     public TextMeshProUGUI activeTimerText;
     
+    //UI Experiment
+    public Animator anim;
+    
     // Script references
     private BasicMovement basicMovementPlayer;
     private BasicMovement basicMovementClone;
@@ -61,6 +64,7 @@ public class ExitClone : MonoBehaviour
         
         activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
         activeTimerText.color = Color.white;
+        anim = GetComponent<Animator>();
     }
     
     // Called between frames.
@@ -124,6 +128,8 @@ public class ExitClone : MonoBehaviour
             combatHandler.healthText.text = "";
 
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+
+            anim.SetBool("isClone", false);
 
             Destroy(this.gameObject);
         }

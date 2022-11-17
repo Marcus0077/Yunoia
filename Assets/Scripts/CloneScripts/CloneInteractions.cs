@@ -36,6 +36,9 @@ public class CloneInteractions : MonoBehaviour
     public GameObject duplicateParticles;
     private float footPos;
 
+    //Clone UI Experiment here
+    [SerializeField] private Animator anim;
+
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
@@ -100,6 +103,8 @@ public class CloneInteractions : MonoBehaviour
         {
             if (basicMovementPlayer.canMove == false)
             {
+                anim.SetBool("isClone", false);
+
                 basicMovementPlayer.canMove = true;
                 basicMovementClone.canMove = false;
                 
@@ -116,6 +121,8 @@ public class CloneInteractions : MonoBehaviour
             }
             else if (basicMovementClone.canMove == false)
             {
+                anim.SetBool("isClone", true);
+
                 basicMovementPlayer.canMove = false;
                 basicMovementClone.canMove = true;
                 

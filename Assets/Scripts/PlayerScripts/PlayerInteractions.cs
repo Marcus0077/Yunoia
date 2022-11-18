@@ -8,36 +8,54 @@ using TMPro;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    public bool canPress;
-    public bool canPressDoor;
-
+    // Script references.
     public Lever lever;
     public Door door;
-
+    
+    // Input Variables
     PlayerControls playerControls;
     public InputAction switchPlaces;
     public InputAction press;
 
-    private void Start()
+    // Interactable variables.
+    public bool canPressLever;
+    public bool canPressDoor;
+
+    // Get references and initialize variables when player spawns.
+    private void Awake()
     {
         playerControls = new PlayerControls();
         
         press = playerControls.Interaction.Press;
         press.Enable();
         
-        canPress = false;
+        canPressLever = false;
     }
 
+    // Called each frame.
     private void Update()
     {
-        if (canPress && press.WasPressedThisFrame())
+        CheckLeverPress();
+        CheckDoorPress();
+        
+    }
+    
+    // Checks if player can activate a lever and whether they activated it.
+    void CheckLeverPress()
+    {
+        if (canPressLever && press.WasPressedThisFrame())
         {
             if (lever != null && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
             {
                 lever.isActivated = true;
             }
         }
-        else if(canPressDoor && press.WasPressedThisFrame())
+    }
+
+    // Checks if player can activate a door and whether they activated it.
+    void CheckDoorPress()
+    {
+        if(canPressDoor && press.WasPressedThisFrame())
         {
             if (door != null && door.canInteract)
             {
@@ -46,6 +64,7 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    // Checks if player is in a lever or door trigger(s).
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Lever"))
@@ -58,6 +77,7 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    // Disable input action map controls.
     private void OnDisable()
     {
         press = playerControls.Interaction.Press;

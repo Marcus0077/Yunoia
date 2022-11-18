@@ -55,43 +55,50 @@ public class BasicMovement : MonoBehaviour
 
     // Animation Variables
     [SerializeField] private Animator animator;
-
-
+    
     // Get references and initialize variables when player spawns.
     void Awake()
     {
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
 
-        if (this.CompareTag("Player"))
-        {
-            curCamState = "RegularView";
-        }
-        else
-        {
-            curCamState = GameObject.FindWithTag("Player").GetComponent<BasicMovement>().curCamState;
-        }
-
         moveSpeed = 4f;
         maxSpeed = 18f;
         jumpForce = 8f;
         accelerationValue = 1f;
         dashCooldown = 0f;
+        dashAccelerate = 0;
+        
+        logFormulaCoefficient = .6f;
+        logFormulaModifier = 2f;
         
         canMove = true;
         isFrozen = false;
-        dashAccelerate = 0;
-
-        logFormulaCoefficient = .6f;
-        logFormulaModifier = 2f;
+        
+        SetInitialCameraState();
     }
     
     // Called between frames.
     void FixedUpdate()
     {
         MovePlayer();
-        CheckCameraState();
+
+        SetWalkingAnimation();
+        SetRunSound();
         
+    }
+
+    // Called each frame.
+    private void Update()
+    {
+        JumpPlayer();
+        ActivateDash();
+    }
+
+    // Plays the walking animation if this game object is moving, 
+    // or plays the idle animation if this game object is not moving.
+    void SetWalkingAnimation()
+    {
         if (move.IsPressed() && canMove)
         {
             animator.SetBool("IsWalking", true);
@@ -100,7 +107,12 @@ public class BasicMovement : MonoBehaviour
         {
             animator.SetBool("IsWalking", false);
         }
+    }
 
+    // Plays the run sound(s) if this game object is moving
+    // and is on the ground.
+    void SetRunSound()
+    {
         if (move.IsPressed() && runSoundOneCanPlay && isGrounded)
         {
             runSoundOne.Play();
@@ -115,14 +127,23 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
-    // Called each frame.
-    private void Update()
+    // Set player camera state to regular at beginning of game.
+    // Set clone camera state to player camera state when clone is instantiated.
+    private void SetInitialCameraState()
     {
-        JumpPlayer();
-        ActivateDash();
+        if (this.CompareTag("Player"))
+        {
+            curCamState = "RegularView";
+        }
+        else
+        {
+            curCamState = GameObject.FindWithTag("Player").GetComponent<BasicMovement>().curCamState;
+        }
     }
 
-    void CheckCameraState()
+    // Changes camera orientation depending on whether player or clone is in
+    // control and what their current camera state it.
+    public void CheckCameraState()
     {
         if (canMove)
         {
@@ -170,7 +191,7 @@ public class BasicMovement : MonoBehaviour
     // Applies gravity and movement velocity to player according to movement input.
     // Freezes player or clone depending on which one is currently active.
     // Applies look rotation depending on player's movement direction.
-    // Gives options to jump and dash.
+    // Applies dash if player uses dash input.
     void MovePlayer()
     {
         if (canMove == true)
@@ -202,12 +223,15 @@ public class BasicMovement : MonoBehaviour
             playerRB.velocity = Vector3.ClampMagnitude(playerRB.velocity, maxSpeed);
         }
     }
-
+    
+    // Calculates the movement change of this game object depending on how
+    // many minions are attached to it.
     float CalcMinionMoveChange()
     {
         return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
     }
 
+    // Adds a minion to the attached minion count of this game object.
     public void AddMinion(int value)
     {
         attachedMinionCount += value;
@@ -263,6 +287,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
+    // If dash is on a cooldown, return the timer value.
     public float CooldownRemaining()
     {
         if (dashCooldown > 0)
@@ -285,10 +310,6 @@ public class BasicMovement : MonoBehaviour
             
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, playerAngle, 0), 
                 Time.deltaTime / moveStartTimeDivider);
-
-            //animator.SetBool("Idle", false);
-            //animator.SetBool("Run", true);
-            //animator.SetBool("Leap", false);
         }
     }
     
@@ -334,10 +355,9 @@ public class BasicMovement : MonoBehaviour
         curCamState = other.tag;
     }
     
-    // Determines if player is on the ground or not.
+    // Determines if player is on the ground or not using (4) raycasts.
     private void IsGrounded()
     {
-
         RaycastHit hit;
 
         Vector3 groundPointRight = new Vector3(groundPoint.position.x, groundPoint.position.y + 0.2f, 
@@ -349,21 +369,17 @@ public class BasicMovement : MonoBehaviour
         Vector3 groundPointBottom = new Vector3(groundPoint.position.x - 0.4f, groundPoint.position.y + 0.2f, 
             groundPoint.position.z);
         
-        
         Debug.DrawRay(groundPointRight, Vector3.down * 0.3f, Color.green, 0.5f);
         Debug.DrawRay(groundPointLeft, Vector3.down * 0.3f, Color.green, 0.5f);
         Debug.DrawRay(groundPointTop, Vector3.down * 0.3f, Color.green, 0.5f);
         Debug.DrawRay(groundPointBottom, Vector3.down * 0.3f, Color.green, 0.5f);
-        
-        
+
         if ((Physics.Raycast(groundPointRight, Vector3.down, out hit, 0.3f, whatIsGround) || 
-            Physics.Raycast(groundPointLeft, Vector3.down, out hit, 0.3f, whatIsGround) || 
-            Physics.Raycast(groundPointTop, Vector3.down, out hit, 0.3f, whatIsGround) || 
-            Physics.Raycast(groundPointBottom, Vector3.down, out hit, 0.3f, whatIsGround)))
+             Physics.Raycast(groundPointLeft, Vector3.down, out hit, 0.3f, whatIsGround) || 
+             Physics.Raycast(groundPointTop, Vector3.down, out hit, 0.3f, whatIsGround) || 
+             Physics.Raycast(groundPointBottom, Vector3.down, out hit, 0.3f, whatIsGround)))
         {
             isGrounded = true;
-
-            //animator.SetBool("Leap", false);
         }
         else
         {
@@ -371,6 +387,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
+    // Delays run sound one to account for footstep(s) speed.
     private IEnumerator RunSoundOneDelay()
     {
         yield return new WaitForSeconds(0.68f);
@@ -378,6 +395,7 @@ public class BasicMovement : MonoBehaviour
         runSoundTwoCanPlay = true;
     }
 
+    // Delays run sound two to account for footstep(s) speed.
     private IEnumerator RunSoundTwoDelay()
     {
         yield return new WaitForSeconds(0.68f);

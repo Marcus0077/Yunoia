@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
+    // Blocker that pressure plate moves.
     public GameObject Blocker;
 
+    // Bool variables.
     private bool isPlayer;
     public bool isClone;
 
+    // Get references and initialize variables when pressure plates spawn.
     private void Awake()
     {
         isPlayer = false;
         isClone = false;
     }
 
+    // Determine whether player or clone is on this pressure plate and activate it.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !isClone)
@@ -32,6 +36,7 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    // Determine whether player or clone is exiting this pressure plate and deactivate it.
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && !isClone)
@@ -48,12 +53,14 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    // Removes blocker when pressure plate is activated.
     public void HideWall()
     {
         Blocker.GetComponent<Renderer>().enabled = false;
         Blocker.GetComponent<Collider>().enabled = false;
     }
     
+    // Adds blocker back when pressure plate is deactivated.
     public void AppearWall()
     {
         Blocker.GetComponent<Renderer>().enabled = true;

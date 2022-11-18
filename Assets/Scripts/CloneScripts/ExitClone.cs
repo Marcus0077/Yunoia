@@ -38,6 +38,7 @@ public class ExitClone : MonoBehaviour
     private float cloneActiveTimer;
     private bool isRunning;
 
+    // Interactable trigger variables.
     private bool isOnPressurePlate;
     private bool isOnLever;
 
@@ -65,6 +66,15 @@ public class ExitClone : MonoBehaviour
         activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
         activeTimerText.color = Color.white;
         anim = GetComponent<Animator>();
+    }
+    
+    // Called each frame.
+    private void Update()
+    {
+        if (exitClone.WasPressedThisFrame() && summonClone.cloneSummoned)
+        {
+            despawnClone = true;
+        }
     }
     
     // Called between frames.
@@ -128,6 +138,7 @@ public class ExitClone : MonoBehaviour
             combatHandler.healthText.text = "";
 
             smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+            basicMovementPlayer.CheckCameraState();
 
             anim.SetBool("isClone", false);
 
@@ -139,16 +150,7 @@ public class ExitClone : MonoBehaviour
         }
     }
 
-    // Called each frame.
-    private void Update()
-    {
-        if (exitClone.WasPressedThisFrame() && summonClone.cloneSummoned)
-        {
-            despawnClone = true;
-        }
-    }
-
-    // Flashes the clone's renderer on and off.
+    // Flashes the clone's renderer on and off. (currently unused)
     IEnumerator Blink()
     {
         isRunning = true;
@@ -174,6 +176,7 @@ public class ExitClone : MonoBehaviour
         exitClone.Disable();
     }
 
+    // Determines whether clone is on a pressure plate or in a lever trigger.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PressurePlate"))
@@ -192,6 +195,7 @@ public class ExitClone : MonoBehaviour
         }
     }
 
+    // Determines whether clone is exiting a pressure plate or a lever trigger.
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("PressurePlate"))

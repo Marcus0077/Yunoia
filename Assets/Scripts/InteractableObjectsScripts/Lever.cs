@@ -8,29 +8,36 @@ using UnityEngine.UI;
 
 public class Lever : MonoBehaviour
 {
+    // Script references.
+    private CloneInteractions cloneInteractions;
+    private PlayerInteractions playerInteractions;
+    
+    // Game object references.
     public GameObject Counterpart;
     public GameObject Door;
 
+    // Bool Variables.
     public bool isActivated;
     private bool isPlayer;
     public bool isClone;
     public bool Complete;
 
-    private CloneInteractions cloneInteractions;
-    private PlayerInteractions playerInteractions;
-
+    // Lever countdown timer.
     public float leverTimer;
 
+    // Lever UI references.
     public TextMeshProUGUI activateText;
 
+    // Lever animation reference.
     public Animator animator;
 
+    // Audio variables.
     public AudioSource audioSource;
     public AudioClip leverSound;
     private bool audioPlayed;
 
-    // Start is called before the first frame update
-    void Start()
+    // Get references and initialize variables when levers spawn.
+    void Awake()
     {
         activateText.enabled = false;
 
@@ -43,47 +50,79 @@ public class Lever : MonoBehaviour
         leverTimer = 1.5f;
     }
 
-    // Update is called once per frame
+    // Called each frame.
     void Update()
+    {
+        CheckForLeverActivation();
+    }
+
+    // If lever is activated, begin lever activation sequence.
+    void CheckForLeverActivation()
     {
         if (isActivated)
         {
-            animator.SetBool("PullLever", true);
-
-            if (!audioPlayed)
-            {
-                audioSource.PlayOneShot(leverSound);
-
-                audioPlayed = true;
-            }
-
-            if (!Counterpart.GetComponent<Lever>().isActivated && !Complete)
-            {
-                leverTimer -= Time.deltaTime;
-            }
+            PlayAudioAndAnimation();
+            SubtractFromLeverTimer();
 
             if (Counterpart.GetComponent<Lever>().isActivated && leverTimer > 0)
             {
-                Complete = true;
-                Counterpart.GetComponent<Lever>().Complete = true;
-
-                Door.GetComponent<Door>().Open();
-
-                activateText.enabled = false;
+                CompleteLeverSequence();
             }
             else if (leverTimer <= 0)
             {
-                animator.SetBool("PullLever", false);
-                
-                Counterpart.GetComponent<Lever>().isActivated = false;
-
-                audioPlayed = false;
-                isActivated = false;
-                leverTimer = 1.5f;
+                EndLeverSequence();
             }
         }
     }
 
+    // Plays lever activation sound and animation.
+    void PlayAudioAndAnimation()
+    {
+        animator.SetBool("PullLever", true);
+
+        if (!audioPlayed)
+        {
+            audioSource.PlayOneShot(leverSound);
+
+            audioPlayed = true;
+        }
+    }
+
+    // Subtracts from lever countdown timer as long as the lever sequence is
+    // not complete and the countdown timer is greater than 1;
+    void SubtractFromLeverTimer()
+    {
+        if (!Counterpart.GetComponent<Lever>().isActivated && !Complete && leverTimer > 0)
+        {
+            leverTimer -= Time.deltaTime;
+        }
+    }
+
+    // Opens specified door if both levers have been activated before time runs out.
+    void CompleteLeverSequence()
+    {
+        Complete = true;
+        Counterpart.GetComponent<Lever>().Complete = true;
+
+        Door.GetComponent<Door>().Open();
+
+        activateText.enabled = false;
+    }
+
+    // Resets lever sequence if both levers were not activated before time runs out.
+    void EndLeverSequence()
+    {
+        animator.SetBool("PullLever", false);
+                
+        Counterpart.GetComponent<Lever>().isActivated = false;
+
+        audioPlayed = false;
+        isActivated = false;
+        leverTimer = 1.5f;
+    }
+
+    // Checks whether clone or player is currently within the lever trigger,
+    // and grants interaction to whichever one is in the trigger.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !isClone)
@@ -91,7 +130,7 @@ public class Lever : MonoBehaviour
             activateText.enabled = true;
             
             playerInteractions = other.GetComponent<PlayerInteractions>();
-            playerInteractions.canPress = true;
+            playerInteractions.canPressLever = true;
 
             isPlayer = true;
         }
@@ -100,12 +139,14 @@ public class Lever : MonoBehaviour
             activateText.enabled = true;
             
             cloneInteractions = other.GetComponent<CloneInteractions>();
-            cloneInteractions.canPress = true;
+            cloneInteractions.canPressLever = true;
 
             isClone = true;
         }
     }
 
+    // Checks whether clone or player is currently exiting the lever trigger,
+    // and disables interaction for whichever one is exiting the trigger.
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && isPlayer)
@@ -114,7 +155,7 @@ public class Lever : MonoBehaviour
             
             activateText.enabled = false;
             
-            playerInteractions.canPress = false;
+            playerInteractions.canPressLever = false;
             
             isPlayer = false;
         }
@@ -122,7 +163,7 @@ public class Lever : MonoBehaviour
         {
             activateText.enabled = false;
             
-            cloneInteractions.canPress = false;
+            cloneInteractions.canPressLever = false;
             
             isClone = false;
         }

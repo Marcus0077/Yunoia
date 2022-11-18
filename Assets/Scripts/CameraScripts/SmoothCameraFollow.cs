@@ -40,7 +40,7 @@ public class SmoothCameraFollow : MonoBehaviour
     [Range(0.001f, 0.1f)]
     public float rotationSmoothSpeed;
 
-    // Get references and initialize variables when camera is activated.
+    // Get references and initialize variables when camera is spawned.
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -66,6 +66,7 @@ public class SmoothCameraFollow : MonoBehaviour
         ChangeCameraRotation();
     }
 
+    // Change the main camera position depending on the position offset values.
     private void ChangeCameraPosition()
     {
         positionOffset = new Vector3(positionOffsetX, positionOffsetY, positionOffsetZ);
@@ -75,6 +76,7 @@ public class SmoothCameraFollow : MonoBehaviour
         transform.position = smoothedPosition;
     }
 
+    // Change the main camera rotation depending on the rotation offset values.
     private void ChangeCameraRotation()
     {
         rotationOffset = new Vector3(rotationOffsetX, rotationOffsetY, rotationOffsetZ);
@@ -82,6 +84,7 @@ public class SmoothCameraFollow : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), rotationSmoothSpeed);
     }
     
+    // Sets camera angle to a further and wider position and rotation. (experimental)
     public void WideAngleCamera()
     {
         rotationSmoothSpeed = 0.01f;
@@ -97,7 +100,7 @@ public class SmoothCameraFollow : MonoBehaviour
         rotationSmoothSpeed = 0.025f;
     }
 
-    // Sets camera angle to a further and higher position and rotation.
+    // Sets camera angle to a further and higher position and rotation. (experimental)
     public void HigherAngleCamera()
     {
         positionOffsetX = -15;
@@ -108,7 +111,7 @@ public class SmoothCameraFollow : MonoBehaviour
         rotationOffsetY = 90;
         rotationOffsetZ = 0;
     }
-    // Sets camera angle to a closer and lower position and rotation.
+    // Sets camera angle to a closer and lower position and rotation. (experimental)
     public void RegularAngleCamera()
     {
         positionOffsetX = -9;

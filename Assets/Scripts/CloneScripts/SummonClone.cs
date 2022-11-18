@@ -19,6 +19,8 @@ public class SummonClone : MonoBehaviour
     public GameObject ClonePrefab;
     public GameObject clone;
     public bool cloneSummoned;
+    
+    // Cooldown variables.
     public float cooldown = 0;
     float cdRemaining;
 
@@ -26,6 +28,7 @@ public class SummonClone : MonoBehaviour
     public LayerMask ground;
     public LayerMask wall;
 
+    // Audio variables.
     [SerializeField] AudioSource cloneSound;
     [SerializeField] Animator uiAnim;
 
@@ -46,11 +49,10 @@ public class SummonClone : MonoBehaviour
         {
             SummonAClone();
         }
-        
     }
     
-    // Summon a clone at a specified location if they are not too close to a wall 
-    // and if the clone will spawn on the ground.
+    // Summons a clone at a specified location if they are not too close to a solid object 
+    // and if the clone will spawn on the ground, using raycasts.
     // Freezes player and deactivates ability to summon a clone.
     void SummonAClone()
     {
@@ -59,16 +61,18 @@ public class SummonClone : MonoBehaviour
         
         RaycastHit hit;
 
+        // Debug rays.
         Debug.DrawRay(transform.position, Vector3.back * 2f, Color.green, 2f);
         Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
         
         
-        if (((Physics.Raycast(transform.position, Vector3.back, out hit, 2f) || 
+        if ((((Physics.Raycast(transform.position, Vector3.back, out hit, 2f) || 
               Physics.Raycast(transform.position, Vector3.back, out hit, 1.5f) || 
-              Physics.Raycast(transform.position, Vector3.back, out hit, 1f) && hit.collider.isTrigger)) || 
+              Physics.Raycast(transform.position, Vector3.back, out hit, 1f)) && !hit.collider.isTrigger)) || 
             !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1f, ground))
         {
-            Debug.Log("Did Hit");
+            // Debug text if clone cannot be summoned.
+            Debug.Log("Clone cannot be summoned here.");
         }
         else
         {
@@ -85,14 +89,18 @@ public class SummonClone : MonoBehaviour
         
             clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + (Vector3.back + new Vector3(0f, 0f, -.75f)), 
                 Quaternion.LookRotation(-Vector3.forward));
-                clone.GetComponent<CloneInteractions>().anim = uiAnim;
-                clone.GetComponent<ExitClone>().anim = uiAnim;
-                uiAnim.SetBool("isClone", true);
+            
+            clone.GetComponent<CloneInteractions>().anim = uiAnim;
+            clone.GetComponent<ExitClone>().anim = uiAnim;
+            uiAnim.SetBool("isClone", true);
+            
             StartCoroutine(Cooldown());
         }
 
     }
 
+    // Subtracts from clone summon cooldown timer while it is above 0, 
+    // and returns the current timer value.
     private IEnumerator Cooldown()
     {
         cdRemaining = cooldown;
@@ -103,6 +111,7 @@ public class SummonClone : MonoBehaviour
         }
     }
 
+    // Returns the remaining cooldown time as long as it is above 0.
     public float CooldownRemaining()
     {
         if (cdRemaining > 0)

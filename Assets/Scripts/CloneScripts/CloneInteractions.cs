@@ -29,10 +29,12 @@ public class CloneInteractions : MonoBehaviour
 
     // Clone version bool.
     public bool cloneRestored;
-
-    public bool canPress;
+    
+    // Interactable Bools
+    public bool canPressLever;
     public bool canPressDoor;
 
+    // Particle Variables
     public GameObject duplicateParticles;
     private float footPos;
 
@@ -63,7 +65,7 @@ public class CloneInteractions : MonoBehaviour
         combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneRestored = true;
-        canPress = false;
+        canPressLever = false;
 
         footPos = duplicateParticles.transform.position.y;
     }
@@ -74,14 +76,33 @@ public class CloneInteractions : MonoBehaviour
     {
         SwitchPlaces();
 
-        if (canPress && press.WasPressedThisFrame())
+        CheckLeverPress();
+        CheckDoorPress();
+        
+    }
+
+    // Called between frames.
+    private void FixedUpdate()
+    {
+        duplicateParticles.transform.position = new Vector3(duplicateParticles.transform.position.x, footPos, duplicateParticles.transform.position.z);
+    }
+
+    // Checks if clone can activate a lever and whether they activated it.
+    void CheckLeverPress()
+    {
+        if (canPressLever && press.WasPressedThisFrame())
         {
             if (lever != null && !lever.isActivated && this.GetComponent<BasicMovement>().canMove)
             {
                 lever.isActivated = true;
             }
         }
-        else if (canPressDoor && press.WasPressedThisFrame())
+    }
+
+    // Checks if clone can activate a door and whether they activated it.
+    void CheckDoorPress()
+    {
+        if (canPressDoor && press.WasPressedThisFrame())
         {
             if (door != null && door.canInteract)
             {
@@ -90,12 +111,7 @@ public class CloneInteractions : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        duplicateParticles.transform.position = new Vector3(duplicateParticles.transform.position.x, footPos, duplicateParticles.transform.position.z);
-    }
-
-    // Switch clone and player control depending on which is
+    // Switch clone and player control and camera depending on which is
     // currently in control.
     private void SwitchPlaces()
     {
@@ -118,6 +134,7 @@ public class CloneInteractions : MonoBehaviour
                 Player.GetComponent<AbilityPush>().enabled = true;
 
                 smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+                basicMovementPlayer.CheckCameraState();
             }
             else if (basicMovementClone.canMove == false)
             {
@@ -136,10 +153,12 @@ public class CloneInteractions : MonoBehaviour
                 Player.GetComponent<AbilityPush>().enabled = false;
 
                 smoothCameraFollow.target = this.transform;
+                basicMovementClone.CheckCameraState();
             }
         }
     }
     
+    // Checks if clone is in a lever or door trigger(s).
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Lever"))

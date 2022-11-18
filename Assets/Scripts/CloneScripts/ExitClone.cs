@@ -184,7 +184,11 @@ public class ExitClone : MonoBehaviour
         else if (other.CompareTag("Lever"))
         {
             lever = other.GetComponent<Lever>();
-            isOnLever = true;
+
+            if (lever.isClone)
+            {
+                isOnLever = true;
+            }
         }
     }
 
@@ -193,6 +197,10 @@ public class ExitClone : MonoBehaviour
         if (other.CompareTag("PressurePlate"))
         {
             isOnPressurePlate = false;
+            isOnLever = false;
+        }
+        else if (other.CompareTag("Lever"))
+        {
             isOnLever = false;
         }
     }

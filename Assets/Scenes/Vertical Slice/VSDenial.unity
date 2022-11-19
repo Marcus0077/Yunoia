@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0442983, g: 0.0701889, b: 0.13381043, a: 1}
+  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018887, b: 0.13381043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1428876313}
     m_Modifications:
+    - target: {fileID: 1689071385, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 524925044068313934, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 746695966148464027, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
     - target: {fileID: 1804445680587551984, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -186,6 +198,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2839228618449278175, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 4016476444187794422, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 4829246933363552738, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 6027253943254012731, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 7059841251480473521, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
+    - target: {fileID: 7249191646969724779, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: d311cdf785383354ea78ad5311130773, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
 --- !u!4 &15820755 stripped
@@ -1853,6 +1889,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4121606559162394652, guid: 10248fe8f69923240bf41892593bb74a, type: 3}
+--- !u!82 &177412587 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 746695966148464027, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+  m_PrefabInstance: {fileID: 3184693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &178148782 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 10248fe8f69923240bf41892593bb74a, type: 3}
@@ -2120,7 +2161,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1464342917}
   m_HandleRect: {fileID: 1275757206}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
@@ -7239,11 +7280,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.095611, y: 0.95186996, z: 4.504402}
   m_Center: {x: -1.5478055, y: 0.47593498, z: 2.7488823}
---- !u!82 &618954412 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2839228618449278175, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
-  m_PrefabInstance: {fileID: 3184693}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &620740846
 GameObject:
   m_ObjectHideFlags: 0
@@ -8855,6 +8891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 763075327}
   - component: {fileID: 763075328}
+  - component: {fileID: 763075329}
   m_Layer: 5
   m_Name: SFX Slider
   m_TagString: Untagged
@@ -8929,17 +8966,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 980149505}
   m_HandleRect: {fileID: 1848199390}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1321045901}
-        m_TargetAssemblyTypeName: SettingController, Assembly-CSharp
-        m_MethodName: UpdateSound
-        m_Mode: 1
+      - m_Target: {fileID: 763075329}
+        m_TargetAssemblyTypeName: NewSettingsController, Assembly-CSharp
+        m_MethodName: OnChangeSlider
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8948,6 +8985,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &763075329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763075326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74009c77566c5494e9015a62c9da59b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: 24100000, guid: d311cdf785383354ea78ad5311130773, type: 2}
+  Source:
+  - {fileID: 325713336}
+  - {fileID: 52826614}
+  - {fileID: 565047402}
+  - {fileID: 1170106800}
+  - {fileID: 46964087}
+  - {fileID: 177412587}
+  - {fileID: 1932779147}
+  - {fileID: 856973982}
+  MixMode: 2
 --- !u!1001 &775900635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9842,6 +9902,11 @@ Transform:
   m_Father: {fileID: 1428876313}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &856973982 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7249191646969724779, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+  m_PrefabInstance: {fileID: 3184693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &863944527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16277,7 +16342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1321045900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16291,13 +16356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmAudio: {fileID: 814752748}
-  sfxAudio:
-  - {fileID: 618954412}
-  - {fileID: 46964087}
-  - {fileID: 1170106800}
-  - {fileID: 565047402}
-  - {fileID: 52826614}
-  - {fileID: 325713336}
+  sfxAudio: []
 --- !u!114 &1321045901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16314,13 +16373,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 763075328}
   masSlider: {fileID: 1537379954}
   bgmAudio: {fileID: 814752748}
-  sfxAudio:
-  - {fileID: 618954412}
-  - {fileID: 46964087}
-  - {fileID: 1170106800}
-  - {fileID: 565047402}
-  - {fileID: 52826614}
-  - {fileID: 325713336}
+  sfxAudio: []
 --- !u!4 &1321045902
 Transform:
   m_ObjectHideFlags: 0
@@ -20047,7 +20100,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 143793582}
   m_HandleRect: {fileID: 644119796}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
@@ -24005,6 +24058,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4706656119230803732, guid: d57b4e732ca0e5e4da0bbb7b0fbc020a, type: 3}
   m_PrefabInstance: {fileID: 595785397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1932779147 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 524925044068313934, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+  m_PrefabInstance: {fileID: 3184693}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1941694519
 GameObject:

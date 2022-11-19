@@ -20,14 +20,20 @@ public class AbilityPush : MonoBehaviour
     public float cdRemaining;
     Transform shape;
 
-    public GameObject pushEffect;
+    public GameObject smallPushEffect;
+    public GameObject largePushEffect;
+    public GameObject chargePushEffect;
+
+    public float chargeRadius;
+    public float pushRadius;
+    public float smallPushRadius;
 
     [SerializeField] private AudioSource source;
     
     // Start is called before the first frame update
     void Start()
     {
-
+    
     }
 
     void PushTargets()
@@ -55,16 +61,44 @@ public class AbilityPush : MonoBehaviour
 
     void RenderVolume(float radius)
     {
-        Instantiate(pushEffect, this.transform.position, Quaternion.identity);
+        GameObject smallPushDestroy = Instantiate(smallPushEffect, this.transform.position, Quaternion.identity);
+        smallPushDestroy.transform.GetChild(0).localScale = new Vector3(smallPushRadius/2, smallPushRadius/2, smallPushRadius/2);
+        smallPushDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallPushDestroy.transform.GetChild(0).GetChild(1).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallPushDestroy.transform.GetChild(0).GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallPushDestroy.transform.GetChild(0).GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+
+        StartCoroutine(DestroyMutedParticles(smallPushDestroy));
+
+        // shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+        // Destroy(shape.GetComponent<Collider>());
+        // shape.localScale = new Vector3(radius, radius, radius);
+        // shape.position = transform.position;
+        // shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
+        // shape.GetComponent<Renderer>().material.color = new Color(1, .3f, .3f, .2f);
+        // shape.GetComponent<Renderer>().enabled = true;
+        // StartCoroutine(EraseRender(shape)); // erase after 1 second
+    }
+
+    public IEnumerator DestroyMutedParticles(GameObject smallPushDestroy)
+    {
+        yield return new WaitForSeconds(2);
         
-        shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
-        Destroy(shape.GetComponent<Collider>());
-        shape.localScale = new Vector3(radius, radius, radius);
-        shape.position = transform.position;
-        shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
-        shape.GetComponent<Renderer>().material.color = new Color(1, .3f, .3f, .2f);
-        shape.GetComponent<Renderer>().enabled = true;
-        StartCoroutine(EraseRender(shape)); // erase after 1 second
+        Destroy(smallPushDestroy);
+    }
+    
+    public IEnumerator DestroyRestoredParticles(GameObject largeEffectDestroy)
+    {
+        yield return new WaitForSeconds(2);
+        
+        Destroy(largeEffectDestroy);
+    }
+    
+    public IEnumerator DestroyChargeParticles(GameObject chargeEffectDestroy)
+    {
+        yield return new WaitForSeconds(2);
+        
+        Destroy(chargeEffectDestroy);
     }
 
     public void DestroyShape()
@@ -77,30 +111,60 @@ public class AbilityPush : MonoBehaviour
 
     private IEnumerator RenderChargeVolume()
     {
-        shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
-        Destroy(shape.GetComponent<Collider>());
-        shape.position = transform.position;
-        shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
-        shape.GetComponent<Renderer>().material.color = new Color(1, 1, 1, .5f);
-        shape.GetComponent<Renderer>().enabled = true;
+        // shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+        // Destroy(shape.GetComponent<Collider>());
+        // shape.position = transform.position;
+        // shape.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
+        // shape.GetComponent<Renderer>().material.color = new Color(1, 1, 1, .5f);
+        // shape.GetComponent<Renderer>().enabled = true;
+        
         float radius = minPush;
         float timeCharging = Time.time;
 
-        Instantiate(pushEffect, this.transform.position, Quaternion.identity);
-        
+        GameObject chargeEffectDestroy = Instantiate(chargePushEffect, this.transform.position, Quaternion.identity);
+            
         while (charging)
         {
             timeCharging = (Time.time - chargeTime) * chargeSpeed + minPush;
+            
             //int radius = 2*Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush);
+            
             radius = Mathf.Clamp(timeCharging, minPush, maxChargeLevel + minPush);
+            
             pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
-            shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2 * pushedLevel), 1f / ( 2* pushedLevel), .2f + (.1f * pushedLevel));
+            
+            // shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2 * pushedLevel), 1f / ( 2* pushedLevel), .2f + (.1f * pushedLevel));
+            
             radius *= 2;
 
-            shape.localScale = new Vector3(radius, radius, radius);
-            shape.position = transform.position;
+            chargeRadius = radius / 8;
+            pushRadius = radius / 2;
+
+            chargeEffectDestroy.transform.position = this.transform.position;
+            chargeEffectDestroy.transform.GetChild(0).localScale = new Vector3(chargeRadius, chargeRadius, chargeRadius);
+            chargeEffectDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(chargeRadius, chargeRadius, chargeRadius);
+
+            // shape.localScale = new Vector3(radius, radius, radius);
+            // shape.position = transform.position;
+            
             yield return new WaitForSeconds(Time.deltaTime);
         }
+
+        StartCoroutine(DestroyChargeParticles(chargeEffectDestroy));
+        
+        GameObject largeEffectDestroy = Instantiate(largePushEffect, this.transform.position, Quaternion.identity);
+        largeEffectDestroy.transform.GetChild(0).localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
+        largeEffectDestroy.transform.GetChild(1).localScale = new Vector3(pushRadius/2, 1f, pushRadius/2);
+        largeEffectDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
+        largeEffectDestroy.transform.GetChild(0).GetChild(1).localScale = new Vector3(pushRadius/2, pushRadius/2, pushRadius/2);
+        largeEffectDestroy.transform.GetChild(0).GetChild(2).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
+        largeEffectDestroy.transform.GetChild(0).GetChild(3).localScale = new Vector3(pushRadius/2, pushRadius/2, pushRadius/2);
+        largeEffectDestroy.transform.GetChild(0).GetChild(4).localScale = new Vector3(pushRadius/4, pushRadius/4, pushRadius/4);
+        largeEffectDestroy.transform.GetChild(0).GetChild(5).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
+        largeEffectDestroy.transform.GetChild(0).GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
+
+        StartCoroutine(DestroyRestoredParticles(largeEffectDestroy));
+
         yield return new WaitForSeconds(1);
 
         if (shape != null)

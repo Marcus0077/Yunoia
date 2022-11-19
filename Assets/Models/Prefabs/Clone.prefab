@@ -1136,7 +1136,8 @@ MonoBehaviour:
     m_Flags: 0
   shoot: {fileID: 1693950768805406485}
   yank: {fileID: 7541856598389149267}
-  grappleLaunch: {fileID: 517576486219800734, guid: 95f1507119b97ea4588c085442261edf, type: 3}
+  grappleEffect: {fileID: 517576486219800734, guid: 95f1507119b97ea4588c085442261edf, type: 3}
+  grappleEffectDestroy: {fileID: 0}
 --- !u!114 &8397525453568900783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,7 +1158,12 @@ MonoBehaviour:
   pushedLevel: 0
   range: 0
   cdRemaining: 0
-  pushEffect: {fileID: 0}
+  smallPushEffect: {fileID: 911370077971938100, guid: 03db4cf4b3cc22c44baa021797a739a9, type: 3}
+  largePushEffect: {fileID: 667768455298700963, guid: 328d5f5903931ee45aea8d3c04cc0178, type: 3}
+  chargePushEffect: {fileID: 3481536621180637866, guid: c36db729420d1bf479404240d8ab6fe1, type: 3}
+  chargeRadius: 0
+  pushRadius: 0
+  smallPushRadius: 1.5
   source: {fileID: 3301278677247772723}
 --- !u!54 &5827308682441603359
 Rigidbody:
@@ -1277,7 +1283,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   cloneRestored: 0
-  canPress: 0
+  canPressLever: 0
   canPressDoor: 0
   duplicateParticles: {fileID: 7627816596865247460}
   anim: {fileID: 0}

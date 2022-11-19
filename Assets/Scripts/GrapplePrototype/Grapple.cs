@@ -41,7 +41,8 @@ public class Grapple : MonoBehaviour
     // Additions from Will :)
     private bool releasedHook = false; // input testing
 
-    public GameObject grappleLaunch;
+    public GameObject grappleEffect;
+    public GameObject grappleEffectDestroy;
 
     // Start is called before the first frame update
     void Start()
@@ -52,12 +53,17 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (grappleEffectDestroy != null)
+        {
+            StartCoroutine(DestroyGrappleEffect(grappleEffectDestroy));
+        }
+        
         if (hook == null && shootHook.IsPressed() && ready == true)
         {
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
             shoot.Play();
 
-            Instantiate(grappleLaunch, shootTransform.position, this.transform.rotation);
+            grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, this.transform.rotation);
 
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());
@@ -130,6 +136,14 @@ public class Grapple : MonoBehaviour
         {
             playerRB.AddForce((hook.transform.position - transform.position).normalized * swingSpeed, ForceMode.Impulse);
         }
+    }
+
+    public IEnumerator DestroyGrappleEffect(GameObject grappleEffectDestroy)
+    {
+        Debug.Log("works");
+        yield return new WaitForSeconds(2);
+        
+        Destroy(grappleEffectDestroy);
     }
 
     public void StartGrapple()

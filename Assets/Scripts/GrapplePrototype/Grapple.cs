@@ -44,9 +44,12 @@ public class Grapple : MonoBehaviour
     public GameObject grappleEffect;
     public GameObject grappleEffectDestroy;
 
+    public bool grappleNeedsDeath;
+
     // Start is called before the first frame update
     void Start()
     {
+        grappleNeedsDeath = false;
         grappleActive = false;
     }
 
@@ -55,7 +58,7 @@ public class Grapple : MonoBehaviour
     {
         if (grappleEffectDestroy != null)
         {
-            StartCoroutine(DestroyGrappleEffect(grappleEffectDestroy));
+            grappleNeedsDeath = true;
         }
         
         if (hook == null && shootHook.IsPressed() && ready == true)
@@ -136,14 +139,6 @@ public class Grapple : MonoBehaviour
         {
             playerRB.AddForce((hook.transform.position - transform.position).normalized * swingSpeed, ForceMode.Impulse);
         }
-    }
-
-    public IEnumerator DestroyGrappleEffect(GameObject grappleEffectDestroy)
-    {
-        Debug.Log("works");
-        yield return new WaitForSeconds(2);
-        
-        Destroy(grappleEffectDestroy);
     }
 
     public void StartGrapple()

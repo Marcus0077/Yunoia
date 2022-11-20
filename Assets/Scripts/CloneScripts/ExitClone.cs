@@ -113,16 +113,24 @@ public class ExitClone : MonoBehaviour
     {
         if (despawnClone)
         {
-            if (isOnPressurePlate)
+            CheckInteractables();
+
+            if (this.GetComponent<AbilityPush>().chargeEffectDestroy != null)
             {
-                pressurePlate.AppearWall();
-                pressurePlate.isClone = false;
+                Destroy(this.GetComponent<AbilityPush>().chargeEffectDestroy);
             }
 
-            if (isOnLever)
+            if (this.GetComponent<AbilityPush>().smallEffectDestroy != null)
             {
-                lever.activateText.enabled = false;
-                lever.isClone = false;
+                Destroy(this.GetComponent<AbilityPush>().smallEffectDestroy);
+            }
+            if (this.GetComponent<AbilityPush>().largeEffectDestroy != null)
+            {
+                Destroy(this.GetComponent<AbilityPush>().largeEffectDestroy);
+            }
+            if (this.GetComponent<Grapple>().grappleEffectDestroy != null)
+            {
+                Destroy(this.GetComponent<Grapple>().grappleEffectDestroy);
             }
 
             this.GetComponent<Grapple>().DestroyHook();
@@ -147,6 +155,21 @@ public class ExitClone : MonoBehaviour
         else
         {
             CloneCountdownTimer();
+        }
+    }
+
+    private void CheckInteractables()
+    {
+        if (isOnPressurePlate)
+        {
+            pressurePlate.AppearWall();
+            pressurePlate.isClone = false;
+        }
+
+        if (isOnLever)
+        {
+            lever.activateText.enabled = false;
+            lever.isClone = false;
         }
     }
 

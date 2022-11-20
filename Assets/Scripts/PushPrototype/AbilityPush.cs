@@ -20,20 +20,32 @@ public class AbilityPush : MonoBehaviour
     public float cdRemaining;
     Transform shape;
 
+    // Particle Variables
     public GameObject smallPushEffect;
     public GameObject largePushEffect;
     public GameObject chargePushEffect;
+    
+    public GameObject smallEffectDestroy;
+    public GameObject largeEffectDestroy;
+    public GameObject chargeEffectDestroy;
+    
+    public bool smallPushNeedsDeath;
+    public bool largePushNeedsDeath;
+    public bool chargePushNeedsDeath;
 
     public float chargeRadius;
     public float pushRadius;
     public float smallPushRadius;
+    
 
     [SerializeField] private AudioSource source;
     
     // Start is called before the first frame update
     void Start()
     {
-    
+        smallPushNeedsDeath = false;
+        largePushNeedsDeath = false;
+        chargePushNeedsDeath = false;
     }
 
     void PushTargets()
@@ -61,14 +73,15 @@ public class AbilityPush : MonoBehaviour
 
     void RenderVolume(float radius)
     {
-        GameObject smallPushDestroy = Instantiate(smallPushEffect, this.transform.position, Quaternion.identity);
-        smallPushDestroy.transform.GetChild(0).localScale = new Vector3(smallPushRadius/2, smallPushRadius/2, smallPushRadius/2);
-        smallPushDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallPushDestroy.transform.GetChild(0).GetChild(1).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallPushDestroy.transform.GetChild(0).GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallPushDestroy.transform.GetChild(0).GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-
-        StartCoroutine(DestroyMutedParticles(smallPushDestroy));
+        smallEffectDestroy = Instantiate(smallPushEffect, this.transform.position, Quaternion.identity);
+        smallEffectDestroy.transform.GetChild(0).localScale = new Vector3(smallPushRadius/2, smallPushRadius/2, smallPushRadius/2);
+        smallEffectDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.transform.GetChild(0).GetChild(1).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.transform.GetChild(0).GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.transform.GetChild(0).GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        
+        // Tell particle destroyer to destroy small push particles.
+        smallPushNeedsDeath = true;
 
         // shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
         // Destroy(shape.GetComponent<Collider>());
@@ -78,27 +91,6 @@ public class AbilityPush : MonoBehaviour
         // shape.GetComponent<Renderer>().material.color = new Color(1, .3f, .3f, .2f);
         // shape.GetComponent<Renderer>().enabled = true;
         // StartCoroutine(EraseRender(shape)); // erase after 1 second
-    }
-
-    public IEnumerator DestroyMutedParticles(GameObject smallPushDestroy)
-    {
-        yield return new WaitForSeconds(2);
-        
-        Destroy(smallPushDestroy);
-    }
-    
-    public IEnumerator DestroyRestoredParticles(GameObject largeEffectDestroy)
-    {
-        yield return new WaitForSeconds(2);
-        
-        Destroy(largeEffectDestroy);
-    }
-    
-    public IEnumerator DestroyChargeParticles(GameObject chargeEffectDestroy)
-    {
-        yield return new WaitForSeconds(2);
-        
-        Destroy(chargeEffectDestroy);
     }
 
     public void DestroyShape()
@@ -121,7 +113,7 @@ public class AbilityPush : MonoBehaviour
         float radius = minPush;
         float timeCharging = Time.time;
 
-        GameObject chargeEffectDestroy = Instantiate(chargePushEffect, this.transform.position, Quaternion.identity);
+        chargeEffectDestroy = Instantiate(chargePushEffect, this.transform.position, Quaternion.identity);
             
         while (charging)
         {
@@ -150,9 +142,10 @@ public class AbilityPush : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        StartCoroutine(DestroyChargeParticles(chargeEffectDestroy));
-        
-        GameObject largeEffectDestroy = Instantiate(largePushEffect, this.transform.position, Quaternion.identity);
+        // Tell particle destroyer to destroy charge push particles.
+        chargePushNeedsDeath = true;
+
+        largeEffectDestroy = Instantiate(largePushEffect, this.transform.position, Quaternion.identity);
         largeEffectDestroy.transform.GetChild(0).localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
         largeEffectDestroy.transform.GetChild(1).localScale = new Vector3(pushRadius/2, 1f, pushRadius/2);
         largeEffectDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
@@ -163,7 +156,8 @@ public class AbilityPush : MonoBehaviour
         largeEffectDestroy.transform.GetChild(0).GetChild(5).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
         largeEffectDestroy.transform.GetChild(0).GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
 
-        StartCoroutine(DestroyRestoredParticles(largeEffectDestroy));
+        // Tell particle destroyer to destroy large push particles.
+        largePushNeedsDeath = true;
 
         yield return new WaitForSeconds(1);
 

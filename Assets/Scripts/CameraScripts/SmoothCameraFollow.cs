@@ -99,15 +99,29 @@ public class SmoothCameraFollow : MonoBehaviour
 
         rotationSmoothSpeed = 0.025f;
     }
+    
+    // back angle camera follow
+    public void BackAngleCamera()
+    {
+        positionOffsetX = -10f;
+        positionOffsetY = 7f;
+        positionOffsetZ = 6;
+
+        rotationOffsetX = 25f;
+        rotationOffsetY = 120f;
+        rotationOffsetZ = 0f;
+    }
+    
+    // setup camera bounds
 
     // Sets camera angle to a further and higher position and rotation. (experimental)
     public void HigherAngleCamera()
     {
         positionOffsetX = -15;
-        positionOffsetY = 4.5f;
+        positionOffsetY = 8f;
         positionOffsetZ = 0;
 
-        rotationOffsetX = 10;
+        rotationOffsetX = 15;
         rotationOffsetY = 90;
         rotationOffsetZ = 0;
     }

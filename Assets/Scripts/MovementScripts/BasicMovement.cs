@@ -159,6 +159,10 @@ public class BasicMovement : MonoBehaviour
             {
                 smoothCameraFollow.WideAngleCamera();
             }
+            else if (curCamState == "BackView")
+            {
+                smoothCameraFollow.BackAngleCamera();
+            }
         }
     }
 
@@ -350,6 +354,11 @@ public class BasicMovement : MonoBehaviour
         if (other.CompareTag("WideView"))
         {
             smoothCameraFollow.WideAngleCamera();
+        }
+        
+        if (other.CompareTag("BackView"))
+        {
+            smoothCameraFollow.BackAngleCamera();
         }
         
         curCamState = other.tag;

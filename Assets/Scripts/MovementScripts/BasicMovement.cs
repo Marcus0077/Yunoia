@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class BasicMovement : MonoBehaviour
 {
@@ -43,6 +45,7 @@ public class BasicMovement : MonoBehaviour
     // Camera Variables
     private SmoothCameraFollow smoothCameraFollow;
     public string curCamState;
+    private int curRoom;
 
     // Sound Variables
     [SerializeField] private AudioSource dashSound;
@@ -85,7 +88,6 @@ public class BasicMovement : MonoBehaviour
 
         SetWalkingAnimation();
         SetRunSound();
-        
     }
 
     // Called each frame.
@@ -344,24 +346,45 @@ public class BasicMovement : MonoBehaviour
         if (other.CompareTag("HigherView"))
         {
             smoothCameraFollow.HigherAngleCamera();
+            curCamState = other.tag;
         }
-
+        
         if (other.CompareTag("RegularView"))
         {
             smoothCameraFollow.RegularAngleCamera();
+            curCamState = other.tag;
         }
         
         if (other.CompareTag("WideView"))
         {
             smoothCameraFollow.WideAngleCamera();
+            curCamState = other.tag;
         }
         
         if (other.CompareTag("BackView"))
         {
             smoothCameraFollow.BackAngleCamera();
+            curCamState = other.tag;
         }
         
-        curCamState = other.tag;
+        
+        if (other.CompareTag("SwitchBounds1"))
+        {
+            if (curRoom == 1)
+            {
+                smoothCameraFollow.GetComponent<CinemachineConfiner>().m_BoundingVolume =
+                    GameObject.FindWithTag("Room2Volume").GetComponent<Collider>();
+        
+                curRoom ++;
+            }
+            else if (curRoom == 2)
+            {
+                smoothCameraFollow.GetComponent<CinemachineConfiner>().m_BoundingVolume =
+                    GameObject.FindWithTag("Room1Volume").GetComponent<Collider>();
+        
+                curRoom--;
+            }
+        }
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

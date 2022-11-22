@@ -57,7 +57,7 @@ public class CloneInteractions : MonoBehaviour
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
 
-        smoothCameraFollow.target = this.transform;
+        //smoothCameraFollow.target = this.transform;
         
         playerControls = new PlayerControls();
         

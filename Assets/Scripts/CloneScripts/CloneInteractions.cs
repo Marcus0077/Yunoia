@@ -132,8 +132,7 @@ public class CloneInteractions : MonoBehaviour
 
                 Player.GetComponent<Grapple>().enabled = true;
                 Player.GetComponent<AbilityPush>().enabled = true;
-
-                smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+                
                 basicMovementPlayer.CheckCameraState();
             }
             else if (basicMovementClone.canMove == false)
@@ -151,8 +150,7 @@ public class CloneInteractions : MonoBehaviour
 
                 Player.GetComponent<Grapple>().enabled = false;
                 Player.GetComponent<AbilityPush>().enabled = false;
-
-                smoothCameraFollow.target = this.transform;
+                
                 basicMovementClone.CheckCameraState();
             }
         }

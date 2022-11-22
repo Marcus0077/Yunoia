@@ -7,9 +7,6 @@ using UnityEngine.InputSystem;
 
 public class SmoothCameraFollow : MonoBehaviour
 {
-    // Transform references
-    public Transform target;
-    
     // Input variables
     PlayerControls playerControls;
     public InputAction exit;
@@ -45,9 +42,7 @@ public class SmoothCameraFollow : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        
+
         RegularAngleCamera();
     }
 
@@ -72,7 +67,7 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         positionOffset = new Vector3(positionOffsetX, positionOffsetY, positionOffsetZ);
 
-        Vector3 desiredPosition = target.position + positionOffset;
+        Vector3 desiredPosition = positionOffset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, positionSmoothSpeed);
         transform.position = smoothedPosition;
     }

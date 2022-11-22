@@ -45,7 +45,8 @@ public class BasicMovement : MonoBehaviour
     // Camera Variables
     private SmoothCameraFollow smoothCameraFollow;
     public string curCamState;
-    private int curRoom;
+    public Animator stateDrivenCamAnimator;
+    public int curRoom;
 
     // Sound Variables
     [SerializeField] private AudioSource dashSound;
@@ -64,6 +65,16 @@ public class BasicMovement : MonoBehaviour
     {
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
+        stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
+
+        if (this.GameObject().CompareTag("Player"))
+        {
+            curRoom = 1;
+        }
+        else
+        {
+            curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
+        }
 
         moveSpeed = 4f;
         maxSpeed = 18f;
@@ -77,8 +88,6 @@ public class BasicMovement : MonoBehaviour
         
         canMove = true;
         isFrozen = false;
-        
-        SetInitialCameraState();
     }
     
     // Called between frames.
@@ -129,42 +138,23 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
-    // Set player camera state to regular at beginning of game.
-    // Set clone camera state to player camera state when clone is instantiated.
-    private void SetInitialCameraState()
-    {
-        if (this.CompareTag("Player"))
-        {
-            curCamState = "RegularView";
-        }
-        else
-        {
-            curCamState = GameObject.FindWithTag("Player").GetComponent<BasicMovement>().curCamState;
-        }
-    }
-
     // Changes camera orientation depending on whether player or clone is in
     // control and what their current camera state it.
     public void CheckCameraState()
     {
         if (canMove)
         {
-            if (curCamState == "RegularView")
+            if (curRoom == 1)
             {
-                smoothCameraFollow.RegularAngleCamera();
+                stateDrivenCamAnimator.SetInteger("roomNum", 1);
             }
-            else if (curCamState == "HigherView")
+            else if (curRoom == 2)
             {
-                smoothCameraFollow.HigherAngleCamera();
+                stateDrivenCamAnimator.SetInteger("roomNum", 2);
             }
-            else if (curCamState == "WideView")
-            {
-                smoothCameraFollow.WideAngleCamera();
-            }
-            else if (curCamState == "BackView")
-            {
-                smoothCameraFollow.BackAngleCamera();
-            }
+
+            GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>().Follow =
+                this.transform;
         }
     }
 
@@ -339,49 +329,31 @@ public class BasicMovement : MonoBehaviour
         jump.Disable();
         dash.Disable();
     }
+
+    IEnumerator SetCameraBlend()
+    {
+        GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>()
+            .m_DefaultBlend.m_Time = 1f;
+
+        yield return new WaitForSeconds(1f);
+        
+        GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>()
+            .m_DefaultBlend.m_Time = 0f;
+    }
     
     // Changes camera position and rotation depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("HigherView"))
-        {
-            smoothCameraFollow.HigherAngleCamera();
-            curCamState = other.tag;
-        }
-        
-        if (other.CompareTag("RegularView"))
-        {
-            smoothCameraFollow.RegularAngleCamera();
-            curCamState = other.tag;
-        }
-        
-        if (other.CompareTag("WideView"))
-        {
-            smoothCameraFollow.WideAngleCamera();
-            curCamState = other.tag;
-        }
-        
-        if (other.CompareTag("BackView"))
-        {
-            smoothCameraFollow.BackAngleCamera();
-            curCamState = other.tag;
-        }
-        
-        
         if (other.CompareTag("SwitchBounds1"))
         {
             if (curRoom == 1)
             {
-                smoothCameraFollow.GetComponent<CinemachineConfiner>().m_BoundingVolume =
-                    GameObject.FindWithTag("Room2Volume").GetComponent<Collider>();
-        
-                curRoom ++;
+                stateDrivenCamAnimator.SetInteger("roomNum", 2);
+                curRoom++;
             }
             else if (curRoom == 2)
             {
-                smoothCameraFollow.GetComponent<CinemachineConfiner>().m_BoundingVolume =
-                    GameObject.FindWithTag("Room1Volume").GetComponent<Collider>();
-        
+                stateDrivenCamAnimator.SetInteger("roomNum", 1);
                 curRoom--;
             }
         }

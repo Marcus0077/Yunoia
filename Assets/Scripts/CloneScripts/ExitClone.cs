@@ -144,8 +144,7 @@ public class ExitClone : MonoBehaviour
 
             activeTimerText.text = "";
             combatHandler.healthText.text = "";
-
-            smoothCameraFollow.target = basicMovementPlayer.playerRB.transform;
+            
             basicMovementPlayer.CheckCameraState();
 
             anim.SetBool("isClone", false);

@@ -93,7 +93,9 @@ public class SummonClone : MonoBehaviour
             clone.GetComponent<CloneInteractions>().anim = uiAnim;
             clone.GetComponent<ExitClone>().anim = uiAnim;
             uiAnim.SetBool("isClone", true);
-            
+
+            GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
+
             StartCoroutine(Cooldown());
         }
 

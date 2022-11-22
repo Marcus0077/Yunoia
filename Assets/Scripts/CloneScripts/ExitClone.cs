@@ -13,7 +13,8 @@ public class ExitClone : MonoBehaviour
     
     //UI Experiment
     public Animator anim;
-    
+    public Animator animCover;
+
     // Script references
     private BasicMovement basicMovementPlayer;
     private BasicMovement basicMovementClone;
@@ -41,6 +42,11 @@ public class ExitClone : MonoBehaviour
     // Interactable trigger variables.
     private bool isOnPressurePlate;
     private bool isOnLever;
+
+    public float Timer
+    {
+        get { return cloneActiveTimer; }
+    }
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -148,6 +154,7 @@ public class ExitClone : MonoBehaviour
             basicMovementPlayer.CheckCameraState();
 
             anim.SetBool("isClone", false);
+            animCover.SetBool("isClone", false);
 
             Destroy(this.gameObject);
         }

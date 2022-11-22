@@ -40,6 +40,7 @@ public class CloneInteractions : MonoBehaviour
 
     //Clone UI Experiment here
     public Animator anim;
+    public Animator animCover;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
@@ -120,6 +121,7 @@ public class CloneInteractions : MonoBehaviour
             if (basicMovementPlayer.canMove == false)
             {
                 anim.SetBool("isClone", false);
+                animCover.SetBool("isClone", false);
 
                 basicMovementPlayer.canMove = true;
                 basicMovementClone.canMove = false;
@@ -138,6 +140,7 @@ public class CloneInteractions : MonoBehaviour
             else if (basicMovementClone.canMove == false)
             {
                 anim.SetBool("isClone", true);
+                animCover.SetBool("isClone", true);
 
                 basicMovementPlayer.canMove = false;
                 basicMovementClone.canMove = true;

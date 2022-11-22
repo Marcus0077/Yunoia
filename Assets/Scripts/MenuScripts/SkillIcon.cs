@@ -9,7 +9,7 @@ public class SkillIcon : MonoBehaviour
     [SerializeField]
     TMP_Text cooldownText;
     [SerializeField]
-    RawImage cover;
+    Image cover;
     [SerializeField]
     AbilityType ability;
     enum AbilityType { push, grapple, clone, dash };
@@ -24,22 +24,36 @@ public class SkillIcon : MonoBehaviour
     void Update()
     {
         float value = cooldown.GetCD(ability.ToString());
-        if (value > 0)
+        if (ability == AbilityType.clone)
         {
-            cooldownText.text = (value).ToString("F1");
-            if (cover.color.a < .3f)
+            if (value > 0)
             {
-                Color currColor = cover.color;
-                currColor.a = 1f;
-                cover.color = currColor;
+                cover.fillAmount = 1 - value;
+            }
+            else if(cover.fillAmount != 1)
+            {
+                cover.fillAmount = 1;
             }
         }
-        else if(cooldownText.text != "")
+        else
         {
-            cooldownText.text = "";
-            Color currColor = cover.color;
-            currColor.a = 0;
-            cover.color = currColor;
+            if (value > 0)
+            {
+                cooldownText.text = (value).ToString("F1");
+                if (cover.color.a < .3f)
+                {
+                    Color currColor = cover.color;
+                    currColor.a = 1f;
+                    cover.color = currColor;
+                }
+            }
+            else if (cooldownText.text != "")
+            {
+                cooldownText.text = "";
+                Color currColor = cover.color;
+                currColor.a = 0;
+                cover.color = currColor;
+            }
         }
     }
 }

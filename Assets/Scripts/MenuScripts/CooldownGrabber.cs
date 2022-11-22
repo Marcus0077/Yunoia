@@ -38,9 +38,9 @@ public class CooldownGrabber : MonoBehaviour
                 return pushFromPlayer.CooldownRemaining();
             }
         }
-        else if(ability == "clone")
+        else if(cloneFromPlayer.cloneSummoned && ability == "clone")
         {
-            return cloneFromPlayer.CooldownRemaining();
+            return cloneFromPlayer.clone.GetComponent<ExitClone>().Timer / 30f;
         }
         else if(ability == "grapple")
         {

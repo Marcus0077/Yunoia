@@ -31,6 +31,7 @@ public class SummonClone : MonoBehaviour
     // Audio variables.
     [SerializeField] AudioSource cloneSound;
     [SerializeField] Animator uiAnim;
+    [SerializeField] Animator uiAnimCover;
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -92,7 +93,10 @@ public class SummonClone : MonoBehaviour
             
             clone.GetComponent<CloneInteractions>().anim = uiAnim;
             clone.GetComponent<ExitClone>().anim = uiAnim;
+            clone.GetComponent<CloneInteractions>().animCover = uiAnimCover;
+            clone.GetComponent<ExitClone>().animCover = uiAnimCover;
             uiAnim.SetBool("isClone", true);
+            uiAnimCover.SetBool("isClone", true);
 
             GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
 

@@ -119,18 +119,18 @@ public class AbilityPush : MonoBehaviour
         {
             timeCharging = (Time.time - chargeTime) * chargeSpeed + minPush;
             
-            //int radius = 2*Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush);
+            // int radiusShape = 2*Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush);
             
             radius = Mathf.Clamp(timeCharging, minPush, maxChargeLevel + minPush);
-            
-            pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
+
+            // pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
             
             // shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2 * pushedLevel), 1f / ( 2* pushedLevel), .2f + (.1f * pushedLevel));
             
             radius *= 2;
 
             chargeRadius = radius / 8;
-            pushRadius = radius / 2;
+            pushRadius = radius / 3;
 
             chargeEffectDestroy.transform.position = this.transform.position;
             chargeEffectDestroy.transform.GetChild(0).localScale = new Vector3(chargeRadius, chargeRadius, chargeRadius);

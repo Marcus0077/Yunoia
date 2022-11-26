@@ -152,6 +152,10 @@ public class BasicMovement : MonoBehaviour
             {
                 stateDrivenCamAnimator.SetInteger("roomNum", 2);
             }
+            else if (curRoom == 3)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 3);
+            }
 
             GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>().Follow =
                 this.transform;
@@ -344,18 +348,20 @@ public class BasicMovement : MonoBehaviour
     // Changes camera position and rotation depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SwitchBounds1"))
+        if (other.CompareTag("Camera1"))
         {
-            if (curRoom == 1)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 2);
-                curRoom++;
-            }
-            else if (curRoom == 2)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 1);
-                curRoom--;
-            }
+            curRoom = 1;
+            stateDrivenCamAnimator.SetInteger("roomNum", 1);
+        }
+        if (other.CompareTag("Camera2"))
+        {
+            curRoom = 2;
+            stateDrivenCamAnimator.SetInteger("roomNum", 2);
+        }
+        if (other.CompareTag("Camera3"))
+        {
+            curRoom = 3;
+            stateDrivenCamAnimator.SetInteger("roomNum", 3);
         }
     }
     

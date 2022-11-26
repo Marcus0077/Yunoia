@@ -1078,6 +1078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTimerText: {fileID: 0}
   anim: {fileID: 0}
+  animCover: {fileID: 0}
   Player: {fileID: 0}
   despawnClone: 0
 --- !u!114 &307182109869249534
@@ -1138,6 +1139,7 @@ MonoBehaviour:
   yank: {fileID: 7541856598389149267}
   grappleEffect: {fileID: 517576486219800734, guid: 95f1507119b97ea4588c085442261edf, type: 3}
   grappleEffectDestroy: {fileID: 0}
+  grappleNeedsDeath: 0
 --- !u!114 &8397525453568900783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,6 +1163,12 @@ MonoBehaviour:
   smallPushEffect: {fileID: 911370077971938100, guid: 03db4cf4b3cc22c44baa021797a739a9, type: 3}
   largePushEffect: {fileID: 667768455298700963, guid: 328d5f5903931ee45aea8d3c04cc0178, type: 3}
   chargePushEffect: {fileID: 3481536621180637866, guid: c36db729420d1bf479404240d8ab6fe1, type: 3}
+  smallEffectDestroy: {fileID: 0}
+  largeEffectDestroy: {fileID: 0}
+  chargeEffectDestroy: {fileID: 0}
+  smallPushNeedsDeath: 0
+  largePushNeedsDeath: 0
+  chargePushNeedsDeath: 0
   chargeRadius: 0
   pushRadius: 0
   smallPushRadius: 1.5
@@ -1237,6 +1245,8 @@ MonoBehaviour:
   isGrounded: 0
   attachedMinionCount: 0
   curCamState: 
+  stateDrivenCamAnimator: {fileID: 0}
+  curRoom: 0
   dashSound: {fileID: 3583609977508913977}
   jumpSound: {fileID: 3240785294556916506}
   runSoundOne: {fileID: 4604248921056564005}
@@ -1287,6 +1297,7 @@ MonoBehaviour:
   canPressDoor: 0
   duplicateParticles: {fileID: 7627816596865247460}
   anim: {fileID: 0}
+  animCover: {fileID: 0}
 --- !u!136 &4181361517068783824
 CapsuleCollider:
   m_ObjectHideFlags: 0

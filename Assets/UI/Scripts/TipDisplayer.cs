@@ -12,4 +12,9 @@ public class TipDisplayer : MonoBehaviour
     {
         message.SetActive(true);
     }
+
+    void OnTriggerExit()
+    {
+        message.SetActive(false);
+    }
 }

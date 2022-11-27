@@ -11,6 +11,7 @@ public class MenuTransition : MonoBehaviour
     public float ySize;
     public CanvasGroup bg;
     public GameObject prevMenu;
+    WaitForSecondsRealtime waitForSecondsRealtime;
 
     public void Awake()
     {
@@ -37,7 +38,15 @@ public class MenuTransition : MonoBehaviour
 
     private IEnumerator NextMenu(float time)
     {
-        yield return new WaitForSecondsRealtime(time);
+        if (waitForSecondsRealtime == null)
+        {
+            waitForSecondsRealtime = new WaitForSecondsRealtime(time);
+        }
+        else
+        {
+            waitForSecondsRealtime.waitTime = time;
+        }
+        yield return waitForSecondsRealtime;
         inSettings = false;
         prevMenu.SetActive(true);
     }

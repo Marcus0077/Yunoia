@@ -45,6 +45,7 @@ public class CombatHandler : MonoBehaviour
 
     IEnumerator TakeCloneHP()
     {
+        ExitClone clone = FindObjectOfType<ExitClone>();
         isRunning = true;
         
         changeAIColor = Color.blue;
@@ -54,8 +55,9 @@ public class CombatHandler : MonoBehaviour
         {
             changeAIColor = Color.red;
             changeCloneColor = new Color(1f, 0f, 0f, .3f);
-            cloneHP -= 1;
-            healthText.text = "Clone Health: " + cloneHP + "/3";
+            //cloneHP -= 1;
+            //healthText.text = "Clone Health: " + cloneHP + "/3";
+            clone.Timer -= 5f;
             yield return new WaitForSeconds(0.25f);
         }
 

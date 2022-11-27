@@ -46,6 +46,7 @@ public class ExitClone : MonoBehaviour
     public float Timer
     {
         get { return cloneActiveTimer; }
+        set { cloneActiveTimer = value; }
     }
 
     // Get references and initialize variables when clone is instantiated.

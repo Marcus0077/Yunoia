@@ -63,7 +63,7 @@ public class CloneInteractions : MonoBehaviour
         playerControls = new PlayerControls();
         
         combatHandler.cloneHP = 3;
-        combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
+        //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
 
         cloneRestored = true;
         canPressLever = false;

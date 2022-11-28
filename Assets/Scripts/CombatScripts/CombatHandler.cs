@@ -22,10 +22,10 @@ public class CombatHandler : MonoBehaviour
     
     void Awake()
     {
-        healthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
-        activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
-        healthText.text = "";
-        activeTimerText.text = "";
+        //healthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
+        //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
+        //healthText.text = "";
+        //activeTimerText.text = "";
         
 
         changeCloneColor = new Color(1f, 1f, 1f, .3f);

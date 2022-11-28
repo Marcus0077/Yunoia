@@ -70,8 +70,8 @@ public class ExitClone : MonoBehaviour
         despawnClone = false;
         cloneActiveTimer = 30.0f;
         
-        activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
-        activeTimerText.color = Color.white;
+        //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
+        //activeTimerText.color = Color.white;
         anim = GetComponent<Animator>();
     }
     
@@ -96,7 +96,7 @@ public class ExitClone : MonoBehaviour
     private void CloneCountdownTimer()
     {
         cloneActiveTimer -= Time.deltaTime;
-        activeTimerText.text = "Clone Despawns In: " + Math.Round(cloneActiveTimer, 2); 
+        //activeTimerText.text = "Clone Despawns In: " + Math.Round(cloneActiveTimer, 2); 
         
         if (cloneActiveTimer <= 0)
         {
@@ -104,7 +104,7 @@ public class ExitClone : MonoBehaviour
         }
         else if (cloneActiveTimer < 5.01)
         {
-            activeTimerText.color = Color.red;
+            //activeTimerText.color = Color.red;
 
             if (!isRunning)
             {
@@ -149,8 +149,8 @@ public class ExitClone : MonoBehaviour
             Player.GetComponent<Grapple>().enabled = true;
             Player.GetComponent<AbilityPush>().enabled = true;
 
-            activeTimerText.text = "";
-            combatHandler.healthText.text = "";
+            //activeTimerText.text = "";
+            //combatHandler.healthText.text = "";
             
             basicMovementPlayer.CheckCameraState();
 

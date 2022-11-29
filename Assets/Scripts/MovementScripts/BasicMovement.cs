@@ -202,8 +202,7 @@ public class BasicMovement : MonoBehaviour
                 playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
             }
-
-            moveDirection = move.ReadValue<Vector2>() * moveSpeed / (1 + CalcMinionMoveChange());
+            moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
             playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
         
             LookPlayer();

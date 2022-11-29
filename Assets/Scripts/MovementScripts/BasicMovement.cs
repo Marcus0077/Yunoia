@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using TMPro;
 using Unity.VisualScripting;
@@ -228,6 +229,10 @@ public class BasicMovement : MonoBehaviour
     // many minions are attached to it.
     float CalcMinionMoveChange()
     {
+        if(attachedMinionCount > 5)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
     }
 

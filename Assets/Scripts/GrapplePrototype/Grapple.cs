@@ -126,18 +126,21 @@ public class Grapple : MonoBehaviour
             playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
         }*/
 
-        if (hook != null && (playerRB.position.y > (hook.transform.position.y - 1)))
+        if (hook != null)
         {
-            DestroyHook();
-        }
-
-        if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || player.isGrounded)
-        {
-            return;
-        }
-        else
-        {
-            playerRB.AddForce((hook.transform.position - transform.position).normalized * swingSpeed, ForceMode.Impulse);
+            if (hook != null && (playerRB.position.y > (hook.transform.position.y - 1)))
+            {
+                DestroyHook();
+            }
+            
+            if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || player.isGrounded)
+            {
+                return;
+            }
+            else
+            {
+                playerRB.AddForce((hook.transform.position - transform.position).normalized * swingSpeed, ForceMode.Impulse);
+            }
         }
     }
 

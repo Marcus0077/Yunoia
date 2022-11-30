@@ -19,6 +19,7 @@ public class Hook : MonoBehaviour
         this.grapple = grapple;
         rigid = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
         rigid.AddForce(transform.forward * hookForce, ForceMode.Impulse);
     }
 
@@ -38,16 +39,21 @@ public class Hook : MonoBehaviour
     {
         if ((LayerMask.GetMask("Grapple") & 1 << other.gameObject.layer) > 0)
         {
+            Debug.Log(other);
+            lineRenderer.enabled = true;
             rigid.useGravity = false;
             rigid.isKinematic = true;
 
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 
             grapple.StartGrapple();
+            GetComponent<Collider>().enabled = false;
         }
 
         if ((LayerMask.GetMask("GrappleYank") & 1 << other.gameObject.layer) > 0)
         {
+            Debug.Log(2);
+            lineRenderer.enabled = true;
             rigid.useGravity = false;
             rigid.isKinematic = true;
             grapple.yankHook = true;
@@ -55,6 +61,7 @@ public class Hook : MonoBehaviour
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 
             grapple.StartGrapple();
+            GetComponent<Collider>().enabled = false;
         }
 
         if ((LayerMask.GetMask("Ground") & 1 << other.gameObject.layer) > 0)

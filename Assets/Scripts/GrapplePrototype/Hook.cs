@@ -15,7 +15,7 @@ public class Hook : MonoBehaviour
     // Start is called before the first frame update
     public void Initialize(Grapple grapple, Transform shootTransform)
     {
-        transform.forward = shootTransform.forward;
+        transform.forward = shootTransform.forward - grapple.bestHook.transform.forward;
         this.grapple = grapple;
         rigid = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();

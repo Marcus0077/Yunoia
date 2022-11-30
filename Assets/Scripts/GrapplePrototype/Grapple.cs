@@ -15,6 +15,10 @@ public class Grapple : MonoBehaviour
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
 
+    [SerializeField] AimAssist aimAssist;
+    public GameObject bestHook;
+    public float radius = 50.0f;
+
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
     [SerializeField] float changePerSecond;
@@ -24,8 +28,6 @@ public class Grapple : MonoBehaviour
     [SerializeField] float horizontalPullSpeed = 0.5f;
 
     Hook hook;
-    [SerializeField] float hookLife;
-    [SerializeField] float maxHookLife;
     bool grappleActive;
     bool ready = true;
     public bool yankHook = false;
@@ -37,7 +39,7 @@ public class Grapple : MonoBehaviour
 
     [SerializeField] private AudioSource shoot;
     [SerializeField] private AudioSource yank;
-    
+
     // Additions from Will :)
     private bool releasedHook = false; // input testing
 
@@ -56,6 +58,8 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        bestHook = aimAssist.HookDetection(player.transform.position, radius);
+
         if (grappleEffectDestroy != null)
         {
             grappleNeedsDeath = true;
@@ -92,14 +96,14 @@ public class Grapple : MonoBehaviour
                 yank.Play();
             }
         }
-        else if (!yankHook)
+        /*else if (!yankHook)
         {
             if (grappleActive && shootHook.IsPressed() && player.isGrounded)
             {
                 playerRB.AddForce((hook.transform.position - transform.position) * yankSpeedWeak, ForceMode.Impulse);
                 yank.Play();
             }
-        }
+        }*/
         
         if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
         {

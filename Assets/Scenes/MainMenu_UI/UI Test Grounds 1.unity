@@ -2393,6 +2393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 573670932}
   - component: {fileID: 573670933}
+  - component: {fileID: 573670934}
   m_Layer: 5
   m_Name: Message Parent
   m_TagString: Untagged
@@ -2436,6 +2437,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   box: {fileID: 2063759312}
   background: {fileID: 941359818}
+--- !u!114 &573670934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573670931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21b201c1e76b2b458450c1d39d0acde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 573670931}
+  messageText: {fileID: 0}
+  displayTime: 5
 --- !u!1 &592135212
 GameObject:
   m_ObjectHideFlags: 0

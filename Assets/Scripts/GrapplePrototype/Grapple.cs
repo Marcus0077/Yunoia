@@ -15,9 +15,9 @@ public class Grapple : MonoBehaviour
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
 
-    [SerializeField] AimAssist aimAssist;
-    public GameObject bestHook;
-    public float radius = 50.0f;
+    //[SerializeField] AimAssist aimAssist;
+    //public GameObject bestHook;
+    //public float radius = 50.0f;
 
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
@@ -58,7 +58,7 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bestHook = aimAssist.HookDetection(player.transform.position, radius);
+        //bestHook = aimAssist.HookDetection(player.transform.position, radius);
 
         if (grappleEffectDestroy != null)
         {

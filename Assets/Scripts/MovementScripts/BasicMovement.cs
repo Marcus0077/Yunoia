@@ -157,6 +157,22 @@ public class BasicMovement : MonoBehaviour
             {
                 stateDrivenCamAnimator.SetInteger("roomNum", 3);
             }
+            else if (curRoom == 4)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 4);
+            }
+            else if (curRoom == 5)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 5);
+            }
+            else if (curRoom == 6)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 6);
+            }
+            else if (curRoom == 7)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 7);
+            }
 
             GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>().Follow =
                 this.transform;
@@ -366,6 +382,26 @@ public class BasicMovement : MonoBehaviour
         {
             curRoom = 3;
             stateDrivenCamAnimator.SetInteger("roomNum", 3);
+        }
+        if (other.CompareTag("Camera4"))
+        {
+            curRoom = 4;
+            stateDrivenCamAnimator.SetInteger("roomNum", 4);
+        }
+        if (other.CompareTag("Camera5"))
+        {
+            curRoom = 5;
+            stateDrivenCamAnimator.SetInteger("roomNum", 5);
+        }
+        if (other.CompareTag("Camera6"))
+        {
+            curRoom = 6;
+            stateDrivenCamAnimator.SetInteger("roomNum", 6);
+        }
+        if (other.CompareTag("Camera7"))
+        {
+            curRoom = 7;
+            stateDrivenCamAnimator.SetInteger("roomNum", 7);
         }
     }
     

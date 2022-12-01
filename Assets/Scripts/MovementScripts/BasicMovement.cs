@@ -79,8 +79,11 @@ public class BasicMovement : MonoBehaviour
             curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
         }
 
-        minionDeath = GameObject.FindWithTag("MinionDeath");
-        minionDeath.SetActive(false);
+        if (GameObject.FindWithTag("MinionDeath") != null)
+        {
+            minionDeath = GameObject.FindWithTag("MinionDeath");
+            minionDeath.SetActive(false);
+        }
 
         moveSpeed = 4f;
         maxSpeed = 18f;

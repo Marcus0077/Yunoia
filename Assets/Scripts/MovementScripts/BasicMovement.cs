@@ -60,6 +60,8 @@ public class BasicMovement : MonoBehaviour
 
     // Animation Variables
     [SerializeField] private Animator animator;
+
+    GameObject minionDeath;
     
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -76,6 +78,9 @@ public class BasicMovement : MonoBehaviour
         {
             curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
         }
+
+        minionDeath = GameObject.FindWithTag("MinionDeath");
+        minionDeath.SetActive(false);
 
         moveSpeed = 4f;
         maxSpeed = 18f;
@@ -246,7 +251,7 @@ public class BasicMovement : MonoBehaviour
     {
         if(attachedMinionCount > 5)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            minionDeath.SetActive(true);
         }
         return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
     }

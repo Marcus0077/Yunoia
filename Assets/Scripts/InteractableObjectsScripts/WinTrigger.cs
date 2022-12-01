@@ -26,7 +26,7 @@ public class WinTrigger : MonoBehaviour
     // Reloads the scene for the Sprint 3 denial level.
     public void ReloadVSDenial()
     {
-        SceneManager.LoadScene("VSDenial");
+        SceneManager.LoadScene("VSRebargaining");
     }
 
     // Loads the main menu scene.

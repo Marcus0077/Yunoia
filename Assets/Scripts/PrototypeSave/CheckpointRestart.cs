@@ -19,6 +19,8 @@ public class CheckpointRestart : MonoBehaviour
     {
         if (DataManager.gameData.checkpointed)
         {
+            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().SetInteger("roomNum", DataManager.gameData.level);
+            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().Play("Room" + DataManager.gameData.level);//SetInteger("roomNum", DataManager.gameData.level);
             transform.position = DataManager.gameData.position;
         }
         checkpointControls = new PlayerControls();

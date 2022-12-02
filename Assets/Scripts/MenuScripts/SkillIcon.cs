@@ -24,8 +24,8 @@ public class SkillIcon : MonoBehaviour
     void Update()
     {
         float value = cooldown.GetCD(ability.ToString());
-        if (ability == AbilityType.clone)
-        {
+        //if (ability == AbilityType.clone || ability == AbilityType.dash)
+        //{
             if (value > 0)
             {
                 cover.fillAmount = 1 - value;
@@ -35,7 +35,7 @@ public class SkillIcon : MonoBehaviour
                 cover.fillAmount = 1;
             }
         }
-        else
+        /*else
         {
             if (value > 0)
             {
@@ -54,6 +54,6 @@ public class SkillIcon : MonoBehaviour
                 currColor.a = 0;
                 cover.color = currColor;
             }
-        }
-    }
+        }*/
+    //}
 }

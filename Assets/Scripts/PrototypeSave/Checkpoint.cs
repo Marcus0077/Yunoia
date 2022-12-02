@@ -21,6 +21,7 @@ public class Checkpoint : MonoBehaviour
                 DataManager.gameData.level = GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum");
                 Debug.Log(DataManager.gameData.level);
                 DataManager.gameData.position = transform.position + (Vector3.up * (GetComponent<Collider>().bounds.size.y / 2 + hit.GetComponent<Collider>().bounds.size.y / 2));
+                GameObject.FindWithTag("Save Icon").GetComponent<Animator>().SetTrigger("Saving");
             }
         }
     }

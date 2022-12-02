@@ -254,6 +254,7 @@ public class BasicMovement : MonoBehaviour
     {
         if(attachedMinionCount > 5)
         {
+            Time.timeScale = 0;
             minionDeath.SetActive(true);
         }
         return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));

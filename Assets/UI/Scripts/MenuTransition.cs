@@ -49,5 +49,6 @@ public class MenuTransition : MonoBehaviour
         yield return waitForSecondsRealtime;
         inSettings = false;
         prevMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

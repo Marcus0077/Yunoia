@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018887, b: 0.13381043, a: 1}
+  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018898, b: 0.13381043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11741,6 +11741,7 @@ GameObject:
   - component: {fileID: 883970418}
   - component: {fileID: 883970416}
   - component: {fileID: 883970417}
+  - component: {fileID: 883970419}
   m_Layer: 5
   m_Name: Settings Object
   m_TagString: Untagged
@@ -11802,6 +11803,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &883970419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883970415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de33e6f821a54344bf12bcb85b2114a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 1244434320}
+  activeIndex: -1
 --- !u!1001 &891848780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15410,6 +15426,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: f4e4f41c-21ce-4891-a2f4-724929ac22ee
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  menuMove:
+    m_Name: Menu Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e4cee4f7-a899-45d2-9deb-bf91e57cae35
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -24464,6 +24489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640198157}
   - component: {fileID: 1640198158}
+  - component: {fileID: 1640198159}
   m_Layer: 5
   m_Name: Pause Menu Object
   m_TagString: Untagged
@@ -24510,6 +24536,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1640198159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640198156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de33e6f821a54344bf12bcb85b2114a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 310959964}
+  - {fileID: 1038323442}
+  - {fileID: 1089619610}
+  activeIndex: -1
 --- !u!1001 &1646499727
 PrefabInstance:
   m_ObjectHideFlags: 0

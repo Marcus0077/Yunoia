@@ -20,4 +20,9 @@ public class OnButtonHover : MonoBehaviour
         LeanTween.color(button.GetComponent<RectTransform>(), nuetralColor, .5f).setEaseInOutQuint().setIgnoreTimeScale(true);
         transform.LeanScale(new Vector2(exitXSize, exitYSize), 0.125f).setEaseInOutQuint().setIgnoreTimeScale(true);
     }
+
+    public void Press()
+    {
+        GetComponent<Button>().onClick.Invoke();
+    }
 }

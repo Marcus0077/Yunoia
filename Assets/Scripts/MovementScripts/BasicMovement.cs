@@ -181,6 +181,11 @@ public class BasicMovement : MonoBehaviour
             {
                 stateDrivenCamAnimator.SetInteger("roomNum", 7);
             }
+            
+            else if (curRoom == 8)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 8);
+            }
 
             GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>().Follow =
                 this.transform;
@@ -412,6 +417,11 @@ public class BasicMovement : MonoBehaviour
             curRoom = 7;
             stateDrivenCamAnimator.SetInteger("roomNum", 7);
         }
+        if (other.CompareTag("Camera8"))
+                {
+                    curRoom = 8;
+                    stateDrivenCamAnimator.SetInteger("roomNum", 8);
+                }
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

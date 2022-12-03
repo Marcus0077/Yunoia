@@ -186,6 +186,7 @@ public class Pushable : MonoBehaviour
         }
         else
         {
+            totalVelocity -= queuedVelocity;
             rb.velocity = pushDirection * -data.maxSpeed;
         }
         pushDirection = rb.velocity.normalized;

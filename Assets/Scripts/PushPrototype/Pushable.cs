@@ -16,6 +16,7 @@ public class Pushable : MonoBehaviour
     Vector3 signs, pushDirection;
     [SerializeField]
     protected PushableFunction data;
+    Coroutine returning;
 
     public float pushSpeed
     {
@@ -156,17 +157,9 @@ public class Pushable : MonoBehaviour
                     if (canReturn)
                     {
                         queuedVelocity = Mathf.Max(totalVelocity - data.maxSpeed,0);
-                        if(queuedVelocity <= 0)
-                        {
-                            rb.velocity = pushDirection * -totalVelocity;
-                        }
-                        else
-                        {
-                            rb.velocity = pushDirection * -data.maxSpeed;
-                        }
-                        pushDirection = rb.velocity.normalized;
-                        signs = new Vector3(Mathf.Sign(rb.velocity.x), Mathf.Sign(rb.velocity.y), Mathf.Sign(rb.velocity.z));
-                        canReturn = false;
+                        Debug.Log(returning);
+                        if(returning == null)
+                            returning = StartCoroutine(DelayReturn());
                     }
                     else
                     {
@@ -182,6 +175,23 @@ public class Pushable : MonoBehaviour
             }
         }
 
+    }
+
+    IEnumerator DelayReturn()
+    {
+        yield return new WaitForSeconds(data.delay);
+        if (queuedVelocity <= 0)
+        {
+            rb.velocity = pushDirection * -totalVelocity;
+        }
+        else
+        {
+            rb.velocity = pushDirection * -data.maxSpeed;
+        }
+        pushDirection = rb.velocity.normalized;
+        signs = new Vector3(Mathf.Sign(rb.velocity.x), Mathf.Sign(rb.velocity.y), Mathf.Sign(rb.velocity.z));
+        canReturn = false;
+        returning = null;
     }
 
     void FixedUpdate()

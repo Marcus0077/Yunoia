@@ -6,7 +6,7 @@ using UnityEngine;
 public class PushableFunction : ScriptableObject
 {
     [SerializeField]
-    float velocity = 1, maxVelocity, dragVelocity;
+    float velocity = 1, maxVelocity, dragVelocity, returnDelay;
     [SerializeField]
     int reqCharge = 1;
     [SerializeField]
@@ -15,6 +15,18 @@ public class PushableFunction : ScriptableObject
     Color color;
     [SerializeField]
     string animationName;
+
+    public float delay
+    {
+        get
+        {
+            return returnDelay;
+        }
+        set
+        {
+            returnDelay = value;
+        }
+    }
 
     public bool doDestroy
     {

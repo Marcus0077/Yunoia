@@ -19,6 +19,7 @@ public class AbilityPush : MonoBehaviour
     public float range;
     public float cdRemaining;
     Transform shape;
+    Vector3 oldPos;
 
     // Particle Variables
     public GameObject smallPushEffect;
@@ -48,38 +49,35 @@ public class AbilityPush : MonoBehaviour
         chargePushNeedsDeath = false;
     }
 
-    void PushTargets()
+    public void PushTargets()
     {
         pushedLevel = (int)range + 1 - minPush;
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        Collider[] hitColliders = Physics.OverlapSphere(oldPos, range);
         foreach (var hitCollider in hitColliders)
         {
             Pushable pushedObj = hitCollider.GetComponent<Pushable>();
             if (pushedObj != null)
             {
-                Vector3 direction = (pushedObj.transform.position - transform.position).normalized;
+                Vector3 direction = (pushedObj.transform.position - oldPos).normalized;
                 //direction = new Vector3(direction.x, direction.y, direction.z).normalized;
-                float distance = Vector3.Distance(pushedObj.transform.position, transform.position);
+                float distance = Vector3.Distance(pushedObj.transform.position, oldPos);
                 float proximityMultiplier = range / distance;
                 //float chargeMultiplier = (range + 1 - minPush) / (float)(maxChargeLevel + 1);
                 pushedObj.Pushed(proximityMultiplier * direction, pushedLevel, maxChargeLevel + 1, gameObject);//casted to int because chargeLevel should be flat numbers not a float
             }
         }
-        if (!restored)
-        {
-            RenderVolume(range * 2);
-        }
     }
 
     void RenderVolume(float radius)
     {
+        oldPos = transform.position;
         smallEffectDestroy = Instantiate(smallPushEffect, this.transform.position, Quaternion.identity);
-        smallEffectDestroy.transform.GetChild(0).localScale = new Vector3(smallPushRadius/2, smallPushRadius/2, smallPushRadius/2);
-        smallEffectDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallEffectDestroy.transform.GetChild(0).GetChild(1).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallEffectDestroy.transform.GetChild(0).GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallEffectDestroy.transform.GetChild(0).GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        
+        smallEffectDestroy.transform.localScale = new Vector3(smallPushRadius/2, smallPushRadius/2, smallPushRadius/2);
+        smallEffectDestroy.transform.GetChild(0).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.transform.GetChild(1).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.transform.GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.transform.GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
+        smallEffectDestroy.AddComponent<DelayedPush>();
         // Tell particle destroyer to destroy small push particles.
         smallPushNeedsDeath = true;
 
@@ -146,19 +144,19 @@ public class AbilityPush : MonoBehaviour
         chargePushNeedsDeath = true;
 
         largeEffectDestroy = Instantiate(largePushEffect, this.transform.position, Quaternion.identity);
-        largeEffectDestroy.transform.GetChild(0).localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
-        largeEffectDestroy.transform.GetChild(1).localScale = new Vector3(pushRadius/2, 1f, pushRadius/2);
-        largeEffectDestroy.transform.GetChild(0).GetChild(0).localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
-        largeEffectDestroy.transform.GetChild(0).GetChild(1).localScale = new Vector3(pushRadius/2, pushRadius/2, pushRadius/2);
-        largeEffectDestroy.transform.GetChild(0).GetChild(2).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
-        largeEffectDestroy.transform.GetChild(0).GetChild(3).localScale = new Vector3(pushRadius/2, pushRadius/2, pushRadius/2);
-        largeEffectDestroy.transform.GetChild(0).GetChild(4).localScale = new Vector3(pushRadius/4, pushRadius/4, pushRadius/4);
-        largeEffectDestroy.transform.GetChild(0).GetChild(5).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
-        largeEffectDestroy.transform.GetChild(0).GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
-
+        largeEffectDestroy.transform.localScale = new Vector3(pushRadius/3, pushRadius/3, pushRadius/3);
+        largeEffectDestroy.transform.GetChild(0).localScale = new Vector3(pushRadius / 3, pushRadius / 3, pushRadius / 3);
+        largeEffectDestroy.transform.GetChild(1).localScale = new Vector3(pushRadius/2, pushRadius/2, pushRadius/2);
+        largeEffectDestroy.transform.GetChild(2).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
+        largeEffectDestroy.transform.GetChild(3).localScale = new Vector3(pushRadius/2, pushRadius/2, pushRadius/2);
+        largeEffectDestroy.transform.GetChild(4).localScale = new Vector3(pushRadius/4, pushRadius/4, pushRadius/4);
+        largeEffectDestroy.transform.GetChild(5).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
+        largeEffectDestroy.transform.GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
+        largeEffectDestroy.transform.GetChild(7).localScale = new Vector3(pushRadius / 2, 1f, pushRadius / 2);
+        largeEffectDestroy.AddComponent<DelayedPush>();
         // Tell particle destroyer to destroy large push particles.
         largePushNeedsDeath = true;
-
+        oldPos = transform.position;
         yield return new WaitForSeconds(1);
 
         if (shape != null)
@@ -224,7 +222,7 @@ public class AbilityPush : MonoBehaviour
             if (!restored)
             {
                 range = minPush;
-                PushTargets();
+                RenderVolume(range * 2);
                 StartCoroutine(PushTimer());
             } else
             {
@@ -245,7 +243,6 @@ public class AbilityPush : MonoBehaviour
             {
                 chargeTime = (Time.time - chargeTime) * chargeSpeed + minPush;
                 range = Mathf.Clamp(chargeTime, minPush, maxChargeLevel + minPush);
-                PushTargets();
                 StartCoroutine(PushTimer());
                 chargeTime = Time.time;
             }

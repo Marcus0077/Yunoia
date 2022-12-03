@@ -74,7 +74,19 @@ public class ParticleDestroyer : MonoBehaviour
     IEnumerator ExecuteParticlesDelayed(GameObject particlesToExecute)
     {
         yield return new WaitForSeconds(2);
-        Destroy(particlesToExecute);
+        if(particlesToExecute != null && particlesToExecute.GetComponent<ParticleSystem>() != null)
+        {
+            particlesToExecute.GetComponent<ParticleSystem>().Stop();
+        }
+        yield return new WaitForSeconds(.1f);
+        if (particlesToExecute != null)
+        {
+            Destroy(particlesToExecute);
+        }
+        else
+        {
+            yield break;
+        }
     }
 
     IEnumerator ExecuteParticlesInstant(GameObject particlesToExecute)

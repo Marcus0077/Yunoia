@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fc3148143a59344a3261f38f02aceb, type: 3}
   m_Name: grappleplatform
   m_EditorClassIdentifier: 
-  velocity: 15
+  velocity: 18
   maxVelocity: 7
   dragVelocity: 1
+  returnDelay: 3
   reqCharge: 1
   activatable: 1
   changeColor: 0
@@ -23,7 +24,7 @@ MonoBehaviour:
   canReturn: 1
   constraintX: 0
   constraintY: 1
-  constraintZ: 0
+  constraintZ: 1
   stackPush: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   animationName: 

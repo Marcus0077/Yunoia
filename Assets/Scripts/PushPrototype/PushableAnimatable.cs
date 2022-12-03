@@ -15,6 +15,7 @@ public class PushableAnimatable : Pushable
 
     public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
+        Debug.Log(data.animationBool);
         toBeDestroyed = data.doDestroy;
         if (base.Pushed(force, chargeLevel, totalCharges, pusher))
         {
@@ -47,6 +48,11 @@ public class PushableAnimatable : Pushable
         {
             Destroy(gameObject);
         }
+    }
+
+    public void AnimationOff()
+    {
+        anim.SetBool(data.animationBool, false);
     }
 
     public override void Awake()

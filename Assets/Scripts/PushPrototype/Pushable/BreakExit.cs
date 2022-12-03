@@ -18,7 +18,7 @@ public class BreakExit : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("break", false);
+        animator.gameObject.GetComponent<PushableAnimatable>().AnimationOff();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

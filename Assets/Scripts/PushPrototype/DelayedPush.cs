@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DelayedPush : MonoBehaviour
 {
+    public GameObject pusher;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,7 @@ public class DelayedPush : MonoBehaviour
     void OnParticleSystemStopped()
     {
         Debug.Log("Works");
-        GameObject.FindWithTag("Player").GetComponent<AbilityPush>().PushTargets();
+        pusher.GetComponent<AbilityPush>().PushTargets();
     }
 
     // Update is called once per frame

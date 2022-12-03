@@ -77,7 +77,8 @@ public class AbilityPush : MonoBehaviour
         smallEffectDestroy.transform.GetChild(1).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
         smallEffectDestroy.transform.GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
         smallEffectDestroy.transform.GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
-        smallEffectDestroy.AddComponent<DelayedPush>();
+        DelayedPush a = smallEffectDestroy.AddComponent<DelayedPush>();
+        a.pusher = gameObject;
         // Tell particle destroyer to destroy small push particles.
         smallPushNeedsDeath = true;
 
@@ -153,7 +154,8 @@ public class AbilityPush : MonoBehaviour
         largeEffectDestroy.transform.GetChild(5).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
         largeEffectDestroy.transform.GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
         largeEffectDestroy.transform.GetChild(7).localScale = new Vector3(pushRadius / 2, 1f, pushRadius / 2);
-        largeEffectDestroy.AddComponent<DelayedPush>();
+        DelayedPush a = largeEffectDestroy.AddComponent<DelayedPush>();
+        a.pusher = gameObject;
         // Tell particle destroyer to destroy large push particles.
         largePushNeedsDeath = true;
         oldPos = transform.position;

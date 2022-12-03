@@ -157,7 +157,6 @@ public class Pushable : MonoBehaviour
                     if (canReturn)
                     {
                         queuedVelocity = Mathf.Max(totalVelocity - data.maxSpeed,0);
-                        Debug.Log(returning);
                         if(returning == null)
                             returning = StartCoroutine(DelayReturn());
                     }
@@ -174,7 +173,28 @@ public class Pushable : MonoBehaviour
                 rb.velocity = pushDirection * data.maxSpeed;
             }
         }
+    }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!(data != null && data.maxSpeed != 0 && data.drag != 0))
+        {
+            return;
+        }
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if(contact.otherCollider.gameObject.tag != "Player")
+            {
+                totalVelocity -= (Mathf.Max(0, queuedVelocity) + collision.relativeVelocity.magnitude);
+                queuedVelocity = 0;
+                rb.velocity = Vector3.zero;
+                rb.Sleep();
+                //signs = new Vector3(Mathf.Sign(rb.velocity.x), Mathf.Sign(rb.velocity.y), Mathf.Sign(rb.velocity.z));
+                //pushDirection = rb.velocity.normalized;
+                //canReturn = false;
+                return;
+            }
+        }
     }
 
     IEnumerator DelayReturn()
@@ -186,7 +206,6 @@ public class Pushable : MonoBehaviour
         }
         else
         {
-            totalVelocity -= queuedVelocity;
             rb.velocity = pushDirection * -data.maxSpeed;
         }
         pushDirection = rb.velocity.normalized;

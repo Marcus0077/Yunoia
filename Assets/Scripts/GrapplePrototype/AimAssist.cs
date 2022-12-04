@@ -5,6 +5,7 @@ using UnityEngine;
 public class AimAssist : MonoBehaviour
 {
     [SerializeField] BasicMovement player;
+    [SerializeField] Transform shootTransform;
 
     Collider closestHook;
 
@@ -16,14 +17,17 @@ public class AimAssist : MonoBehaviour
         {
             if (((LayerMask.GetMask("Grapple") & 1 << hitCollider.gameObject.layer) > 0) || ((LayerMask.GetMask("GrappleYank") & 1 << hitCollider.gameObject.layer) > 0))
             {
-                if (closestHook == null)
+                if (hitCollider.transform.position.y > shootTransform.position.y)
                 {
-                    closestHook = hitCollider;
-                }
+                    if (closestHook == null)
+                    {
+                        closestHook = hitCollider;
+                    }
 
-                if (Vector3.Distance(center, hitCollider.transform.position) <= Vector3.Distance(center, closestHook.transform.position))
-                {
-                    closestHook = hitCollider;
+                    if (Vector3.Distance(center, hitCollider.transform.position) <= Vector3.Distance(center, closestHook.transform.position))
+                    {
+                        closestHook = hitCollider;
+                    }
                 }
             }
         }

@@ -154,7 +154,7 @@ public class AbilityPush : MonoBehaviour
         largeEffectDestroy.transform.GetChild(5).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
         largeEffectDestroy.transform.GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
         largeEffectDestroy.transform.GetChild(7).localScale = new Vector3(pushRadius / 2, 1f, pushRadius / 2);
-        DelayedPush a = largeEffectDestroy.AddComponent<DelayedPush>();
+        DelayedPush a = largeEffectDestroy.transform.GetChild(5).gameObject.AddComponent<DelayedPush>();
         a.pusher = gameObject;
         // Tell particle destroyer to destroy large push particles.
         largePushNeedsDeath = true;

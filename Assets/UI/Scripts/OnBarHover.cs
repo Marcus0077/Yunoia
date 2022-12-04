@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OnButtonHover : MonoBehaviour
+public class OnBarHover : OnButtonHover
 {
-    [SerializeField] protected GameObject button;
-    public float hoverXSize, hoverYSize, exitXSize, exitYSize;
-    public Color hoverColor, nuetralColor;
-
     public void OnHoverEnter()
     {
         LeanTween.color(button.GetComponent<RectTransform>(), hoverColor, .5f).setEaseInOutQuint().setIgnoreTimeScale(true);
@@ -23,6 +19,12 @@ public class OnButtonHover : MonoBehaviour
 
     public void Press()
     {
-        GetComponent<Button>().onClick.Invoke();
+        //GetComponent<Button>().onClick.Invoke();
+    }
+
+    public void Move(int amount)
+    {
+        GetComponent<Slider>().value = Mathf.Clamp(GetComponent<Slider>().value + amount / 10f, 0, 1);
+        
     }
 }

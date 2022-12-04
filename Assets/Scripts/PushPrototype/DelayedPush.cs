@@ -11,7 +11,7 @@ public class DelayedPush : MonoBehaviour
         
     }
 
-    void OnParticleSystemStopped()
+    public void OnParticleSystemStopped()
     {
         Debug.Log("Works");
         pusher.GetComponent<AbilityPush>().PushTargets();

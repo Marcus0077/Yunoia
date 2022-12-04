@@ -57,7 +57,8 @@ public class MenuTraverse : MonoBehaviour
     {
         if(!stop)
         {
-            int amount = Math.Min(1, (int)Mathf.Round(context.ReadValue<Vector2>().x) + -1 * (int)Mathf.Round(context.ReadValue<Vector2>().y));
+            int amount = Math.Min(1, (int)(-1 * Mathf.Round(context.ReadValue<Vector2>().y)));
+            int change = (int)Mathf.Round(context.ReadValue<Vector2>().x);
             if (activeIndex >= 0 || amount > 0)
             {
                 if (activeIndex != -1)
@@ -68,6 +69,10 @@ public class MenuTraverse : MonoBehaviour
                 activeIndex += amount;
             }
             activeIndex = (activeIndex % buttons.Length + buttons.Length) % buttons.Length;
+            if (buttons[activeIndex].GetComponent<OnBarHover>() != null)
+            {
+                buttons[activeIndex].GetComponent<OnBarHover>().Move(change);
+            }
             buttons[activeIndex].OnHoverEnter();
             StartCoroutine(SlowMoveMenu());
         }

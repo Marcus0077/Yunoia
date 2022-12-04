@@ -15,10 +15,9 @@ public class Grapple : MonoBehaviour
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
 
-    [SerializeField] AimAssist aimAssist;
-    public Collider bestHook;
-    public Vector3 bestHookCenter;
-    public float radius = 8.0f;
+    //[SerializeField] AimAssist aimAssist;
+    //public GameObject bestHook;
+    //public float radius = 50.0f;
 
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
@@ -31,8 +30,7 @@ public class Grapple : MonoBehaviour
     Hook hook;
     bool grappleActive;
     bool ready = true;
-    public bool canYank = false;
-    public bool yankReady = false;
+    public bool yankHook = false;
 
     PlayerControls grappleControls;
     public InputAction shootHook;
@@ -60,19 +58,14 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (hook == null && !grappleActive)
-        {
-            bestHook = aimAssist.HookDetection(shootTransform.position, radius);
-            bestHookCenter = bestHook.bounds.center;
-            shootTransform.LookAt(bestHookCenter);
-        }
+        //bestHook = aimAssist.HookDetection(player.transform.position, radius);
 
         if (grappleEffectDestroy != null)
         {
             grappleNeedsDeath = true;
         }
         
-        if (bestHook != null && hook == null && shootHook.IsPressed() && ready == true)
+        if (hook == null && shootHook.IsPressed() && ready == true)
         {
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
             shoot.Play();
@@ -95,7 +88,7 @@ public class Grapple : MonoBehaviour
         }
         
         // Updated - Press Shoot again to 'yank' if connected to 'GrappleYank' points
-        if (canYank && yankReady)
+        if (yankHook)
         {
             if (grappleActive && shootHook.IsPressed() && player.isGrounded)
             {
@@ -159,11 +152,6 @@ public class Grapple : MonoBehaviour
     {
         ready = false;
         grappleActive = true;
-
-        if (canYank)
-        {
-            StartCoroutine(YankDelay());
-        }
     }
 
     public void DestroyHook()
@@ -174,8 +162,7 @@ public class Grapple : MonoBehaviour
         }
 
         ready = false;
-        canYank = false;
-        yankReady = false;
+        //pullable = false;
         grappleActive = false;
 
         Destroy(hook.gameObject);
@@ -185,7 +172,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator DestroyHookAfterLifetime()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.4f);
 
         if (grappleActive == true)
         {
@@ -211,6 +198,11 @@ public class Grapple : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
     }*/
 
+    public void StartPull()
+    {
+        
+    }
+
     private IEnumerator GrappleCooldown()
     {
         cdRemaining = grappleCooldown;
@@ -234,13 +226,6 @@ public class Grapple : MonoBehaviour
         {
             return -1;
         }
-    }
-
-    private IEnumerator YankDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        yankReady = true;
     }
 
     // Enable input action map controls.

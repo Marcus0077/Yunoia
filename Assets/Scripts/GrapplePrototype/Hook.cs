@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
-    [SerializeField] float hookForce = 1.0f;
+    [SerializeField] float hookForce = 10f;
 
     Grapple grapple;
-    Transform shootTransform;
-
-    float angle = 0.0f;
-    Vector3 bestHookCenter;
-
     Rigidbody rigid;
     LineRenderer lineRenderer;
 
@@ -20,13 +15,12 @@ public class Hook : MonoBehaviour
     // Start is called before the first frame update
     public void Initialize(Grapple grapple, Transform shootTransform)
     {
+        transform.forward = shootTransform.forward;
         this.grapple = grapple;
-        this.shootTransform = shootTransform;
-
         rigid = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.enabled = false;
-        rigid.AddForce(shootTransform.forward * hookForce, ForceMode.Impulse);
+        lineRenderer.enabled = false;
+        rigid.AddForce(transform.forward * hookForce, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -46,28 +40,28 @@ public class Hook : MonoBehaviour
         if ((LayerMask.GetMask("Grapple") & 1 << other.gameObject.layer) > 0)
         {
             Debug.Log(other);
-            //lineRenderer.enabled = true;
+            lineRenderer.enabled = true;
             rigid.useGravity = false;
             rigid.isKinematic = true;
 
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 
             grapple.StartGrapple();
-            //GetComponent<Collider>().enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
 
         if ((LayerMask.GetMask("GrappleYank") & 1 << other.gameObject.layer) > 0)
         {
             Debug.Log(2);
-            //lineRenderer.enabled = true;
+            lineRenderer.enabled = true;
             rigid.useGravity = false;
             rigid.isKinematic = true;
-            grapple.canYank = true;
+            grapple.yankHook = true;
             
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 
             grapple.StartGrapple();
-            //GetComponent<Collider>().enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
 
         if ((LayerMask.GetMask("Ground") & 1 << other.gameObject.layer) > 0)

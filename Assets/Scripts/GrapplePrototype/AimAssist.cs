@@ -6,6 +6,7 @@ public class AimAssist : MonoBehaviour
 {
     [SerializeField] BasicMovement player;
     [SerializeField] Transform shootTransform;
+    [SerializeField] Rigidbody playerRB;
 
     Collider closestHook;
 
@@ -17,7 +18,7 @@ public class AimAssist : MonoBehaviour
         {
             if (((LayerMask.GetMask("Grapple") & 1 << hitCollider.gameObject.layer) > 0) || ((LayerMask.GetMask("GrappleYank") & 1 << hitCollider.gameObject.layer) > 0))
             {
-                if (hitCollider.transform.position.y > shootTransform.position.y)
+                if (hitCollider.bounds.center.y > playerRB.worldCenterOfMass.y)
                 {
                     if (closestHook == null)
                     {
@@ -25,6 +26,10 @@ public class AimAssist : MonoBehaviour
                     }
 
                     if (Vector3.Distance(center, hitCollider.transform.position) <= Vector3.Distance(center, closestHook.transform.position))
+                    {
+                        closestHook = hitCollider;
+                    }
+                    else if (playerRB.worldCenterOfMass.y > closestHook.bounds.center.y)
                     {
                         closestHook = hitCollider;
                     }

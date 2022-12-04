@@ -159,6 +159,7 @@ public class Grapple : MonoBehaviour
     {
         ready = false;
         grappleActive = true;
+        yankReady = false;
 
         if (canYank)
         {
@@ -180,6 +181,9 @@ public class Grapple : MonoBehaviour
 
         Destroy(hook.gameObject);
         hook = null;
+
+        StopAllCoroutines();
+
         StartCoroutine(GrappleCooldown());
     }
 

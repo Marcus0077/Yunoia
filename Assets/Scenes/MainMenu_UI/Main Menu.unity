@@ -1560,6 +1560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406497326}
   - component: {fileID: 406497325}
+  - component: {fileID: 406497327}
   m_Layer: 5
   m_Name: Master Slider
   m_TagString: Untagged
@@ -1653,6 +1654,25 @@ RectTransform:
   m_AnchoredPosition: {x: 60.3, y: -69.06447}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &406497327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406497324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c186988e45785cb4baa99915853da1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1393692653}
+  hoverXSize: 2.679117
+  hoverYSize: 14.87161
+  exitXSize: 2.679117
+  exitYSize: 14.87161
+  hoverColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  nuetralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &426527463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,6 +3432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959699873}
   - component: {fileID: 959699874}
+  - component: {fileID: 959699875}
   m_Layer: 5
   m_Name: SFX Slider
   m_TagString: Untagged
@@ -3505,6 +3526,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &959699875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959699872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c186988e45785cb4baa99915853da1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 795495475}
+  hoverXSize: 2.679117
+  hoverYSize: 14.87161
+  exitXSize: 2.679117
+  exitYSize: 14.87161
+  hoverColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  nuetralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1035882652
 GameObject:
   m_ObjectHideFlags: 0
@@ -3802,6 +3842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063408273}
   - component: {fileID: 1063408274}
+  - component: {fileID: 1063408275}
   m_Layer: 5
   m_Name: BGM Slider
   m_TagString: Untagged
@@ -3895,6 +3936,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1063408275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063408272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c186988e45785cb4baa99915853da1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1144670744}
+  hoverXSize: 2.679117
+  hoverYSize: 14.87161
+  exitXSize: 2.679117
+  exitYSize: 14.87161
+  hoverColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  nuetralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1099549352
 GameObject:
   m_ObjectHideFlags: 0
@@ -5734,10 +5794,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1371053689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de33e6f821a54344bf12bcb85b2114a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f5440ea77a4e1749a42d34141aaaaea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttons:
+  - {fileID: 406497327}
+  - {fileID: 1063408275}
+  - {fileID: 959699875}
   - {fileID: 359091647}
   prevMenu: {fileID: 0}
 --- !u!1 &1393692653

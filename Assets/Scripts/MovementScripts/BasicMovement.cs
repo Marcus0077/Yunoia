@@ -11,6 +11,9 @@ using Unity.VisualScripting;
 
 public class BasicMovement : MonoBehaviour
 {
+    // // Scripts
+    // private PauseMenu pauseMenu;
+    
     // Input variables
     PlayerControls playerControls;
     public InputAction move;
@@ -66,6 +69,11 @@ public class BasicMovement : MonoBehaviour
     // Get references and initialize variables when player spawns.
     void Awake()
     {
+        // if (GameObject.FindObjectOfType<PauseMenu>() != null)
+        // {
+        //     pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
+        // }
+        
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();

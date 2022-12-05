@@ -14,7 +14,7 @@ public class AbilityPush : MonoBehaviour
     [SerializeField]
     public bool restored;
     PlayerControls pushControls;
-    private InputAction pushAction;
+    public InputAction pushAction;
     public int pushedLevel;
     public float range;
     public float cdRemaining;

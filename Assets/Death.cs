@@ -10,11 +10,23 @@ public class Death : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("VSDenial");
+            StartCoroutine(FadeThenDie());
         }
         else if (other.CompareTag("Clone"))
         {
             GameObject.FindObjectOfType<ExitClone>().despawnClone = true;
         }
+    }
+
+    private IEnumerator FadeThenDie()
+    {
+        if (GameObject.FindObjectOfType<FadeBlack>() != null)
+        {
+            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+        }
+
+        yield return new WaitForSeconds(1.5f);
+        
+        SceneManager.LoadScene("VSDenial");
     }
 }

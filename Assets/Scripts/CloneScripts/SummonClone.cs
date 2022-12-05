@@ -13,7 +13,7 @@ public class SummonClone : MonoBehaviour
 
     // Input variables
     PlayerControls summonControls;
-    private InputAction summonAClone;
+    public InputAction summonAClone;
 
     // Clone Summon variables
     public GameObject ClonePrefab;

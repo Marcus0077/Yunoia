@@ -5,12 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MusicPersist : MonoBehaviour
 {
-    public static MusicPersist instance;
     string curr;
-    // Start is called before the first frame update
-    void Start()
+    public static MusicPersist instance;
+
+    public static MusicPersist Instance
     {
-        DontDestroyOnLoad(this);
+        get
+        {
+            if (instance == null)
+            {
+                instance = new MusicPersist();
+            }
+            return instance;
+        }
+    }
+    
+    // Start is called before the first frame update
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
         if (instance == null)
         {
             instance = this;

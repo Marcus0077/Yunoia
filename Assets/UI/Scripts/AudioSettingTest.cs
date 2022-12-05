@@ -9,9 +9,9 @@ public class AudioSettingTest : MonoBehaviour
     public AudioSource bgmAudio;
     public AudioSource[] sfxAudio;
 
-    void Awake()
+    void Start()
     {
-        bgmAudio = MusicPersist.instance.GetComponent<AudioSource>();
+        bgmAudio = MusicPersist.Instance.GetComponent<AudioSource>();
         ContinueSettings(); 
     }
 

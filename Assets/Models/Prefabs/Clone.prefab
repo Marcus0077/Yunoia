@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swingSpeed: 0.3
-  yankSpeedStrong: 3
+  yankSpeedStrong: 4
   yankSpeedWeak: 0.9
   stopDistance: 2.5
   taughtDistance: 6
@@ -1202,7 +1202,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &-8715429646849006418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,6 +1265,7 @@ MonoBehaviour:
   jumpSound: {fileID: 3240785294556916506}
   runSoundOne: {fileID: 4604248921056564005}
   runSoundTwo: {fileID: 8238776559536899785}
+  transitionPos: {fileID: 0}
   animator: {fileID: 7068460080398614047}
 --- !u!114 &8898106702094236184
 MonoBehaviour:

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04429823, g: 0.07018887, b: 0.13381043, a: 1}
+  m_IndirectSpecularColor: {r: 0.045738317, g: 0.07090198, b: 0.13437396, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -276,14 +276,30 @@ PrefabInstance:
       propertyPath: uiAnimCover
       value: 
       objectReference: {fileID: 1353533077}
+    - target: {fileID: 1804445680587551989, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: summonAClone.m_Id
+      value: af398b03-f1d8-4840-82cf-41739958be91
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804445680587551989, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: summonAClone.m_Name
+      value: Summon A Clone
+      objectReference: {fileID: 0}
     - target: {fileID: 1804445680587551990, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: radius
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1804445680587551990, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: aimAssist
       value: 
       objectReference: {fileID: 432396388}
+    - target: {fileID: 1804445680587551991, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: pushAction.m_Id
+      value: e37f2308-93ec-4031-b3e1-c5e62c0fdc98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804445680587551991, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: pushAction.m_Name
+      value: Push
+      objectReference: {fileID: 0}
     - target: {fileID: 1804445680587551994, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_Name
       value: Player Variant
@@ -4785,6 +4801,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!65 &126044466
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12145,6 +12166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!65 &349556714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25475,6 +25501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &750007805
 GameObject:
   m_ObjectHideFlags: 0
@@ -27518,6 +27549,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!65 &817913121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35587,6 +35623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!65 &1131762379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62606,6 +62647,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!65 &1911543583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63306,6 +63352,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!4 &1929687737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7035547642867367602, guid: 5f4e9f9719b0687418c43c46a2bd8bb6, type: 3}

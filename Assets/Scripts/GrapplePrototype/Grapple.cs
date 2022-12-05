@@ -18,7 +18,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] AimAssist aimAssist;
     public Collider bestHook;
     public Vector3 bestHookCenter;
-    public float radius = 8.0f;
+    public float radius = 12.0f;
 
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
@@ -65,6 +65,14 @@ public class Grapple : MonoBehaviour
             bestHook = aimAssist.HookDetection(shootTransform.position, radius);
             bestHookCenter = bestHook.bounds.center;
             shootTransform.LookAt(bestHookCenter);
+        }
+
+        if (bestHook != null)
+        {
+            if (Vector3.Distance(bestHookCenter, shootTransform.position) > radius)
+            {
+                bestHook = null;
+            }
         }
 
         if (grappleEffectDestroy != null)

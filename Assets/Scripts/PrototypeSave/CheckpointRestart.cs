@@ -30,7 +30,7 @@ public class CheckpointRestart : MonoBehaviour
 
     private void OnEnable()
     {
-        restartAction.Enable();
+        //restartAction.Enable();
     }
 
     private void OnDisable()

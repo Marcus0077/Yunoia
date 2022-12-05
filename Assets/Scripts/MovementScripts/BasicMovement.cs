@@ -11,9 +11,6 @@ using Unity.VisualScripting;
 
 public class BasicMovement : MonoBehaviour
 {
-    // // Scripts
-    // private PauseMenu pauseMenu;
-    
     // Input variables
     PlayerControls playerControls;
     public InputAction move;
@@ -61,6 +58,9 @@ public class BasicMovement : MonoBehaviour
     private bool runSoundOneCanPlay = true;
     private bool runSoundTwoCanPlay = false;
 
+    private bool hasTransitioned;
+    public Transform transitionPos;
+
     // Animation Variables
     [SerializeField] private Animator animator;
 
@@ -69,11 +69,6 @@ public class BasicMovement : MonoBehaviour
     // Get references and initialize variables when player spawns.
     void Awake()
     {
-        // if (GameObject.FindObjectOfType<PauseMenu>() != null)
-        // {
-        //     pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
-        // }
-        
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
@@ -105,6 +100,7 @@ public class BasicMovement : MonoBehaviour
         
         canMove = true;
         isFrozen = false;
+        hasTransitioned = false;
     }
     
     // Called between frames.
@@ -189,10 +185,13 @@ public class BasicMovement : MonoBehaviour
             {
                 stateDrivenCamAnimator.SetInteger("roomNum", 7);
             }
-            
             else if (curRoom == 8)
             {
                 stateDrivenCamAnimator.SetInteger("roomNum", 8);
+            }
+            else if (curRoom == 9)
+            {
+                stateDrivenCamAnimator.SetInteger("roomNum", 9);
             }
 
             GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>().Follow =
@@ -265,14 +264,41 @@ public class BasicMovement : MonoBehaviour
     // many minions are attached to it.
     float CalcMinionMoveChange()
     {
-        if(attachedMinionCount > 5)
+        if(attachedMinionCount > 5 && !hasTransitioned)
         {
-            Time.timeScale = 0;
-            minionDeath.SetActive(true);
+            //Time.timeScale = 0;
+            //minionDeath.SetActive(true);
+
+            StartCoroutine(TransitionToEres());
         }
         return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
     }
 
+    IEnumerator TransitionToEres()
+    {
+        hasTransitioned = true;
+        
+        if (GameObject.FindObjectOfType<FadeBlack>() != null)
+        {
+            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+            yield return new WaitForSeconds(1.5f);
+            
+            curRoom = 9;
+            stateDrivenCamAnimator.SetInteger("roomNum", 9);
+            this.transform.position = transitionPos.position;
+            attachedMinionCount = 0;
+            
+            foreach (GameObject Minion in GameObject.FindGameObjectsWithTag("Minion"))
+            {
+                Debug.Log("Minion kilt");
+                Destroy(Minion);
+            }
+
+            yield return new WaitForSeconds(1.5f);
+            GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent();
+        }
+    }
+    
     // Adds a minion to the attached minion count of this game object.
     public void AddMinion(int value)
     {
@@ -426,10 +452,15 @@ public class BasicMovement : MonoBehaviour
             stateDrivenCamAnimator.SetInteger("roomNum", 7);
         }
         if (other.CompareTag("Camera8"))
-                {
-                    curRoom = 8;
-                    stateDrivenCamAnimator.SetInteger("roomNum", 8);
-                }
+        {
+            curRoom = 8;
+            stateDrivenCamAnimator.SetInteger("roomNum", 8);
+        }
+        if (other.CompareTag("Camera9"))
+        {
+            curRoom = 9;
+            stateDrivenCamAnimator.SetInteger("roomNum", 9);
+        }
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

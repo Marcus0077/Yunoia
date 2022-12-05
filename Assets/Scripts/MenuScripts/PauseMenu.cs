@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -39,19 +40,35 @@ public class PauseMenu : MonoBehaviour
         {
             if (!isPaused && !menuTransition.inSettings)
             {
-                DisableInput();
                 Pause();
             }
             else if (isPaused && !menuTransition.inSettings)
             {
-                EnableInput();
                 Resume();
             }
         }
     }
 
+    private void PauseVideo()
+    {
+        if (GameObject.FindWithTag("Outro") != null)
+        {
+            if (GameObject.FindWithTag("Outro").GetComponent<VideoPlayer>().isPlaying)
+                GameObject.FindWithTag("Outro").GetComponent<VideoPlayer>().Pause();
+        }
+    }
+
+    private void ResumeVideo()
+    {
+        if (GameObject.FindWithTag("Outro") != null)
+        {
+            if (GameObject.FindWithTag("Outro").GetComponent<VideoPlayer>().isPaused)
+                GameObject.FindWithTag("Outro").GetComponent<VideoPlayer>().Play();
+        }
+    }
+
     // Disable movement and ability input.
-    private void DisableInput()
+    public void DisableInput()
     {
         GameObject player;
         GameObject clone;
@@ -186,9 +203,15 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        PauseVideo();
+        DisableInput();
+        
         pauseMenu.SetActive(true);
         BGBlur.SetActive(true);
-        abilityIcons.SetActive(false);
+        
+        if (abilityIcons != null)
+            abilityIcons.SetActive(false);
+        
         Time.timeScale = 0;
 
         isPaused = true;
@@ -196,11 +219,25 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        ResumeVideo();
+
+        if (GameObject.FindGameObjectWithTag("Outro") != null)
+        {
+            if (!GameObject.FindGameObjectWithTag("Outro").activeInHierarchy)
+                EnableInput();
+        }
+        else
+        {
+            EnableInput();
+        }
+
         pauseMenu.SetActive(false);
         BGBlur.SetActive(false);
-        abilityIcons.SetActive(true);
+        
+        if (abilityIcons != null)
+            abilityIcons.SetActive(true);
+        
         Time.timeScale = 1;
-        EnableInput();
 
         pauseMenu.GetComponent<MenuTraverse>().ExitCurrent();
         isPaused = false;

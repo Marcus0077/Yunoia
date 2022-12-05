@@ -17,6 +17,7 @@ public class Grapple : MonoBehaviour
 
     [SerializeField] AimAssist aimAssist;
     public Collider bestHook;
+    public Collider playerCollider;
     public Vector3 bestHookCenter;
     public float radius = 12.0f;
 

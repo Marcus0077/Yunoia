@@ -11,7 +11,8 @@ public class AudioSettingTest : MonoBehaviour
 
     void Awake()
     {
-       ContinueSettings(); 
+        bgmAudio = MusicPersist.instance.GetComponent<AudioSource>();
+        ContinueSettings(); 
     }
 
     private void ContinueSettings()

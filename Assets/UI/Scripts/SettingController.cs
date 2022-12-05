@@ -19,8 +19,8 @@ public class SettingController : MonoBehaviour
     void Start()
     {
         firstPlayInt = PlayerPrefs.GetInt(Firstplay);
-
-        if(firstPlayInt == 0)
+        bgmAudio = MusicPersist.instance.GetComponent<AudioSource>();
+        if (firstPlayInt == 0)
         {
             bgmFloat = .50f;
             sfxFloat = .50f;

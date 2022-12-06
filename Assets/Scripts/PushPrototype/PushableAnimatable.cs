@@ -7,6 +7,8 @@ public class PushableAnimatable : Pushable
 {
     protected Animator anim;
     bool toBeDestroyed;
+    public AudioClip statueFriction;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {

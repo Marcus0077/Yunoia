@@ -101,12 +101,18 @@ public class Lever : MonoBehaviour
     // Opens specified door if both levers have been activated before time runs out.
     void CompleteLeverSequence()
     {
+        if (!Complete)
+        {
+            
         Complete = true;
         Counterpart.GetComponent<Lever>().Complete = true;
+ 
 
         Door.GetComponent<Door>().Open();
 
         activateText.enabled = false;
+        }
+       
     }
 
     // Resets lever sequence if both levers were not activated before time runs out.

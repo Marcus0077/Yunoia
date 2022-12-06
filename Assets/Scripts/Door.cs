@@ -14,9 +14,14 @@ public class Door : MonoBehaviour
     private bool isClone;
     private CloneInteractions cloneInteractions;
     private PlayerInteractions playerInteractions;
+    public AudioClip doorSound;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         if(activateText != null)
             activateText.enabled = false;
         isPlayer = false;
@@ -31,6 +36,9 @@ public class Door : MonoBehaviour
         }
         
         animator.SetTrigger("DoorOpen");
+
+        audioSource.PlayOneShot(doorSound, 0.4f);
+
     }
 
     public void Close()
@@ -45,6 +53,7 @@ public class Door : MonoBehaviour
         {
             isClone = false;
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,6 +65,7 @@ public class Door : MonoBehaviour
 
             playerInteractions = other.GetComponent<PlayerInteractions>();
             playerInteractions.canPressDoor = true;
+
 
             isPlayer = true;
         }

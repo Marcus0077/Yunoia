@@ -35,11 +35,25 @@ public class MusicPersist : MonoBehaviour
         curr = SceneManager.GetActiveScene().name;
     }
 
+    void OnEnabled()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (curr != scene.name)
+            Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (curr != SceneManager.GetActiveScene().name)
-            Destroy(gameObject);
-        transform.position = GameObject.FindWithTag("Player").transform.position;
+        
     }
 }

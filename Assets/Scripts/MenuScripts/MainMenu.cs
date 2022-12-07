@@ -8,10 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     private void Awake()
     {
-        if (MusicPersist.Instance != null)
-        {
-            MusicPersist.Instance.GetComponent<AudioSource>().Stop();
-        }
+        
     }
 
     // Sets prototype scene to active and set time scale to normal when play button is pressed.

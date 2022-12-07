@@ -49,6 +49,7 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     {
         menuMove.Disable();
         menuPress.Disable();
+        stop = true;
         ExitAll();
         if (prevMenu != null)
             prevMenu.OnEnable();

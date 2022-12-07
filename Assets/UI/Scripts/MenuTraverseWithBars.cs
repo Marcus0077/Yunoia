@@ -50,6 +50,7 @@ public class MenuTraverseWithBars : MonoBehaviour, MenuStop
         menuMove.Disable();
         menuPress.Disable();
         ExitAll();
+        stop = true;
         if (prevMenu != null)
             prevMenu.OnEnable();
     }

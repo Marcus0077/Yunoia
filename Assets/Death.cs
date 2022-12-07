@@ -12,7 +12,8 @@ public class Death : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            deathScreen.SetActive(true);
+            StartCoroutine(FadeThenDie());
+            GameObject.FindObjectOfType<PauseMenu>().DisableInput();
         }
         else if (other.CompareTag("Clone"))
         {
@@ -34,6 +35,6 @@ public class Death : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         
-        SceneManager.LoadScene("VSDenial");
+        deathScreen.SetActive(true);
     }
 }

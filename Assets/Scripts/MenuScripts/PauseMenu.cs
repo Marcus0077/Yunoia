@@ -134,7 +134,7 @@ public class PauseMenu : MonoBehaviour
     }
     
     // Enable movement and ability input.
-    private void EnableInput()
+    public void EnableInput()
     {
         Debug.Log("enabled runs.");
         

@@ -17,9 +17,13 @@ public class Door : MonoBehaviour
     public AudioClip doorSound;
     AudioSource audioSource;
 
+    private bool isOpen;
+
     // Start is called before the first frame update
     void Start()
     {
+        isOpen = false;
+        
         audioSource = GetComponent<AudioSource>();
 
         if(activateText != null)
@@ -30,15 +34,19 @@ public class Door : MonoBehaviour
 
     public void Open()
     {
-        if (activateText != null)
+        if (!isOpen)
         {
-            Destroy(activateText);
+            isOpen = true;
+
+            if (activateText != null)
+            {
+                Destroy(activateText);
+            }
+
+            animator.SetTrigger("DoorOpen");
+
+            audioSource.PlayOneShot(doorSound, 0.4f);
         }
-        
-        animator.SetTrigger("DoorOpen");
-
-        audioSource.PlayOneShot(doorSound, 0.4f);
-
     }
 
     public void Close()

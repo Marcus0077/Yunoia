@@ -24,6 +24,7 @@ public class LoadVSDenial : MonoBehaviour
         if (skipCutscene.WasPressedThisFrame())
         {
             StopCoroutine(LoadDenial());
+
             SceneManager.LoadScene("VSDenial");
         }
     }

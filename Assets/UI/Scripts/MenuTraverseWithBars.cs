@@ -37,7 +37,6 @@ public class MenuTraverseWithBars : MonoBehaviour, MenuStop
 
     public void OnEnable()
     {
-        Debug.Log(gameObject.name);
         menuMove.Enable();
         menuPress.Enable();
         stop = false;
@@ -48,9 +47,9 @@ public class MenuTraverseWithBars : MonoBehaviour, MenuStop
 
     public void OnDisable()
     {
-        Debug.Log("a");
         menuMove.Disable();
         menuPress.Disable();
+        ExitAll();
         if (prevMenu != null)
             prevMenu.OnEnable();
     }
@@ -97,6 +96,12 @@ public class MenuTraverseWithBars : MonoBehaviour, MenuStop
     {
         if(activeIndex >= 0)
             buttons[activeIndex].OnHoverExit();
+    }
+
+    public void ExitAll()
+    {
+        foreach (OnButtonHover button in buttons)
+            button.OnHoverExit();
     }
 
     // Update is called once per frame

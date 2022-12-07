@@ -49,6 +49,7 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     {
         menuMove.Disable();
         menuPress.Disable();
+        ExitAll();
         if (prevMenu != null)
             prevMenu.OnEnable();
     }
@@ -92,6 +93,12 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     {
         if(activeIndex >= 0)
             buttons[activeIndex].OnHoverExit();
+    }
+
+    public void ExitAll()
+    {
+        foreach (OnButtonHover button in buttons)
+            button.OnHoverExit();
     }
 
     // Update is called once per frame

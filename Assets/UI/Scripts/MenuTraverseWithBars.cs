@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MenuTraverseWithBars : MonoBehaviour
+public class MenuTraverseWithBars : MonoBehaviour, MenuStop
 {
     [SerializeField]
     OnButtonHover[] buttons;
@@ -15,7 +15,11 @@ public class MenuTraverseWithBars : MonoBehaviour
     InputAction menuMove;
     InputAction menuPress;
     bool stop;
-    
+    public bool Stop
+    {
+        get { return stop; }
+        set { stop = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +37,18 @@ public class MenuTraverseWithBars : MonoBehaviour
 
     public void OnEnable()
     {
+        Debug.Log(gameObject.name);
         menuMove.Enable();
         menuPress.Enable();
+        stop = false;
+        activeIndex = 0;
         if (prevMenu != null)
             prevMenu.OnDisable();
     }
 
     public void OnDisable()
     {
+        Debug.Log("a");
         menuMove.Disable();
         menuPress.Disable();
         if (prevMenu != null)
@@ -49,7 +57,6 @@ public class MenuTraverseWithBars : MonoBehaviour
 
     public void PressMenu()
     {
-        Debug.Log("a");
         if (activeIndex >= 0)
             buttons[activeIndex].Press();
     }

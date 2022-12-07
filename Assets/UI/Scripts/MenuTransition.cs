@@ -31,6 +31,7 @@ public class MenuTransition : MonoBehaviour
 
     public void Close()
     {
+        GetComponent<MenuStop>().Stop = true;
         transform.LeanScale(Vector2.zero, 0.8f).setEaseInBack().setIgnoreTimeScale(true);
         bg.LeanAlpha(0, 0.5f).setIgnoreTimeScale(true);
         StartCoroutine(NextMenu(0.8f));

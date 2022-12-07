@@ -53,7 +53,6 @@ public class MusicPersist : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GetMusic(scene.name);
-        Debug.Log(scene.name);
     }
 
     void GetMusic(string key)
@@ -61,6 +60,13 @@ public class MusicPersist : MonoBehaviour
         List<AudioClip> clips = (from sceneMusic in music where sceneMusic.SceneName == key select sceneMusic.BGM).ToList();
         if (clips.Count > 0)
         {
+            if(audioSource.clip != null)
+            {
+                if(audioSource.clip.name == clips[0].name)
+                {
+                    return;
+                }
+            }
             audioSource.clip = clips[0];
             audioSource.Play();
         }

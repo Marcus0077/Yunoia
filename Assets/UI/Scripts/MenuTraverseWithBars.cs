@@ -49,15 +49,9 @@ public class MenuTraverseWithBars : MonoBehaviour
 
     public void PressMenu()
     {
-        if (GameObject.FindObjectOfType<PauseMenu>() != null)
-        {
-            if (GameObject.FindObjectOfType<PauseMenu>().isPaused)
-            {
-                Debug.Log("a");
-                if (activeIndex >= 0)
-                    buttons[activeIndex].Press();
-            }
-        }
+        Debug.Log("a");
+        if (activeIndex >= 0)
+            buttons[activeIndex].Press();
     }
 
     public void MoveMenu(InputAction.CallbackContext context)

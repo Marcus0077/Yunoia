@@ -47,15 +47,11 @@ public class MenuTraverse : MonoBehaviour
     }
 
     public void PressMenu()
-    {
-        if (GameObject.FindObjectOfType<PauseMenu>() != null)
+    {        
+        Debug.Log("a");
+        if (activeIndex >= 0)
         {
-            if (GameObject.FindObjectOfType<PauseMenu>().isPaused)
-            {
-                Debug.Log("a");
-                if (activeIndex >= 0)
-                    buttons[activeIndex].Press();
-            }
+            buttons[activeIndex].Press();
         }
     }
 

@@ -16,7 +16,8 @@ public class Grapple : MonoBehaviour
     [SerializeField] Transform shootTransform;
 
     [SerializeField] AimAssist aimAssist;
-    public Collider bestHook;
+    [SerializeField] public Collider hookBase;
+    [SerializeField] public Collider bestHook;
     public Collider playerCollider;
     public Vector3 bestHookCenter;
     public float radius = 12.0f;
@@ -64,11 +65,15 @@ public class Grapple : MonoBehaviour
         if (hook == null && !grappleActive)
         {
             bestHook = aimAssist.HookDetection(shootTransform.position, radius);
-            bestHookCenter = bestHook.bounds.center;
-            shootTransform.LookAt(bestHookCenter);
+
+            if (bestHook != null)
+            {
+                bestHookCenter = bestHook.bounds.center;
+                shootTransform.LookAt(bestHookCenter);
+            }
         }
 
-        if (bestHook != null)
+        if (bestHook != hookBase)
         {
             if (Vector3.Distance(bestHookCenter, shootTransform.position) > radius)
             {

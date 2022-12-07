@@ -36,9 +36,8 @@ public class MusicPersist : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
         audioSource = GetComponent<AudioSource>();
-        GetMusic(SceneManager.GetActiveScene().name);
-        Play();       
     }
 
     void OnEnabled()
@@ -54,6 +53,7 @@ public class MusicPersist : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GetMusic(scene.name);
+        Debug.Log(scene.name);
     }
 
     void GetMusic(string key)
@@ -61,25 +61,13 @@ public class MusicPersist : MonoBehaviour
         List<AudioClip> clips = (from sceneMusic in music where sceneMusic.SceneName == key select sceneMusic.BGM).ToList();
         if (clips.Count > 0)
         {
-            Debug.Log(clips.Count);
             audioSource.clip = clips[0];
-        }
-        else
-        {
-            audioSource.clip = null;
-        }
-        Play();
-    }
-
-    void Play()
-    {
-        if (audioSource.clip != null)
-        {
             audioSource.Play();
         }
         else
         {
             audioSource.Stop();
+            //audioSource.clip = null;
         }
     }
 

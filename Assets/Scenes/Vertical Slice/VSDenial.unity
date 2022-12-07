@@ -1572,7 +1572,7 @@ PrefabInstance:
     - target: {fileID: 4453434793835715272, guid: 6f03a10d947c54042bcf831c71fbb2cf, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 349e787f18949da479cf104a1fe3533a, type: 2}
+      objectReference: {fileID: 2100000, guid: a8b3308357b96c54d916c239fb0e03bf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f03a10d947c54042bcf831c71fbb2cf, type: 3}
 --- !u!82 &46964087 stripped
@@ -6539,6 +6539,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: a9efc50d81ce79f4a8b34aa9bf21f17a, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &167588033
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7081,6 +7086,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 2cd5fb5e029eb744d886912ca8432c07, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &185686799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25790,6 +25800,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 6ded47a011d620044b6e69875f75b2a1, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &710068137
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27032,11 +27047,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 509733175617221906, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05999999
+      value: -0.0674
       objectReference: {fileID: 0}
     - target: {fileID: 509733175617221906, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.685
+      value: -1.6976
       objectReference: {fileID: 0}
     - target: {fileID: 509733175617221906, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29341,6 +29356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 0a3771d8d4c4d114eb4b042e1ffd9721, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &810926907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29492,6 +29512,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 814752746}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1001 &818800783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32918,6 +32986,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 2e7a80228bb21284e97cbc16c5602109, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &947511380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35083,6 +35156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 7b4b439079775904d94f50a1f01bfd85, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &1042412178
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48706,6 +48784,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bc39928414c0b9946a9319496bb8b358, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &1409545415
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -49491,6 +49574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 7a09274dd80b6c848a81e764d1bf72df, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &1420526050
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57964,6 +58052,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 0db18f78b01f63240b8d08df64df4fac, type: 2}
+  isGlobal: 0
+  blendDistance: 1.5
+  weight: 1
+  priority: 0
 --- !u!65 &1653957561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59874,7 +59967,7 @@ PrefabInstance:
     - target: {fileID: -305091885687274788, guid: 6f03a10d947c54042bcf831c71fbb2cf, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 349e787f18949da479cf104a1fe3533a, type: 2}
+      objectReference: {fileID: 2100000, guid: 62cca871f83ba954fb4861b55ec70250, type: 2}
     - target: {fileID: 919132149155446097, guid: 6f03a10d947c54042bcf831c71fbb2cf, type: 3}
       propertyPath: m_Name
       value: NEWBrokenDoorArch_LoganO_ZachM_11.5.22
@@ -60425,7 +60518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7642157136765367479, guid: dd369288a8c98324b9b5c4eb7d3de3ef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -115.02197
+      value: -115
       objectReference: {fileID: 0}
     - target: {fileID: 7642157136765367479, guid: dd369288a8c98324b9b5c4eb7d3de3ef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74804,7 +74897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 509733175617221906, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0047
       objectReference: {fileID: 0}
     - target: {fileID: 509733175617221907, guid: 19a504c86d374e64ab6384c925c76502, type: 3}
       propertyPath: m_Controller

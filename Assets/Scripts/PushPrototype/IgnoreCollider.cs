@@ -9,7 +9,9 @@ public class IgnoreCollider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Physics.IgnoreCollision(other.GetComponent<Collider>(),GetComponent<Collider>());
+        Collider[] colliders = transform.GetComponents<Collider>();
+        foreach (Collider col in colliders)
+            Physics.IgnoreCollision(other.GetComponent<Collider>(),col);
     }
 
     // Update is called once per frame

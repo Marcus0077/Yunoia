@@ -6,16 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class Death : MonoBehaviour
 {
+    public GameObject deathScreen;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FadeThenDie());
+            deathScreen.SetActive(true);
         }
         else if (other.CompareTag("Clone"))
         {
             GameObject.FindObjectOfType<ExitClone>().despawnClone = true;
         }
+    }
+
+    public void FadetoBlack()
+    {
+        StartCoroutine(FadeThenDie());
     }
 
     private IEnumerator FadeThenDie()

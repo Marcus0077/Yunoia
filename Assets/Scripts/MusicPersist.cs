@@ -11,6 +11,8 @@ public class MusicPersist : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]
     SceneMusic<string, AudioClip>[] music;
+    bool stop;
+    float oldVol;
 
     public static MusicPersist Instance
     {
@@ -72,15 +74,25 @@ public class MusicPersist : MonoBehaviour
         }
         else
         {
-            audioSource.Stop();
+            oldVol = audioSource.volume;
+            stop = true;
             //audioSource.clip = null;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(stop && audioSource.isPlaying)
+        {
+            if(audioSource.volume <= 0.005f)
+            {
+                audioSource.Stop();
+                audioSource.volume = oldVol;
+                stop = false;
+            }
+            audioSource.volume *= 0.95f;
+        }
     }
 }
 

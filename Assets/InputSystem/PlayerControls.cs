@@ -603,6 +603,45 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Cutscene"",
+            ""id"": ""f2f6447e-4041-4154-8c96-779c669308e1"",
+            ""actions"": [
+                {
+                    ""name"": ""SkipCutscene"",
+                    ""type"": ""Button"",
+                    ""id"": ""a82d3cbb-c478-4649-b438-6e50ce252938"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6ef0f914-fa2b-4574-8fcc-f06feb220e5b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5a16131-7d92-4ea4-98bf-929cdcf913fc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -668,6 +707,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
         m_Cheat_Toggle = m_Cheat.FindAction("Toggle", throwIfNotFound: true);
         m_Cheat_History = m_Cheat.FindAction("History", throwIfNotFound: true);
+        // Cutscene
+        m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
+        m_Cutscene_SkipCutscene = m_Cutscene.FindAction("SkipCutscene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1068,6 +1110,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CheatActions @Cheat => new CheatActions(this);
+
+    // Cutscene
+    private readonly InputActionMap m_Cutscene;
+    private ICutsceneActions m_CutsceneActionsCallbackInterface;
+    private readonly InputAction m_Cutscene_SkipCutscene;
+    public struct CutsceneActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CutsceneActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SkipCutscene => m_Wrapper.m_Cutscene_SkipCutscene;
+        public InputActionMap Get() { return m_Wrapper.m_Cutscene; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CutsceneActions set) { return set.Get(); }
+        public void SetCallbacks(ICutsceneActions instance)
+        {
+            if (m_Wrapper.m_CutsceneActionsCallbackInterface != null)
+            {
+                @SkipCutscene.started -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
+                @SkipCutscene.performed -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
+                @SkipCutscene.canceled -= m_Wrapper.m_CutsceneActionsCallbackInterface.OnSkipCutscene;
+            }
+            m_Wrapper.m_CutsceneActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SkipCutscene.started += instance.OnSkipCutscene;
+                @SkipCutscene.performed += instance.OnSkipCutscene;
+                @SkipCutscene.canceled += instance.OnSkipCutscene;
+            }
+        }
+    }
+    public CutsceneActions @Cutscene => new CutsceneActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1127,5 +1202,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnToggle(InputAction.CallbackContext context);
         void OnHistory(InputAction.CallbackContext context);
+    }
+    public interface ICutsceneActions
+    {
+        void OnSkipCutscene(InputAction.CallbackContext context);
     }
 }

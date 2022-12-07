@@ -581,6 +581,45 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Cutscene",
+            "id": "f2f6447e-4041-4154-8c96-779c669308e1",
+            "actions": [
+                {
+                    "name": "SkipCutscene",
+                    "type": "Button",
+                    "id": "a82d3cbb-c478-4649-b438-6e50ce252938",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6ef0f914-fa2b-4574-8fcc-f06feb220e5b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SkipCutscene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e5a16131-7d92-4ea4-98bf-929cdcf913fc",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "SkipCutscene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

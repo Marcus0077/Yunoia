@@ -9,7 +9,7 @@ public class CheckpointRestart : MonoBehaviour
     PlayerControls checkpointControls;
     private InputAction restartAction;
 
-    void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         

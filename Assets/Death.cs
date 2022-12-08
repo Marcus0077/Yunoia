@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Death : MonoBehaviour
 {
-    public GameObject deathScreen;
+    public GameObject deathScreen, continueButton, menuButton;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,5 +36,7 @@ public class Death : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         
         deathScreen.SetActive(true);
+        continueButton.SetActive(true);
+        menuButton.SetActive(true);
     }
 }

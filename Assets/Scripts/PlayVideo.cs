@@ -14,9 +14,15 @@ public class PlayVideo : MonoBehaviour
 
     private bool videoPlaying;
 
+    public GameObject aToSkip;
+    private bool canSkip;
+
     // Start is called before the first frame update
     void Start()
     {
+        canSkip = false;
+        aToSkip.SetActive(false);
+        
         playerControls = new PlayerControls();
         skipCutscene = playerControls.Cutscene.SkipCutscene;
         skipCutscene.Enable();
@@ -27,7 +33,7 @@ public class PlayVideo : MonoBehaviour
     
     void Update()
     {
-        if (skipCutscene.WasPressedThisFrame() && videoPlaying)
+        if (skipCutscene.WasPressedThisFrame() && videoPlaying && canSkip)
         {
             StopCoroutine(PlayOutro());
             SceneManager.LoadScene("Main Menu");
@@ -59,7 +65,12 @@ public class PlayVideo : MonoBehaviour
           GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent();
           videoPlayer.SetActive(true);
           
-          yield return new WaitForSeconds(40f);
+          yield return new WaitForSeconds(3f);
+
+          aToSkip.SetActive(true);
+          canSkip = true;
+          
+          yield return new WaitForSeconds(37f);
 
           SceneManager.LoadScene("Main Menu");
       }

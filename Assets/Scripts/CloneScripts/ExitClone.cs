@@ -24,6 +24,7 @@ public class ExitClone : MonoBehaviour
     private CloneInteractions cloneInteractions;
     private PressurePlate pressurePlate;
     private Lever lever;
+    private Door door;
     
     // Player reference
     public GameObject Player;
@@ -42,6 +43,7 @@ public class ExitClone : MonoBehaviour
     // Interactable trigger variables.
     private bool isOnPressurePlate;
     private bool isOnLever;
+    private bool isOnDoor;
 
     public float Timer
     {
@@ -67,7 +69,9 @@ public class ExitClone : MonoBehaviour
         isOnPressurePlate = false;
         isOnLever = false;
         isRunning = false;
+        isOnDoor = false;
         despawnClone = false;
+        
         cloneActiveTimer = 30.0f;
         
         //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
@@ -178,6 +182,12 @@ public class ExitClone : MonoBehaviour
             lever.activateText.enabled = false;
             lever.isClone = false;
         }
+
+        if (isOnDoor && door.activateText != null)
+        {
+            door.activateText.enabled = false;
+            door.isClone = false;
+        }
     }
 
     // Flashes the clone's renderer on and off. (currently unused)
@@ -223,6 +233,15 @@ public class ExitClone : MonoBehaviour
                 isOnLever = true;
             }
         }
+        else if (other.CompareTag("Door"))
+        {
+            door = other.GetComponent<Door>();
+
+            if (door.isClone)
+            {
+                isOnDoor = true;
+            }
+        }
     }
 
     // Determines whether clone is exiting a pressure plate or a lever trigger.
@@ -236,6 +255,10 @@ public class ExitClone : MonoBehaviour
         else if (other.CompareTag("Lever"))
         {
             isOnLever = false;
+        }
+        else if (other.CompareTag("Door"))
+        {
+            isOnDoor = false;
         }
     }
 }

@@ -10,9 +10,15 @@ public class LoadVSDenial : MonoBehaviour
     PlayerControls playerControls;
     public InputAction skipCutscene;
     
+    // A to skip Text
+    public GameObject aToSkip;
+    private bool canSkip;
+
     // Start is called before the first frame update
     void Awake()
     {
+        aToSkip.SetActive(false);
+        canSkip = false;
         playerControls = new PlayerControls();
         skipCutscene = playerControls.Cutscene.SkipCutscene;
         skipCutscene.Enable();
@@ -21,7 +27,7 @@ public class LoadVSDenial : MonoBehaviour
 
     void Update()
     {
-        if (skipCutscene.WasPressedThisFrame())
+        if (skipCutscene.WasPressedThisFrame() && canSkip)
         {
             StopCoroutine(LoadDenial());
 
@@ -31,7 +37,12 @@ public class LoadVSDenial : MonoBehaviour
     
     private IEnumerator LoadDenial()
     {
-        yield return new WaitForSeconds(61f);
+        yield return new WaitForSeconds(3f);
+
+        aToSkip.SetActive(true);
+        canSkip = true;
+        
+        yield return new WaitForSeconds(58f);
 
         SceneManager.LoadScene("VSDenial");
     }

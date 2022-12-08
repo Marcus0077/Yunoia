@@ -65,6 +65,8 @@ public class BasicMovement : MonoBehaviour
     [SerializeField] private Animator animator;
 
     GameObject minionDeath;
+
+    public GameObject winScreen;
     
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -75,6 +77,7 @@ public class BasicMovement : MonoBehaviour
 
         if (this.GameObject().CompareTag("Player"))
         {
+            winScreen.SetActive(false);
             curRoom = 1;
         }
         else
@@ -264,39 +267,55 @@ public class BasicMovement : MonoBehaviour
     // many minions are attached to it.
     float CalcMinionMoveChange()
     {
-        if(attachedMinionCount > 5 && !hasTransitioned)
+        if(attachedMinionCount > 5 && !hasTransitioned && this.GameObject().CompareTag("Player"))
         {
-            //Time.timeScale = 0;
-            //minionDeath.SetActive(true);
-
-            StartCoroutine(TransitionToEres());
+            StartCoroutine(TransitionToWinScreen());
         }
+        
         return Mathf.Max(0,Mathf.Pow(attachedMinionCount * logFormulaCoefficient, logFormulaModifier));
     }
 
-    IEnumerator TransitionToEres()
+    IEnumerator TransitionToWinScreen()
     {
         hasTransitioned = true;
+        
+        GameObject.FindObjectOfType<PauseMenu>().DisableInput();
         
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
         {
             GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
             yield return new WaitForSeconds(1.5f);
-            
-            curRoom = 9;
-            stateDrivenCamAnimator.SetInteger("roomNum", 9);
-            this.transform.position = transitionPos.position;
-            attachedMinionCount = 0;
-            
+
+            winScreen.SetActive(true);
+
             foreach (GameObject Minion in GameObject.FindGameObjectsWithTag("Minion"))
             {
                 Debug.Log("Minion kilt");
                 Destroy(Minion);
             }
-
-            yield return new WaitForSeconds(1.5f);
-            GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent();
+            
+            attachedMinionCount = 0;
         }
+    }
+
+    public void ClickedContinue()
+    {
+        StartCoroutine(TransitionToEres());
+    }
+    
+    IEnumerator TransitionToEres()
+    {
+        winScreen.SetActive(false);
+        
+        curRoom = 9;
+        stateDrivenCamAnimator.SetInteger("roomNum", 9);
+        this.transform.position = transitionPos.position;
+        
+        yield return new WaitForSeconds(1.5f);
+        
+        GameObject.FindObjectOfType<PauseMenu>().EnableInput();
+        GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent();
+        
     }
     
     // Adds a minion to the attached minion count of this game object.

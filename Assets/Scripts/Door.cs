@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Door : MonoBehaviour
 {
     [SerializeField]
     Animator animator;
-    [SerializeField]
-    TextMeshProUGUI activateText;
+
+    public Image activateText;
     public bool canInteract;
     private bool isPlayer;
-    private bool isClone;
+    public bool isClone;
     private CloneInteractions cloneInteractions;
     private PlayerInteractions playerInteractions;
     public AudioClip doorSound;
@@ -26,8 +27,11 @@ public class Door : MonoBehaviour
         
         audioSource = GetComponent<AudioSource>();
 
-        if(activateText != null)
+        if (activateText != null)
+        {
             activateText.enabled = false;
+        }
+
         isPlayer = false;
         isClone = false;
     }
@@ -69,18 +73,21 @@ public class Door : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (activateText != null && canInteract)
+            {
                 activateText.enabled = true;
+            }
 
             playerInteractions = other.GetComponent<PlayerInteractions>();
             playerInteractions.canPressDoor = true;
-
-
+            
             isPlayer = true;
         }
         else if (other.CompareTag("Clone"))
         {
-            if(activateText != null && canInteract)
+            if (activateText != null && canInteract)
+            {
                 activateText.enabled = true;
+            }
 
             cloneInteractions = other.GetComponent<CloneInteractions>();
             cloneInteractions.canPressDoor = true;
@@ -102,6 +109,7 @@ public class Door : MonoBehaviour
             cloneInteractions.canPressDoor = false;
             
         }
+        
         if (!isPlayer && !isClone && canInteract && activateText != null)
         {
             activateText.enabled = false;

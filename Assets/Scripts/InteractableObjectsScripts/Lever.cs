@@ -26,7 +26,7 @@ public class Lever : MonoBehaviour
     public float leverTimer;
 
     // Lever UI references.
-    public TextMeshProUGUI activateText;
+    public Image activateText;
 
     // Lever animation reference.
     public Animator animator;
@@ -104,13 +104,12 @@ public class Lever : MonoBehaviour
         if (!Complete)
         {
             
-        Complete = true;
-        Counterpart.GetComponent<Lever>().Complete = true;
- 
-
-        Door.GetComponent<Door>().Open();
-
-        activateText.enabled = false;
+            Complete = true;
+            Counterpart.GetComponent<Lever>().Complete = true;
+            Door.GetComponent<Door>().Open();
+            
+            Counterpart.GetComponent<Lever>().activateText.enabled = false;
+            activateText.enabled = false;
         }
        
     }
@@ -131,7 +130,7 @@ public class Lever : MonoBehaviour
     // and grants interaction to whichever one is in the trigger.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isClone)
+        if (other.CompareTag("Player") && !isClone && !Complete)
         {
             activateText.enabled = true;
             
@@ -140,7 +139,7 @@ public class Lever : MonoBehaviour
 
             isPlayer = true;
         }
-        else if (other.CompareTag("Clone") && !isPlayer)
+        else if (other.CompareTag("Clone") && !isPlayer && !Complete)
         {
             activateText.enabled = true;
             

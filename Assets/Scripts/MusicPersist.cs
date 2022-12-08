@@ -11,6 +11,8 @@ public class MusicPersist : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]
     SceneMusic<string, AudioClip>[] music;
+    bool stop;
+    float oldVol;
 
     public static MusicPersist Instance
     {
@@ -53,7 +55,6 @@ public class MusicPersist : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GetMusic(scene.name);
-        Debug.Log(scene.name);
     }
 
     void GetMusic(string key)
@@ -61,20 +62,37 @@ public class MusicPersist : MonoBehaviour
         List<AudioClip> clips = (from sceneMusic in music where sceneMusic.SceneName == key select sceneMusic.BGM).ToList();
         if (clips.Count > 0)
         {
+            if(audioSource.clip != null)
+            {
+                if(audioSource.clip.name == clips[0].name)
+                {
+                    return;
+                }
+            }
             audioSource.clip = clips[0];
             audioSource.Play();
         }
         else
         {
-            audioSource.Stop();
+            oldVol = audioSource.volume;
+            stop = true;
             //audioSource.clip = null;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(stop && audioSource.isPlaying)
+        {
+            if(audioSource.volume <= 0.005f)
+            {
+                audioSource.Stop();
+                audioSource.volume = oldVol;
+                stop = false;
+            }
+            audioSource.volume *= 0.95f;
+        }
     }
 }
 

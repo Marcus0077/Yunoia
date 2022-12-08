@@ -11,7 +11,10 @@ public class IgnoreCollider : MonoBehaviour
     {
         Collider[] colliders = transform.GetComponents<Collider>();
         foreach (Collider col in colliders)
-            Physics.IgnoreCollision(other.GetComponent<Collider>(),col);
+        {
+            Physics.IgnoreCollision(other.GetComponent<Collider>(), col);
+        }
+            
     }
 
     // Update is called once per frame

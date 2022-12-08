@@ -41,6 +41,7 @@ public class MenuTraverseWithBars : MonoBehaviour, MenuStop
         menuPress.Enable();
         stop = false;
         activeIndex = 0;
+        buttons[activeIndex].OnHoverEnter();
         if (prevMenu != null)
             prevMenu.OnDisable();
     }

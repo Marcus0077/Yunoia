@@ -7,14 +7,18 @@ using UnityEngine.InputSystem;
 public class MenuTraverse : MonoBehaviour, MenuStop
 {
     [SerializeField]
-    OnButtonHover[] buttons;
+    protected OnButtonHover[] buttons;
     [SerializeField]
-    MenuTraverse prevMenu;
-    int activeIndex;
-    PlayerControls playerControls;
-    InputAction menuMove;
-    InputAction menuPress;
-    bool stop;
+    protected MenuTraverse prevMenu;
+    protected int activeIndex, amount;
+    protected PlayerControls playerControls;
+    protected InputAction menuMove, menuAltMove, menuPress, menuCancel;
+    protected bool stop, move;
+    protected float time = .2f;
+    protected WaitForSecondsRealtime waitForSecondsRealtime;
+    protected Coroutine moving;
+    [SerializeField]
+    protected int backIndex = -1;
     public bool Stop
     {
         get { return stop; }
@@ -29,16 +33,30 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     void Awake()
     {
         playerControls = new PlayerControls();
-        menuMove = playerControls.Movement.Move;
-        menuMove.performed += ctx => MoveMenu(ctx);
-        menuPress = playerControls.Interaction.Press;
+        menuMove = playerControls.Menu.Move;
+        menuMove.performed += ctx => StartMove(ctx);
+        menuMove.canceled += ctx => CancelMove();
+        menuAltMove = playerControls.Menu.AltMove;
+        menuAltMove.performed += ctx => StartMove(ctx);
+        menuAltMove.canceled += ctx => CancelMove();
+        menuPress = playerControls.Menu.Press;
         menuPress.performed += ctx => PressMenu();
+        menuCancel = playerControls.Menu.Back;
+        menuCancel.performed += ctx => Back();
+    }
+
+    public void Back()
+    {
+        if(backIndex >= 0)
+            buttons[backIndex].Press();
     }
 
     public void OnEnable()
     {
         menuMove.Enable();
+        menuAltMove.Enable();
         menuPress.Enable();
+        menuCancel.Enable();
         stop = false;
         activeIndex = 0;
         buttons[activeIndex].OnHoverEnter();
@@ -49,8 +67,11 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     public void OnDisable()
     {
         menuMove.Disable();
+        menuAltMove.Disable();
         menuPress.Disable();
+        menuCancel.Disable();
         stop = true;
+        moving = null;
         ExitAll();
         if (prevMenu != null)
             prevMenu.OnEnable();
@@ -58,37 +79,71 @@ public class MenuTraverse : MonoBehaviour, MenuStop
 
     public void PressMenu()
     {
-        if (activeIndex >= 0)
-        {
-            buttons[activeIndex].Press();
-        }
+        Debug.Log(activeIndex);
+        buttons[activeIndex].Press();
     }
 
-    public void MoveMenu(InputAction.CallbackContext context)
+    public void MoveMenu()
     {
-        if(!stop)
+        if (amount != 0)
         {
-            int amount = Math.Min(1, (int)Mathf.Round(context.ReadValue<Vector2>().x) + -1 * (int)Mathf.Round(context.ReadValue<Vector2>().y));
-            if (activeIndex >= 0 || amount > 0)
+            buttons[activeIndex].OnHoverExit();
+            activeIndex += amount;
+        }
+        activeIndex = (activeIndex % buttons.Length + buttons.Length) % buttons.Length;
+        EnterCurrent(activeIndex);
+    }
+
+    public void StartMove(InputAction.CallbackContext context)
+    {
+        if (!move)
+        {
+            amount = (int)context.ReadValue<float>();
+            if (moving == null)
             {
-                if (activeIndex != -1)
-                {
-                    buttons[activeIndex].OnHoverExit();
-                }
-                //activeIndex += Math.Min(1, (int)(Math.Round((int)(context.ReadValue<Vector2>().x * 10) / 10f, MidpointRounding.AwayFromZero) + -1 * Math.Round((int)(context.ReadValue<Vector2>().y * 10) / 10f, MidpointRounding.AwayFromZero)));
-                activeIndex += amount;
+                move = true;
+                moving = StartCoroutine(SlowMoveMenu());
             }
-            activeIndex = (activeIndex % buttons.Length + buttons.Length) % buttons.Length;
-            buttons[activeIndex].OnHoverEnter();
-            StartCoroutine(SlowMoveMenu());
+            else
+            {
+                MoveMenu();
+            }
         }
     }
 
-    IEnumerator SlowMoveMenu()
+    protected void CancelMove()
     {
-        stop = true;
-        yield return new WaitForSecondsRealtime(.25f);
-        stop = false;
+        move = false;
+    }
+
+    protected IEnumerator SlowMoveMenu()
+    {
+        yield return null;
+        Coroutine self = moving;
+        while (move)
+        {
+            MoveMenu();
+            if (waitForSecondsRealtime == null)
+            {
+                waitForSecondsRealtime = new WaitForSecondsRealtime(time);
+            }
+            else
+            {
+                waitForSecondsRealtime.waitTime = time;
+            }
+            yield return waitForSecondsRealtime;
+        }
+        if (moving == self)
+        {
+            moving = null;
+        }
+         
+    }
+
+    public void EnterCurrent(int index)
+    {
+        buttons[index].OnHoverEnter();
+        activeIndex = index;
     }
 
     public void ExitCurrent()

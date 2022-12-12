@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MenuTraverse : MonoBehaviour, MenuStop
+public class MenuTraverse : MonoBehaviour
 {
     [SerializeField]
     protected OnButtonHover[] buttons;
@@ -19,10 +19,10 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     protected Coroutine moving;
     [SerializeField]
     protected int backIndex = -1;
-    public bool Stop
+    public bool Move
     {
-        get { return stop; }
-        set { stop = value; }
+        get { return move; }
+        set { move = value; }
     }
     // Start is called before the first frame update
     void Start()
@@ -36,16 +36,16 @@ public class MenuTraverse : MonoBehaviour, MenuStop
         menuMove = playerControls.Menu.Move;
         menuMove.performed += ctx => StartMove(ctx);
         menuMove.canceled += ctx => CancelMove();
-        menuAltMove = playerControls.Menu.AltMove;
-        menuAltMove.performed += ctx => StartMove(ctx);
-        menuAltMove.canceled += ctx => CancelMove();
+        //menuAltMove = playerControls.Menu.AltMove;
+        //menuAltMove.performed += ctx => StartMove(ctx);
+        //menuAltMove.canceled += ctx => CancelMove();
         menuPress = playerControls.Menu.Press;
         menuPress.performed += ctx => PressMenu();
         menuCancel = playerControls.Menu.Back;
         menuCancel.performed += ctx => Back();
     }
 
-    public void Back()
+    public virtual void Back()
     {
         if(backIndex >= 0)
             buttons[backIndex].Press();
@@ -54,7 +54,7 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     public void OnEnable()
     {
         menuMove.Enable();
-        menuAltMove.Enable();
+        //menuAltMove.Enable();
         menuPress.Enable();
         menuCancel.Enable();
         stop = false;
@@ -67,7 +67,7 @@ public class MenuTraverse : MonoBehaviour, MenuStop
     public void OnDisable()
     {
         menuMove.Disable();
-        menuAltMove.Disable();
+        //menuAltMove.Disable();
         menuPress.Disable();
         menuCancel.Disable();
         stop = true;
@@ -77,13 +77,13 @@ public class MenuTraverse : MonoBehaviour, MenuStop
             prevMenu.OnEnable();
     }
 
-    public void PressMenu()
+    public virtual void PressMenu()
     {
         Debug.Log(activeIndex);
         buttons[activeIndex].Press();
     }
 
-    public void MoveMenu()
+    public virtual void MoveMenu()
     {
         if (amount != 0)
         {
@@ -152,7 +152,7 @@ public class MenuTraverse : MonoBehaviour, MenuStop
             buttons[activeIndex].OnHoverExit();
     }
 
-    public void ExitAll()
+    public virtual void ExitAll()
     {
         foreach (OnButtonHover button in buttons)
             button.OnHoverExit();

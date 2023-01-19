@@ -116,7 +116,7 @@ public class CloneInteractions : MonoBehaviour
     // currently in control.
     private void SwitchPlaces()
     {
-        if (switchPlaces.WasPressedThisFrame())
+        if (switchPlaces.WasReleasedThisFrame())
         {
             if (basicMovementPlayer.canMove == false)
             {

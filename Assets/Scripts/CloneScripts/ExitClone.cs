@@ -11,6 +11,9 @@ public class ExitClone : MonoBehaviour
     // UI Clone Active Timer
     public TextMeshProUGUI activeTimerText;
     
+    // Temporary Despawn Timer UI
+    public TextMeshProUGUI despawnTimerText;
+    
     //UI Experiment
     public Animator anim;
     public Animator animCover;
@@ -33,8 +36,9 @@ public class ExitClone : MonoBehaviour
     PlayerControls summonControls;
     private InputAction exitClone;
 
-    // Despawn clone conditional variable
+    // Despawn clone variables
     public bool despawnClone;
+    public float despawnCloneTimer;
     
     // Timer variables
     private float cloneActiveTimer;
@@ -73,24 +77,44 @@ public class ExitClone : MonoBehaviour
         despawnClone = false;
         
         cloneActiveTimer = 30.0f;
+        despawnCloneTimer = 2.0f;
         
         //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
         //activeTimerText.color = Color.white;
+        
+        despawnTimerText = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<TextMeshProUGUI>();
+        despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+        
         anim = GetComponent<Animator>();
     }
     
     // Called each frame.
     private void Update()
     {
-        if (exitClone.WasPressedThisFrame() && summonClone.cloneSummoned)
-        {
-            despawnClone = true;
-        }
+        
     }
     
     // Called between frames.
     void FixedUpdate()
     {
+        if (exitClone.IsPressed() && summonClone.cloneSummoned)
+        {
+            if (despawnCloneTimer <= 0)
+            {
+                despawnClone = true;
+            }
+            else
+            {
+                despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
+                despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+            }
+        }
+        else if (!exitClone.IsPressed() && despawnCloneTimer != 2)
+        {
+            despawnCloneTimer = 2.0f;
+            despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+        }
+
         CheckCloneDespawn();
     }
 
@@ -155,6 +179,7 @@ public class ExitClone : MonoBehaviour
 
             //activeTimerText.text = "";
             //combatHandler.healthText.text = "";
+            despawnTimerText.text = "";
             
             basicMovementPlayer.CheckCameraState();
 

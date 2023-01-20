@@ -90,13 +90,16 @@ public class SummonClone : MonoBehaviour
         
             clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + (Vector3.back + new Vector3(0f, 0f, -.75f)), 
                 Quaternion.LookRotation(-Vector3.forward));
-            
-            clone.GetComponent<CloneInteractions>().anim = uiAnim;
-            clone.GetComponent<ExitClone>().anim = uiAnim;
-            clone.GetComponent<CloneInteractions>().animCover = uiAnimCover;
-            clone.GetComponent<ExitClone>().animCover = uiAnimCover;
-            uiAnim.SetBool("isClone", true);
-            uiAnimCover.SetBool("isClone", true);
+
+            if (uiAnim != null)
+            {
+                clone.GetComponent<CloneInteractions>().anim = uiAnim;
+                clone.GetComponent<ExitClone>().anim = uiAnim;
+                clone.GetComponent<CloneInteractions>().animCover = uiAnimCover;
+                clone.GetComponent<ExitClone>().animCover = uiAnimCover;
+                uiAnim.SetBool("isClone", true);
+                uiAnimCover.SetBool("isClone", true);
+            }
 
             GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
 

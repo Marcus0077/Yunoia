@@ -14,16 +14,23 @@ public class CloneCombat : MonoBehaviour
         combatHandler = FindObjectOfType<CombatHandler>();
         exitClone = FindObjectOfType<ExitClone>();
 
-        combatHandler.cloneHP = 3;
+
+        if (combatHandler != null)
+        {
+            combatHandler.cloneHP = 3;
+        }
     }
     
     void FixedUpdate()
     {
         cloneHead.GetComponent<Renderer>().material.color = combatHandler.changeCloneColor;
 
-        if (combatHandler.cloneHP <= 0)
+        if (combatHandler != null)
         {
-            exitClone.despawnClone = true;
+            if (combatHandler.cloneHP <= 0)
+            {
+                exitClone.despawnClone = true;
+            }
         }
     }
 }

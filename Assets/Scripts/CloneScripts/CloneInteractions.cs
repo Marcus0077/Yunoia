@@ -61,9 +61,12 @@ public class CloneInteractions : MonoBehaviour
         //smoothCameraFollow.target = this.transform;
         
         playerControls = new PlayerControls();
-        
-        combatHandler.cloneHP = 3;
-        //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
+
+        if (combatHandler != null)
+        {
+            combatHandler.cloneHP = 3;
+            //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
+        }
 
         cloneRestored = true;
         canPressLever = false;
@@ -120,8 +123,11 @@ public class CloneInteractions : MonoBehaviour
         {
             if (basicMovementPlayer.canMove == false)
             {
-                anim.SetBool("isClone", false);
-                animCover.SetBool("isClone", false);
+                if (anim != null)
+                {
+                    anim.SetBool("isClone", false);
+                    animCover.SetBool("isClone", false);
+                }
 
                 basicMovementPlayer.canMove = true;
                 basicMovementClone.canMove = false;
@@ -139,8 +145,11 @@ public class CloneInteractions : MonoBehaviour
             }
             else if (basicMovementClone.canMove == false)
             {
-                anim.SetBool("isClone", true);
-                animCover.SetBool("isClone", true);
+                if (anim != null)
+                {
+                    anim.SetBool("isClone", true);
+                    animCover.SetBool("isClone", true);
+                }
 
                 basicMovementPlayer.canMove = false;
                 basicMovementClone.canMove = true;

@@ -77,7 +77,11 @@ public class BasicMovement : MonoBehaviour
 
         if (this.GameObject().CompareTag("Player"))
         {
-            winScreen.SetActive(false);
+            if (winScreen != null)
+            {
+                winScreen.SetActive(false);
+            }
+
             curRoom = 1;
         }
         else

@@ -183,8 +183,11 @@ public class ExitClone : MonoBehaviour
             
             basicMovementPlayer.CheckCameraState();
 
-            anim.SetBool("isClone", false);
-            animCover.SetBool("isClone", false);
+            if (anim != null)
+            {
+                anim.SetBool("isClone", false);
+                animCover.SetBool("isClone", false);
+            }
 
             Destroy(this.gameObject);
         }

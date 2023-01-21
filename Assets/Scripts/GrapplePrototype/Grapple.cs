@@ -9,8 +9,10 @@ public class Grapple : MonoBehaviour
     [SerializeField] float swingSpeed = 0.3f;
     [SerializeField] float yankSpeedStrong = 0.7f;
     [SerializeField] float yankSpeedWeak = 0.7f;
-    [SerializeField] float stopDistance = 2.5f;
-    [SerializeField] float taughtDistance = 5.0f;
+    [SerializeField] float stopDistanceClose = 2.5f;
+    [SerializeField] float stopDistanceFar = 13.0f;
+    [SerializeField] float taughtDistance = 3.0f;
+    [SerializeField] float maxSwingHeight = float.MaxValue;
 
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
@@ -126,10 +128,16 @@ public class Grapple : MonoBehaviour
             }
         }*/
         
-        if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistance)
+        if (Vector3.Distance(transform.position, hook.transform.position) <= stopDistanceClose)
         {
             DestroyHook();
         }
+        // Break Active Grapple if the player is too far from the grapple point
+        else if (Vector3.Distance(transform.position, hook.transform.position) >= stopDistanceFar)
+        {
+            DestroyHook();
+        }
+        
         /*else
         {
             rigid.AddForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.VelocityChange);
@@ -153,12 +161,12 @@ public class Grapple : MonoBehaviour
 
         if (hook != null)
         {
-            if (hook != null && (playerRB.position.y > (hook.transform.position.y - 1)))
+            if (playerRB.position.y > (hook.transform.position.y - 1))
             {
                 DestroyHook();
             }
-            
-            if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || player.isGrounded)
+
+            if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || player.isGrounded || (playerRB.position.y > maxSwingHeight))
             {
                 return;
             }
@@ -175,7 +183,11 @@ public class Grapple : MonoBehaviour
         grappleActive = true;
         yankReady = false;
 
-        if (canYank)
+        if (!canYank)
+        {
+            maxSwingHeight = playerRB.position.y + 0.5f;
+        }
+        else if (canYank)
         {
             StartCoroutine(YankDelay());
         }
@@ -192,6 +204,8 @@ public class Grapple : MonoBehaviour
         canYank = false;
         yankReady = false;
         grappleActive = false;
+
+        maxSwingHeight = float.MaxValue;
 
         Destroy(hook.gameObject);
         hook = null;

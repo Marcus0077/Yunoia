@@ -81,7 +81,7 @@ public class AiOrbs : Pushable
         }
         if (closer != null)
         {
-            Debug.Log(closer);
+            //Debug.Log(closer);
             player = closer;
             transform.position = Vector3.Lerp(transform.position, closer.transform.position, Time.deltaTime * movespeed);
             transform.LookAt(closer.transform);

@@ -8,16 +8,16 @@ public class AbilityPush : MonoBehaviour
     [SerializeField]
     int maxChargeLevel = 1, minPush = 1;
     [SerializeField]
-    float chargeSpeed = 1, cooldown = 1;
+    float chargeSpeed = 1, cooldown = 1, shieldCooldown, shieldDuration;
     float chargeTime;
-    bool ableToPush = true, charging = false;
+    bool ableToPush = true, charging = false, shield = false, shielded = false;
     [SerializeField]
-    public bool restored;
+    public bool restored, ableToShield;
     PlayerControls pushControls;
     public InputAction pushAction;
     public int pushedLevel;
     public float range;
-    public float cdRemaining;
+    public float cdRemaining, cdRemainingForShield;
     Transform shape;
     Vector3 oldPos;
 
@@ -25,11 +25,12 @@ public class AbilityPush : MonoBehaviour
     public GameObject smallPushEffect;
     public GameObject largePushEffect;
     public GameObject chargePushEffect;
-    
+    public GameObject shieldEffect;
+
     public GameObject smallEffectDestroy;
     public GameObject largeEffectDestroy;
     public GameObject chargeEffectDestroy;
-    
+
     public bool smallPushNeedsDeath;
     public bool largePushNeedsDeath;
     public bool chargePushNeedsDeath;
@@ -137,7 +138,13 @@ public class AbilityPush : MonoBehaviour
 
             // shape.localScale = new Vector3(radius, radius, radius);
             // shape.position = transform.position;
-            
+            if(timeCharging > maxChargeLevel+minPush)
+            {
+                Destroy(chargeEffectDestroy);
+                shield = true;
+                PushRelease();
+                yield break;
+            }
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
@@ -180,7 +187,6 @@ public class AbilityPush : MonoBehaviour
     private IEnumerator PushTimer()
     {
         source.Play();
-        
         ableToPush = false;
         cdRemaining = cooldown;
         while(cdRemaining > 0)
@@ -194,6 +200,22 @@ public class AbilityPush : MonoBehaviour
             StartCoroutine(RenderChargeVolume());
         }
         cdRemaining = -1;
+        ableToPush = true;
+    }
+
+    private IEnumerator PushTimerForShield()
+    {
+        //source.Play(); add sound to shield gameobject particle system?
+        ableToShield = false;
+        yield return new WaitUntil(() => !shielded);
+        cdRemainingForShield = shieldCooldown;
+        while (cdRemainingForShield > 0)
+        {
+            cdRemainingForShield -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        cdRemainingForShield = -1;
+        ableToShield = true;
         ableToPush = true;
     }
 
@@ -226,7 +248,8 @@ public class AbilityPush : MonoBehaviour
                 range = minPush;
                 RenderVolume(range * 2);
                 StartCoroutine(PushTimer());
-            } else
+            }
+            else
             {
                 chargeTime = Time.time;
                 StartCoroutine(RenderChargeVolume());
@@ -241,14 +264,38 @@ public class AbilityPush : MonoBehaviour
         if (ableToPush)
         {
             //start animation
-            if (restored)
+            if (restored && !shield)
             {
                 chargeTime = (Time.time - chargeTime) * chargeSpeed + minPush;
                 range = Mathf.Clamp(chargeTime, minPush, maxChargeLevel + minPush);
                 StartCoroutine(PushTimer());
                 chargeTime = Time.time;
             }
+            else if(shield)
+            {
+                if(ableToShield)
+                {
+                    shield = false;
+                    shieldEffect.SetActive(true);
+                    shielded = true;
+                    ableToPush = false;
+                    StartCoroutine(DisableShield(shieldDuration));
+                    StartCoroutine(PushTimerForShield());
+                }
+                else
+                {
+                    shield = false;
+                    Debug.Log("on cooldown or not unlocked");
+                }
+            }
         }
+    }
+
+    private IEnumerator DisableShield(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        shielded = false;
+        shieldEffect.SetActive(false);
     }
 
     void Awake()

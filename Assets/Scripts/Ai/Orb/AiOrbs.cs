@@ -9,8 +9,10 @@ public class AiOrbs : Pushable
     [SerializeField]
     GameObject stickyOrb;
     public GameObject player;
+    bool seenOnce = false;
+    Coroutine delay = null;
     [SerializeField]
-    float detectDistance, movespeed;
+    float detectDistance, movespeed, timeToDelay;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,7 @@ public class AiOrbs : Pushable
     public override void Awake()
     {
         base.Awake();
+        seenOnce = false;
     }
 
     void DistancePlayer()
@@ -68,6 +71,14 @@ public class AiOrbs : Pushable
             {
                 if (hit.transform.gameObject.GetComponent<AbilityPush>() != null)
                 {
+                    if(!seenOnce)
+                    {
+                        if (delay == null)
+                        {
+                            delay = StartCoroutine(DelayChase(timeToDelay));
+                        }
+                        return;
+                    }
                     if (hit.distance < detectDistance)
                     {
                         if (distance > hit.distance)
@@ -86,6 +97,13 @@ public class AiOrbs : Pushable
             transform.position = Vector3.Lerp(transform.position, closer.transform.position, Time.deltaTime * movespeed);
             transform.LookAt(closer.transform);
         }
+    }
+
+    IEnumerator DelayChase(float time)
+    {
+        yield return new WaitForSeconds(time);
+        seenOnce = true;
+        delay = null;
     }
 
     void Update()

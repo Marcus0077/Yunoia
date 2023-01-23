@@ -278,7 +278,7 @@ public class AbilityPush : MonoBehaviour
                     shield = false;
                     shieldEffect.SetActive(true);
                     shielded = true;
-                    ableToPush = false;
+                    //ableToPush = false;
                     StartCoroutine(DisableShield(shieldDuration));
                     StartCoroutine(PushTimerForShield());
                 }

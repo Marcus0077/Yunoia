@@ -6,13 +6,15 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    [SerializeField] float swingSpeed = 0.3f;
+    float pullSpeed = 0.27f;
     [SerializeField] float yankSpeedStrong = 0.7f;
     [SerializeField] float yankSpeedWeak = 0.7f;
-    [SerializeField] float stopDistanceClose = 2.5f;
-    [SerializeField] float stopDistanceFar = 13.0f;
-    [SerializeField] float taughtDistance = 3.0f;
+    float stopDistanceClose = 2.5f;
+    float stopDistanceFar = 13.0f;
+    float taughtDistance = 3.0f;
     [SerializeField] float maxSwingHeight = float.MaxValue;
+    [SerializeField] Vector3 lastPlayerPos;
+    public bool canCheckPos = true;
 
     [SerializeField] GameObject hookPrefab;
     [SerializeField] Transform shootTransform;
@@ -28,9 +30,12 @@ public class Grapple : MonoBehaviour
     [SerializeField] BasicMovement player;
     [SerializeField] float changePerSecond;
     [SerializeField] float grappleCooldown = 1;
+    float maxVelocity;
+    float sqrMaxVelocity;
+    [SerializeField] bool canReverseSwing = true;
+    [SerializeField] bool canApplyForce = true;
+    [SerializeField] bool forwardSwing = true;
     float cdRemaining;
-
-    [SerializeField] float horizontalPullSpeed = 0.5f;
 
     Hook hook;
     bool grappleActive;
@@ -59,11 +64,19 @@ public class Grapple : MonoBehaviour
     {
         grappleNeedsDeath = false;
         grappleActive = false;
+
+        SetMaxVelocity(15.0f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Caps player player velocity according to SetMaxVelocity() on awake
+        if (playerRB.velocity.sqrMagnitude > sqrMaxVelocity)
+        {
+            playerRB.velocity = playerRB.velocity.normalized * maxVelocity;
+        }
+
         if (hook == null && !grappleActive)
         {
             bestHook = aimAssist.HookDetection(shootTransform.position, radius);
@@ -159,21 +172,9 @@ public class Grapple : MonoBehaviour
             playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
         }*/
 
-        if (hook != null)
+        if (grappleActive)
         {
-            if (playerRB.position.y > (hook.transform.position.y - 1))
-            {
-                DestroyHook();
-            }
-
-            if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || player.isGrounded || (playerRB.position.y > maxSwingHeight))
-            {
-                return;
-            }
-            else
-            {
-                playerRB.AddForce((hook.transform.position - transform.position).normalized * swingSpeed, ForceMode.Impulse);
-            }
+            GrappleForce();
         }
     }
 
@@ -182,10 +183,13 @@ public class Grapple : MonoBehaviour
         ready = false;
         grappleActive = true;
         yankReady = false;
+        forwardSwing = true;
+
+        stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 1.5f;
 
         if (!canYank)
         {
-            maxSwingHeight = playerRB.position.y + 0.5f;
+            maxSwingHeight = playerRB.position.y + 1.5f;
         }
         else if (canYank)
         {
@@ -204,6 +208,7 @@ public class Grapple : MonoBehaviour
         canYank = false;
         yankReady = false;
         grappleActive = false;
+        canCheckPos = true;
 
         maxSwingHeight = float.MaxValue;
 
@@ -273,6 +278,94 @@ public class Grapple : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         yankReady = true;
+    }
+
+    private void GrappleForce()
+    {
+        if (canCheckPos)
+        {
+            StartCoroutine(SetLastPosition());
+        }
+
+        if (playerRB.position.y > (hook.transform.position.y - 1))
+        {
+            DestroyHook();
+        }
+
+        if ((playerRB.position.y > maxSwingHeight) && canApplyForce)
+        {
+            StartCoroutine(ReverseSwing());
+        }
+
+        if (!player.isGrounded && canApplyForce)
+        {
+            HorizontalSwing();
+        }
+
+        if (player.isGrounded)
+        {
+            return;
+        }
+        /*if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || (playerRB.position.y > maxSwingHeight))
+        {
+            playerRB.AddRelativeForce(Vector3.down * 1.0f, ForceMode.VelocityChange);
+        }*/
+        else if (canApplyForce)
+        {
+            playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized * pullSpeed, ForceMode.Impulse);
+        }
+
+        return;
+    }
+
+    private void HorizontalSwing()
+    {
+        if (forwardSwing)
+        {
+            playerRB.AddRelativeForce(7.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+        }
+        else
+        {
+            playerRB.AddRelativeForce(-7.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+        }
+    }
+
+    private IEnumerator SetLastPosition()
+    {
+        canCheckPos = false;
+        lastPlayerPos = transform.position;
+
+        yield return new WaitForSeconds(0.5f);
+
+        canCheckPos = true;
+    }
+
+    public void SetMaxVelocity(float maxVelocity)
+    {
+        this.maxVelocity = maxVelocity;
+        sqrMaxVelocity = maxVelocity * maxVelocity;
+    }
+
+    private IEnumerator ReverseSwing()
+    {
+        if (canReverseSwing)
+        {
+            forwardSwing = !forwardSwing;
+            canReverseSwing = false;
+            canApplyForce = false;
+            StartCoroutine(RemoveForce());
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        canReverseSwing = true;
+    }
+
+    private IEnumerator RemoveForce()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        canApplyForce = true;
     }
 
     // Enable input action map controls.

@@ -7,15 +7,15 @@ using UnityEngine.InputSystem;
 
 public class LimitedMovementCam : MonoBehaviour
 {
-    // Input Variables
+    // Input Variables.
     PlayerControls playerControls;
     public InputAction camMove;
     public InputAction playerMove;
     
-    // Camera Follow Sphere(s) RigidBody
+    // Camera Follow Sphere RigidBody.
     public Rigidbody camFollowSphere;
 
-    // Movement Variables
+    // Sphere Movement Variables.
     public Vector2 moveDirection;
     public float baseAccelerationValue;
     public float accelerationValueX;
@@ -23,26 +23,30 @@ public class LimitedMovementCam : MonoBehaviour
     public float moveSpeed;
     public float returnSpeed;
 
+    // Player Information.
     public Vector3 playerPos;
 
+    // Return Sphere to player Cooldown Timer.
     public float returnToPlayerTimer;
 
+    // Camera Variables.
     public CinemachineVirtualCameraBase curCamera;
-    public CinemachineConfiner curConfiner;
+    private float curCameraPosX;
+    private float curCameraPosY;
 
+    // Confiner Variables.
+    public CinemachineConfiner curConfiner;
     private float curConfinerScaleX;
     private float curConfinerPosX;
     private float curConfinerScaleY;
     private float curConfinerPosY;
 
+    // Bounding Box Variables.
     private float leftXBound;
     private float rightXBound;
     private float leftYBound;
     private float rightYBound;
 
-    private float curCameraPosX;
-    private float curCameraPosY;
-    
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,7 +66,7 @@ public class LimitedMovementCam : MonoBehaviour
         moveSpeed = 5f;
     }
 
-    // Currently Unused
+    // Currently Unused.
     void GetCurrentCameraData()
     {
         
@@ -114,6 +118,8 @@ public class LimitedMovementCam : MonoBehaviour
         
         if (camMove.IsPressed() && !playerMove.IsPressed())
         {
+            Debug.Log(leftYBound);
+            
             returnToPlayerTimer = 1.5f;
 
             moveDirection = (Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y - 90, -Vector3.forward) *

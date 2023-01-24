@@ -184,6 +184,9 @@ public class ExitClone : MonoBehaviour
             despawnTimerText.text = "";
             
             limitedMovementCam.Player = basicMovementPlayer.GameObject();
+            limitedMovementCam.curCamera.Follow = basicMovementPlayer.GameObject().transform;
+            limitedMovementCam.isCamFollowingPlayer = true;
+            
             basicMovementPlayer.CheckCameraState();
 
             if (anim != null)

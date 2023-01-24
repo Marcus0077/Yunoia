@@ -49,7 +49,7 @@ public class LimitedMovementCam : MonoBehaviour
     private Vector3 camBallOffset;
 
     
-    private bool isCamFollowingPlayer;
+    public bool isCamFollowingPlayer;
 
     // Start is called before the first frame update
     void Awake()
@@ -60,6 +60,7 @@ public class LimitedMovementCam : MonoBehaviour
         playerPos = Player.transform.position;
         transform.position = Vector3.MoveTowards(transform.position, playerPos, returnSpeed * Time.deltaTime);
         curCamera = GameObject.FindGameObjectWithTag("Camera1").GetComponent<CinemachineVirtualCamera>();
+        curCamera.Follow = Player.transform;
         
         camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
 
@@ -68,7 +69,7 @@ public class LimitedMovementCam : MonoBehaviour
         returnSpeed = 20f;
         returnToPlayerTimer = 0f;
         accelerationValue = 1f;
-        moveSpeed = 5f;
+        moveSpeed = 10f;
 
         isCamFollowingPlayer = true;
     }

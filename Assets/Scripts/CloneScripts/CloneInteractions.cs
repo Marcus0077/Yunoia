@@ -129,6 +129,7 @@ public class CloneInteractions : MonoBehaviour
                 limitedMovementCam.Player = basicMovementPlayer.GameObject();
                 limitedMovementCam.curCamera.Follow = basicMovementPlayer.GameObject().transform;
                 limitedMovementCam.isCamFollowingPlayer = true;
+                limitedMovementCam.camFollowSphere.position = basicMovementPlayer.GameObject().transform.position;
                     
                 if (anim != null)
                 {
@@ -155,6 +156,7 @@ public class CloneInteractions : MonoBehaviour
                 limitedMovementCam.Player = basicMovementClone.GameObject();
                 limitedMovementCam.curCamera.Follow = basicMovementClone.GameObject().transform;
                 limitedMovementCam.isCamFollowingPlayer = true;
+                limitedMovementCam.camFollowSphere.position = basicMovementClone.GameObject().transform.position;
                 
                 if (anim != null)
                 {

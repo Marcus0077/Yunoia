@@ -95,6 +95,7 @@ public class BasicMovement : MonoBehaviour
             limitedMovementCam.Player = this.GameObject();
             limitedMovementCam.curCamera.Follow = this.GameObject().transform;
             limitedMovementCam.isCamFollowingPlayer = true;
+            limitedMovementCam.camFollowSphere.position = this.GameObject().transform.position;
         }
 
         if (GameObject.FindWithTag("MinionDeath") != null)

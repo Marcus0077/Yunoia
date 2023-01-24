@@ -186,6 +186,7 @@ public class ExitClone : MonoBehaviour
             limitedMovementCam.Player = basicMovementPlayer.GameObject();
             limitedMovementCam.curCamera.Follow = basicMovementPlayer.GameObject().transform;
             limitedMovementCam.isCamFollowingPlayer = true;
+            limitedMovementCam.camFollowSphere.position = basicMovementPlayer.GameObject().transform.position;
             
             basicMovementPlayer.CheckCameraState();
 

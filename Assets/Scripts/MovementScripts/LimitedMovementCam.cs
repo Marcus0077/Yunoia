@@ -48,7 +48,7 @@ public class LimitedMovementCam : MonoBehaviour
     // Offset Values.
     private Vector3 camBallOffset;
 
-    
+    // Tells camera whether to follow player or sphere.
     public bool isCamFollowingPlayer;
 
     // Start is called before the first frame update
@@ -69,7 +69,7 @@ public class LimitedMovementCam : MonoBehaviour
         returnSpeed = 20f;
         returnToPlayerTimer = 0f;
         accelerationValue = 1f;
-        moveSpeed = 10f;
+        moveSpeed = 6f;
 
         isCamFollowingPlayer = true;
     }

@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196432523}
   m_LocalRotation: {x: 0.054095466, y: -0, z: -0, w: 0.99853575}
-  m_LocalPosition: {x: -0.01845666, y: -1.3269424, z: 10.426422}
+  m_LocalPosition: {x: 0.016375383, y: -1.5209465, z: 10.069502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -809,6 +809,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 0}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 0}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!20 &1130757543
 Camera:
   m_ObjectHideFlags: 0
@@ -894,7 +942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130757541}
   m_LocalRotation: {x: 0.05409547, y: 0, z: 0, w: 0.9985358}
-  m_LocalPosition: {x: -0.01845666, y: 46.28494, z: 24.8885}
+  m_LocalPosition: {x: 0.016375383, y: 46.090935, z: 24.53158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1396,7 +1444,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 0
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1828050830}
+  m_Follow: {fileID: 1196110547}
   m_AnimatedTarget: {fileID: 1571189343}
   m_LayerIndex: 0
   m_ShowDebugText: 0
@@ -1615,13 +1663,21 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  cloneButton:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6c94c77d-8df7-4314-a246-f4f97fd7d926
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   camFollowSphere: {fileID: 1828050834}
   moveDirection: {x: 0, y: 0}
-  baseAccelerationValue: 0
-  accelerationValueX: 0
-  accelerationValueY: 0
+  accelerationValue: 0
   moveSpeed: 0
   returnSpeed: 0
+  Player: {fileID: 0}
   playerPos: {x: 0, y: 0, z: 0}
   returnToPlayerTimer: 0
   curCamera: {fileID: 196432524}
@@ -1656,8 +1712,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4148275, z: 1}
-  m_Center: {x: 0, y: -0.20741522, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1911463894
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1716,8 +1772,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911463892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.84, y: 47.43, z: 28.2}
-  m_LocalScale: {x: 10.277756, y: 4.4135, z: 8.713708}
+  m_LocalPosition: {x: 0.84, y: 46.9727, z: 28.2}
+  m_LocalScale: {x: 10.277756, y: 5.328351, z: 8.713708}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

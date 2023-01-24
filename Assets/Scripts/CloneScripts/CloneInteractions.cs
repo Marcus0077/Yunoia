@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CloneInteractions : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CloneInteractions : MonoBehaviour
     public AbilityPush cloneAbilityPush;
     public Lever lever;
     public Door door;
+    public LimitedMovementCam limitedMovementCam;
 
     // Player game object reference.
     public GameObject Player;
@@ -55,6 +57,7 @@ public class CloneInteractions : MonoBehaviour
         summonClone = FindObjectOfType<SummonClone>();
         exitClone = FindObjectOfType<ExitClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
+        limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
 
@@ -123,6 +126,8 @@ public class CloneInteractions : MonoBehaviour
         {
             if (basicMovementPlayer.canMove == false)
             {
+                limitedMovementCam.Player = basicMovementPlayer.GameObject();
+                    
                 if (anim != null)
                 {
                     anim.SetBool("isClone", false);
@@ -145,6 +150,8 @@ public class CloneInteractions : MonoBehaviour
             }
             else if (basicMovementClone.canMove == false)
             {
+                limitedMovementCam.Player = basicMovementClone.GameObject();
+                
                 if (anim != null)
                 {
                     anim.SetBool("isClone", true);

@@ -28,6 +28,7 @@ public class ExitClone : MonoBehaviour
     private PressurePlate pressurePlate;
     private Lever lever;
     private Door door;
+    public LimitedMovementCam limitedMovementCam;
     
     // Player reference
     public GameObject Player;
@@ -69,6 +70,7 @@ public class ExitClone : MonoBehaviour
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
+        limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
 
         isOnPressurePlate = false;
         isOnLever = false;
@@ -181,6 +183,7 @@ public class ExitClone : MonoBehaviour
             //combatHandler.healthText.text = "";
             despawnTimerText.text = "";
             
+            limitedMovementCam.Player = basicMovementPlayer.GameObject();
             basicMovementPlayer.CheckCameraState();
 
             if (anim != null)

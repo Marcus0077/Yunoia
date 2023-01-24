@@ -17,6 +17,9 @@ public class BasicMovement : MonoBehaviour
     public InputAction jump;
     public InputAction dash;
     
+    // Script References
+    public LimitedMovementCam limitedMovementCam;
+    
     // Movement variables
     public Rigidbody playerRB;
     public Vector2 moveDirection = Vector2.zero;
@@ -73,6 +76,7 @@ public class BasicMovement : MonoBehaviour
     {
         playerControls = new PlayerControls();
         smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
+        limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
 
         if (this.GameObject().CompareTag("Player"))
@@ -87,6 +91,7 @@ public class BasicMovement : MonoBehaviour
         else
         {
             curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
+            limitedMovementCam.Player = this.GameObject();
         }
 
         if (GameObject.FindWithTag("MinionDeath") != null)

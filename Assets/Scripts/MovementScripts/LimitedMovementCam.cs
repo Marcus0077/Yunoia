@@ -11,19 +11,19 @@ public class LimitedMovementCam : MonoBehaviour
     PlayerControls playerControls;
     public InputAction camMove;
     public InputAction playerMove;
+    public InputAction cloneButton;
     
     // Camera Follow Sphere RigidBody.
     public Rigidbody camFollowSphere;
 
     // Sphere Movement Variables.
     public Vector2 moveDirection;
-    public float baseAccelerationValue;
-    public float accelerationValueX;
-    public float accelerationValueY;
+    public float accelerationValue;
     public float moveSpeed;
     public float returnSpeed;
 
     // Player Information.
+    public GameObject Player;
     public Vector3 playerPos;
 
     // Return Sphere to player Cooldown Timer.
@@ -31,8 +31,6 @@ public class LimitedMovementCam : MonoBehaviour
 
     // Camera Variables.
     public CinemachineVirtualCameraBase curCamera;
-    private float curCameraPosX;
-    private float curCameraPosY;
 
     // Confiner Variables.
     public CinemachineConfiner curConfiner;
@@ -47,31 +45,41 @@ public class LimitedMovementCam : MonoBehaviour
     private float leftYBound;
     private float rightYBound;
 
+    // Offset Values.
+    private Vector3 camBallOffset;
+
+    
+    private bool isCamFollowingPlayer;
+
     // Start is called before the first frame update
     void Awake()
     {
         playerControls = new PlayerControls();
-        
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+        Player = GameObject.FindWithTag("Player");
+        playerPos = Player.transform.position;
         transform.position = Vector3.MoveTowards(transform.position, playerPos, returnSpeed * Time.deltaTime);
         curCamera = GameObject.FindGameObjectWithTag("Camera1").GetComponent<CinemachineVirtualCamera>();
+        
+        camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
 
         GetCurrentConfinerData();
 
         returnSpeed = 20f;
         returnToPlayerTimer = 0f;
-        baseAccelerationValue = 1f;
-        accelerationValueX = 1f;
-        accelerationValueY = 1f;
+        accelerationValue = 1f;
         moveSpeed = 5f;
+
+        isCamFollowingPlayer = true;
     }
 
-    // Currently Unused.
+    // Currently unused; will need later for switching cameras.
     void GetCurrentCameraData()
     {
         
     }
 
+    // Grab all needed information about the current camera's confiner.
     void GetCurrentConfinerData()
     {
         curConfiner = curCamera.GetComponent<CinemachineConfiner>();
@@ -89,88 +97,73 @@ public class LimitedMovementCam : MonoBehaviour
         rightYBound = (curConfinerPosY + curConfinerScaleY);
     }
 
+    // Clamp the position of the camera follow sphere to the bounds of the confiner.
     void ClampCameraFollowSphere()
     {
         Vector3 position = camFollowSphere.transform.position;
 
         position.x = Mathf.Clamp(position.x, leftXBound, rightXBound);
-        position.y = Mathf.Clamp(position.y, leftYBound, rightYBound);
+        position.y = Mathf.Clamp(position.y, leftYBound - camBallOffset.y, rightYBound - camBallOffset.y);
             
         camFollowSphere.transform.position = position;
     }
 
+    // Update is called each frame.
     void Update()
     {
-        ClampCameraFollowSphere();
+        if (isCamFollowingPlayer == false)
+        {
+            ClampCameraFollowSphere();
+        }
     }
 
-    // Update is called once per frame
+    // FixedUpdate is called between frames.
     void FixedUpdate()
     {
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-
-        float xInput = camMove.ReadValue<Vector2>().x;
-        float yInput = camMove.ReadValue<Vector2>().y;
-
-        curCameraPosX = curCamera.transform.position.x;
-        curCameraPosY = curCamera.transform.position.y;
+        playerPos = Player.transform.position;
         
-        
+        // If the camera follow sphere is being controlled and the player is not, set the camera target to the
+        // camera follow sphere and move the sphere along a 2D plane (x, y) according to player input via arrows
+        // or d-pad. Return timer remains at a static value as long as the camera is being moved.
         if (camMove.IsPressed() && !playerMove.IsPressed())
         {
-            Debug.Log(leftYBound);
+            if (isCamFollowingPlayer)
+            {
+                curCamera.Follow = transform;
+
+                isCamFollowingPlayer = false;
+            }
             
             returnToPlayerTimer = 1.5f;
 
             moveDirection = (Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y - 90, -Vector3.forward) *
                                  camMove.ReadValue<Vector2>().normalized * moveSpeed);
 
-            camFollowSphere.velocity = new Vector3(moveDirection.y * accelerationValueY,
-                     -moveDirection.x * accelerationValueX, camFollowSphere.velocity.z);
-
-            if ((curConfinerScaleX - (curCameraPosX - curConfinerPosX) <= 0 && xInput == 1)
-                || (curConfinerScaleX + (curCameraPosX - curConfinerPosX) <= 0 && xInput == -1))
-            {
-                Vector3 velocity = camFollowSphere.velocity;
-                velocity.x = 0;
-                camFollowSphere.velocity = velocity;
-                
-                accelerationValueY = 0f;
-            }
-            else if ((curConfinerScaleX -
-                         (curCameraPosX - curConfinerPosX) <= 0 && xInput == -1) || (curConfinerScaleX + 
-                         (curCameraPosX - curConfinerPosX) <= 0 && xInput == 1) || (curConfinerScaleX -
-                         (curCameraPosX - curConfinerPosX) >= 0 || (curCameraPosX - curConfinerPosX) >= 0))
-            {
-                Vector3 velocity = camFollowSphere.velocity;
-                velocity.x = moveDirection.y * accelerationValueY;
-                camFollowSphere.velocity = velocity;
-                
-                accelerationValueY = 1f;
-            }
-            
-            if ((curConfinerScaleY - (curCameraPosY - curConfinerPosY) <= 0 && yInput == 1)
-                || (curConfinerScaleY + (curCameraPosY - curConfinerPosY) <= 0 && yInput == -1))
-            {
-                accelerationValueX = 0f;
-            }
-            else if ((curConfinerScaleY -
-                         (curCameraPosY - curConfinerPosY) <= 0 && yInput == -1) || (curConfinerScaleY + 
-                         (curCameraPosY - curConfinerPosY) <= 0 && yInput == 1) || (curConfinerScaleY -
-                         (curCameraPosY - curConfinerPosY) >= 0 || (curCameraPosY - curConfinerPosY) >= 0))
-            {
-                accelerationValueX = 1f;
-            }
+            camFollowSphere.velocity = new Vector3(moveDirection.y * accelerationValue,
+                     -moveDirection.x * accelerationValue, camFollowSphere.velocity.z);
         }
+        // If there is no movement input for the camera follow sphere or the character,
+        // stop the ball and countdown the return timer.
         else if (!camMove.IsPressed() && !playerMove.IsPressed() && returnToPlayerTimer > 0)
         {
             camFollowSphere.velocity = Vector2.zero;
             
             returnToPlayerTimer -= Time.deltaTime;
+            
         }
+        // If the return timer runs out or the player is moving the character, the camera target will become the
+        // character again and camera follow sphere will follow the player.
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, playerPos, returnSpeed * Time.deltaTime);
+            if (!isCamFollowingPlayer)
+            {
+                curCamera.Follow = Player.transform;
+
+                isCamFollowingPlayer = true;
+            }
+            
+            transform.position = Vector3.MoveTowards(transform.position, playerPos, 
+                returnSpeed * Time.deltaTime);
         }
     }
     
@@ -182,6 +175,9 @@ public class LimitedMovementCam : MonoBehaviour
         
         camMove = playerControls.Movement.CamMove;
         camMove.Enable();
+
+        cloneButton = playerControls.SummonClone.SwitchPlaces;
+        cloneButton.Enable();
     }
 
     // Disable input action map controls.
@@ -189,5 +185,6 @@ public class LimitedMovementCam : MonoBehaviour
     {
         playerMove.Disable();
         camMove.Disable();
+        cloneButton.Disable();
     }
 }

@@ -182,13 +182,9 @@ public class ExitClone : MonoBehaviour
             //activeTimerText.text = "";
             //combatHandler.healthText.text = "";
             despawnTimerText.text = "";
-            
-            limitedMovementCam.Player = basicMovementPlayer.GameObject();
-            limitedMovementCam.curCamera.Follow = basicMovementPlayer.GameObject().transform;
-            limitedMovementCam.isCamFollowingPlayer = true;
-            limitedMovementCam.camFollowSphere.position = basicMovementPlayer.GameObject().transform.position;
-            
-            basicMovementPlayer.CheckCameraState();
+
+            limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
+            limitedMovementCam.SetCurrentPlayer(basicMovementPlayer.gameObject);
 
             if (anim != null)
             {

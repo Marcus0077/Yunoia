@@ -75,7 +75,6 @@ public class BasicMovement : MonoBehaviour
     void Awake()
     {
         playerControls = new PlayerControls();
-        smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
 
@@ -86,16 +85,20 @@ public class BasicMovement : MonoBehaviour
                 winScreen.SetActive(false);
             }
 
-            curRoom = 1;
+            if (DataManager.gameData.level > 0)
+            {
+                curRoom = DataManager.gameData.level;
+            }
+            else
+            {
+                curRoom = 1;   
+            }
         }
         else
         {
             curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
             
-            limitedMovementCam.Player = this.GameObject();
-            limitedMovementCam.curCamera.Follow = this.GameObject().transform;
-            limitedMovementCam.isCamFollowingPlayer = true;
-            limitedMovementCam.camFollowSphere.position = this.GameObject().transform.position;
+            limitedMovementCam.SetCurrentPlayer(this.gameObject);
         }
 
         if (GameObject.FindWithTag("MinionDeath") != null)
@@ -173,45 +176,44 @@ public class BasicMovement : MonoBehaviour
     {
         if (canMove)
         {
-            if (curRoom == 1)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 1);
-            }
-            else if (curRoom == 2)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 2);
-            }
-            else if (curRoom == 3)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 3);
-            }
-            else if (curRoom == 4)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 4);
-            }
-            else if (curRoom == 5)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 5);
-            }
-            else if (curRoom == 6)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 6);
-            }
-            else if (curRoom == 7)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 7);
-            }
-            else if (curRoom == 8)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 8);
-            }
-            else if (curRoom == 9)
-            {
-                stateDrivenCamAnimator.SetInteger("roomNum", 9);
-            }
-
-            GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>().Follow =
-                this.transform;
+            // if (curRoom == 1)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 1);
+            // }
+            // else if (curRoom == 2)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 2);
+            // }
+            // else if (curRoom == 3)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 3);
+            // }
+            // else if (curRoom == 4)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 4);
+            // }
+            // else if (curRoom == 5)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 5);
+            // }
+            // else if (curRoom == 6)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 6);
+            // }
+            // else if (curRoom == 7)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 7);
+            // }
+            // else if (curRoom == 8)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 8);
+            // }
+            // else if (curRoom == 9)
+            // {
+            //     stateDrivenCamAnimator.SetInteger("roomNum", 9);
+            // }
+            
+            //stateDrivenCamAnimator.SetInteger("roomNum", curRoom);
         }
     }
 
@@ -434,65 +436,66 @@ public class BasicMovement : MonoBehaviour
         dash.Disable();
     }
 
-    IEnumerator SetCameraBlend()
-    {
-        GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>()
-            .m_DefaultBlend.m_Time = 1f;
-
-        yield return new WaitForSeconds(1f);
-        
-        GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<CinemachineStateDrivenCamera>()
-            .m_DefaultBlend.m_Time = 0f;
-    }
-    
     // Changes camera position and rotation depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Camera1"))
         {
             curRoom = 1;
-            stateDrivenCamAnimator.SetInteger("roomNum", 1);
+
+            //limitedMovementCam.SetCurrentConfinerData("Confiner1");
+            
         }
         if (other.CompareTag("Camera2"))
         {
             curRoom = 2;
-            stateDrivenCamAnimator.SetInteger("roomNum", 2);
+
+            //limitedMovementCam.SetCurrentConfinerData("Confiner2");
         }
         if (other.CompareTag("Camera3"))
         {
             curRoom = 3;
-            stateDrivenCamAnimator.SetInteger("roomNum", 3);
+            
+            //limitedMovementCam.SetCurrentConfinerData("Confiner3");
         }
         if (other.CompareTag("Camera4"))
         {
             curRoom = 4;
-            stateDrivenCamAnimator.SetInteger("roomNum", 4);
+            
+            //limitedMovementCam.SetCurrentConfinerData("Confiner4");
         }
         if (other.CompareTag("Camera5"))
         {
             curRoom = 5;
-            stateDrivenCamAnimator.SetInteger("roomNum", 5);
+            
+           //limitedMovementCam.SetCurrentConfinerData("Confiner5");
         }
         if (other.CompareTag("Camera6"))
         {
             curRoom = 6;
-            stateDrivenCamAnimator.SetInteger("roomNum", 6);
+            
+            //limitedMovementCam.SetCurrentConfinerData("Confiner6");
         }
         if (other.CompareTag("Camera7"))
         {
             curRoom = 7;
-            stateDrivenCamAnimator.SetInteger("roomNum", 7);
+            
+            //limitedMovementCam.SetCurrentConfinerData("Confiner7");
         }
         if (other.CompareTag("Camera8"))
         {
             curRoom = 8;
-            stateDrivenCamAnimator.SetInteger("roomNum", 8);
+            
+            //limitedMovementCam.SetCurrentConfinerData("Confiner8");
         }
         if (other.CompareTag("Camera9"))
         {
             curRoom = 9;
-            stateDrivenCamAnimator.SetInteger("roomNum", 9);
+            
+            //limitedMovementCam.SetCurrentConfinerData("Confiner9");
         }
+        
+        limitedMovementCam.GetCurrentCameraData(curRoom);
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

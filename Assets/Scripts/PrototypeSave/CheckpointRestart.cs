@@ -7,20 +7,27 @@ using UnityEngine.SceneManagement;
 public class CheckpointRestart : MonoBehaviour
 {
     PlayerControls checkpointControls;
+    
     private InputAction restartAction;
+    private LimitedMovementCam limitedMovementCam;
 
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+
     }
 
     void Awake()
     {
+        limitedMovementCam = GameObject.FindObjectOfType<LimitedMovementCam>();
+        
         if (DataManager.gameData.checkpointed)
         {
-            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().SetInteger("roomNum", DataManager.gameData.level);
-            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().Play("Room" + DataManager.gameData.level);//SetInteger("roomNum", DataManager.gameData.level);
+            Debug.Log(DataManager.gameData.level);
+            // limitedMovementCam.GetCurrentCameraData(DataManager.gameData.level);
+            // limitedMovementCam.SetCurrentPlayer(GameObject.FindGameObjectWithTag("Player"));
+            
+            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().Play("Room" + DataManager.gameData.level);
             transform.position = DataManager.gameData.position;
         }
         checkpointControls = new PlayerControls();

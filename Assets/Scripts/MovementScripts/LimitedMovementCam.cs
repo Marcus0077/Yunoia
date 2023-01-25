@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -55,16 +56,24 @@ public class LimitedMovementCam : MonoBehaviour
     void Awake()
     {
         playerControls = new PlayerControls();
-
+        
         Player = GameObject.FindWithTag("Player");
         playerPos = Player.transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, playerPos, returnSpeed * Time.deltaTime);
-        curCamera = GameObject.FindGameObjectWithTag("Camera1").GetComponent<CinemachineVirtualCamera>();
-        curCamera.Follow = Player.transform;
         
-        camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
+        transform.position = Vector3.MoveTowards
+            (transform.position, playerPos, returnSpeed * Time.deltaTime);
 
-        GetCurrentConfinerData();
+        if (DataManager.gameData.level > 0)
+        {
+            GetCurrentCameraData((int)DataManager.gameData.level);
+        }
+        else
+        {
+            Debug.Log("sets to 1");
+            GetCurrentCameraData(1);
+        }
+
+        SetCurrentPlayer(Player);
 
         returnSpeed = 20f;
         returnToPlayerTimer = 0f;
@@ -74,17 +83,32 @@ public class LimitedMovementCam : MonoBehaviour
         isCamFollowingPlayer = true;
     }
 
-    // Currently unused; will need later for switching cameras.
-    void GetCurrentCameraData()
+    public void SetCurrentPlayer(GameObject newPlayer)
     {
+        Player = newPlayer;
+        curCamera.Follow = Player.transform;
+        isCamFollowingPlayer = true;
+        camFollowSphere.position = playerPos;
+    }
+    
+    // 
+    public void GetCurrentCameraData(int newRoom)
+    {
+        curCamera = GameObject.FindGameObjectWithTag
+            ("VCam" + newRoom.ToString()).GetComponent<CinemachineVirtualCamera>();
         
+        GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>().SetInteger("roomNum", newRoom);
+        
+        camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
+        
+        GetCurrentConfinerData();
     }
 
     // Grab all needed information about the current camera's confiner.
-    void GetCurrentConfinerData()
+    public void GetCurrentConfinerData()
     {
         curConfiner = curCamera.GetComponent<CinemachineConfiner>();
-        
+
         curConfinerScaleX = curConfiner.m_BoundingVolume.transform.lossyScale.x * .5f;
         curConfinerPosX = (curConfiner.m_BoundingVolume.transform.position.x);
         
@@ -103,7 +127,7 @@ public class LimitedMovementCam : MonoBehaviour
     {
         Vector3 position = camFollowSphere.transform.position;
 
-        position.x = Mathf.Clamp(position.x, leftXBound, rightXBound);
+        position.x = Mathf.Clamp(position.x, leftXBound - camBallOffset.x, rightXBound - camBallOffset.x);
         position.y = Mathf.Clamp(position.y, leftYBound - camBallOffset.y, rightYBound - camBallOffset.y);
             
         camFollowSphere.transform.position = position;
@@ -112,7 +136,7 @@ public class LimitedMovementCam : MonoBehaviour
     // Update is called each frame.
     void Update()
     {
-        if (isCamFollowingPlayer == false)
+        if (isCamFollowingPlayer == false && !playerMove.IsPressed())
         {
             ClampCameraFollowSphere();
         }

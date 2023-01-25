@@ -126,10 +126,8 @@ public class CloneInteractions : MonoBehaviour
         {
             if (basicMovementPlayer.canMove == false)
             {
-                limitedMovementCam.Player = basicMovementPlayer.GameObject();
-                limitedMovementCam.curCamera.Follow = basicMovementPlayer.GameObject().transform;
-                limitedMovementCam.isCamFollowingPlayer = true;
-                limitedMovementCam.camFollowSphere.position = basicMovementPlayer.GameObject().transform.position;
+                limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
+                limitedMovementCam.SetCurrentPlayer(basicMovementPlayer.GameObject());
                     
                 if (anim != null)
                 {
@@ -149,14 +147,12 @@ public class CloneInteractions : MonoBehaviour
                 Player.GetComponent<Grapple>().enabled = true;
                 Player.GetComponent<AbilityPush>().enabled = true;
                 
-                basicMovementPlayer.CheckCameraState();
+                //basicMovementPlayer.CheckCameraState();
             }
             else if (basicMovementClone.canMove == false)
             {
-                limitedMovementCam.Player = basicMovementClone.GameObject();
-                limitedMovementCam.curCamera.Follow = basicMovementClone.GameObject().transform;
-                limitedMovementCam.isCamFollowingPlayer = true;
-                limitedMovementCam.camFollowSphere.position = basicMovementClone.GameObject().transform.position;
+                limitedMovementCam.GetCurrentCameraData(basicMovementClone.curRoom);
+                limitedMovementCam.SetCurrentPlayer(basicMovementClone.GameObject());
                 
                 if (anim != null)
                 {
@@ -176,7 +172,7 @@ public class CloneInteractions : MonoBehaviour
                 Player.GetComponent<Grapple>().enabled = false;
                 Player.GetComponent<AbilityPush>().enabled = false;
                 
-                basicMovementClone.CheckCameraState();
+                //basicMovementClone.CheckCameraState();
             }
         }
     }

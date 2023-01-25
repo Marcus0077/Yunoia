@@ -79,8 +79,8 @@ public class LimitedMovementCam : MonoBehaviour
         returnToPlayerTimer = 0f;
         accelerationValue = 1f;
         moveSpeed = 6f;
-
-        isCamFollowingPlayer = true;
+        
+        camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
     }
 
     public void SetCurrentPlayer(GameObject newPlayer)
@@ -98,9 +98,7 @@ public class LimitedMovementCam : MonoBehaviour
             ("VCam" + newRoom.ToString()).GetComponent<CinemachineVirtualCamera>();
         
         GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>().SetInteger("roomNum", newRoom);
-        
-        camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
-        
+
         GetCurrentConfinerData();
     }
 

@@ -52,6 +52,10 @@ public class LimitedMovementCam : MonoBehaviour
     // Tells camera whether to follow player or sphere.
     public bool isCamFollowingPlayer;
 
+    // Make ball travel back to player if clone actions are being used
+    // or player is moving.
+    public bool forceBallToPlayer;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -79,6 +83,8 @@ public class LimitedMovementCam : MonoBehaviour
         returnToPlayerTimer = 0f;
         accelerationValue = 1f;
         moveSpeed = 6f;
+
+        forceBallToPlayer = false;
         
         camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
     }
@@ -89,9 +95,12 @@ public class LimitedMovementCam : MonoBehaviour
         curCamera.Follow = Player.transform;
         isCamFollowingPlayer = true;
         camFollowSphere.position = playerPos;
+
+        forceBallToPlayer = true;
+        camFollowSphere.transform.position = Player.transform.position;
     }
     
-    // 
+    // Changes camera depending on the main camera's animator state.
     public void GetCurrentCameraData(int newRoom)
     {
         curCamera = GameObject.FindGameObjectWithTag
@@ -138,6 +147,11 @@ public class LimitedMovementCam : MonoBehaviour
         {
             ClampCameraFollowSphere();
         }
+
+        if (forceBallToPlayer && camMove.IsPressed())
+        {
+            forceBallToPlayer = false;
+        }
     }
 
     // FixedUpdate is called between frames.
@@ -148,7 +162,7 @@ public class LimitedMovementCam : MonoBehaviour
         // If the camera follow sphere is being controlled and the player is not, set the camera target to the
         // camera follow sphere and move the sphere along a 2D plane (x, y) according to player input via arrows
         // or d-pad. Return timer remains at a static value as long as the camera is being moved.
-        if (camMove.IsPressed() && !playerMove.IsPressed())
+        if (camMove.IsPressed() && !playerMove.IsPressed() && !forceBallToPlayer)
         {
             if (isCamFollowingPlayer)
             {

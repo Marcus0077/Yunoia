@@ -279,6 +279,7 @@ MonoBehaviour:
   curCamera: {fileID: 0}
   curConfiner: {fileID: 0}
   isCamFollowingPlayer: 0
+  forceBallToPlayer: 0
 --- !u!1 &964311697839506481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6823,6 +6824,81 @@ MonoBehaviour:
   player: {fileID: 1804445680587551756}
   shootTransform: {fileID: 1804445680190044959}
   playerRB: {fileID: 1804445680587551992}
+--- !u!114 &2635672628132051271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804445680587551994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cc3c0f95027834e937fe9cc3ead6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angerScene:
+    m_Name: Anger Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6e7b5988-4f89-4706-bf34-536b3bbc0816
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  bargainingScene:
+    m_Name: Bargaining Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1169f298-d60f-4f68-90f3-a4ba4a755538
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  depressionScene:
+    m_Name: Depression Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 157b5381-90b3-4f49-bd6a-d1a4e2591936
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  denialScene:
+    m_Name: Denial Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ef4de90d-7d19-4439-8992-403454b9a568
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  acceptanceScene:
+    m_Name: Acceptance Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4478164c-6bbd-411f-aa99-bc8c7e4510a6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  hubScene:
+    m_Name: Hub Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b9516410-d8a0-4059-9a85-e1d36d7b9ecf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  museumScene:
+    m_Name: Museum Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 02d8d900-8e37-44d5-afb9-d9d24b71c693
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &2762635009039075892
 MonoBehaviour:
   m_ObjectHideFlags: 0

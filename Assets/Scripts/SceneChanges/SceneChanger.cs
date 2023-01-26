@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class SceneChanger : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
 
     PlayerControls sceneChanges;
@@ -37,7 +37,7 @@ public class SceneChanger : MonoBehaviour
 
         if (denialScene.IsPressed())
         {
-            SceneManager.LoadScene("VSDenial");
+            SceneManager.LoadScene("DenialFinal");
         }
 
         if (acceptanceScene.IsPressed())

@@ -436,63 +436,44 @@ public class BasicMovement : MonoBehaviour
         dash.Disable();
     }
 
-    // Changes camera position and rotation depending on where the player is on the level.
+    // Changes active camera depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Camera1"))
         {
             curRoom = 1;
-
-            //limitedMovementCam.SetCurrentConfinerData("Confiner1");
-            
         }
         if (other.CompareTag("Camera2"))
         {
             curRoom = 2;
-
-            //limitedMovementCam.SetCurrentConfinerData("Confiner2");
         }
         if (other.CompareTag("Camera3"))
         {
             curRoom = 3;
-            
-            //limitedMovementCam.SetCurrentConfinerData("Confiner3");
         }
         if (other.CompareTag("Camera4"))
         {
             curRoom = 4;
-            
-            //limitedMovementCam.SetCurrentConfinerData("Confiner4");
         }
         if (other.CompareTag("Camera5"))
         {
             curRoom = 5;
-            
-           //limitedMovementCam.SetCurrentConfinerData("Confiner5");
         }
         if (other.CompareTag("Camera6"))
         {
             curRoom = 6;
-            
-            //limitedMovementCam.SetCurrentConfinerData("Confiner6");
         }
         if (other.CompareTag("Camera7"))
         {
             curRoom = 7;
-            
-            //limitedMovementCam.SetCurrentConfinerData("Confiner7");
         }
         if (other.CompareTag("Camera8"))
         {
             curRoom = 8;
-            
-            //limitedMovementCam.SetCurrentConfinerData("Confiner8");
         }
         if (other.CompareTag("Camera9"))
         {
             curRoom = 9;
-            
-            //limitedMovementCam.SetCurrentConfinerData("Confiner9");
         }
         
         limitedMovementCam.GetCurrentCameraData(curRoom);

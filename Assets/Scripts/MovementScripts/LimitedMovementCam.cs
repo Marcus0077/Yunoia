@@ -148,7 +148,8 @@ public class LimitedMovementCam : MonoBehaviour
             ClampCameraFollowSphere();
         }
 
-        if (forceBallToPlayer && camMove.IsPressed())
+        if (forceBallToPlayer && camMove.IsPressed() 
+                              && Vector3.Distance(camFollowSphere.transform.position, playerPos) < 1f)
         {
             forceBallToPlayer = false;
         }

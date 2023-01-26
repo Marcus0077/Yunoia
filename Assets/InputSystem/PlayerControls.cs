@@ -937,6 +937,154 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Scenes"",
+            ""id"": ""8379664d-373e-4316-97a0-0aabe99b24e9"",
+            ""actions"": [
+                {
+                    ""name"": ""AngerScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""c65b2815-e064-4aaf-9b9e-cef792f316cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BargainingScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ea02045-b826-417a-9d19-cd80c8cc2e56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DepressionScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""f07250f8-716e-44db-a48e-a4dc75edfbca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DenialScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""54befe8e-dee2-49b8-83b5-a00f3b2bc31f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AcceptanceScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""3df64762-cd97-4f45-a7e9-d29ca282f0fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HubScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""c73906e9-7657-49f8-824a-cca27128e9f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MuseumScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff2cf89d-9aa7-481f-9f48-71c2ddf39c47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2927d436-03c7-4997-bb56-93782c26f282"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AngerScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cf15228-9880-43f8-961b-bf0136cf8718"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""BargainingScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23c5203d-f4ca-426e-843b-33e4e7540f0f"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DepressionScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3a79e4a-8828-4332-909f-8ca6f7b79f0c"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DenialScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bd01edb-b093-4c22-8691-19a4c0941152"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AcceptanceScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""246cb10d-8643-4704-858a-de40dcb040e6"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""HubScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d7a7263-fbec-4fa0-826b-3c61d7b570d0"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MuseumScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1012,6 +1160,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Menu_AltMove = m_Menu.FindAction("AltMove", throwIfNotFound: true);
         m_Menu_Press = m_Menu.FindAction("Press", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
+        // Scenes
+        m_Scenes = asset.FindActionMap("Scenes", throwIfNotFound: true);
+        m_Scenes_AngerScene = m_Scenes.FindAction("AngerScene", throwIfNotFound: true);
+        m_Scenes_BargainingScene = m_Scenes.FindAction("BargainingScene", throwIfNotFound: true);
+        m_Scenes_DepressionScene = m_Scenes.FindAction("DepressionScene", throwIfNotFound: true);
+        m_Scenes_DenialScene = m_Scenes.FindAction("DenialScene", throwIfNotFound: true);
+        m_Scenes_AcceptanceScene = m_Scenes.FindAction("AcceptanceScene", throwIfNotFound: true);
+        m_Scenes_HubScene = m_Scenes.FindAction("HubScene", throwIfNotFound: true);
+        m_Scenes_MuseumScene = m_Scenes.FindAction("MuseumScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1510,6 +1667,87 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Scenes
+    private readonly InputActionMap m_Scenes;
+    private IScenesActions m_ScenesActionsCallbackInterface;
+    private readonly InputAction m_Scenes_AngerScene;
+    private readonly InputAction m_Scenes_BargainingScene;
+    private readonly InputAction m_Scenes_DepressionScene;
+    private readonly InputAction m_Scenes_DenialScene;
+    private readonly InputAction m_Scenes_AcceptanceScene;
+    private readonly InputAction m_Scenes_HubScene;
+    private readonly InputAction m_Scenes_MuseumScene;
+    public struct ScenesActions
+    {
+        private @PlayerControls m_Wrapper;
+        public ScenesActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AngerScene => m_Wrapper.m_Scenes_AngerScene;
+        public InputAction @BargainingScene => m_Wrapper.m_Scenes_BargainingScene;
+        public InputAction @DepressionScene => m_Wrapper.m_Scenes_DepressionScene;
+        public InputAction @DenialScene => m_Wrapper.m_Scenes_DenialScene;
+        public InputAction @AcceptanceScene => m_Wrapper.m_Scenes_AcceptanceScene;
+        public InputAction @HubScene => m_Wrapper.m_Scenes_HubScene;
+        public InputAction @MuseumScene => m_Wrapper.m_Scenes_MuseumScene;
+        public InputActionMap Get() { return m_Wrapper.m_Scenes; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ScenesActions set) { return set.Get(); }
+        public void SetCallbacks(IScenesActions instance)
+        {
+            if (m_Wrapper.m_ScenesActionsCallbackInterface != null)
+            {
+                @AngerScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAngerScene;
+                @AngerScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAngerScene;
+                @AngerScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAngerScene;
+                @BargainingScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnBargainingScene;
+                @BargainingScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnBargainingScene;
+                @BargainingScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnBargainingScene;
+                @DepressionScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDepressionScene;
+                @DepressionScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDepressionScene;
+                @DepressionScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDepressionScene;
+                @DenialScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDenialScene;
+                @DenialScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDenialScene;
+                @DenialScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDenialScene;
+                @AcceptanceScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAcceptanceScene;
+                @AcceptanceScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAcceptanceScene;
+                @AcceptanceScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAcceptanceScene;
+                @HubScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
+                @HubScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
+                @HubScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
+                @MuseumScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
+                @MuseumScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
+                @MuseumScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
+            }
+            m_Wrapper.m_ScenesActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AngerScene.started += instance.OnAngerScene;
+                @AngerScene.performed += instance.OnAngerScene;
+                @AngerScene.canceled += instance.OnAngerScene;
+                @BargainingScene.started += instance.OnBargainingScene;
+                @BargainingScene.performed += instance.OnBargainingScene;
+                @BargainingScene.canceled += instance.OnBargainingScene;
+                @DepressionScene.started += instance.OnDepressionScene;
+                @DepressionScene.performed += instance.OnDepressionScene;
+                @DepressionScene.canceled += instance.OnDepressionScene;
+                @DenialScene.started += instance.OnDenialScene;
+                @DenialScene.performed += instance.OnDenialScene;
+                @DenialScene.canceled += instance.OnDenialScene;
+                @AcceptanceScene.started += instance.OnAcceptanceScene;
+                @AcceptanceScene.performed += instance.OnAcceptanceScene;
+                @AcceptanceScene.canceled += instance.OnAcceptanceScene;
+                @HubScene.started += instance.OnHubScene;
+                @HubScene.performed += instance.OnHubScene;
+                @HubScene.canceled += instance.OnHubScene;
+                @MuseumScene.started += instance.OnMuseumScene;
+                @MuseumScene.performed += instance.OnMuseumScene;
+                @MuseumScene.canceled += instance.OnMuseumScene;
+            }
+        }
+    }
+    public ScenesActions @Scenes => new ScenesActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1581,5 +1819,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAltMove(InputAction.CallbackContext context);
         void OnPress(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+    }
+    public interface IScenesActions
+    {
+        void OnAngerScene(InputAction.CallbackContext context);
+        void OnBargainingScene(InputAction.CallbackContext context);
+        void OnDepressionScene(InputAction.CallbackContext context);
+        void OnDenialScene(InputAction.CallbackContext context);
+        void OnAcceptanceScene(InputAction.CallbackContext context);
+        void OnHubScene(InputAction.CallbackContext context);
+        void OnMuseumScene(InputAction.CallbackContext context);
     }
 }

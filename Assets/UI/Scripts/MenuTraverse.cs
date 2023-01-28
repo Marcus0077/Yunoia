@@ -11,6 +11,8 @@ public class MenuTraverse : MonoBehaviour
     [SerializeField]
     protected MenuTraverse prevMenu;
     protected int activeIndex, amount;
+    protected Vector2 cursorMovement;
+    protected Vector3 mousePosition;
     protected PlayerControls playerControls;
     protected InputAction menuMove, menuAltMove, menuPress, menuCancel;
     protected bool stop, move;
@@ -33,12 +35,23 @@ public class MenuTraverse : MonoBehaviour
     void Awake()
     {
         playerControls = new PlayerControls();
-        menuMove = playerControls.Menu.Move;
-        menuMove.performed += ctx => StartMove(ctx);
-        menuMove.canceled += ctx => CancelMove();
-        //menuAltMove = playerControls.Menu.AltMove;
-        //menuAltMove.performed += ctx => StartMove(ctx);
-        //menuAltMove.canceled += ctx => CancelMove();
+        if (!GameManager.Instance.menuCursor)
+        {
+            menuMove = playerControls.Menu.Move;
+            menuMove.performed += ctx => StartMove(ctx);
+            menuMove.canceled += ctx => CancelMove();
+            //menuAltMove = playerControls.Menu.AltMove;
+            //menuAltMove.performed += ctx => StartMove(ctx);
+            //menuAltMove.canceled += ctx => CancelMove();
+        }
+        else
+        {
+            menuAltMove = playerControls.Menu.AltMove;
+            menuAltMove.started += ctx => StartMoveCursor();
+            menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
+            menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
+            //menuAltMove.performed += ctx => StartMoveCursor(ctx);
+        }
         menuPress = playerControls.Menu.Press;
         menuPress.performed += ctx => PressMenu();
         menuCancel = playerControls.Menu.Back;
@@ -53,8 +66,15 @@ public class MenuTraverse : MonoBehaviour
 
     public void OnEnable()
     {
-        menuMove.Enable();
-        //menuAltMove.Enable();
+        if (!GameManager.Instance.menuCursor)
+        {
+            menuMove.Enable();
+            //menuAltMove.Enable();
+        }
+        else
+        {
+            menuAltMove.Enable();
+        }
         menuPress.Enable();
         menuCancel.Enable();
         stop = false;
@@ -66,13 +86,20 @@ public class MenuTraverse : MonoBehaviour
 
     public void OnDisable()
     {
-        menuMove.Disable();
-        //menuAltMove.Disable();
+        if (!GameManager.Instance.menuCursor)
+        {
+            menuMove.Disable();
+            //menuAltMove.Disable();   
+        }
+        else
+        {
+            menuAltMove.Disable();
+        }
         menuPress.Disable();
         menuCancel.Disable();
+        ExitAll();
         stop = true;
         moving = null;
-        ExitAll();
         if (prevMenu != null)
             prevMenu.OnEnable();
     }
@@ -109,6 +136,13 @@ public class MenuTraverse : MonoBehaviour
                 MoveMenu();
             }
         }
+    }
+
+    public void StartMoveCursor()
+    {
+        mousePosition = new Vector3(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 0);
+        //cursorMovement = context.ReadValue<Vector2>();
+        //Mouse.current.WarpCursorPosition(Input.mousePosition + new Vector3(cursorMovement.x, cursorMovement.y,0) * GameManager.Instance.sensitivity);
     }
 
     protected void CancelMove()
@@ -161,7 +195,15 @@ public class MenuTraverse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Instance.menuCursor && cursorMovement != Vector2.zero)
+        {
+            //int scalar = 5;
+            //if ((cursorMovement.x < 0 || cursorMovement.y > 0) && !(cursorMovement.x > 0 || cursorMovement.y < 0))
+            //    scalar = 4;
+            mousePosition += new Vector3(cursorMovement.x, cursorMovement.y, 0) * GameManager.Instance.sensitivity;
+            //Debug.Log(currentPosition);
+            Mouse.current.WarpCursorPosition(mousePosition);
+        }
     }
 }
 

@@ -24,7 +24,7 @@ public class ScaleControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(compareValue != right.GetComponent<ScaleMeasure>().weight - left.GetComponent<ScaleMeasure>().weight)
         {

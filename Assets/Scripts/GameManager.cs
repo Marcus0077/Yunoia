@@ -42,6 +42,12 @@ public class GameManager : MonoBehaviour
 
     public void ToggleGhost()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if(player == null)
+                return;
+        }
         ghost = !ghost;
         if(ghost)
         {
@@ -54,11 +60,18 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
             EnablePlayerInput();
             Destroy(spawnedGhost);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
     public void EnablePlayerInput()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+                return;
+        }
         player.GetComponent<BasicMovement>().playerControls.Enable();
         player.GetComponent<AbilityPush>().pushControls.Enable();
         player.GetComponent<Grapple>().grappleControls.Enable();
@@ -81,6 +94,12 @@ public class GameManager : MonoBehaviour
 
     public void BlockPlayerInput()
     {
+        if(player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+                return;
+        }
         player.GetComponent<BasicMovement>().playerControls.Disable();
         player.GetComponent<AbilityPush>().pushControls.Disable();
         player.GetComponent<Grapple>().grappleControls.Disable();

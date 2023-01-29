@@ -24,6 +24,7 @@ public class CheatMenu : MonoBehaviour
     string greenText = "<color=#00FF00>", colorEnd = "</color>";
     List<string> clipboard = new List<string>();
     int selected = 0;
+    float oldTimeScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -116,12 +117,15 @@ public class CheatMenu : MonoBehaviour
         cg.interactable = !cg.interactable;
         if (cg.interactable)
         {
+            oldTimeScale = Time.timeScale;
+            Time.timeScale = 0;
             GameManager.Instance.BlockPlayerInput();
             cg.alpha = .75f;
             inputField.ActivateInputField();
         }
         else
         {
+            Time.timeScale = oldTimeScale;
             GameManager.Instance.EnablePlayerInput();
             cg.alpha = 0f;
             inputField.DeactivateInputField();

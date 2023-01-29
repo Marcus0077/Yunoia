@@ -13,7 +13,7 @@ public class PlayerInteractions : MonoBehaviour
     public Door door;
     
     // Input Variables
-    PlayerControls playerControls;
+    public PlayerControls playerControls;
     public InputAction switchPlaces;
     public InputAction press;
 

@@ -12,7 +12,7 @@ public class SummonClone : MonoBehaviour
     private BasicMovement basicMovementPlayer;
 
     // Input variables
-    PlayerControls summonControls;
+    public PlayerControls summonControls;
     public InputAction summonAClone;
 
     // Clone Summon variables

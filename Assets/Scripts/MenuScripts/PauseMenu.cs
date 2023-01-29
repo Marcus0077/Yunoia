@@ -10,7 +10,7 @@ using UnityEngine.Video;
 public class PauseMenu : MonoBehaviour
 {
     // Input variables
-    PlayerControls playerControls;
+    public PlayerControls playerControls;
     public InputAction pause;
     public InputAction menuMove;
 

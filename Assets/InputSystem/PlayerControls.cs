@@ -1118,6 +1118,182 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Ghost"",
+            ""id"": ""b6a5b962-b838-4bc7-b2d1-e19e1ad08c9d"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""8a2029c3-6b10-4b0b-83cf-3d038d3e31f1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""e633966b-c5ea-470b-b731-ff0b1db75243"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""8da92ba9-9133-4063-a907-cab4d2d52307"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""c8473abd-b324-42be-83ca-131addb25e70"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9bcb0e68-c2b6-4769-8d88-762c67871438"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""aa8f399f-9ae5-4747-9bde-f16ea073cd95"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""651f98a4-915e-4733-bc2e-eaadcfe824b4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""043a791c-5172-48db-b619-c35dc31d3e4b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f148ade9-97ee-4911-865a-45da9258d7b0"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a6ffe074-c604-45a9-bf3d-000eaf428910"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""572efc94-78e7-45a9-8057-b13d2054d732"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75382391-5aff-4653-83d5-ff69df5aeed3"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""670970cd-2a3d-4655-8ff3-0a6152605265"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56196eee-1c24-468b-b9c9-f81e2b11d985"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7200b13e-1914-4307-a75a-e56061243409"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4cf3fec-afef-4daf-bd15-c11ba755602d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1202,6 +1378,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Scenes_AcceptanceScene = m_Scenes.FindAction("AcceptanceScene", throwIfNotFound: true);
         m_Scenes_HubScene = m_Scenes.FindAction("HubScene", throwIfNotFound: true);
         m_Scenes_MuseumScene = m_Scenes.FindAction("MuseumScene", throwIfNotFound: true);
+        // Ghost
+        m_Ghost = asset.FindActionMap("Ghost", throwIfNotFound: true);
+        m_Ghost_Move = m_Ghost.FindAction("Move", throwIfNotFound: true);
+        m_Ghost_Up = m_Ghost.FindAction("Up", throwIfNotFound: true);
+        m_Ghost_Down = m_Ghost.FindAction("Down", throwIfNotFound: true);
+        m_Ghost_Camera = m_Ghost.FindAction("Camera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1781,6 +1963,63 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public ScenesActions @Scenes => new ScenesActions(this);
+
+    // Ghost
+    private readonly InputActionMap m_Ghost;
+    private IGhostActions m_GhostActionsCallbackInterface;
+    private readonly InputAction m_Ghost_Move;
+    private readonly InputAction m_Ghost_Up;
+    private readonly InputAction m_Ghost_Down;
+    private readonly InputAction m_Ghost_Camera;
+    public struct GhostActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GhostActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Ghost_Move;
+        public InputAction @Up => m_Wrapper.m_Ghost_Up;
+        public InputAction @Down => m_Wrapper.m_Ghost_Down;
+        public InputAction @Camera => m_Wrapper.m_Ghost_Camera;
+        public InputActionMap Get() { return m_Wrapper.m_Ghost; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GhostActions set) { return set.Get(); }
+        public void SetCallbacks(IGhostActions instance)
+        {
+            if (m_Wrapper.m_GhostActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnMove;
+                @Up.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnDown;
+                @Camera.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnCamera;
+            }
+            m_Wrapper.m_GhostActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
+            }
+        }
+    }
+    public GhostActions @Ghost => new GhostActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1862,5 +2101,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAcceptanceScene(InputAction.CallbackContext context);
         void OnHubScene(InputAction.CallbackContext context);
         void OnMuseumScene(InputAction.CallbackContext context);
+    }
+    public interface IGhostActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
     }
 }

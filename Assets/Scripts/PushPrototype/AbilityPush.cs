@@ -13,7 +13,7 @@ public class AbilityPush : MonoBehaviour
     bool ableToPush = true, charging = false, shield = false, shielded = false;
     [SerializeField]
     public bool restored, ableToShield;
-    PlayerControls pushControls;
+    public PlayerControls pushControls;
     public InputAction pushAction;
     public int pushedLevel;
     public float range;

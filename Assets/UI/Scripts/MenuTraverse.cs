@@ -200,7 +200,7 @@ public class MenuTraverse : MonoBehaviour
             //int scalar = 5;
             //if ((cursorMovement.x < 0 || cursorMovement.y > 0) && !(cursorMovement.x > 0 || cursorMovement.y < 0))
             //    scalar = 4;
-            mousePosition += new Vector3(cursorMovement.x, cursorMovement.y, 0) * GameManager.Instance.sensitivity;
+            mousePosition += new Vector3(cursorMovement.x, cursorMovement.y, 0) * 50 * GameManager.Instance.sensitivity;
             //Debug.Log(currentPosition);
             Mouse.current.WarpCursorPosition(mousePosition);
         }

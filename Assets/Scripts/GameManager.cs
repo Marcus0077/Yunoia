@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool ghost = false, menuCursor = false;
-    [Range(0.0f, 100.0f)]
+    [Range(0.0f, 1.0f)]
     public float sensitivity = 1;
     [SerializeField]
     GameObject player, ghostObj;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         player = GameObject.FindGameObjectWithTag("Player");
+        sensitivity = PlayerPrefs.GetFloat("Sensitivity");
     }
 
     public void ToggleGhost()

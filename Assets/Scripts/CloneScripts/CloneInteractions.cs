@@ -25,7 +25,7 @@ public class CloneInteractions : MonoBehaviour
     public GameObject Player;
     
     // Input variables
-    PlayerControls playerControls;
+    public PlayerControls playerControls;
     public InputAction switchPlaces;
     public InputAction press;
 

@@ -71,6 +71,7 @@ public class CheatMenu : MonoBehaviour
                 UpdateHistory(commands);
                 UpdateHistory(greenText + "went to " + commands.Substring(3, commands.Length - 3) + colorEnd);
                 SceneManager.LoadScene(place);
+                Toggle();
             }
             else if (int.TryParse(place,out failed) && SceneUtility.GetScenePathByBuildIndex(int.Parse(place)) != "")
             {
@@ -78,6 +79,7 @@ public class CheatMenu : MonoBehaviour
                 UpdateHistory(commands);
                 UpdateHistory(greenText + "went to scene index " + commands.Substring(3, commands.Length - 3) + colorEnd);
                 SceneManager.LoadScene(int.Parse(place));
+                Toggle();
             }
             else
             {
@@ -85,6 +87,20 @@ public class CheatMenu : MonoBehaviour
                 UpdateHistory(commands);
                 UpdateHistory(greenText + "Enter valid scene (in build settings)" + colorEnd);
             }
+        }
+        else if(commands != "" && commands.Substring(0, Mathf.Min(commands.Length, 5)) == "ghost")
+        {
+            UpdateHistory(commands);
+            if(GameManager.Instance.ghost)
+            {
+                UpdateHistory(greenText + "Ghost mode off" + colorEnd);
+            }
+            else
+            {
+                UpdateHistory(greenText + "Ghost mode on" + colorEnd);
+            }
+            Toggle();
+            GameManager.Instance.ToggleGhost();
         }
         inputField.text = "";
         inputField.ActivateInputField();
@@ -100,10 +116,13 @@ public class CheatMenu : MonoBehaviour
         cg.interactable = !cg.interactable;
         if (cg.interactable)
         {
+            GameManager.Instance.BlockPlayerInput();
             cg.alpha = .75f;
             inputField.ActivateInputField();
-        } else
+        }
+        else
         {
+            GameManager.Instance.EnablePlayerInput();
             cg.alpha = 0f;
             inputField.DeactivateInputField();
         }

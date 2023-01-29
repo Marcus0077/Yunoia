@@ -43,7 +43,7 @@ public class Grapple : MonoBehaviour
     public bool canYank = false;
     public bool yankReady = false;
 
-    PlayerControls grappleControls;
+    public PlayerControls grappleControls;
     public InputAction shootHook;
     public InputAction cancelHook;
     public InputAction extendGrapple;

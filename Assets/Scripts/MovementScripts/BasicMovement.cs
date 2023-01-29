@@ -12,7 +12,7 @@ using Unity.VisualScripting;
 public class BasicMovement : MonoBehaviour
 {
     // Input variables
-    PlayerControls playerControls;
+    public PlayerControls playerControls;
     public InputAction move;
     public InputAction jump;
     public InputAction dash;

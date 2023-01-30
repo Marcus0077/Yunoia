@@ -32,7 +32,7 @@ public class AiMovement : MonoBehaviour
     // Get references and initialize variables when Faceless AI is spawned.
     void Awake()
     {
-        combatHandler = FindObjectOfType<CombatHandler>();
+        //combatHandler = FindObjectOfType<CombatHandler>();
         aiAgent = this.GetComponent<NavMeshAgent>();
 
         turnAround = false;
@@ -70,11 +70,11 @@ public class AiMovement : MonoBehaviour
     {
         if (distanceBetweenClone < 1.3f)
         {
-            combatHandler.inCombat = true;
+            //combatHandler.inCombat = true;
         }
         else
         {
-            combatHandler.inCombat = false;
+            //combatHandler.inCombat = false;
         }
 
         if (GameObject.FindWithTag("Clone") != null && !isRunning)
@@ -87,7 +87,7 @@ public class AiMovement : MonoBehaviour
     // Returm the Faceless AI to it's specified path.
     void ReturnToPath()
     {
-        combatHandler.inCombat = false;
+        //combatHandler.inCombat = false;
         aiAgent.isStopped = false;
         aiAgent.SetDestination(lastPos);
     }

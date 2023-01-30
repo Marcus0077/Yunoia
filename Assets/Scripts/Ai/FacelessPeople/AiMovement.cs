@@ -8,7 +8,7 @@ public class AiMovement : MonoBehaviour
 {
     // Combat handler script reference.
     private CombatHandler combatHandler;
-    
+
     // Navmesh agent reference.
     public NavMeshAgent aiAgent;
     
@@ -29,6 +29,11 @@ public class AiMovement : MonoBehaviour
     public Vector3 lastPos;
     private Vector3 clonePos;
     
+    // Stops clone when on stopping crystal.
+    private bool isStoppedByCrystal;
+    private bool isFollowingCrystal;
+    private Vector3 crytalPos;
+    
     // Get references and initialize variables when Faceless AI is spawned.
     void Awake()
     {
@@ -37,6 +42,8 @@ public class AiMovement : MonoBehaviour
 
         turnAround = false;
         isRunning = false;
+        isStoppedByCrystal = false;
+        isFollowingCrystal = false;
 
         distanceBetweenClone = 100f;
         
@@ -49,17 +56,22 @@ public class AiMovement : MonoBehaviour
     {
         IsCloneSpawned();
         DetermineCloneDistance();
+
+        if (isStoppedByCrystal && isFollowingCrystal && Vector3.Distance(this.transform.position, crytalPos) < 0.1)
+        {
+            isStoppedByCrystal = true;
+        }
     }
 
     // Determines whether clone is close enough to chase and attack. 
     // If not, return to pathing loop.
     void DetermineCloneDistance()
     {
-        if (distanceBetweenClone < 4)
+        if (distanceBetweenClone < 4 && isFollowingCrystal == false)
         {
             ChaseAndAttackClone();
         }
-        else
+        else if (isStoppedByCrystal)
         {
             ReturnToPath();
         }
@@ -70,11 +82,10 @@ public class AiMovement : MonoBehaviour
     {
         if (distanceBetweenClone < 1.3f)
         {
-            //combatHandler.inCombat = true;
-        }
-        else
-        {
-            //combatHandler.inCombat = false;
+            if (GameObject.FindGameObjectWithTag("Clone") != null)
+            {
+                
+            }
         }
 
         if (GameObject.FindWithTag("Clone") != null && !isRunning)
@@ -163,6 +174,12 @@ public class AiMovement : MonoBehaviour
 
             lastPos = turnPos.position;
             aiAgent.SetDestination(lastPos);
+        }
+        else if (other.CompareTag("AIStop"))
+        {
+            crytalPos = other.transform.position;
+            aiAgent.SetDestination(crytalPos);
+            isFollowingCrystal = true;
         }
     }
 }

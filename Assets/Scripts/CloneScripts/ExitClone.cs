@@ -42,7 +42,7 @@ public class ExitClone : MonoBehaviour
     public float despawnCloneTimer;
     
     // Timer variables
-    private float cloneActiveTimer;
+    public float cloneActiveTimer;
     private bool isRunning;
 
     // Interactable trigger variables.

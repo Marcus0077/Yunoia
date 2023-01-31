@@ -33,6 +33,7 @@ public class AiMovement : MonoBehaviour
     private bool isStoppedByCrystal;
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
+    public float attackTimer;
     
     // Get references and initialize variables when Faceless AI is spawned.
     void Awake()
@@ -46,6 +47,7 @@ public class AiMovement : MonoBehaviour
         isFollowingCrystal = false;
 
         distanceBetweenClone = 100f;
+        attackTimer = 2f;
         
         targetPos = startPos.position;
         aiAgent.SetDestination(targetPos);
@@ -71,7 +73,7 @@ public class AiMovement : MonoBehaviour
         {
             ChaseAndAttackClone();
         }
-        else if (isStoppedByCrystal)
+        else if (!isStoppedByCrystal && !isFollowingCrystal)
         {
             ReturnToPath();
         }
@@ -84,8 +86,21 @@ public class AiMovement : MonoBehaviour
         {
             if (GameObject.FindGameObjectWithTag("Clone") != null)
             {
-                
+                if (attackTimer <= 0)
+                {
+                    
+                    GameObject.FindGameObjectWithTag("Clone").GetComponent<ExitClone>().cloneActiveTimer -= 5f;
+                    attackTimer = 2f;
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime;
+                }
             }
+        }
+        else if (attackTimer < 2f)
+        {
+            attackTimer = 2f;
         }
 
         if (GameObject.FindWithTag("Clone") != null && !isRunning)
@@ -95,7 +110,7 @@ public class AiMovement : MonoBehaviour
         }
     }
 
-    // Returm the Faceless AI to it's specified path.
+    // Return the Faceless AI to it's specified path.
     void ReturnToPath()
     {
         //combatHandler.inCombat = false;

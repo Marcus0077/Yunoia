@@ -134,7 +134,8 @@ public class LimitedMovementCam : MonoBehaviour
     {
         Vector3 position = camFollowSphere.transform.position;
 
-        position.x = Mathf.Clamp(position.x, leftXBound - camBallOffset.x, rightXBound - camBallOffset.x);
+        // position.x = Mathf.Clamp(position.x, leftXBound - camBallOffset.x, rightXBound - camBallOffset.x);
+        position.x = Mathf.Clamp(position.x, leftXBound, rightXBound);
         position.y = Mathf.Clamp(position.y, leftYBound - camBallOffset.y, rightYBound - camBallOffset.y);
             
         camFollowSphere.transform.position = position;
@@ -174,11 +175,13 @@ public class LimitedMovementCam : MonoBehaviour
             
             returnToPlayerTimer = 1.5f;
 
-            moveDirection = (Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y - 90, -Vector3.forward) *
-                                 camMove.ReadValue<Vector2>().normalized * moveSpeed);
+            // moveDirection = (Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y - 90, -Vector3.forward) *
+            //                      camMove.ReadValue<Vector2>().normalized * moveSpeed);
 
-            camFollowSphere.velocity = new Vector3(moveDirection.y * accelerationValue,
-                     -moveDirection.x * accelerationValue, camFollowSphere.velocity.z);
+            moveDirection = camMove.ReadValue<Vector2>().normalized * moveSpeed;
+
+            camFollowSphere.velocity = new Vector3(moveDirection.x * accelerationValue,
+                     moveDirection.y * accelerationValue, camFollowSphere.velocity.z);
         }
         // If there is no movement input for the camera follow sphere or the character,
         // stop the ball and countdown the return timer.

@@ -256,7 +256,7 @@ public class BasicMovement : MonoBehaviour
                 playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
             }
-            moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+            moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
             playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
         
             LookPlayer();
@@ -477,6 +477,7 @@ public class BasicMovement : MonoBehaviour
         }
         
         limitedMovementCam.GetCurrentCameraData(curRoom);
+        limitedMovementCam.SetCurrentPlayer(this.gameObject);
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

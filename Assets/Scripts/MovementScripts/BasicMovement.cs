@@ -176,44 +176,7 @@ public class BasicMovement : MonoBehaviour
     {
         if (canMove)
         {
-            // if (curRoom == 1)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 1);
-            // }
-            // else if (curRoom == 2)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 2);
-            // }
-            // else if (curRoom == 3)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 3);
-            // }
-            // else if (curRoom == 4)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 4);
-            // }
-            // else if (curRoom == 5)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 5);
-            // }
-            // else if (curRoom == 6)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 6);
-            // }
-            // else if (curRoom == 7)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 7);
-            // }
-            // else if (curRoom == 8)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 8);
-            // }
-            // else if (curRoom == 9)
-            // {
-            //     stateDrivenCamAnimator.SetInteger("roomNum", 9);
-            // }
-            
-            //stateDrivenCamAnimator.SetInteger("roomNum", curRoom);
+            stateDrivenCamAnimator.SetInteger("roomNum", curRoom);
         }
     }
 
@@ -439,45 +402,13 @@ public class BasicMovement : MonoBehaviour
     // Changes active camera depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Camera1"))
+        if (other.tag.ToString().Trim(other.tag.ToString()[other.tag.ToString().Length-1]).CompareTo("Camera") == 0)
         {
-            curRoom = 1;
+            curRoom = other.tag.ToCharArray()[other.tag.ToCharArray().Length - 1] - 48;
+            
+            limitedMovementCam.GetCurrentCameraData(curRoom);
+            limitedMovementCam.SetCurrentPlayer(this.gameObject);
         }
-        if (other.CompareTag("Camera2"))
-        {
-            curRoom = 2;
-        }
-        if (other.CompareTag("Camera3"))
-        {
-            curRoom = 3;
-        }
-        if (other.CompareTag("Camera4"))
-        {
-            curRoom = 4;
-        }
-        if (other.CompareTag("Camera5"))
-        {
-            curRoom = 5;
-        }
-        if (other.CompareTag("Camera6"))
-        {
-            curRoom = 6;
-        }
-        if (other.CompareTag("Camera7"))
-        {
-            curRoom = 7;
-        }
-        if (other.CompareTag("Camera8"))
-        {
-            curRoom = 8;
-        }
-        if (other.CompareTag("Camera9"))
-        {
-            curRoom = 9;
-        }
-        
-        limitedMovementCam.GetCurrentCameraData(curRoom);
-        limitedMovementCam.SetCurrentPlayer(this.gameObject);
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

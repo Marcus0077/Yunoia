@@ -6701,7 +6701,7 @@ PrefabInstance:
     - target: {fileID: 8325761764747410605, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: aimAssist
       value: 
-      objectReference: {fileID: 9131877454595238742}
+      objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410605, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: pullSpeed
       value: 0.3
@@ -6794,36 +6794,6 @@ AudioListener:
   m_GameObject: {fileID: 1804445680587551994}
   m_Enabled: 1
 --- !u!114 &1196110548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804445680587551994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02910329b6b291d4a9417a86c23195e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1804445680587551756}
-  shootTransform: {fileID: 1804445680190044959}
-  playerRB: {fileID: 1804445680587551992}
---- !u!114 &1199798116232109753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804445680587551994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02910329b6b291d4a9417a86c23195e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1804445680587551756}
-  shootTransform: {fileID: 1804445680190044959}
-  playerRB: {fileID: 1804445680587551992}
---- !u!114 &1365605670516443930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6934,21 +6904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043885dd9cc22324ea1448c52b6e246a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5060561299439290151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804445680587551994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02910329b6b291d4a9417a86c23195e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1804445680587551756}
-  shootTransform: {fileID: 1804445680190044959}
-  playerRB: {fileID: 1804445680587551992}
 --- !u!114 &5462156312054235809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6961,36 +6916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc31e0345dfaa0643a6dd1573dd23136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6377329798018395117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804445680587551994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02910329b6b291d4a9417a86c23195e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1804445680587551756}
-  shootTransform: {fileID: 1804445680190044959}
-  playerRB: {fileID: 1804445680587551992}
---- !u!114 &8013332736959680640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804445680587551994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02910329b6b291d4a9417a86c23195e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1804445680587551756}
-  shootTransform: {fileID: 1804445680190044959}
-  playerRB: {fileID: 1804445680587551992}
 --- !u!114 &9110379836589996222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7005,19 +6930,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactSound: {fileID: 7249191646969724779}
   player: {fileID: 1804445680587551756}
-  playerRB: {fileID: 1804445680587551992}
---- !u!114 &9131877454595238742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804445680587551994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02910329b6b291d4a9417a86c23195e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1804445680587551756}
-  shootTransform: {fileID: 1804445680190044959}
   playerRB: {fileID: 1804445680587551992}

@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class LimitedMovementCam : MonoBehaviour
 {
@@ -175,13 +177,10 @@ public class LimitedMovementCam : MonoBehaviour
             
             returnToPlayerTimer = 1.5f;
 
-            // moveDirection = (Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y - 90, -Vector3.forward) *
-            //                      camMove.ReadValue<Vector2>().normalized * moveSpeed);
-
             moveDirection = camMove.ReadValue<Vector2>().normalized * moveSpeed;
-
-            camFollowSphere.velocity = new Vector3(moveDirection.x * accelerationValue,
-                     moveDirection.y * accelerationValue, camFollowSphere.velocity.z);
+            
+                camFollowSphere.velocity = new Vector3(moveDirection.x * accelerationValue,
+                    moveDirection.y * accelerationValue, camFollowSphere.velocity.z);
         }
         // If there is no movement input for the camera follow sphere or the character,
         // stop the ball and countdown the return timer.

@@ -219,8 +219,17 @@ public class BasicMovement : MonoBehaviour
                 playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
             }
-            moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
-            playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+
+            if (SceneManager.GetActiveScene().name == "VSDenial")
+            {
+                moveDirection = Quaternion.AngleAxis(0, Vector3.right) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+            }
+            else
+            {
+                moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+            }
         
             LookPlayer();
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,12 +35,18 @@ public class AiMovement : MonoBehaviour
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
     public float attackTimer;
+
+    public GameObject[] plants;
+    public GameObject[] aiStopper;
     
     // Get references and initialize variables when Faceless AI is spawned.
     void Awake()
     {
         //combatHandler = FindObjectOfType<CombatHandler>();
         aiAgent = this.GetComponent<NavMeshAgent>();
+
+        // plants = new GameObject[2];
+        // aiStopper = new GameObject[2];
 
         turnAround = false;
         isRunning = false;
@@ -82,26 +89,26 @@ public class AiMovement : MonoBehaviour
     // Sets Faceless AI to chase the clone, and attack it if they are close enough.
     void ChaseAndAttackClone()
     {
-        if (distanceBetweenClone < 1.3f)
-        {
-            if (GameObject.FindGameObjectWithTag("Clone") != null)
-            {
-                if (attackTimer <= 0)
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<Rumbler>().RumbleConstant(1, 3, 0.3f);
-                    GameObject.FindGameObjectWithTag("Clone").GetComponent<ExitClone>().cloneActiveTimer -= 5f;
-                    attackTimer = 2f;
-                }
-                else
-                {
-                    attackTimer -= Time.deltaTime;
-                }
-            }
-        }
-        else if (attackTimer < 2f)
-        {
-            attackTimer = 2f;
-        }
+        // if (distanceBetweenClone < 1.3f)
+        // {
+        //     if (GameObject.FindGameObjectWithTag("Clone") != null)
+        //     {
+        //         if (attackTimer <= 0)
+        //         {
+        //             GameObject.FindGameObjectWithTag("Player").GetComponent<Rumbler>().RumbleConstant(1, 3, 0.3f);
+        //             GameObject.FindGameObjectWithTag("Clone").GetComponent<ExitClone>().cloneActiveTimer -= 5f;
+        //             attackTimer = 2f;
+        //         }
+        //         else
+        //         {
+        //             attackTimer -= Time.deltaTime;
+        //         }
+        //     }
+        // }
+        // else if (attackTimer < 2f)
+        // {
+        //     attackTimer = 2f;
+        // }
 
         if (GameObject.FindWithTag("Clone") != null && !isRunning)
         {
@@ -192,6 +199,14 @@ public class AiMovement : MonoBehaviour
         }
         else if (other.CompareTag("AIStop"))
         {
+            // for (int i = 0; i < 2; i++)
+            // {
+            //     if (other.GameObject() == aiStopper[i])
+            //     {
+            //         Destroy(plants[i]);
+            //     }
+            // }
+            
             crytalPos = other.transform.position;
             aiAgent.SetDestination(crytalPos);
             isFollowingCrystal = true;

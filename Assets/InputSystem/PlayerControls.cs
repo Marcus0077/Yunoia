@@ -1048,6 +1048,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ff967f6-e516-4478-9be7-7f97ff370aab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1125,6 +1134,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""MuseumScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f63ed48b-c78b-48f0-9a73-353d4815c30a"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraScene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1389,6 +1409,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Scenes_AcceptanceScene = m_Scenes.FindAction("AcceptanceScene", throwIfNotFound: true);
         m_Scenes_HubScene = m_Scenes.FindAction("HubScene", throwIfNotFound: true);
         m_Scenes_MuseumScene = m_Scenes.FindAction("MuseumScene", throwIfNotFound: true);
+        m_Scenes_CameraScene = m_Scenes.FindAction("CameraScene", throwIfNotFound: true);
         // Ghost
         m_Ghost = asset.FindActionMap("Ghost", throwIfNotFound: true);
         m_Ghost_Move = m_Ghost.FindAction("Move", throwIfNotFound: true);
@@ -1904,6 +1925,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Scenes_AcceptanceScene;
     private readonly InputAction m_Scenes_HubScene;
     private readonly InputAction m_Scenes_MuseumScene;
+    private readonly InputAction m_Scenes_CameraScene;
     public struct ScenesActions
     {
         private @PlayerControls m_Wrapper;
@@ -1915,6 +1937,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @AcceptanceScene => m_Wrapper.m_Scenes_AcceptanceScene;
         public InputAction @HubScene => m_Wrapper.m_Scenes_HubScene;
         public InputAction @MuseumScene => m_Wrapper.m_Scenes_MuseumScene;
+        public InputAction @CameraScene => m_Wrapper.m_Scenes_CameraScene;
         public InputActionMap Get() { return m_Wrapper.m_Scenes; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1945,6 +1968,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MuseumScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
                 @MuseumScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
                 @MuseumScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
+                @CameraScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCameraScene;
+                @CameraScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCameraScene;
+                @CameraScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCameraScene;
             }
             m_Wrapper.m_ScenesActionsCallbackInterface = instance;
             if (instance != null)
@@ -1970,6 +1996,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MuseumScene.started += instance.OnMuseumScene;
                 @MuseumScene.performed += instance.OnMuseumScene;
                 @MuseumScene.canceled += instance.OnMuseumScene;
+                @CameraScene.started += instance.OnCameraScene;
+                @CameraScene.performed += instance.OnCameraScene;
+                @CameraScene.canceled += instance.OnCameraScene;
             }
         }
     }
@@ -2112,6 +2141,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAcceptanceScene(InputAction.CallbackContext context);
         void OnHubScene(InputAction.CallbackContext context);
         void OnMuseumScene(InputAction.CallbackContext context);
+        void OnCameraScene(InputAction.CallbackContext context);
     }
     public interface IGhostActions
     {

@@ -16,6 +16,7 @@ public class SceneChanger : MonoBehaviour
     public InputAction acceptanceScene;
     public InputAction hubScene;
     public InputAction museumScene;
+    public InputAction cameraScene;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -54,6 +55,11 @@ public class SceneChanger : MonoBehaviour
         {
             SceneManager.LoadScene("museum");
         }
+
+        if (cameraScene.IsPressed())
+        {
+            SceneManager.LoadScene("Camera_Prototyping");
+        }
     }
 
     private void OnEnable()
@@ -80,6 +86,9 @@ public class SceneChanger : MonoBehaviour
 
         museumScene = sceneChanges.Scenes.MuseumScene;
         museumScene.Enable();
+
+        cameraScene = sceneChanges.Scenes.CameraScene;
+        cameraScene.Enable();
     }
 
     private void OnDisable()
@@ -91,5 +100,6 @@ public class SceneChanger : MonoBehaviour
         acceptanceScene.Disable();
         hubScene.Disable();
         museumScene.Disable();
+        cameraScene.Disable();
     }
 }

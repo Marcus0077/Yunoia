@@ -309,6 +309,7 @@ public class BasicMovement : MonoBehaviour
     public void AddMinion(int value)
     {
         attachedMinionCount += value;
+        GameObject.FindWithTag("Player").GetComponent<Rumbler>().RumbleConstant(1, 2, 0.25f);
     }
 
     // Applies jump force to player if they press the jump button and

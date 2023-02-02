@@ -967,6 +967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5827308682441603347}
+  - component: {fileID: 5243249086005743272}
   - component: {fileID: 5827308682441603356}
   - component: {fileID: 5827308682441603358}
   - component: {fileID: 8960577420141974533}
@@ -1014,6 +1015,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5243249086005743272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc31e0345dfaa0643a6dd1573dd23136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &5827308682441603356
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1078,10 +1091,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTimerText: {fileID: 0}
+  despawnTimerText: {fileID: 0}
   anim: {fileID: 0}
   animCover: {fileID: 0}
+  limitedMovementCam: {fileID: 0}
   Player: {fileID: 0}
   despawnClone: 0
+  despawnCloneTimer: 0
+  cloneActiveTimer: 0
 --- !u!114 &307182109869249534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,14 +1111,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swingSpeed: 0.3
   yankSpeedStrong: 4
   yankSpeedWeak: 0.9
-  stopDistance: 2.5
-  taughtDistance: 6
+  maxSwingHeight: 3.4028235e+38
+  lastPlayerPos: {x: 0, y: 0, z: 0}
+  canCheckPos: 1
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 224377010961569212}
   aimAssist: {fileID: 6366286162391475576}
+  hookBase: {fileID: 0}
   bestHook: {fileID: 0}
   playerCollider: {fileID: 4181361517068783824}
   bestHookCenter: {x: 0, y: 0, z: 0}
@@ -1110,7 +1128,9 @@ MonoBehaviour:
   player: {fileID: -8715429646849006418}
   changePerSecond: 0
   grappleCooldown: 1
-  horizontalPullSpeed: 5
+  canReverseSwing: 1
+  canApplyForce: 1
+  forwardSwing: 1
   canYank: 0
   yankReady: 0
   shootHook:
@@ -1161,7 +1181,10 @@ MonoBehaviour:
   minPush: 2
   chargeSpeed: 1
   cooldown: 1
+  shieldCooldown: 0
+  shieldDuration: 0
   restored: 0
+  ableToShield: 0
   pushAction:
     m_Name: Push
     m_Type: 0
@@ -1174,9 +1197,11 @@ MonoBehaviour:
   pushedLevel: 0
   range: 0
   cdRemaining: 0
+  cdRemainingForShield: 0
   smallPushEffect: {fileID: 3905313478084107240, guid: c716b58407b66b3469d6721755671cca, type: 3}
   largePushEffect: {fileID: 5709810143480064173, guid: d4fbe853b52814646889275708399b7d, type: 3}
   chargePushEffect: {fileID: 3481536621180637866, guid: c36db729420d1bf479404240d8ab6fe1, type: 3}
+  shieldEffect: {fileID: 0}
   smallEffectDestroy: {fileID: 0}
   largeEffectDestroy: {fileID: 0}
   chargeEffectDestroy: {fileID: 0}
@@ -1242,6 +1267,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  limitedMovementCam: {fileID: 0}
   playerRB: {fileID: 5827308682441603359}
   moveDirection: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
@@ -1267,6 +1293,7 @@ MonoBehaviour:
   runSoundTwo: {fileID: 8238776559536899785}
   transitionPos: {fileID: 0}
   animator: {fileID: 7068460080398614047}
+  winScreen: {fileID: 0}
 --- !u!114 &8898106702094236184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,6 +1315,7 @@ MonoBehaviour:
   cloneAbilityPush: {fileID: 8397525453568900783}
   lever: {fileID: 0}
   door: {fileID: 0}
+  limitedMovementCam: {fileID: 0}
   Player: {fileID: 0}
   switchPlaces:
     m_Name: Switch Places

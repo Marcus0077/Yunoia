@@ -88,7 +88,7 @@ public class AiMovement : MonoBehaviour
             {
                 if (attackTimer <= 0)
                 {
-                    
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<Rumbler>().RumbleConstant(1, 3, 0.3f);
                     GameObject.FindGameObjectWithTag("Clone").GetComponent<ExitClone>().cloneActiveTimer -= 5f;
                     attackTimer = 2f;
                 }

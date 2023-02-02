@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 1828050832}
   - component: {fileID: 1828050834}
   - component: {fileID: 1828050835}
+  - component: {fileID: 1144875423}
   m_Layer: 0
   m_Name: CameraFollowSphere
   m_TagString: Untagged
@@ -157,8 +158,8 @@ Transform:
   m_GameObject: {fileID: 1828050829}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.48800156, y: 0.258667, z: 0.009333333}
-  m_LocalScale: {x: 1.3333331, y: 1.3333333, z: 1.3333331}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1804445680587551984}
   m_RootOrder: 12
@@ -178,7 +179,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828050829}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -191,7 +192,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 06b2b2e169a51c04f81f0a48a6844a49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -280,6 +281,19 @@ MonoBehaviour:
   curConfiner: {fileID: 0}
   isCamFollowingPlayer: 0
   forceBallToPlayer: 0
+--- !u!65 &1144875423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828050829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Center: {x: 0.0000038146973, y: 0, z: -0.0000076293945}
 --- !u!1 &964311697839506481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6574,15 +6588,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.92
+      value: -12.32
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 45
+      value: 44.47
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.42
+      value: 33.9
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6899,6 +6913,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  cameraScene:
+    m_Name: Camera Scene
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 90c83ff3-4c52-4c41-af22-c942899efd0e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &2762635009039075892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6926,6 +6949,18 @@ MonoBehaviour:
   player: {fileID: 1804445680587551756}
   shootTransform: {fileID: 1804445680190044959}
   playerRB: {fileID: 1804445680587551992}
+--- !u!114 &5462156312054235809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804445680587551994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc31e0345dfaa0643a6dd1573dd23136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6377329798018395117
 MonoBehaviour:
   m_ObjectHideFlags: 0

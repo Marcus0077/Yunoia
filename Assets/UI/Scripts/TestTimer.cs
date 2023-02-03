@@ -7,8 +7,10 @@ public class TestTimer : MonoBehaviour
 {
     public Image timerBar;
     float timeLeft;
-    public float maxTime;
+    public float maxTime, phase1, phase2, phase3, finalPhase;
     public Animator anim;
+
+    public GameObject flame1, flame2, flame3, finalFlame;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +31,24 @@ public class TestTimer : MonoBehaviour
             Destroy(timerBar);
         }
 
-        if(timeLeft < 5)
+        if(timeLeft < phase1)
         {
-            anim.SetTrigger("shake");
+            flame1.SetActive(true);
+        }
+
+        if(timeLeft < phase2)
+        {
+            flame2.SetActive(true);
+        }
+
+        if(timeLeft < phase3)
+        {
+            flame3.SetActive(true);
+        }
+
+        if(timeLeft < finalPhase)
+        {
+            finalFlame.SetActive(true);
         }
     }
 }

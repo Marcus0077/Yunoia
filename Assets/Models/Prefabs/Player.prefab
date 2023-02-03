@@ -143,6 +143,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  limitedMovementCam: {fileID: 0}
   playerRB: {fileID: 8325761764747410595}
   moveDirection: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
@@ -166,7 +167,9 @@ MonoBehaviour:
   jumpSound: {fileID: 0}
   runSoundOne: {fileID: 0}
   runSoundTwo: {fileID: 0}
+  transitionPos: {fileID: 0}
   animator: {fileID: 0}
+  winScreen: {fileID: 0}
 --- !u!114 &8325761764747410518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +216,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd70cbc1da36f43b80acf35bbb5744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  summonAClone:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a10a264c-d4a7-4f0a-bced-c20471e0c9be
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   ClonePrefab: {fileID: 5827308682441603353, guid: b8fbd0975a3b42b45a9a9f048c23c726, type: 3}
   clone: {fileID: 0}
   cloneSummoned: 0
@@ -238,21 +250,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swingSpeed: 0.3
   yankSpeedStrong: 0.7
   yankSpeedWeak: 0.7
-  stopDistance: 2.5
-  taughtDistance: 5
+  maxSwingHeight: 3.4028235e+38
+  lastPlayerPos: {x: 0, y: 0, z: 0}
+  canCheckPos: 1
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 8325761764601099076}
+  aimAssist: {fileID: 0}
+  hookBase: {fileID: 0}
+  bestHook: {fileID: 0}
+  playerCollider: {fileID: 0}
+  bestHookCenter: {x: 0, y: 0, z: 0}
+  radius: 12
   playerRB: {fileID: 8325761764747410595}
   player: {fileID: 0}
   changePerSecond: 0
   grappleCooldown: 1
-  horizontalPullSpeed: 5
-  hookLife: 5
-  maxHookLife: 0
-  yankHook: 0
+  canReverseSwing: 1
+  canApplyForce: 1
+  forwardSwing: 1
+  canYank: 0
+  yankReady: 0
   shootHook:
     m_Name: Shoot Hook
     m_Type: 0
@@ -301,13 +320,27 @@ MonoBehaviour:
   minPush: 2
   chargeSpeed: 1
   cooldown: 1
+  shieldCooldown: 0
+  shieldDuration: 0
   restored: 0
+  ableToShield: 0
+  pushAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7170bf00-dfb8-42bb-a52c-c36f6d18d6c8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   pushedLevel: 0
   range: 0
   cdRemaining: 0
+  cdRemainingForShield: 0
   smallPushEffect: {fileID: 0}
   largePushEffect: {fileID: 0}
   chargePushEffect: {fileID: 0}
+  shieldEffect: {fileID: 0}
   smallEffectDestroy: {fileID: 0}
   largeEffectDestroy: {fileID: 0}
   chargeEffectDestroy: {fileID: 0}

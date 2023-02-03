@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class SensitivityController : MonoBehaviour
 {
+    [SerializeField]
+    Settings prefName;
+
     void Start()
     {
-        GameManager.Instance.sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-        GetComponent<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+        GetComponent<Slider>().value = GameManager.Instance.GetFloat(prefName);
     }
 
-    public void OnChangeSlider(float Value)
+    public void OnChangeSlider(float value)
     {
-        PlayerPrefs.SetFloat("Sensitivity", Value);
-        GameManager.Instance.sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        GameManager.Instance.SetFloat(prefName, value);
         PlayerPrefs.Save();
     }
 

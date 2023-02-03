@@ -29,8 +29,6 @@ public class NewSettingsController : MonoBehaviour
                 Mixer.SetFloat("Volume", Mathf.Log10(Value) * 20);
                 break;
         }
-        PlayerPrefs.SetFloat("Volume", Value);
-        PlayerPrefs.Save();
     }
 
 

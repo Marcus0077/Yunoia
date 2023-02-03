@@ -1189,6 +1189,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""a782a6d4-329c-492e-b816-50d84a565678"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sensitivity"",
+                    ""type"": ""Button"",
+                    ""id"": ""12ed0a89-1b70-4a82-accb-41c55d97e2e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1198,7 +1216,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1220,7 +1238,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1231,7 +1249,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1242,7 +1260,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1253,7 +1271,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1264,7 +1282,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1275,7 +1293,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1286,7 +1304,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1297,7 +1315,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1308,7 +1326,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1319,10 +1337,54 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ada852d6-895e-4e0e-813b-d2de853bfc03"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""[ ]"",
+                    ""id"": ""cbc31170-97f3-4eaa-baab-56e275e8015d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sensitivity"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2ba2e1da-43bc-49ad-8da9-289fda2f8a3b"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sensitivity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""10dbe719-faae-4bc0-a998-9cf3c038bd57"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sensitivity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1416,6 +1478,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Ghost_Up = m_Ghost.FindAction("Up", throwIfNotFound: true);
         m_Ghost_Down = m_Ghost.FindAction("Down", throwIfNotFound: true);
         m_Ghost_Camera = m_Ghost.FindAction("Camera", throwIfNotFound: true);
+        m_Ghost_Sprint = m_Ghost.FindAction("Sprint", throwIfNotFound: true);
+        m_Ghost_Sensitivity = m_Ghost.FindAction("Sensitivity", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -2011,6 +2075,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Ghost_Up;
     private readonly InputAction m_Ghost_Down;
     private readonly InputAction m_Ghost_Camera;
+    private readonly InputAction m_Ghost_Sprint;
+    private readonly InputAction m_Ghost_Sensitivity;
     public struct GhostActions
     {
         private @PlayerControls m_Wrapper;
@@ -2019,6 +2085,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Up => m_Wrapper.m_Ghost_Up;
         public InputAction @Down => m_Wrapper.m_Ghost_Down;
         public InputAction @Camera => m_Wrapper.m_Ghost_Camera;
+        public InputAction @Sprint => m_Wrapper.m_Ghost_Sprint;
+        public InputAction @Sensitivity => m_Wrapper.m_Ghost_Sensitivity;
         public InputActionMap Get() { return m_Wrapper.m_Ghost; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2040,6 +2108,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Camera.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnCamera;
+                @Sprint.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnSprint;
+                @Sensitivity.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnSensitivity;
+                @Sensitivity.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnSensitivity;
+                @Sensitivity.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnSensitivity;
             }
             m_Wrapper.m_GhostActionsCallbackInterface = instance;
             if (instance != null)
@@ -2056,6 +2130,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
+                @Sensitivity.started += instance.OnSensitivity;
+                @Sensitivity.performed += instance.OnSensitivity;
+                @Sensitivity.canceled += instance.OnSensitivity;
             }
         }
     }
@@ -2149,5 +2229,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnUp(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnSensitivity(InputAction.CallbackContext context);
     }
 }

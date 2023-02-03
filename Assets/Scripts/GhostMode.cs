@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class GhostMode : MonoBehaviour
 {
     PlayerControls playerControls;
-    InputAction move, up, down, camera;
+    InputAction move, up, down, camera, shift, mouseSense;
     public float speed, vSpeed, sensitivity; // read from gameManager?
     Vector3 moveAmount;
     Vector2 totalRot;
@@ -23,6 +23,11 @@ public class GhostMode : MonoBehaviour
         move = playerControls.Ghost.Move;
         move.performed += ctx => Move(ctx.ReadValue<Vector2>());
         move.canceled += ctx => Move(Vector2.zero);
+        shift = playerControls.Ghost.Sprint;
+        shift.performed += ctx => speed *= 2;
+        shift.canceled += ctx => speed /= 2;
+        mouseSense = playerControls.Ghost.Sensitivity;
+        mouseSense.performed += ctx => AddMouseSensitivity(ctx.ReadValue<float>());
         up = playerControls.Ghost.Up;
         down = playerControls.Ghost.Down;
         up.performed += ctx => Elevate(vSpeed);
@@ -31,6 +36,11 @@ public class GhostMode : MonoBehaviour
         down.canceled += ctx => Elevate(0);
         camera = playerControls.Ghost.Camera;
         camera.performed += ctx => { totalRot += ctx.ReadValue<Vector2>() * sensitivity; transform.rotation = Quaternion.Euler(-(totalRot.y - 360 * Mathf.Floor(totalRot.y / 360)), totalRot.x - 360 * Mathf.Floor(totalRot.x / 360), 0); };
+    }
+
+    void AddMouseSensitivity(float value)
+    {
+        sensitivity = Mathf.Clamp(sensitivity + value * .1f,0,1);
     }
 
     void Elevate(float amount)
@@ -52,6 +62,8 @@ public class GhostMode : MonoBehaviour
         up.Enable();
         down.Enable();
         camera.Enable();
+        shift.Enable();
+        mouseSense.Enable();
     }
 
     // Disable input action map controls.
@@ -61,6 +73,8 @@ public class GhostMode : MonoBehaviour
         up.Disable();
         down.Disable();
         camera.Disable();
+        shift.Disable();
+        mouseSense.Disable();
     }
 
     // Update is called once per frame

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScaleMeasure : MonoBehaviour
 {
-    public float weight = 0, minionScale = 1;
+    public float weight = 0, minionScale = 1, cloneWeight = 2, facelessWeight = 1;
     int minionCount;
     BasicMovement player;
     // Start is called before the first frame update
@@ -23,11 +23,11 @@ public class ScaleMeasure : MonoBehaviour
         }
         else if(collider.tag == "Clone")
         {
-            weight += 2;
+            weight += cloneWeight;
         }
         else if (collider.tag == "Faceless")
         {
-            weight++;
+            weight += facelessWeight;
         }
     }
 
@@ -40,11 +40,11 @@ public class ScaleMeasure : MonoBehaviour
         }
         else if (collider.tag == "Clone") //check if clone despawns?
         {
-            weight -= 2;
+            weight -= cloneWeight;
         }
         else if (collider.tag == "Faceless")
         {
-            weight--;
+            weight -= facelessWeight;
         }
     }
 

@@ -6,10 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private static readonly string Firstplay = "First Play";
+    private static readonly string BGMPref = "BGM Pref";
+    private static readonly string SFXPref = "SFX Pref";
+    private static readonly string MasPref = "Mas Pref";
+    private static readonly string Sensitivity = "Sensitivity";
+
+    public string[] statics = { Firstplay,BGMPref,SFXPref,MasPref,Sensitivity };
+    float[] settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
+
     public static GameManager instance;
     public bool ghost = false, menuCursor = false;
-    [Range(0.0f, 1.0f)]
-    public float sensitivity = 1;
     [SerializeField]
     GameObject player, ghostObj;
     GameObject spawnedGhost;
@@ -38,7 +45,36 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         player = GameObject.FindGameObjectWithTag("Player");
-        sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        if(PlayerPrefs.GetFloat(Firstplay) == 0)
+        {
+            PlayerPrefs.SetFloat(Sensitivity,.5f);
+            PlayerPrefs.SetFloat(MasPref,.5f);
+            PlayerPrefs.SetFloat(BGMPref,1);
+            PlayerPrefs.SetFloat(SFXPref,1);
+            settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
+            settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
+            settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
+            settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
+            PlayerPrefs.SetFloat(Firstplay, -1);
+        }
+        else
+        {
+            settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
+            settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
+            settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
+            settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
+        }
+    }
+
+    public float GetFloat(Settings value)
+    {
+        return settings[(int)value];
+    }
+
+    public void SetFloat(Settings index, float value)
+    {
+        settings[(int)index] = value;
+        PlayerPrefs.SetFloat(statics[(int)index], value);
     }
 
     public void ToggleGhost()
@@ -135,4 +171,13 @@ public class GameManager : MonoBehaviour
     {
         
     }
+}
+
+public enum Settings
+{
+    FIRSTPLAY = 0,
+    BGM = 1,
+    SFX = 2,
+    MAS = 3,
+    SENSE = 4
 }

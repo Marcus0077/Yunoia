@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1794804523629897620}
-  - component: {fileID: 5066128322017175189}
   - component: {fileID: 3829750802335174669}
   - component: {fileID: 1720594846475588801}
   - component: {fileID: 3357661769188792596}
@@ -37,18 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5066128322017175189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8918028478591988760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67cc65ec1ad82334b8cae61eb3ecda73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3829750802335174669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +54,7 @@ MonoBehaviour:
   endPos: {fileID: 0}
   distanceBetweenClone: 0
   lastPos: {x: 0, y: 0, z: 0}
+  attackTimer: 0
 --- !u!195 &1720594846475588801
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -77,7 +65,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5000001
-  m_Speed: 2
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: Infinity

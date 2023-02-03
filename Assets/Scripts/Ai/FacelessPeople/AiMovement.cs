@@ -35,18 +35,11 @@ public class AiMovement : MonoBehaviour
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
     public float attackTimer;
-
-    public GameObject[] plants;
-    public GameObject[] aiStopper;
     
     // Get references and initialize variables when Faceless AI is spawned.
     void Awake()
     {
-        //combatHandler = FindObjectOfType<CombatHandler>();
         aiAgent = this.GetComponent<NavMeshAgent>();
-
-        // plants = new GameObject[2];
-        // aiStopper = new GameObject[2];
 
         turnAround = false;
         isRunning = false;
@@ -120,7 +113,6 @@ public class AiMovement : MonoBehaviour
     // Return the Faceless AI to it's specified path.
     void ReturnToPath()
     {
-        //combatHandler.inCombat = false;
         aiAgent.isStopped = false;
         aiAgent.SetDestination(lastPos);
     }
@@ -199,14 +191,6 @@ public class AiMovement : MonoBehaviour
         }
         else if (other.CompareTag("AIStop"))
         {
-            // for (int i = 0; i < 2; i++)
-            // {
-            //     if (other.GameObject() == aiStopper[i])
-            //     {
-            //         Destroy(plants[i]);
-            //     }
-            // }
-            
             crytalPos = other.transform.position;
             aiAgent.SetDestination(crytalPos);
             isFollowingCrystal = true;

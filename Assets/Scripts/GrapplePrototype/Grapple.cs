@@ -209,6 +209,8 @@ public class Grapple : MonoBehaviour
         yankReady = false;
         grappleActive = false;
         canCheckPos = true;
+        canApplyForce = true;
+        canReverseSwing = true;
 
         maxSwingHeight = float.MaxValue;
 

@@ -26,7 +26,7 @@ public class AiMovement : MonoBehaviour
     public float distanceBetweenClone;
 
     // Target positioning variables.
-    private Vector3 targetPos;
+    public Vector3 targetPos;
     public Vector3 lastPos;
     private Vector3 clonePos;
     

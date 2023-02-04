@@ -27,6 +27,7 @@ public class SummonClone : MonoBehaviour
     // LayerMask variables
     public LayerMask ground;
     public LayerMask wall;
+    public LayerMask scale;
 
     // Audio variables.
     [SerializeField] AudioSource cloneSound;
@@ -57,20 +58,20 @@ public class SummonClone : MonoBehaviour
     // Freezes player and deactivates ability to summon a clone.
     void SummonAClone()
     {
-        Vector3 rightOfPlayer = new Vector3(transform.position.x, transform.position.y - 0.25f, 
-            transform.position.z - 2f);
+        Vector3 rightOfPlayer = new Vector3(transform.position.x + 1.5f, transform.position.y - 0.25f, 
+            transform.position.z);
         
         RaycastHit hit;
 
         // Debug rays.
-        Debug.DrawRay(transform.position, Vector3.back * 2f, Color.green, 2f);
+        Debug.DrawRay(transform.position, Vector3.right * 1.5f, Color.green, 2f);
         Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
         
         
-        if ((((Physics.Raycast(transform.position, Vector3.back, out hit, 2f) || 
-              Physics.Raycast(transform.position, Vector3.back, out hit, 1.5f) || 
-              Physics.Raycast(transform.position, Vector3.back, out hit, 1f)) && !hit.collider.isTrigger)) || 
-            !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1f, ground))
+        if ((Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, wall)) 
+            || (Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, ground)) 
+            || (!Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1f, ground)
+            && !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1f, scale)))
         {
             // Debug text if clone cannot be summoned.
             Debug.Log("Clone cannot be summoned here.");
@@ -88,7 +89,7 @@ public class SummonClone : MonoBehaviour
         
             cloneSummoned = true;
         
-            clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + (Vector3.back + new Vector3(0f, 0f, -.75f)), 
+            clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + (Vector3.right + new Vector3(0f, 0f, -.75f)), 
                 Quaternion.LookRotation(-Vector3.forward));
 
             if (uiAnim != null)

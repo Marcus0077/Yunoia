@@ -9,9 +9,9 @@ public class Grapple : MonoBehaviour
     float pullSpeed = 0.27f;
     [SerializeField] float yankSpeedStrong = 0.7f;
     [SerializeField] float yankSpeedWeak = 0.7f;
-    float stopDistanceClose = 2.5f;
-    float stopDistanceFar = 13.0f;
-    float taughtDistance = 3.0f;
+    public float stopDistanceClose = 2.5f;
+    public float stopDistanceFar = 13.0f;
+    public float taughtDistance = 3.0f;
     [SerializeField] float maxSwingHeight = float.MaxValue;
     [SerializeField] Vector3 lastPlayerPos;
     public bool canCheckPos = true;
@@ -29,7 +29,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;
     [SerializeField] float changePerSecond;
-    [SerializeField] float grappleCooldown = 1;
+    [SerializeField] float grappleCooldown = 0.1f;
     float maxVelocity;
     float sqrMaxVelocity;
     [SerializeField] bool canReverseSwing = true;
@@ -277,7 +277,7 @@ public class Grapple : MonoBehaviour
 
     private IEnumerator YankDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         yankReady = true;
     }

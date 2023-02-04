@@ -24,6 +24,25 @@ public class SceneTransition : MonoBehaviour
         {
             SceneManager.LoadScene(sceneToTransfer);
         }
+
+        {
+        if (other.tag == "Depression")
+        {
+           SceneManager.LoadScene("DepressionFinal");
+        }
+         }
+          {
+        if (other.tag == "Bargaining")
+        {
+           SceneManager.LoadScene("BargainingFinal");
+        }
+         }
+          {
+        if (other.tag == "Anger")
+        {
+           SceneManager.LoadScene("AngerFinal");
+        }
+         }
     }
 
     // Update is called once per frame

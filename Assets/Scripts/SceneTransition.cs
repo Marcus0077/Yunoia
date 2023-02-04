@@ -43,6 +43,12 @@ public class SceneTransition : MonoBehaviour
            SceneManager.LoadScene("AngerFinal");
         }
          }
+         {
+        if (other.tag == "LevelWin")
+        {
+           SceneManager.LoadScene("HubFinal");
+        }
+         }
     }
 
     // Update is called once per frame

@@ -64,7 +64,7 @@ public class Lever : MonoBehaviour
             PlayAudioAndAnimation();
             SubtractFromLeverTimer();
 
-            if (Counterpart.GetComponent<Lever>().isActivated && leverTimer > 0)
+            if ((Counterpart.GetComponent<Lever>().isActivated || Counterpart == null) && leverTimer > 0)
             {
                 CompleteLeverSequence();
             }
@@ -92,7 +92,7 @@ public class Lever : MonoBehaviour
     // not complete and the countdown timer is greater than 1;
     void SubtractFromLeverTimer()
     {
-        if (!Counterpart.GetComponent<Lever>().isActivated && !Complete && leverTimer > 0)
+        if ((Counterpart == null || !Counterpart.GetComponent<Lever>().isActivated) && !Complete && leverTimer > 0)
         {
             leverTimer -= Time.deltaTime;
         }
@@ -105,10 +105,13 @@ public class Lever : MonoBehaviour
         {
             
             Complete = true;
-            Counterpart.GetComponent<Lever>().Complete = true;
+            if(Counterpart != null)
+            {
+                Counterpart.GetComponent<Lever>().Complete = true;
+                Counterpart.GetComponent<Lever>().activateText.enabled = false;
+            }
             Door.GetComponent<Door>().Open();
-            
-            Counterpart.GetComponent<Lever>().activateText.enabled = false;
+
             activateText.enabled = false;
         }
        
@@ -118,8 +121,9 @@ public class Lever : MonoBehaviour
     void EndLeverSequence()
     {
         animator.SetBool("PullLever", false);
-                
-        Counterpart.GetComponent<Lever>().isActivated = false;
+
+        if(Counterpart != null)
+            Counterpart.GetComponent<Lever>().isActivated = false;
 
         audioPlayed = false;
         isActivated = false;

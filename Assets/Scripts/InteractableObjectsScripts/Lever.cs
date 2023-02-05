@@ -64,8 +64,11 @@ public class Lever : MonoBehaviour
             PlayAudioAndAnimation();
             SubtractFromLeverTimer();
 
-            if ((Counterpart.GetComponent<Lever>().isActivated || Counterpart == null) && leverTimer > 0)
+            Debug.Log("A");
+
+            if ((Counterpart == null || Counterpart.GetComponent<Lever>().isActivated) && leverTimer > 0)
             {
+                Debug.Log("B");
                 CompleteLeverSequence();
             }
             else if (leverTimer <= 0)

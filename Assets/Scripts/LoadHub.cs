@@ -7,7 +7,7 @@ public class LoadHub : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player"))
+        if(other.tag == "Player")
         {
             SceneManager.LoadScene("HubFinal");
         }

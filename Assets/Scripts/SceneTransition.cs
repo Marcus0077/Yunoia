@@ -28,7 +28,7 @@ public class SceneTransition : MonoBehaviour
             SceneManager.LoadScene(sceneToTransfer);
             if(sceneToTransfer == "HubFinal")
             {
-                //GameManager.Instance.CompleteLevel(level);
+                GameManager.Instance.CompleteLevel(level);
             }
         }
     }

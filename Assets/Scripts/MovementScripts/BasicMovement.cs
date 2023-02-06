@@ -125,6 +125,8 @@ public class BasicMovement : MonoBehaviour
     // Called between frames.
     void FixedUpdate()
     {
+        Time.timeScale = 1.0f;
+        
         MovePlayer();
 
         SetWalkingAnimation();

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class DataManager
+public class DataManager
 {
-    static string saveFilePath = Application.persistentDataPath + "/save.json";
+    public static string saveFilePath = Application.persistentDataPath + "/save.json";
     public static GameData gameData = new GameData();
 
     public static void Awake()

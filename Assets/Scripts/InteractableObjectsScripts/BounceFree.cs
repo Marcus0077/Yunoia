@@ -18,7 +18,7 @@ public class BounceFree : MonoBehaviour
         Debug.Log(player);
         if (player != null)
         {
-            player.playerRB.AddForce(Vector3.up * additiveForce);
+            player.playerRB.AddForce(transform.up * additiveForce);
         }
     }
     

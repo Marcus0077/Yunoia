@@ -39,7 +39,7 @@ public class Lever : MonoBehaviour
     // Get references and initialize variables when levers spawn.
     void Awake()
     {
-        activateText.enabled = false;
+        //activateText.enabled = false;
 
         isActivated = false;
         isPlayer = false;
@@ -111,11 +111,11 @@ public class Lever : MonoBehaviour
             if(Counterpart != null)
             {
                 Counterpart.GetComponent<Lever>().Complete = true;
-                Counterpart.GetComponent<Lever>().activateText.enabled = false;
+                //Counterpart.GetComponent<Lever>().activateText.enabled = false;
             }
             Door.GetComponent<Door>().Open();
 
-            activateText.enabled = false;
+            //activateText.enabled = false;
         }
        
     }
@@ -139,7 +139,7 @@ public class Lever : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isClone && !Complete)
         {
-            activateText.enabled = true;
+            //activateText.enabled = true;
             
             playerInteractions = other.GetComponent<PlayerInteractions>();
             playerInteractions.canPressLever = true;
@@ -148,7 +148,7 @@ public class Lever : MonoBehaviour
         }
         else if (other.CompareTag("Clone") && !isPlayer && !Complete)
         {
-            activateText.enabled = true;
+            //activateText.enabled = true;
             
             cloneInteractions = other.GetComponent<CloneInteractions>();
             cloneInteractions.canPressLever = true;
@@ -165,7 +165,7 @@ public class Lever : MonoBehaviour
         {
             Debug.Log("works");
             
-            activateText.enabled = false;
+            //activateText.enabled = false;
             
             playerInteractions.canPressLever = false;
             
@@ -173,7 +173,7 @@ public class Lever : MonoBehaviour
         }
         else if (other.CompareTag("Clone") && isClone)
         {
-            activateText.enabled = false;
+            //activateText.enabled = false;
             
             cloneInteractions.canPressLever = false;
             

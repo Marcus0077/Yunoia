@@ -7,7 +7,6 @@ public class PushableAnimatable : Pushable
 {
     protected Animator anim;
     bool toBeDestroyed;
-    public AudioClip statueFriction;
     AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +16,6 @@ public class PushableAnimatable : Pushable
 
     public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
-        Debug.Log(data.animationBool);
         toBeDestroyed = data.doDestroy;
         if (base.Pushed(force, chargeLevel, totalCharges, pusher))
         {

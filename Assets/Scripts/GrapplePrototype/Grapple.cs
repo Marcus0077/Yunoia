@@ -10,7 +10,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] float yankSpeedStrong = 0.7f;
     [SerializeField] float yankSpeedWeak = 0.7f;
     public float stopDistanceClose = 2.5f;
-    public float stopDistanceFar = 13.0f;
+    public float stopDistanceFar;
     public float taughtDistance = 3.0f;
     [SerializeField] float maxSwingHeight = float.MaxValue;
     [SerializeField] Vector3 lastPlayerPos;
@@ -185,7 +185,7 @@ public class Grapple : MonoBehaviour
         yankReady = false;
         forwardSwing = true;
 
-        stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 1.5f;
+        stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 3.0f;
 
         if (!canYank)
         {

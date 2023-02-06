@@ -9,8 +9,8 @@ public class ScaleControl : MonoBehaviour
     Vector3 leftPos, rightPos;
     Vector3 oldLeftPos, oldRightPos;
     [SerializeField]
-    float unitDistance = 1, speed = 1;
-    NavMeshHandler navHandler;
+    float unitDistance = 1, speed = 1, freezeAt = -1;
+    GameObject navHandler;
     [SerializeField]
     Vector3 axis;
     float compareValue = 0, frame;
@@ -23,29 +23,35 @@ public class ScaleControl : MonoBehaviour
         oldLeftPos = leftPos;
         oldRightPos = rightPos;
         compareValue = 0;
-        navHandler = GameObject.FindGameObjectWithTag("NavmeshHandler").GetComponent<NavMeshHandler>();
+        navHandler = GameObject.FindGameObjectWithTag("NavmeshHandler");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(compareValue != right.GetComponent<ScaleMeasure>().weight - left.GetComponent<ScaleMeasure>().weight)
+        if (compareValue != right.GetComponent<ScaleMeasure>().weight - left.GetComponent<ScaleMeasure>().weight)
         {
             frame = 0;
             compareValue = right.GetComponent<ScaleMeasure>().weight - left.GetComponent<ScaleMeasure>().weight;
             oldLeftPos = left.transform.position;
             oldRightPos = right.transform.position;
         }
-        if(frame * speed <= 60 && frame >= 0)
+        if ((right.transform.position.y <= freezeAt && compareValue > 0) || (left.transform.position.y <= freezeAt && compareValue < 0))//make it for every axis
+        {
+            return;
+        }
+        if (frame * speed <= 60 && frame >= 0)
         {
             left.transform.position = Vector3.Lerp(oldLeftPos, new Vector3(leftPos.x + unitDistance * axis.x * compareValue, leftPos.y + unitDistance * axis.y * compareValue, leftPos.z + unitDistance * axis.z * compareValue), frame / 60f * speed);
             right.transform.position = Vector3.Lerp(oldRightPos, new Vector3(rightPos.x + unitDistance * axis.x * -compareValue, rightPos.y + unitDistance * axis.y * -compareValue, rightPos.z + unitDistance * axis.z * -compareValue), frame / 60f * speed);
-            navHandler.BuildScaleNavMesh();
+            if(navHandler != null)
+                navHandler.GetComponent<NavMeshHandler>().BuildScaleNavMesh();
             frame++;
         }
         else if (frame != -1)
         {
-            //navHandler.BuildAllNavMesh();
+            if (navHandler != null)
+                navHandler.GetComponent<NavMeshHandler>().BuildAllNavMesh();
             frame = -1;
         }
     }

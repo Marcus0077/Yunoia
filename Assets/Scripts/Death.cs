@@ -19,6 +19,15 @@ public class Death : MonoBehaviour
         {
             GameObject.FindObjectOfType<ExitClone>().despawnClone = true;
         }
+        else if (other.CompareTag("Faceless")) //reset real faceless too?
+        {
+            FakeFaceless fake = other.gameObject.GetComponent<FakeFaceless>();
+            Debug.Log(fake);
+            if (fake != null)
+            {
+                fake.Reset();
+            }
+        }
     }
 
     public void FadetoBlack()

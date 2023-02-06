@@ -7,6 +7,8 @@ public class ScaleMeasure : MonoBehaviour
     public float weight = 0, minionScale = 1, cloneWeight = 2, facelessWeight = 1;
     int minionCount;
     BasicMovement player;
+    BasicMovement clone;
+    bool cloneOn;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class ScaleMeasure : MonoBehaviour
         }
         else if(collider.tag == "Clone")
         {
+            clone = collider.gameObject.GetComponent<BasicMovement>();
+            cloneOn = true;
             weight += cloneWeight;
         }
         else if (collider.tag == "Faceless")
@@ -40,6 +44,8 @@ public class ScaleMeasure : MonoBehaviour
         }
         else if (collider.tag == "Clone") //check if clone despawns?
         {
+            clone = null;
+            cloneOn = false;
             weight -= cloneWeight;
         }
         else if (collider.tag == "Faceless")
@@ -58,6 +64,11 @@ public class ScaleMeasure : MonoBehaviour
                 weight -= (minionCount - player.attachedMinionCount) * minionScale;
                 minionCount = player.attachedMinionCount;
             }
+        }
+        if(clone == null && cloneOn)
+        {
+            weight -= cloneWeight;
+            cloneOn = false;
         }
     }
 }

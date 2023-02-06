@@ -16,8 +16,10 @@ public class NavMeshHandler : MonoBehaviour
 
     public void BuildScaleNavMesh()
     {
-        for (int i = 0; i < surfaces.Length; i++)
+        for (int i = 0; i < scales.Length; i++)
         {
+            scales[i].size = new Vector3(1, 1, 1);
+            //Debug.Log(scales[i].sourceBounds);
             scales[i].BuildNavMesh();
         }
     }

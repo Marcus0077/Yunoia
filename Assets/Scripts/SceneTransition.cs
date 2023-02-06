@@ -7,6 +7,8 @@ public class SceneTransition : MonoBehaviour
 {
     [SerializeField]
     string sceneToTransfer;
+    [SerializeField]
+    Levels level;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,7 @@ public class SceneTransition : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }
 
@@ -23,32 +26,11 @@ public class SceneTransition : MonoBehaviour
         if(other.tag == "Player")
         {
             SceneManager.LoadScene(sceneToTransfer);
+            if(sceneToTransfer == "HubFinal")
+            {
+                GameManager.Instance.CompleteLevel(level);
+            }
         }
-
-        {
-        if (other.tag == "Depression")
-        {
-           SceneManager.LoadScene("DepressionFinal");
-        }
-         }
-          {
-        if (other.tag == "Bargaining")
-        {
-           SceneManager.LoadScene("BargainingFinal");
-        }
-         }
-          {
-        if (other.tag == "Anger")
-        {
-           SceneManager.LoadScene("AngerFinal");
-        }
-         }
-         {
-        if (other.tag == "LevelWin")
-        {
-           SceneManager.LoadScene("HubFinal");
-        }
-         }
     }
 
     // Update is called once per frame

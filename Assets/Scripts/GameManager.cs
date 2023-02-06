@@ -11,8 +11,12 @@ public class GameManager : MonoBehaviour
     private static readonly string SFXPref = "SFX Pref";
     private static readonly string MasPref = "Mas Pref";
     private static readonly string Sensitivity = "Sensitivity";
+    private static readonly string Depr = "Depression";
+    private static readonly string Barg = "Barg";
+    private static readonly string Anger = "Anger";
 
     public string[] statics = { Firstplay,BGMPref,SFXPref,MasPref,Sensitivity };
+    public string[] levelNames = { Depr, Barg, Anger };
     float[] settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
 
     public static GameManager instance;
@@ -56,6 +60,9 @@ public class GameManager : MonoBehaviour
             settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
             settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
             PlayerPrefs.SetFloat(Firstplay, -1);
+            PlayerPrefs.SetInt(Depr, 0);
+            PlayerPrefs.SetInt(Barg, 0);
+            PlayerPrefs.SetInt(Anger, 0);
         }
         else
         {
@@ -75,6 +82,16 @@ public class GameManager : MonoBehaviour
     {
         settings[(int)index] = value;
         PlayerPrefs.SetFloat(statics[(int)index], value);
+    }
+
+    public void CompleteLevel(Levels level)
+    {
+        PlayerPrefs.SetInt(levelNames[(int)level], 1);
+    }
+
+    public bool GetLevelStatus(Levels level)
+    {
+        return PlayerPrefs.GetInt(levelNames[(int)level]) == 1;
     }
 
     public void ToggleGhost()
@@ -180,4 +197,11 @@ public enum Settings
     SFX = 2,
     MAS = 3,
     SENSE = 4
+}
+
+public enum Levels
+{
+    DEP = 0,
+    BAR = 1,
+    ANG = 2
 }

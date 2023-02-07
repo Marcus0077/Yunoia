@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class MenuTraverseWithBars : MenuTraverse
 {
-    bool barEnter;
+    public bool barEnter;
 
     public override void MoveMenu()
     {
@@ -33,6 +33,7 @@ public class MenuTraverseWithBars : MenuTraverse
             barEnter = true;
             return;
         }
+        Debug.Log("asd");
         buttons[activeIndex].Press();
     }
 
@@ -54,5 +55,23 @@ public class MenuTraverseWithBars : MenuTraverse
     {
         base.ExitAll();
         barEnter = false;
+    }
+
+    void Update()
+    {
+        if(barEnter)
+        {
+            buttons[activeIndex].GetComponent<OnBarHover>().Move((int)Math.Round(cursorMovement.x, 1, MidpointRounding.AwayFromZero));
+            return;
+        }
+        if (GameManager.Instance.GetMouseCursor() && cursorMovement != Vector2.zero)
+        {
+            //int scalar = 5;
+            //if ((cursorMovement.x < 0 || cursorMovement.y > 0) && !(cursorMovement.x > 0 || cursorMovement.y < 0))
+            //    scalar = 4;
+            mousePosition += new Vector3(cursorMovement.x, cursorMovement.y, 0) * 50 * GameManager.Instance.GetFloat(Settings.SENSE);
+            //Debug.Log(currentPosition);
+            Mouse.current.WarpCursorPosition(mousePosition);
+        }
     }
 }

@@ -73,6 +73,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool GetMouseCursor()
+    {
+        return menuCursor;
+    }
+
     public float GetFloat(Settings value)
     {
         return settings[(int)value];

@@ -10,7 +10,8 @@ public class MenuTraverse : MonoBehaviour
     protected OnButtonHover[] buttons;
     [SerializeField]
     protected MenuTraverse prevMenu;
-    protected int activeIndex, amount;
+    public int activeIndex;
+    protected int amount;
     protected Vector2 cursorMovement;
     protected Vector3 mousePosition;
     protected PlayerControls playerControls;
@@ -29,13 +30,8 @@ public class MenuTraverse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    void Awake()
-    {
         playerControls = new PlayerControls();
-        if (!GameManager.Instance.menuCursor)
+        if (!GameManager.Instance.GetMouseCursor())
         {
             menuMove = playerControls.Menu.Move;
             menuMove.performed += ctx => StartMove(ctx);
@@ -47,6 +43,7 @@ public class MenuTraverse : MonoBehaviour
         else
         {
             menuAltMove = playerControls.Menu.AltMove;
+            Debug.Log(menuAltMove);
             menuAltMove.started += ctx => StartMoveCursor();
             menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
             menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
@@ -58,6 +55,11 @@ public class MenuTraverse : MonoBehaviour
         menuCancel.performed += ctx => Back();
     }
 
+    void Awake()
+    {
+        
+    }
+
     public virtual void Back()
     {
         if(backIndex >= 0)
@@ -66,7 +68,7 @@ public class MenuTraverse : MonoBehaviour
 
     public void OnEnable()
     {
-        if (!GameManager.Instance.menuCursor)
+        if (!GameManager.Instance.GetMouseCursor())
         {
             menuMove.Enable();
             //menuAltMove.Enable();
@@ -86,7 +88,7 @@ public class MenuTraverse : MonoBehaviour
 
     public void OnDisable()
     {
-        if (!GameManager.Instance.menuCursor)
+        if (!GameManager.Instance.GetMouseCursor())
         {
             menuMove.Disable();
             //menuAltMove.Disable();   
@@ -195,7 +197,7 @@ public class MenuTraverse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.menuCursor && cursorMovement != Vector2.zero)
+        if (GameManager.Instance.GetMouseCursor() && cursorMovement != Vector2.zero)
         {
             //int scalar = 5;
             //if ((cursorMovement.x < 0 || cursorMovement.y > 0) && !(cursorMovement.x > 0 || cursorMovement.y < 0))

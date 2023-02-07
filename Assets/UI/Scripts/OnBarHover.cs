@@ -24,7 +24,7 @@ public class OnBarHover : OnButtonHover
 
     public void Move(int amount)
     {
-        GetComponent<Slider>().value = Mathf.Clamp(GetComponent<Slider>().value + amount / 10f, 0, 1);
+        GetComponent<Slider>().value = Mathf.Clamp(GetComponent<Slider>().value + amount / 100f, 0, 1);
         
     }
 }

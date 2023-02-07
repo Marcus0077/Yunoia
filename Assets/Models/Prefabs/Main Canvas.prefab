@@ -727,6 +727,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -1286,7 +1310,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1341,6 +1365,7 @@ GameObject:
   - component: {fileID: 1499953887540684629}
   - component: {fileID: 1499953887540684628}
   - component: {fileID: 7673845925108607793}
+  - component: {fileID: 1286257191314682200}
   m_Layer: 5
   m_Name: BGM Slider
   m_TagString: Untagged
@@ -1494,6 +1519,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefName: 1
+--- !u!114 &1286257191314682200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499953887540684649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverseWithBars, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1499953887592502218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,7 +1720,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1937,6 +2003,30 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -2470,7 +2560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1499953887953723526
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2545,7 +2635,9 @@ MonoBehaviour:
   - {fileID: 1499953888092580598}
   - {fileID: 7356327765722548244}
   prevMenu: {fileID: 1499953889238155771}
+  activeIndex: 0
   backIndex: -1
+  barEnter: 0
 --- !u!1 &1499953887990624208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2633,6 +2725,7 @@ GameObject:
   - component: {fileID: 1499953888092580597}
   - component: {fileID: 1499953888092580598}
   - component: {fileID: 8666764521719150397}
+  - component: {fileID: 2775697184892059439}
   m_Layer: 5
   m_Name: SFX Slider
   m_TagString: Untagged
@@ -2814,6 +2907,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefName: 2
+--- !u!114 &2775697184892059439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499953888092580618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverseWithBars, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1499953888175230215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,8 +2981,8 @@ RectTransform:
   m_Father: {fileID: 1499953887841904292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.5699998}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3039,6 +3173,7 @@ GameObject:
   - component: {fileID: 1499953888271302528}
   - component: {fileID: 1499953888271302529}
   - component: {fileID: 3370554625585712468}
+  - component: {fileID: 7894816136660554127}
   m_Layer: 5
   m_Name: Master Slider
   m_TagString: Untagged
@@ -3202,6 +3337,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefName: 3
+--- !u!114 &7894816136660554127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499953888271302532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverseWithBars, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1499953888323084843
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,7 +4379,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4296,6 +4472,7 @@ GameObject:
   - component: {fileID: 1499953888515489381}
   - component: {fileID: 1499953888515489380}
   - component: {fileID: 1499953888515489403}
+  - component: {fileID: 3551298472485605277}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -4474,6 +4651,47 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: OnButtonHover, Assembly-CSharp
           m_MethodName: OnHoverExit
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &3551298472485605277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499953888515489401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverseWithBars, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4727,8 +4945,8 @@ RectTransform:
   m_Father: {fileID: 1499953887990624209}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.57}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5473,6 +5691,30 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -6601,8 +6843,8 @@ RectTransform:
   m_Father: {fileID: 1499953889040385333}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.5699998}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6852,8 +7094,10 @@ MonoBehaviour:
   buttons:
   - {fileID: 1499953887313538728}
   - {fileID: 1499953887830966022}
+  - {fileID: 1221272083456427846}
   - {fileID: 1499953888687601518}
   prevMenu: {fileID: 0}
+  activeIndex: 0
   backIndex: -1
 --- !u!1 &1499953889266978913
 GameObject:
@@ -7097,6 +7341,7 @@ MonoBehaviour:
   - {fileID: 1499953888359314109}
   - {fileID: 1499953888984781730}
   prevMenu: {fileID: 0}
+  activeIndex: 0
   backIndex: -1
 --- !u!1 &1499953889292259187
 GameObject:
@@ -7506,6 +7751,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953889238155771}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -7685,6 +7954,7 @@ GameObject:
   - component: {fileID: 6901155196309498970}
   - component: {fileID: 7356327765722548244}
   - component: {fileID: 8399203406529266041}
+  - component: {fileID: 7992410141321916698}
   m_Layer: 5
   m_Name: Sensitivity Slider
   m_TagString: Untagged
@@ -7810,6 +8080,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefName: 4
+--- !u!114 &7992410141321916698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588377480579271020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverseWithBars, Assembly-CSharp
+          m_MethodName: ExitAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1499953887953723527}
+          m_TargetAssemblyTypeName: MenuTraverse, Assembly-CSharp
+          m_MethodName: EnterCurrent
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7034877027980690995
 GameObject:
   m_ObjectHideFlags: 0
@@ -7910,8 +8221,8 @@ RectTransform:
   m_Father: {fileID: 9020637654014782980}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.5699998}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8024,7 +8335,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

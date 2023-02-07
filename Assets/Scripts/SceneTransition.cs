@@ -10,8 +10,6 @@ public class SceneTransition : MonoBehaviour
     string sceneToTransfer;
     [SerializeField]
     Levels level;
-    [SerializeField]
-    string dataFile;
 
     // Start is called before the first frame update
     void Start()
@@ -60,10 +58,15 @@ public class SceneTransition : MonoBehaviour
                 DataManager.gameData.position.Set(11.73f, 0.0f, 10.0f);
             }
 
-            if(sceneToTransfer == "HubFinal")
+            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene() != "VSDenial")
             {
                 DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
                 GameManager.Instance.CompleteLevel(level);
+            }
+            
+            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene() == "VSDenial")
+            {
+                DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
             }
 
             SceneManager.LoadScene(sceneToTransfer);

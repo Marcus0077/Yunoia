@@ -58,13 +58,13 @@ public class SceneTransition : MonoBehaviour
                 DataManager.gameData.position.Set(11.73f, 0.0f, 10.0f);
             }
 
-            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene() != "VSDenial")
+            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name != "VSDenial")
             {
                 DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
                 GameManager.Instance.CompleteLevel(level);
             }
             
-            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene() == "VSDenial")
+            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name == "VSDenial")
             {
                 DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
             }

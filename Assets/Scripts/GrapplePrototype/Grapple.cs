@@ -35,6 +35,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] bool canReverseSwing = true;
     [SerializeField] bool canApplyForce = true;
     [SerializeField] bool forwardSwing = true;
+    [SerializeField] bool needYankSwing = true;
     float cdRemaining;
 
     Hook hook;
@@ -71,6 +72,12 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (yankReady && !player.isGrounded && needYankSwing)
+        {
+            maxSwingHeight = playerRB.position.y + 1.5f;
+            needYankSwing = false;
+        }
+
         // Caps player player velocity according to SetMaxVelocity() on awake
         if (playerRB.velocity.sqrMagnitude > sqrMaxVelocity)
         {
@@ -128,6 +135,7 @@ public class Grapple : MonoBehaviour
         {
             if (grappleActive && shootHook.IsPressed() && player.isGrounded)
             {
+                yankReady = false;
                 playerRB.AddForce((hook.transform.position - transform.position) * yankSpeedStrong, ForceMode.Impulse);
                 yank.Play();
             }
@@ -211,6 +219,7 @@ public class Grapple : MonoBehaviour
         canCheckPos = true;
         canApplyForce = true;
         canReverseSwing = true;
+        needYankSwing = true;
 
         maxSwingHeight = float.MaxValue;
 

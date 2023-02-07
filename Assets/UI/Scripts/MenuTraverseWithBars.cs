@@ -33,7 +33,6 @@ public class MenuTraverseWithBars : MenuTraverse
             barEnter = true;
             return;
         }
-        Debug.Log("asd");
         buttons[activeIndex].Press();
     }
 
@@ -46,7 +45,6 @@ public class MenuTraverseWithBars : MenuTraverse
         }
         if (backIndex >= 0)
         {
-            Debug.Log("a");
             buttons[backIndex].Press();
         }
     }

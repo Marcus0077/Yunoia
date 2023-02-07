@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     private void Awake()
     {
-        
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Sets prototype scene to active and set time scale to normal when play button is pressed.

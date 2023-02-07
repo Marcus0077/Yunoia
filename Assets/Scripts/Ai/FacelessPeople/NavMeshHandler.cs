@@ -18,7 +18,15 @@ public class NavMeshHandler : MonoBehaviour
     {
         for (int i = 0; i < scales.Length; i++)
         {
-            scales[i].size = new Vector3(1, 1, 1);
+            List<NavMeshBuildSource> sources = new List<NavMeshBuildSource>();
+            NavMeshBuilder.CollectSources(
+                new Bounds(GameObject.FindGameObjectWithTag("Player").transform.position, new Vector3(1, 1, 1)),
+                ~0,
+                NavMeshCollectGeometry.PhysicsColliders,
+                0,
+                new List<NavMeshBuildMarkup>(),
+                sources);
+            NavMeshBuilder.UpdateNavMeshData(scales[i].navMeshData, NavMesh.GetSettingsByID(0), new List<NavMeshBuildSource>(), new Bounds(GameObject.FindGameObjectWithTag("Player").transform.position, new Vector3(20, 20, 20)));
             //Debug.Log(scales[i].sourceBounds);
             scales[i].BuildNavMesh();
         }

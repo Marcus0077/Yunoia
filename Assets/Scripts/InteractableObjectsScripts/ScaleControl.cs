@@ -13,7 +13,7 @@ public class ScaleControl : MonoBehaviour
     GameObject navHandler;
     [SerializeField]
     Vector3 axis;
-    float compareValue = 0, frame;
+    float compareValue = 0, frame = -1;
     // Start is called before the first frame update
     void Start()
     {

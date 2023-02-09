@@ -8,18 +8,25 @@ public class TipDisplayer : MonoBehaviour
     public GameObject message;
     public TextMeshProUGUI messageText;
     public float displayTime;
+    public TipController tc;
 
-   /* void OnTriggerEnter()
+    void Awake()
+    {
+        tc = GetComponent<TipController>();
+    }
+    
+    void OnTriggerEnter()
     {
         message.SetActive(true);
+        tc.OnEnable();
     }
 
     void OnTriggerExit()
     {
-        message.SetActive(false);
-    }*/
+        tc.CloseDialog();
+    }
 
-    void Awake()
+    /*void Awake()
     {
         StartCoroutine(DisplayMessage());
     }
@@ -31,5 +38,5 @@ public class TipDisplayer : MonoBehaviour
         yield return new WaitForSeconds(displayTime);
 
         message.SetActive(false);
-    }
+    }*/
 }

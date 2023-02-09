@@ -8,23 +8,24 @@ public class TipController : MonoBehaviour
 
     public CanvasGroup background;
 
-    private void OnEnable()
+    public void OnEnable()
     {
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
 
-        box.localPosition = new Vector2(0, Screen.height);
-        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().delay = 0.1f;
+        box.localPosition = new Vector2(0, -Screen.height);
+        box.LeanMoveLocalY(-150, 0.5f).setEaseOutExpo().delay = 0.1f;
     }
 
     public void CloseDialog()
     {
         background.LeanAlpha(0, 0.5f);
-        box.LeanMoveLocalY(Screen.height, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
+        box.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
+        Debug.Log("Closed");
     }
 
     public void OnComplete()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

@@ -1901,7 +1901,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7560509112517518753, guid: 0f5e00646f14b3b41b9762f74d8d6985, type: 3}
   m_PrefabInstance: {fileID: 79950028}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1259023799}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a16dd38f668709d4992b04cc3c9bc554, type: 3}
@@ -4420,6 +4420,11 @@ MonoBehaviour:
   prevMenu: {fileID: 1536431166}
   activeIndex: 0
   backIndex: 0
+--- !u!1 &1259023799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7560509112517518782, guid: 0f5e00646f14b3b41b9762f74d8d6985, type: 3}
+  m_PrefabInstance: {fileID: 79950028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1269551729
 GameObject:
   m_ObjectHideFlags: 0
@@ -5781,6 +5786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536431165}
   - component: {fileID: 1536431166}
+  - component: {fileID: 1536431167}
   m_Layer: 5
   m_Name: Title Screen Object
   m_TagString: Untagged
@@ -5828,6 +5834,19 @@ MonoBehaviour:
   prevMenu: {fileID: 0}
   activeIndex: 0
   backIndex: -1
+--- !u!114 &1536431167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536431164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae9f7862e87163469a2c3301bf40059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 1259023799}
 --- !u!1 &1542421542
 GameObject:
   m_ObjectHideFlags: 0

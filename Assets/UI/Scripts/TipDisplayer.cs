@@ -5,25 +5,43 @@ using TMPro;
 
 public class TipDisplayer : MonoBehaviour
 {
-    public GameObject message;
+    public GameObject message, prompt;
     public TextMeshProUGUI messageText;
     public float displayTime;
     public TipController tc;
+    private bool isOpen;
 
     void Awake()
     {
         tc = GetComponent<TipController>();
+        isOpen = false;
     }
     
-    void OnTriggerEnter()
+    void OnTriggerStay()
     {
-        message.SetActive(true);
-        tc.OnEnable();
+        if(!isOpen)
+        {
+            prompt.SetActive(true);
+        
+            if(Input.GetKey(KeyCode.E) && !isOpen)
+            {
+                message.SetActive(true);
+                tc.OnEnable();
+                isOpen = true;
+            }
+        }
+
+        else if(isOpen)
+        {
+            prompt.SetActive(false);
+        }
     }
 
     void OnTriggerExit()
     {
         tc.CloseDialog();
+        isOpen = false;
+        prompt.SetActive(false);
     }
 
     /*void Awake()

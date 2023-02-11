@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+// Anything triggered by an interactable
 public class Door : MonoBehaviour
 {
     [SerializeField]
@@ -36,6 +37,7 @@ public class Door : MonoBehaviour
         isClone = false;
     }
 
+    // Plays animation caused by trigger DoorOpen
     public void Open()
     {
         if (!isOpen)
@@ -68,6 +70,7 @@ public class Door : MonoBehaviour
 
     }
 
+    // Allow a text to display if needed
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

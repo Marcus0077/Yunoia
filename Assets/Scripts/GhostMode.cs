@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Ghost mode for debugging
 public class GhostMode : MonoBehaviour
 {
     PlayerControls playerControls;

@@ -5,17 +5,21 @@ using UnityEngine.InputSystem;
 
 public class AbilityPush : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] // maxChargeLevel: how many stages a push can charge up to, minPush: smallest value a push can be
     int maxChargeLevel = 1, minPush = 1;
     [SerializeField]
     float chargeSpeed = 1, cooldown = 1, shieldCooldown, shieldDuration;
+    // chargeTime: tracks how long push was charging
     float chargeTime;
+    // shield: tracks if shield action is queued, shielded: tracks if player is shielded
     bool ableToPush = true, charging = false, shield = false, shielded = false;
     [SerializeField]
     public bool restored, ableToShield;
     public PlayerControls pushControls;
     public InputAction pushAction;
+    // pushedLevel: what stage a push is at (corresponding to charge levels)
     public int pushedLevel;
+    // range: how large a push is
     public float range;
     public float cdRemaining, cdRemainingForShield;
     Transform shape;
@@ -50,19 +54,20 @@ public class AbilityPush : MonoBehaviour
         chargePushNeedsDeath = false;
     }
 
+    // Push logic
     public void PushTargets()
     {
         pushedLevel = (int)range + 1 - minPush;
-        Collider[] hitColliders = Physics.OverlapSphere(oldPos, range);
+        Collider[] hitColliders = Physics.OverlapSphere(oldPos, range); // OverlapSphere returns any colliders inside sphere of range size at oldPos position
         foreach (var hitCollider in hitColliders)
         {
             Pushable pushedObj = hitCollider.GetComponent<Pushable>();
-            if (pushedObj != null)
+            if (pushedObj != null) // if the collider was a pushable object
             {
                 Vector3 direction = (pushedObj.transform.position - oldPos).normalized;
                 //direction = new Vector3(direction.x, direction.y, direction.z).normalized;
                 float distance = Vector3.Distance(pushedObj.transform.position, oldPos);
-                float proximityMultiplier = range / distance;
+                float proximityMultiplier = range / distance; // scales push strength by how close an object is to the pusher
                 //float chargeMultiplier = (range + 1 - minPush) / (float)(maxChargeLevel + 1);
                 pushedObj.Pushed(proximityMultiplier * direction, pushedLevel, maxChargeLevel + 1, gameObject);//casted to int because chargeLevel should be flat numbers not a float
             }
@@ -101,6 +106,7 @@ public class AbilityPush : MonoBehaviour
         }
     }
 
+    // Displays particles for push effect (rename function?)
     private IEnumerator RenderChargeVolume()
     {
         // shape = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
@@ -110,24 +116,24 @@ public class AbilityPush : MonoBehaviour
         // shape.GetComponent<Renderer>().material.color = new Color(1, 1, 1, .5f);
         // shape.GetComponent<Renderer>().enabled = true;
         
-        float radius = minPush;
+        float radius = minPush; // radius starts at minPush size
         float timeCharging = Time.time;
 
-        chargeEffectDestroy = Instantiate(chargePushEffect, this.transform.position, Quaternion.identity);
+        chargeEffectDestroy = Instantiate(chargePushEffect, this.transform.position, Quaternion.identity); // create particle system for charging effect
             
         while (charging)
         {
-            timeCharging = (Time.time - chargeTime) * chargeSpeed + minPush;
+            timeCharging = (Time.time - chargeTime) * chargeSpeed + minPush; // scale time charged by charge speed
             
             // int radiusShape = 2*Mathf.Clamp((int)chargeTime, minPush, maxChargeLevel + minPush);
             
-            radius = Mathf.Clamp(timeCharging, minPush, maxChargeLevel + minPush);
+            radius = Mathf.Clamp(timeCharging, minPush, maxChargeLevel + minPush); // make sure push size is clamped between minimum and maximum size
 
             // pushedLevel = (int)radius + 1 - minPush; //different effects like color change or something EXAMPLE COLOR CHANGE:
             
             // shape.GetComponent<Renderer>().material.color = new Color(1, 1f / (2 * pushedLevel), 1f / ( 2* pushedLevel), .2f + (.1f * pushedLevel));
             
-            radius *= 2;
+            radius *= 2; // radius is used like diameter
 
             chargeRadius = radius / 8;
             pushRadius = radius / 3;
@@ -138,11 +144,11 @@ public class AbilityPush : MonoBehaviour
 
             // shape.localScale = new Vector3(radius, radius, radius);
             // shape.position = transform.position;
-            if(timeCharging > maxChargeLevel+minPush)
+            if(timeCharging > maxChargeLevel+minPush) // automatically shield if max charge is reached
             {
                 Destroy(chargeEffectDestroy);
                 shield = true;
-                PushRelease();
+                PushRelease(); // remove this line if player should not automatically shielded at end of charging
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -184,9 +190,10 @@ public class AbilityPush : MonoBehaviour
         }
     }
 
+    // Cooldown for push
     private IEnumerator PushTimer()
     {
-        source.Play();
+        source.Play(); // move this to fix sound bug with shielding
         ableToPush = false;
         cdRemaining = cooldown;
         while(cdRemaining > 0)
@@ -203,6 +210,7 @@ public class AbilityPush : MonoBehaviour
         ableToPush = true;
     }
 
+    // Cooldown for shield
     private IEnumerator PushTimerForShield()
     {
         //source.Play(); add sound to shield gameobject particle system?
@@ -219,6 +227,7 @@ public class AbilityPush : MonoBehaviour
         ableToPush = true;
     }
 
+    // Cooldown grabber for ui
     public float CooldownRemaining()
     {
         if(cdRemaining > 0)
@@ -237,6 +246,7 @@ public class AbilityPush : MonoBehaviour
 
     }
 
+    // When player presses push
     void PushPress()
     {
         charging = true;
@@ -257,6 +267,7 @@ public class AbilityPush : MonoBehaviour
         }
     }
 
+    // When player releases push (or called automatically for shield)
     void PushRelease()
     {
         charging = false;
@@ -291,6 +302,7 @@ public class AbilityPush : MonoBehaviour
         }
     }
 
+    // Disables shield after timer seconds (public variable shieldDuration called within PushRelease)
     private IEnumerator DisableShield(float timer)
     {
         yield return new WaitForSeconds(timer);

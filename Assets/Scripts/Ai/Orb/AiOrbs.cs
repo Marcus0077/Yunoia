@@ -9,7 +9,9 @@ public class AiOrbs : Pushable
     [SerializeField]
     GameObject stickyOrb;
     public GameObject player;
+    // Detects if a player or clone was in range at any point
     bool seenOnce = false;
+    // Make sure only 1 delay coroutine is running
     Coroutine delay = null;
     [SerializeField]
     float detectDistance, movespeed, timeToDelay;
@@ -31,6 +33,7 @@ public class AiOrbs : Pushable
     //    }
     //}
 
+    // On touching player replace self with stickyOrb
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == player)
@@ -41,6 +44,7 @@ public class AiOrbs : Pushable
         }
     }
 
+    // Change to a stickyOrb object to disable movement temporarily
     public override bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
         if(chargeLevel >= reqChargeLevel)
@@ -60,6 +64,7 @@ public class AiOrbs : Pushable
         seenOnce = false;
     }
 
+    // Detects distance from player or clone and chases
     void DistancePlayer()
     {
         RaycastHit hit;
@@ -69,9 +74,9 @@ public class AiOrbs : Pushable
         {
             if (Physics.Raycast(transform.position, play.gameObject.transform.position - transform.position, out hit, Mathf.Infinity))
             {
-                if (hit.transform.gameObject.GetComponent<AbilityPush>() != null)
+                if (hit.transform.gameObject.GetComponent<AbilityPush>() != null) // Chase any object that can push (player or clone) in line of sight
                 {
-                    if(!seenOnce)
+                    if(!seenOnce) // If player has never been in chase range, delay chasing until timeToDelay has elapsed
                     {
                         if (delay == null)
                         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Adds upwards force to a bounce pad ignoring gravity physics
 public class BounceFree : MonoBehaviour
 {
     [SerializeField]
@@ -14,7 +15,7 @@ public class BounceFree : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        BasicMovement player = col.gameObject.GetComponent<BasicMovement>();
+        BasicMovement player = col.gameObject.GetComponent<BasicMovement>(); // not actually only player, includes clone
         Debug.Log(player);
         if (player != null)
         {

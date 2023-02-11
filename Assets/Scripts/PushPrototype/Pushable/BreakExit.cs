@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Pushable animation's animator state boolean set to false once an animation ends (to allow activatables to occur)
 public class BreakExit : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -15,7 +16,7 @@ public class BreakExit : StateMachineBehaviour
     //{
     //    
     //}
-
+    
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.gameObject.GetComponent<PushableAnimatable>().AnimationOff();

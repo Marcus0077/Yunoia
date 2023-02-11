@@ -10,7 +10,7 @@ using TMPro;
 
 public class CheatMenu : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] // Text to display in console
     TMP_Text historyText;
     [SerializeField]
     TMP_InputField inputField;
@@ -22,8 +22,8 @@ public class CheatMenu : MonoBehaviour
     CanvasGroup cg;
     string commands, returnValue;
     string greenText = "<color=#00FF00>", colorEnd = "</color>";
-    List<string> clipboard = new List<string>();
-    int selected = 0;
+    List<string> clipboard = new List<string>(); // traversible history of commands inputted
+    int selected = 0; // index of history of commands
     float oldTimeScale;
     // Start is called before the first frame update
     void Start()
@@ -59,6 +59,7 @@ public class CheatMenu : MonoBehaviour
         inputField.DeactivateInputField();
     }
 
+    // Run the command inside input box
     public void DoCommand()
     {
         //check command value
@@ -132,6 +133,7 @@ public class CheatMenu : MonoBehaviour
         }
     }
 
+    // Allow movement of history of commands (arrow keys)
     public void Clipboard(InputAction.CallbackContext ctx)
     {
         if (clipboard.Count != 0)

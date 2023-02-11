@@ -10,8 +10,8 @@ public class AiOrbsSticky : Pushable
     Vector3 relativePosition;
     float relativeRot;
     bool attached = false;
-    int pushedCount = 0;
-    [SerializeField]
+    int pushedCount = 0; // Making sure the last push's timeToTravel has elapsed before allowing orb to move again (current push index is equal to last push index)
+    [SerializeField] // How long a minion should be stunned
     float timeToTravel = 1;
 
     [SerializeField] AudioSource attachSound;
@@ -23,6 +23,7 @@ public class AiOrbsSticky : Pushable
     {
         if(player == null)
             player = Object.FindObjectsOfType<AbilityPush>()[0].gameObject;
+        // Find position the orb should be at relative to player position (attached to player model at its touching point)
         Vector3 tempOriginalScale = transform.localScale;
         transform.localScale = Vector3.one;
         //relativePosition = player.transform.InverseTransformPoint(transform.position);
@@ -64,6 +65,7 @@ public class AiOrbsSticky : Pushable
         }
     }
 
+    // Swap to orb object (moving orb) after specific float time has elapsed and no other pushes are underway
     public IEnumerator PushTimer(float time)
     {
         //if (waitForSecondsRealtime == null)
@@ -111,7 +113,7 @@ public class AiOrbsSticky : Pushable
         }
         else
         {
-            rb.velocity = rb.velocity / 1.005f;
+            rb.velocity = rb.velocity / 1.005f; // slows momentum from push gradually
         }
     }
 }

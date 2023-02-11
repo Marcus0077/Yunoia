@@ -12,6 +12,7 @@ public class Checkpoint : MonoBehaviour
         
     }
 
+    // Save checkpoint position if player touches checkpoint
     void OnTriggerEnter(Collider collision) 
     {
         GameObject hit = collision.GameObject();
@@ -19,7 +20,7 @@ public class Checkpoint : MonoBehaviour
         if (hit.tag == "Player")
         {
             DataManager.gameData.checkpointed = true;
-            DataManager.gameData.level = GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum");
+            DataManager.gameData.level = GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum"); // camera doesn't use animator anymore?
             Debug.Log(DataManager.gameData.level);
             //DataManager.gameData.position = transform.position + Vector3.right;
             DataManager.gameData.position = hit.transform.position;

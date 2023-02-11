@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Save files for game data (not for settings)
 public class DataManager
 {
     public static string saveFilePath = Application.persistentDataPath + "/save.json";

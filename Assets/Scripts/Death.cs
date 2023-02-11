@@ -8,6 +8,7 @@ public class Death : MonoBehaviour
 {
     public GameObject deathScreen, continueButton, menuButton;
 
+    // Actions to take place upon touching the collider
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

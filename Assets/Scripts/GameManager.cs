@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Strings for settings and stage names
     private static readonly string Firstplay = "First Play";
     private static readonly string BGMPref = "BGM Pref";
     private static readonly string SFXPref = "SFX Pref";
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         player = GameObject.FindGameObjectWithTag("Player");
+        // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
         if(PlayerPrefs.GetFloat(Firstplay) == 0)
         {
             PlayerPrefs.SetFloat(Sensitivity,.5f);
@@ -73,11 +75,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Is game using a cursor controlled by keyboard?
     public bool GetMouseCursor()
     {
         return menuCursor;
     }
 
+    // Return a pref value
     public float GetFloat(Settings value)
     {
         return settings[(int)value];
@@ -99,6 +103,7 @@ public class GameManager : MonoBehaviour
         return PlayerPrefs.GetInt(levelNames[(int)level]) == 1;
     }
 
+    // Toggles ghost mode at player position while freezing time (maybe have an oldTimeScale variable if it becomes a problem)
     public void ToggleGhost()
     {
         if (player == null)
@@ -123,6 +128,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Globally available function to allow and stop player inputs regardless of any scripts
     public void EnablePlayerInput()
     {
         if (player == null)

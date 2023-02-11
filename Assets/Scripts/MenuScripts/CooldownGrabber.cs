@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Grabs float cooldown from variety of scripts to display in ui
 public class CooldownGrabber : MonoBehaviour
 {
     AbilityPush pushFromPlayer;

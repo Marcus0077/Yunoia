@@ -146,10 +146,18 @@ public class AbilityPush : MonoBehaviour
             // shape.position = transform.position;
             if(timeCharging > maxChargeLevel+minPush) // automatically shield if max charge is reached
             {
-                Destroy(chargeEffectDestroy);
-                shield = true;
-                PushRelease(); // remove this line if player should not automatically shielded at end of charging
-                yield break;
+                if(ableToShield)
+                {
+                    Destroy(chargeEffectDestroy);
+                    shield = true;
+                    PushRelease(); // remove this line if player should not automatically shielded at end of charging
+                    yield break;
+                }
+                else
+                {
+                    charging = false;
+                    PushRelease();
+                }
             }
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -215,6 +223,7 @@ public class AbilityPush : MonoBehaviour
     {
         //source.Play(); add sound to shield gameobject particle system?
         ableToShield = false;
+        ableToPush = false;
         yield return new WaitUntil(() => !shielded);
         cdRemainingForShield = shieldCooldown;
         while (cdRemainingForShield > 0)
@@ -224,7 +233,6 @@ public class AbilityPush : MonoBehaviour
         }
         cdRemainingForShield = -1;
         ableToShield = true;
-        ableToPush = true;
     }
 
     // Cooldown grabber for ui
@@ -306,6 +314,7 @@ public class AbilityPush : MonoBehaviour
     private IEnumerator DisableShield(float timer)
     {
         yield return new WaitForSeconds(timer);
+        ableToPush = true;
         shielded = false;
         shieldEffect.SetActive(false);
     }

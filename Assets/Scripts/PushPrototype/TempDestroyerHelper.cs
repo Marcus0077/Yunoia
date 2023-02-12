@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TempDestroyerHelper : MonoBehaviour
 {
+    // Script added by tempdestroyer to autmatically decrement counter in tempdestroyer
     public TempDestroyer counter;
     // Start is called before the first frame update
     void Start()

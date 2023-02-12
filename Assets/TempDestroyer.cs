@@ -12,9 +12,11 @@ public class TempDestroyer : MonoBehaviour
 
     void Start()
     {
+        // Get all pushable objects with the same data with name nameOfData
         pushables = (from go in new List<Pushable>(FindObjectsOfType<Pushable>()) where go.Data() != null && go.Data().name == nameOfData select go).ToList();
         for(int index = 0; index < pushables.Count; index++)
         {
+            // Add helper script to keep track of how many exist in scene
             TempDestroyerHelper tdh = pushables[index].gameObject.AddComponent<TempDestroyerHelper>();
             tdh.counter = this;
         }

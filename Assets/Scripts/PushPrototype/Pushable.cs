@@ -197,6 +197,11 @@ public class Pushable : MonoBehaviour
         }
     }
 
+    public PushableFunction Data()
+    {
+        return data;
+    }
+
     IEnumerator DelayReturn()
     {
         yield return new WaitForSeconds(data.delay);

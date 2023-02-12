@@ -8,7 +8,7 @@ public class PushableFunction : ScriptableObject
     [SerializeField]
     float velocity = 1, maxVelocity, dragVelocity, returnDelay;
     [SerializeField]
-    int reqCharge = 1;
+    int reqCharge = 1, pushNumbers = 0;
     [SerializeField]
     bool activatable, changeColor, destroy, animation, canReturn, constraintX, constraintY, constraintZ, stackPush = true;
     [SerializeField]
@@ -144,6 +144,12 @@ public class PushableFunction : ScriptableObject
             if (changeColor)
             {
                 pushedObj.GetComponent<Renderer>().material.SetColor("_Color", color);
+            }
+            if(pushNumbers != 0)
+            {
+                pushedObj.GetComponent<Pushable>().pushCounter++;
+                if(pushedObj.GetComponent<Pushable>().pushCounter >= pushNumbers)
+                    pushedObj.GetComponent<Pushable>().capSpeed = false;
             }
             pushedObj.GetComponent<Pushable>().Activate();
         }

@@ -7,11 +7,12 @@ using UnityEngine.AI;
 public class Pushable : MonoBehaviour
 {
     protected Rigidbody rb;
-    protected float velocity = 1;
+    protected float velocity = 1, maxSpeed;
     protected float reqChargeLevel = 1;
+    public int pushCounter = 0;
     public float queuedVelocity;
     public float totalVelocity = 0;
-    public bool canReturn;
+    public bool canReturn, canPush = true, capSpeed = true;
     bool pushed, skip;
     Vector3 signs, pushDirection;
     [SerializeField]
@@ -35,6 +36,7 @@ public class Pushable : MonoBehaviour
         {
             velocity = data.pushSpeed;
             reqChargeLevel = data.reqChargeLevel;
+            maxSpeed = data.maxSpeed;
         }
     }
 
@@ -47,6 +49,14 @@ public class Pushable : MonoBehaviour
 
     public virtual bool Pushed(Vector3 force, int chargeLevel, int totalCharges, GameObject pusher)
     {
+        if(!capSpeed)
+        {
+            //rb.isKinematic = true;
+            //rb.velocity = Vector3.zero;
+            //rb.isKinematic = false;
+            maxSpeed = 0;
+            //return false;
+        }
         if(chargeLevel >= reqChargeLevel)
         {
             if(GetComponent<NavMeshAgent>() != null)
@@ -118,7 +128,7 @@ public class Pushable : MonoBehaviour
 
     public virtual void CapSpeed()
     {
-        if (data != null && data.maxSpeed != 0 && data.drag != 0)
+        if (data != null && maxSpeed != 0 && data.drag != 0)
         {
             if (totalVelocity == 0)
             {
@@ -177,7 +187,7 @@ public class Pushable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!(data != null && data.maxSpeed != 0 && data.drag != 0))
+        if (!(data != null && maxSpeed != 0 && data.drag != 0))
         {
             return;
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2319721608855748606, guid: 6ad6595c78973de43b0585ceb02136c8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2319721608855748606, guid: 6ad6595c78973de43b0585ceb02136c8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -404,7 +404,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -600,9 +601,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2dec90adcfebd46b90b11d5643123e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statics:
+  - First Play
+  - BGM Pref
+  - SFX Pref
+  - Mas Pref
+  - Sensitivity
+  levelNames:
+  - Depression
+  - Barg
+  - Anger
   ghost: 0
   menuCursor: 0
-  sensitivity: 1
   player: {fileID: 1804445680587551994, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
   ghostObj: {fileID: 3169690673374037347, guid: d0008c29af1b0ca40a863262d4b450d6, type: 3}
 --- !u!4 &839600649
@@ -1197,16 +1207,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  positionOffset: {x: 0, y: 0, z: 0}
-  positionOffsetX: 0
-  positionOffsetY: 0
-  positionOffsetZ: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  rotationOffsetX: 0
-  rotationOffsetY: 0
-  rotationOffsetZ: 0
-  positionSmoothSpeed: 0
-  rotationSmoothSpeed: 0
 --- !u!1 &1558863524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1269,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1403,8 +1404,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 1587877542}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1491376671}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -1593943380
     m_VirtualCamera: {fileID: 1491376671}
@@ -1539,7 +1539,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

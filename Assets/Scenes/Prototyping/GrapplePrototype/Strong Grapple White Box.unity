@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1386,7 +1386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2857,7 +2857,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15073,7 +15073,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21456,7 +21456,37 @@ MonoBehaviour:
   minPush: 2
   chargeSpeed: 1
   cooldown: 1
+  shieldCooldown: 0
+  shieldDuration: 0
   restored: 0
+  ableToShield: 0
+  pushAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  pushedLevel: 0
+  range: 0
+  cdRemaining: 0
+  cdRemainingForShield: 0
+  smallPushEffect: {fileID: 0}
+  largePushEffect: {fileID: 0}
+  chargePushEffect: {fileID: 0}
+  shieldEffect: {fileID: 0}
+  smallEffectDestroy: {fileID: 0}
+  largeEffectDestroy: {fileID: 0}
+  chargeEffectDestroy: {fileID: 0}
+  smallPushNeedsDeath: 0
+  largePushNeedsDeath: 0
+  chargePushNeedsDeath: 0
+  chargeRadius: 0
+  pushRadius: 0
+  smallPushRadius: 0
+  source: {fileID: 0}
 --- !u!114 &1514020790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21469,14 +21499,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullSpeed: 0.75
-  stopDistance: 2.5
+  yankSpeedStrong: 0.7
+  yankSpeedWeak: 0.7
+  stopDistanceClose: 2.5
+  stopDistanceFar: 0
+  taughtDistance: 3
+  maxSwingHeight: 3.4028235e+38
+  lastPlayerPos: {x: 0, y: 0, z: 0}
+  canCheckPos: 1
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
   shootTransform: {fileID: 1678468341}
-  hookLife: 5
-  maxHookLife: 0
+  aimAssist: {fileID: 0}
+  hookBase: {fileID: 0}
+  bestHook: {fileID: 0}
+  playerCollider: {fileID: 0}
+  bestHookCenter: {x: 0, y: 0, z: 0}
+  radius: 12
   playerRB: {fileID: 1514020788}
+  player: {fileID: 0}
   changePerSecond: 0
+  grappleCooldown: 0.1
+  canReverseSwing: 1
+  canApplyForce: 1
+  forwardSwing: 1
+  needYankSwing: 1
+  canYank: 0
+  yankReady: 0
   shootHook:
     m_Name: Shoot Hook
     m_Type: 0
@@ -21504,6 +21552,11 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  shoot: {fileID: 0}
+  yank: {fileID: 0}
+  grappleEffect: {fileID: 0}
+  grappleEffectDestroy: {fileID: 0}
+  grappleNeedsDeath: 0
 --- !u!114 &1514020791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21516,8 +21569,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd70cbc1da36f43b80acf35bbb5744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  summonAClone:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   ClonePrefab: {fileID: 5827308682441603353, guid: b8fbd0975a3b42b45a9a9f048c23c726, type: 3}
+  clone: {fileID: 0}
   cloneSummoned: 0
+  cooldown: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  wall:
+    serializedVersion: 2
+    m_Bits: 0
+  scale:
+    serializedVersion: 2
+    m_Bits: 0
+  cloneSound: {fileID: 0}
+  uiAnim: {fileID: 0}
+  uiAnimCover: {fileID: 0}
 --- !u!114 &1514020792
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -252,7 +252,13 @@ MonoBehaviour:
   Counterpart: {fileID: 613602930}
   Door: {fileID: 0}
   isActivated: 0
+  isClone: 0
+  Complete: 0
   leverTimer: 0
+  activateText: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  leverSound: {fileID: 0}
 --- !u!65 &546873515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -286,7 +292,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -366,7 +372,13 @@ MonoBehaviour:
   Counterpart: {fileID: 1407799823}
   Door: {fileID: 0}
   isActivated: 0
+  isClone: 0
+  Complete: 0
   leverTimer: 0
+  activateText: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  leverSound: {fileID: 0}
 --- !u!65 &613602932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -400,7 +412,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -522,11 +534,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
---- !u!4 &805753987 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
-  m_PrefabInstance: {fileID: 805753986}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &885462290
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412f635d606aaa04c9735b6796b9814e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 805753987}
   exit:
     m_Name: Exit
     m_Type: 0
@@ -634,16 +640,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  positionOffset: {x: 0, y: 0, z: 0}
-  positionOffsetX: 0
-  positionOffsetY: 0
-  positionOffsetZ: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  rotationOffsetX: 0
-  rotationOffsetY: 0
-  rotationOffsetZ: 0
-  positionSmoothSpeed: 0
-  rotationSmoothSpeed: 0
 --- !u!1 &1012262551
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +702,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -912,7 +909,13 @@ MonoBehaviour:
   Counterpart: {fileID: 613602930}
   Door: {fileID: 0}
   isActivated: 0
+  isClone: 0
+  Complete: 0
   leverTimer: 0
+  activateText: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  leverSound: {fileID: 0}
 --- !u!65 &1407799825
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -946,7 +949,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1196,7 +1199,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1256,7 +1259,13 @@ MonoBehaviour:
   Counterpart: {fileID: 2088131360}
   Door: {fileID: 546873513}
   isActivated: 0
+  isClone: 0
+  Complete: 0
   leverTimer: 0
+  activateText: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  leverSound: {fileID: 0}
 --- !u!1 &2088131360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1370,7 +1379,13 @@ MonoBehaviour:
   Counterpart: {fileID: 1552827173}
   Door: {fileID: 546873513}
   isActivated: 0
+  isClone: 0
+  Complete: 0
   leverTimer: 0
+  activateText: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  leverSound: {fileID: 0}
 --- !u!1 &2099653428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1448,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

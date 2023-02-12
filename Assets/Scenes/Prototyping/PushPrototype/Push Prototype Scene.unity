@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -394,16 +394,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  positionOffset: {x: 0, y: 0, z: 0}
-  positionOffsetX: 0
-  positionOffsetY: 0
-  positionOffsetZ: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  rotationOffsetX: 0
-  rotationOffsetY: 0
-  rotationOffsetZ: 0
-  positionSmoothSpeed: 0
-  rotationSmoothSpeed: 0
 --- !u!54 &196432528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -570,7 +560,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -695,7 +686,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -889,7 +880,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -988,7 +979,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1456,6 +1447,7 @@ MonoBehaviour:
   right: {fileID: 1322409486}
   unitDistance: 0.3
   speed: 1
+  freezeAt: -1
   axis: {x: 0, y: 1, z: 0}
 --- !u!4 &1098197002
 Transform:
@@ -1983,6 +1975,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 0
   minionScale: 1
+  cloneWeight: 2
+  facelessWeight: 1
 --- !u!65 &1322409488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2029,7 +2023,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2136,7 +2130,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2270,8 +2265,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 1571189343}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 196432524}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -1593943380
     m_VirtualCamera: {fileID: 196432524}
@@ -2409,7 +2403,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2485,17 +2479,27 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  cloneButton:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   camFollowSphere: {fileID: 1828050834}
-  seekerSphere: {fileID: 707035861}
   moveDirection: {x: 0, y: 0}
-  baseAccelerationValue: 0
-  accelerationValueX: 0
-  accelerationValueY: 0
+  accelerationValue: 0
   moveSpeed: 0
   returnSpeed: 0
+  Player: {fileID: 0}
   playerPos: {x: 0, y: 0, z: 0}
   returnToPlayerTimer: 0
   curCamera: {fileID: 196432524}
+  curConfiner: {fileID: 0}
+  isCamFollowingPlayer: 0
+  forceBallToPlayer: 0
 --- !u!1 &1911463892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,7 +2552,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2700,6 +2704,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 0
   minionScale: 1
+  cloneWeight: 2
+  facelessWeight: 1
 --- !u!65 &2080105115
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2746,7 +2752,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

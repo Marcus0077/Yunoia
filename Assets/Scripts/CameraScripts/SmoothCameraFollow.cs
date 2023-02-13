@@ -16,6 +16,8 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void Start()
     {
+        playerControls = new PlayerControls();
+        
         exit = playerControls.Camera.Exit;
         exit.Enable();
     }

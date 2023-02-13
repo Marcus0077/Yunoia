@@ -5,15 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PushFunction")]
 public class PushableFunction : ScriptableObject
 {
-    [SerializeField]
+    [SerializeField] // velocity: push force, maxVelocity: max speed, dragVelocity: friction force, returnDelay: seconds before returning
     float velocity = 1, maxVelocity, dragVelocity, returnDelay;
-    [SerializeField]
+    [SerializeField] // reqCharge: Charge Level required to push, pushNumbers: number of pushes before maxVelocity is removed
     int reqCharge = 1, pushNumbers = 0;
+    // activatable: runs functions inside this class, changeColor: -, destroy: destroys pushed object on completion of all tasks, animation: plays animation
+    // canReturn: returns if speed is capped, constraints: -, stackPush: can be pushed while moving from last push
     [SerializeField]
     bool activatable, changeColor, destroy, animation, canReturn, constraintX, constraintY, constraintZ, stackPush = true;
-    [SerializeField]
+    [SerializeField] // color: color for changeColor
     Color color;
-    [SerializeField]
+    [SerializeField] // animationName: name of the bool used in the animator for specific animation state (connected to default state in a 2 way connection)
     string animationName;
 
     public float delay

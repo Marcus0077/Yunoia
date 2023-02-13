@@ -32,17 +32,20 @@ public class Hook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Movement of the grapple hook after shooting it
         Vector3[] positions = new Vector3[]
             {
                 transform.position,
                 grapple.transform.position
             };
 
+        // Renders line for the grapple hook's path
         lineRenderer.SetPositions(positions);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // Starts grappla activivation when hitting a grapple point on the 'Grapple' layer
         if ((LayerMask.GetMask("Grapple") & 1 << other.gameObject.layer) > 0)
         {
             Debug.Log(other);
@@ -56,6 +59,8 @@ public class Hook : MonoBehaviour
             //GetComponent<Collider>().enabled = false;
         }
 
+        // Starts grappla activivation when hitting a grapple point on the
+        // 'Grapple' layer with canYank = true
         if ((LayerMask.GetMask("GrappleYank") & 1 << other.gameObject.layer) > 0)
         {
             Debug.Log(2);
@@ -70,12 +75,12 @@ public class Hook : MonoBehaviour
             //GetComponent<Collider>().enabled = false;
         }
 
+        // Destroys the grapple hook if it collides with an object on the 'Ground' or 'Wall' layers 
         if ((LayerMask.GetMask("Ground") & 1 << other.gameObject.layer) > 0)
         {
             grapple.DestroyHook();
         }
-
-        if ((LayerMask.GetMask("Wall") & 1 << other.gameObject.layer) > 0)
+        else if ((LayerMask.GetMask("Wall") & 1 << other.gameObject.layer) > 0)
         {
             grapple.DestroyHook();
         }

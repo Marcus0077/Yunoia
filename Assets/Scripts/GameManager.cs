@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,16 +16,19 @@ public class GameManager : MonoBehaviour
     private static readonly string Depr = "Depression";
     private static readonly string Barg = "Barg";
     private static readonly string Anger = "Anger";
+    private static readonly string TextColor = "TextColor";
 
-    public string[] statics = { Firstplay,BGMPref,SFXPref,MasPref,Sensitivity };
+    public string[] statics = { Firstplay,BGMPref,SFXPref,MasPref,Sensitivity,TextColor };
     public string[] levelNames = { Depr, Barg, Anger };
-    float[] settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
+    public double[] settings = new double[System.Enum.GetValues(typeof(Settings)).Length];
 
     public static GameManager instance;
-    public bool ghost = false, menuCursor = false;
+    public bool ghost = false, menuCursor = false, textColor = false;
     [SerializeField]
     GameObject player, ghostObj;
     GameObject spawnedGhost;
+    List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
+    public float time;
     public static GameManager Instance
     {
         get
@@ -35,6 +39,34 @@ public class GameManager : MonoBehaviour
             }
             return instance;
         }
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!textColor)
+            return;
+        texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
+        texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
+    }
+
+    public void SetColor()
+    {
+        if (!textColor)
+            return;
+        texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
+        texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
+    }
+
+    double ConvertHexToFloat(Color color)
+    {
+        return double.Parse(color.r.ToString("000") + color.g.ToString("000") + color.b.ToString("000") + color.a.ToString("000"));
+    }
+
+    Color ConvertFloatToHex(double value)
+    {
+        string colorString = value.ToString("000000000000");
+        Debug.Log(colorString);
+        return new Color(float.Parse(colorString.Substring(0, 3)), float.Parse(colorString.Substring(3, 3)), float.Parse(colorString.Substring(6, 3)), float.Parse(colorString.Substring(9, 3)));
     }
 
     // Start is called before the first frame update
@@ -50,17 +82,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         player = GameObject.FindGameObjectWithTag("Player");
+        SceneManager.sceneLoaded += OnSceneLoaded;
         // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
-        if(PlayerPrefs.GetFloat(Firstplay) == 0)
+        if (PlayerPrefs.GetFloat(Firstplay) == 0)
         {
             PlayerPrefs.SetFloat(Sensitivity,.5f);
             PlayerPrefs.SetFloat(MasPref,.5f);
             PlayerPrefs.SetFloat(BGMPref,1);
             PlayerPrefs.SetFloat(SFXPref,1);
+            PlayerPrefs.SetFloat(TextColor, 255255255255);
             settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
             settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
             settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
             settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
+            settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
             PlayerPrefs.SetFloat(Firstplay, -1);
             PlayerPrefs.SetInt(Depr, 0);
             PlayerPrefs.SetInt(Barg, 0);
@@ -72,6 +107,7 @@ public class GameManager : MonoBehaviour
             settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
             settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
             settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
+            settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
         }
     }
 
@@ -84,7 +120,7 @@ public class GameManager : MonoBehaviour
     // Return a pref value
     public float GetFloat(Settings value)
     {
-        return settings[(int)value];
+        return (float)settings[(int)value];
     }
 
     public void SetFloat(Settings index, float value)
@@ -207,7 +243,8 @@ public enum Settings
     BGM = 1,
     SFX = 2,
     MAS = 3,
-    SENSE = 4
+    SENSE = 4,
+    TXTCLR = 5
 }
 
 public enum Levels

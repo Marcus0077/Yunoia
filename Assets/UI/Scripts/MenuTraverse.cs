@@ -96,7 +96,7 @@ public class MenuTraverse : MonoBehaviour
 
     public void OnEnable()
     {
-        Debug.Log("asd");
+        GameManager.Instance.SetColor();
         if (!GameManager.Instance.GetMouseCursor())
         {
             menuMove.Enable();

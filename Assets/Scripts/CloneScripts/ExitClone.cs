@@ -21,7 +21,6 @@ public class ExitClone : MonoBehaviour
     // Script references
     private BasicMovement basicMovementPlayer;
     private BasicMovement basicMovementClone;
-    private SmoothCameraFollow smoothCameraFollow;
     private SummonClone summonClone;
     private CombatHandler combatHandler;
     private CloneInteractions cloneInteractions;
@@ -67,7 +66,6 @@ public class ExitClone : MonoBehaviour
         basicMovementClone = GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>();
         
         cloneInteractions = FindObjectOfType<CloneInteractions>();
-        smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
         combatHandler = FindObjectOfType<CombatHandler>();
         limitedMovementCam = FindObjectOfType<LimitedMovementCam>();

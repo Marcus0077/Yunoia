@@ -49,7 +49,7 @@ public class ScaleControl : MonoBehaviour
             left.transform.position = Vector3.Lerp(oldLeftPos, new Vector3(leftPos.x + unitDistance * axis.x * compareValue, leftPos.y + unitDistance * axis.y * compareValue, leftPos.z + unitDistance * axis.z * compareValue), frame / 60f * speed);
             right.transform.position = Vector3.Lerp(oldRightPos, new Vector3(rightPos.x + unitDistance * axis.x * -compareValue, rightPos.y + unitDistance * axis.y * -compareValue, rightPos.z + unitDistance * axis.z * -compareValue), frame / 60f * speed);
             if(navHandler != null)
-                navHandler.GetComponent<NavMeshHandler>().BuildScaleNavMesh();
+                //navHandler.GetComponent<NavMeshHandler>().BuildScaleNavMesh();
             frame++;
         }
         else if (frame != -1)

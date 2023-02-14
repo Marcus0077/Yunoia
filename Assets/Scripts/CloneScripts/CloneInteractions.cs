@@ -12,7 +12,6 @@ public class CloneInteractions : MonoBehaviour
     // Script references
     public BasicMovement basicMovementPlayer;
     public BasicMovement basicMovementClone;
-    public SmoothCameraFollow smoothCameraFollow;
     public SummonClone summonClone;
     public ExitClone exitClone;
     public CombatHandler combatHandler;
@@ -53,7 +52,6 @@ public class CloneInteractions : MonoBehaviour
         
         basicMovementPlayer = Player.GetComponent<BasicMovement>();
         basicMovementClone = this.GetComponent<BasicMovement>();
-        smoothCameraFollow = FindObjectOfType<SmoothCameraFollow>();
         summonClone = FindObjectOfType<SummonClone>();
         exitClone = FindObjectOfType<ExitClone>();
         combatHandler = FindObjectOfType<CombatHandler>();

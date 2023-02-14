@@ -6033,6 +6033,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yankSpeedStrong: 4
   yankSpeedWeak: 0.9
+  stopDistanceClose: 2.5
+  stopDistanceFar: 0
+  taughtDistance: 3
   maxSwingHeight: 3.4028235e+38
   lastPlayerPos: {x: 0, y: 0, z: 0}
   canCheckPos: 1
@@ -6046,13 +6049,12 @@ MonoBehaviour:
   radius: 12
   playerRB: {fileID: 5827308682441603359}
   player: {fileID: -8715429646849006418}
-  changePerSecond: 0
-  grappleCooldown: 1
+  canYank: 0
+  yankReady: 0
   canReverseSwing: 1
   canApplyForce: 1
   forwardSwing: 1
-  canYank: 0
-  yankReady: 0
+  needYankSwing: 1
   shootHook:
     m_Name: Shoot Hook
     m_Type: 0
@@ -6228,7 +6230,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicMovementPlayer: {fileID: 0}
   basicMovementClone: {fileID: 0}
-  smoothCameraFollow: {fileID: 0}
   summonClone: {fileID: 0}
   exitClone: {fileID: 0}
   combatHandler: {fileID: 0}

@@ -4,57 +4,64 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class AiMovement : MonoBehaviour
 {
-    // Combat handler script reference.
-    private CombatHandler combatHandler;
-
     // Navmesh agent reference.
-    public NavMeshAgent aiAgent;
-    
-    // Faceless AI pathing location transforms.
-    public Transform startPos;
-    public Transform turnPos;
-    public Transform endPos;
+    [SerializeField] private NavMeshAgent aiAgent;
 
     // Bool variables.
-    private bool turnAround;
     private bool isRunning;
 
     // Distance between clone and Faceless AI.
-    public float distanceBetweenClone;
+    private float distanceBetweenClone;
 
     // Target positioning variables.
-    public Vector3 targetPos;
-    public Vector3 lastPos;
+    private Vector3 targetPos;
+    private Vector3 lastPos;
     private Vector3 clonePos;
     
     // Stops clone when on stopping crystal.
     private bool isStoppedByCrystal;
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
-    public float attackTimer;
+
+    private Transform curScale;
+    private bool isOnScale;
+    private bool isScaleMoving;
+
+    // AI Wandering Variables.
+    private float wanderDistance;
+    
+    [Range(1.0f, 10.0f)]
+    public float wanderDistanceMin;
+    
+    [Range(1.0f, 10.0f)]
+    public float wanderDistanceMax;
+    
+    [Range(0.5f, 5.0f)]
+    public float wanderPauseMin;
+    
+    [Range(0.5f, 5.0f)]
+    public float wanderPauseMax;
     
     // Get references and initialize variables when Faceless AI is spawned.
-    void Awake()
+    private void Awake()
     {
         aiAgent = this.GetComponent<NavMeshAgent>();
 
-        turnAround = false;
         isRunning = false;
         isStoppedByCrystal = false;
         isFollowingCrystal = false;
+        isOnScale = false;
+        isScaleMoving = false;
 
         distanceBetweenClone = 100f;
-        attackTimer = 2f;
-        
-        targetPos = startPos.position;
-        aiAgent.SetDestination(targetPos);
     }
     
     // Called between frames.
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         IsCloneSpawned();
         DetermineCloneDistance();
@@ -63,46 +70,47 @@ public class AiMovement : MonoBehaviour
         {
             isStoppedByCrystal = true;
         }
+
+        if (curScale != null && isOnScale)
+        {
+            if (curScale.GetComponent<Rigidbody>().velocity == Vector3.zero)
+            {
+                isScaleMoving = false;
+            }
+            else
+            {
+                isScaleMoving = true;
+                
+                targetPos = curScale.transform.position;
+                aiAgent.SetDestination(targetPos);
+            }
+        }
     }
 
     // Determines whether clone is close enough to chase and attack. 
     // If not, return to pathing loop.
-    void DetermineCloneDistance()
+    private void DetermineCloneDistance()
     {
-        if (distanceBetweenClone < 4 && isFollowingCrystal == false)
+        if (distanceBetweenClone < 4 && isFollowingCrystal == false && !isScaleMoving)
         {
-            ChaseAndAttackClone();
+            StopCoroutine(Wander());
+            ChaseClone();
         }
-        else if (!isStoppedByCrystal && !isFollowingCrystal)
+        else if (!isStoppedByCrystal && !isFollowingCrystal && !isRunning && !isScaleMoving)
         {
-            ReturnToPath();
+            aiAgent.isStopped = false;
+
+            StartCoroutine(Wander());
+        }
+        else if (isOnScale && isScaleMoving)
+        {
+            
         }
     }
 
     // Sets Faceless AI to chase the clone, and attack it if they are close enough.
-    void ChaseAndAttackClone()
+    private void ChaseClone()
     {
-        // if (distanceBetweenClone < 1.3f)
-        // {
-        //     if (GameObject.FindGameObjectWithTag("Clone") != null)
-        //     {
-        //         if (attackTimer <= 0)
-        //         {
-        //             GameObject.FindGameObjectWithTag("Player").GetComponent<Rumbler>().RumbleConstant(1, 3, 0.3f);
-        //             GameObject.FindGameObjectWithTag("Clone").GetComponent<ExitClone>().cloneActiveTimer -= 5f;
-        //             attackTimer = 2f;
-        //         }
-        //         else
-        //         {
-        //             attackTimer -= Time.deltaTime;
-        //         }
-        //     }
-        // }
-        // else if (attackTimer < 2f)
-        // {
-        //     attackTimer = 2f;
-        // }
-
         if (GameObject.FindWithTag("Clone") != null && !isRunning)
         {
             LookAtClone();
@@ -110,15 +118,36 @@ public class AiMovement : MonoBehaviour
         }
     }
 
-    // Return the Faceless AI to it's specified path.
-    void ReturnToPath()
+    private Vector3 RandomNavSphere(Vector3 origin, float distance, int areaMask)
     {
-        aiAgent.isStopped = false;
-        aiAgent.SetDestination(lastPos);
+        Vector3 randomDirection = new Vector3(UnityEngine.Random.insideUnitSphere.x,
+            0f, UnityEngine.Random.insideUnitSphere.z) * distance;
+
+        randomDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randomDirection, out navHit, distance, areaMask);
+
+        return navHit.position;
+    }
+
+    private IEnumerator Wander()
+    {
+        isRunning = true;
+
+        wanderDistance = Random.Range(wanderDistanceMin, wanderDistanceMax);
+            
+        targetPos = RandomNavSphere(this.transform.position, wanderDistance, 1);
+        aiAgent.SetDestination(targetPos);
+
+        yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
+
+        isRunning = false;
     }
 
     // Determines whether there is a clone currently spawned in the scene.
-    void IsCloneSpawned()
+    private void IsCloneSpawned()
     {
         if (GameObject.FindWithTag("Clone") != null)
         {
@@ -133,7 +162,7 @@ public class AiMovement : MonoBehaviour
 
     // Sets Faceless AI target position to follow the clone's position
     // and stops when close to the clone.
-    void FollowClone()
+    private void FollowClone()
     {
         if (distanceBetweenClone < 1.5f)
         {
@@ -149,7 +178,7 @@ public class AiMovement : MonoBehaviour
     }
     
     // Sets Faceless AI to look at the clone.
-    void LookAtClone()
+    private void LookAtClone()
     {
         var target = GameObject.FindWithTag("Clone");
             
@@ -162,38 +191,25 @@ public class AiMovement : MonoBehaviour
     // Saves the last target position.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("StartPoint"))
-        {
-            turnAround = false;
-
-            lastPos = turnPos.position;
-            aiAgent.SetDestination(lastPos);
-        }
-        else if (other.CompareTag("TurnPoint"))
-        {
-            if (turnAround)
-            {
-                lastPos = startPos.position;
-                aiAgent.SetDestination(lastPos);
-            }
-            else
-            {
-                lastPos = endPos.position;
-                aiAgent.SetDestination(lastPos);
-            }
-        }
-        else if (other.CompareTag("EndPoint"))
-        {
-            turnAround = true;
-
-            lastPos = turnPos.position;
-            aiAgent.SetDestination(lastPos);
-        }
-        else if (other.CompareTag("AIStop"))
+        if (other.CompareTag("AIStop"))
         {
             crytalPos = other.transform.position;
             aiAgent.SetDestination(crytalPos);
             isFollowingCrystal = true;
+        }
+
+        if (other.CompareTag("Scale"))
+        {
+            curScale = other.transform;
+            isOnScale = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Scale"))
+        {
+            isOnScale = false;
         }
     }
 }

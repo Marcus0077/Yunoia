@@ -22,12 +22,12 @@ public class Death : MonoBehaviour
         }
         else if (other.CompareTag("Faceless")) //reset real faceless too?
         {
-            FakeFaceless fake = other.gameObject.GetComponent<FakeFaceless>();
-            Debug.Log(fake);
-            if (fake != null)
-            {
-                fake.Reset();
-            }
+            // FakeFaceless fake = other.gameObject.GetComponent<FakeFaceless>();
+            // Debug.Log(fake);
+            // if (fake != null)
+            // {
+            //     fake.Reset();
+            // }
         }
     }
 

@@ -47,7 +47,6 @@ public class BasicMovement : MonoBehaviour
     private int dashAccelerate;
     
     // Camera Variables
-    private SmoothCameraFollow smoothCameraFollow;
     public string curCamState;
     public Animator stateDrivenCamAnimator;
     public int curRoom;

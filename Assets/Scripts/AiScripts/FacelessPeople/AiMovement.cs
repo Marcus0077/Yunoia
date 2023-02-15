@@ -27,10 +27,6 @@ public class AiMovement : MonoBehaviour
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
 
-    private Transform curScale;
-    private bool isOnScale;
-    private bool isScaleMoving;
-
     // AI Wandering Variables.
     private float wanderDistance;
     
@@ -54,8 +50,6 @@ public class AiMovement : MonoBehaviour
         isRunning = false;
         isStoppedByCrystal = false;
         isFollowingCrystal = false;
-        isOnScale = false;
-        isScaleMoving = false;
 
         distanceBetweenClone = 100f;
     }
@@ -70,41 +64,24 @@ public class AiMovement : MonoBehaviour
         {
             isStoppedByCrystal = true;
         }
-
-        if (curScale != null && isOnScale)
-        {
-            if (curScale.GetComponent<Rigidbody>().velocity == Vector3.zero)
-            {
-                isScaleMoving = false;
-            }
-            else
-            {
-                isScaleMoving = true;
-                
-                targetPos = curScale.transform.position;
-                aiAgent.SetDestination(targetPos);
-            }
-        }
     }
 
     // Determines whether clone is close enough to chase and attack. 
     // If not, return to pathing loop.
     private void DetermineCloneDistance()
     {
-        if (distanceBetweenClone < 4 && isFollowingCrystal == false && !isScaleMoving)
+        if (distanceBetweenClone < 4 && isFollowingCrystal == false)
         {
-            StopCoroutine(Wander());
+            StopCoroutine(Wander(wanderDistance));
             ChaseClone();
         }
-        else if (!isStoppedByCrystal && !isFollowingCrystal && !isRunning && !isScaleMoving)
+        else if (!isStoppedByCrystal && !isFollowingCrystal && !isRunning)
         {
             aiAgent.isStopped = false;
-
-            StartCoroutine(Wander());
-        }
-        else if (isOnScale && isScaleMoving)
-        {
             
+            wanderDistance = Random.Range(wanderDistanceMin, wanderDistanceMax);
+            
+            StartCoroutine(Wander(wanderDistance));
         }
     }
 
@@ -132,18 +109,38 @@ public class AiMovement : MonoBehaviour
         return navHit.position;
     }
 
-    private IEnumerator Wander()
+    private IEnumerator Wander(float wanderDistanceR)
     {
         isRunning = true;
 
-        wanderDistance = Random.Range(wanderDistanceMin, wanderDistanceMax);
-            
-        targetPos = RandomNavSphere(this.transform.position, wanderDistance, 1);
-        aiAgent.SetDestination(targetPos);
+        bool canWalk = true;
 
-        yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
+        targetPos = RandomNavSphere(this.transform.position, wanderDistanceR, 1);
 
-        isRunning = false;
+        foreach (var plantDestroyers in GameObject.FindObjectsOfType<PlantDestroyer>())
+        {
+            if (Vector3.Distance(targetPos, plantDestroyers.transform.position) < 5f)
+            {
+                canWalk = false;
+            }
+        }
+
+        if (canWalk == false)
+        {
+            Debug.Log("Tried to walk onto a crystal pressure plate! Oh no!");
+            StartCoroutine(Wander(wanderDistanceR));
+        }
+        else
+        {
+            Debug.Log("Walked correctly :)");
+            aiAgent.SetDestination(targetPos);
+
+            yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
+                
+            isRunning = false;
+                
+            StopAllCoroutines();
+        }
     }
 
     // Determines whether there is a clone currently spawned in the scene.
@@ -197,19 +194,10 @@ public class AiMovement : MonoBehaviour
             aiAgent.SetDestination(crytalPos);
             isFollowingCrystal = true;
         }
-
-        if (other.CompareTag("Scale"))
-        {
-            curScale = other.transform;
-            isOnScale = true;
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Scale"))
-        {
-            isOnScale = false;
-        }
+        
     }
 }

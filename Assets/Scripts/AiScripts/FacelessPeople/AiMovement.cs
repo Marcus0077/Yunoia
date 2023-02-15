@@ -26,6 +26,7 @@ public class AiMovement : MonoBehaviour
     private bool isStoppedByCrystal;
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
+    private IEnumerator wanderCoroutine;
 
     // AI Wandering Variables.
     private float wanderDistance;
@@ -46,6 +47,8 @@ public class AiMovement : MonoBehaviour
     private void Awake()
     {
         aiAgent = this.GetComponent<NavMeshAgent>();
+        
+        //wanderCoroutine = Wander();
 
         isRunning = false;
         isStoppedByCrystal = false;
@@ -70,16 +73,22 @@ public class AiMovement : MonoBehaviour
     // If not, return to pathing loop.
     private void DetermineCloneDistance()
     {
-        if (distanceBetweenClone < 4 && isFollowingCrystal == false)
+        if (distanceBetweenClone < 4 && !isFollowingCrystal)
         {
-            StopCoroutine(Wander());
             ChaseClone();
+
+            if (isRunning)
+            {
+                StopCoroutine(wanderCoroutine);
+                isRunning = false;
+            }
         }
         else if (!isStoppedByCrystal && !isFollowingCrystal && !isRunning)
         {
             aiAgent.isStopped = false;
-
-            StartCoroutine(Wander());
+            
+            wanderCoroutine = Wander();
+            StartCoroutine(wanderCoroutine);
         }
     }
 
@@ -134,10 +143,15 @@ public class AiMovement : MonoBehaviour
             {
                 aiAgent.SetDestination(targetPos);
 
-                yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
-                isRunning = false;
+                walked = true;
             }
         }
+        
+        yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
+        
+        Debug.Log("found spot");
+        
+        isRunning = false;
     }
 
     // Determines whether there is a clone currently spawned in the scene.
@@ -187,6 +201,8 @@ public class AiMovement : MonoBehaviour
     {
         if (other.CompareTag("AIStop"))
         {
+            StopCoroutine(Wander());
+            
             crytalPos = other.transform.position;
             aiAgent.SetDestination(crytalPos);
             isFollowingCrystal = true;

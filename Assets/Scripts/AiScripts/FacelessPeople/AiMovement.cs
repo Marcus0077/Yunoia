@@ -72,16 +72,14 @@ public class AiMovement : MonoBehaviour
     {
         if (distanceBetweenClone < 4 && isFollowingCrystal == false)
         {
-            StopCoroutine(Wander(wanderDistance));
+            StopCoroutine(Wander());
             ChaseClone();
         }
         else if (!isStoppedByCrystal && !isFollowingCrystal && !isRunning)
         {
             aiAgent.isStopped = false;
-            
-            wanderDistance = Random.Range(wanderDistanceMin, wanderDistanceMax);
-            
-            StartCoroutine(Wander(wanderDistance));
+
+            StartCoroutine(Wander());
         }
     }
 
@@ -109,18 +107,20 @@ public class AiMovement : MonoBehaviour
         return navHit.position;
     }
 
-    private IEnumerator Wander(float wanderDistanceR)
+    private IEnumerator Wander()
     {
         isRunning = true;
 
         bool canWalk;
         bool walked = false;
+        
+        wanderDistance = Random.Range(wanderDistanceMin, wanderDistanceMax);
 
         while (!walked)
         {
             canWalk = true;
             
-            targetPos = RandomNavSphere(this.transform.position, wanderDistanceR, 1);
+            targetPos = RandomNavSphere(this.transform.position, wanderDistance, 1);
 
             foreach (var plantDestroyers in GameObject.FindObjectsOfType<PlantDestroyer>())
             {

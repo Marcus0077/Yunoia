@@ -17,7 +17,6 @@ public class Hook : MonoBehaviour
 
     public GameObject grappleAttach;
 
-    // Start is called before the first frame update
     public void Initialize(Grapple grapple, Transform shootTransform)
     {
         this.grapple = grapple;
@@ -29,10 +28,14 @@ public class Hook : MonoBehaviour
         rigid.AddForce(shootTransform.forward * hookForce, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Movement of the grapple hook after shooting it
+        if (grapple.grappleActive)
+        {
+            //transform.position = bestHookCenter;
+        }
+
         Vector3[] positions = new Vector3[]
             {
                 transform.position,
@@ -45,7 +48,7 @@ public class Hook : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Starts grappla activivation when hitting a grapple point on the 'Grapple' layer
+        // Starts grapple activivation when hitting a grapple point on the 'Grapple' layer
         if ((LayerMask.GetMask("Grapple") & 1 << other.gameObject.layer) > 0)
         {
             Debug.Log(other);

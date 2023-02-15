@@ -36,11 +36,11 @@ public class Grapple : MonoBehaviour
     Hook hook;
     float changePerSecond;
     float grappleCooldown = 0.1f;
-    float maxVelocity;
+    float maxVelocity = 18.0f;
     float sqrMaxVelocity;
 
     // Conditions for grapple movement
-    bool grappleActive;
+    public bool grappleActive;
     bool ready = true;
     public bool canYank = false;
     public bool yankReady = false;
@@ -70,7 +70,7 @@ public class Grapple : MonoBehaviour
         grappleNeedsDeath = false;
         grappleActive = false;
 
-        SetMaxVelocity(15.0f);
+        SetMaxVelocity(maxVelocity);
     }
 
     // Update is called once per frame
@@ -307,7 +307,7 @@ public class Grapple : MonoBehaviour
     // Delay between shooting the grapple and being able to yank
     private IEnumerator YankDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         yankReady = true;
     }
@@ -331,7 +331,9 @@ public class Grapple : MonoBehaviour
         // ready to swing backwards
         if ((playerRB.position.y > maxSwingHeight) && canApplyForce)
         {
-            StartCoroutine(ReverseSwing());
+            // Temporary Coroutine Swap
+            //StartCoroutine(ReverseSwing());
+            StartCoroutine(RemoveForce());
         }
 
         // Maintains horizontal force if the player is in the air and force can be applied
@@ -390,27 +392,33 @@ public class Grapple : MonoBehaviour
     }
 
     // Simulate backward movement after completing a forward swing
-    private IEnumerator ReverseSwing()
+    /*private IEnumerator ReverseSwing()
     {
         if (canReverseSwing)
         {
             forwardSwing = !forwardSwing;
             canReverseSwing = false;
-            canApplyForce = false;
             StartCoroutine(RemoveForce());
         }
 
         yield return new WaitForSeconds(1.5f);
 
         canReverseSwing = true;
-    }
+    }*/
 
     // 
     private IEnumerator RemoveForce()
     {
+        canApplyForce = false;
+
         yield return new WaitForSeconds(0.5f);
 
         canApplyForce = true;
+
+        if (hook != null)
+        {
+            DestroyHook();
+        }
     }
 
     // Enable input action map controls.

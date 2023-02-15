@@ -113,33 +113,30 @@ public class AiMovement : MonoBehaviour
     {
         isRunning = true;
 
-        bool canWalk = true;
+        bool canWalk;
+        bool walked = false;
 
-        targetPos = RandomNavSphere(this.transform.position, wanderDistanceR, 1);
-
-        foreach (var plantDestroyers in GameObject.FindObjectsOfType<PlantDestroyer>())
+        while (!walked)
         {
-            if (Vector3.Distance(targetPos, plantDestroyers.transform.position) < 5f)
+            canWalk = true;
+            
+            targetPos = RandomNavSphere(this.transform.position, wanderDistanceR, 1);
+
+            foreach (var plantDestroyers in GameObject.FindObjectsOfType<PlantDestroyer>())
             {
-                canWalk = false;
+                if (Vector3.Distance(targetPos, plantDestroyers.transform.position) < 5f)
+                {
+                    canWalk = false;
+                }
             }
-        }
 
-        if (canWalk == false)
-        {
-            Debug.Log("Tried to walk onto a crystal pressure plate! Oh no!");
-            StartCoroutine(Wander(wanderDistanceR));
-        }
-        else
-        {
-            Debug.Log("Walked correctly :)");
-            aiAgent.SetDestination(targetPos);
+            if (canWalk)
+            {
+                aiAgent.SetDestination(targetPos);
 
-            yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
-                
-            isRunning = false;
-                
-            StopAllCoroutines();
+                yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
+                isRunning = false;
+            }
         }
     }
 

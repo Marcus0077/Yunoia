@@ -16,6 +16,7 @@ public class SceneChanger : MonoBehaviour
     public InputAction acceptanceScene;
     public InputAction hubScene;
     public InputAction museumScene;
+    public InputAction closeGame;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -54,6 +55,11 @@ public class SceneChanger : MonoBehaviour
         {
             SceneManager.LoadScene("museum");
         }
+
+        if (closeGame.IsPressed())
+        {
+            Application.Quit();
+        }
     }
 
     private void OnEnable()
@@ -80,6 +86,9 @@ public class SceneChanger : MonoBehaviour
 
         museumScene = sceneChanges.Scenes.MuseumScene;
         museumScene.Enable();
+
+        closeGame = sceneChanges.Scenes.CloseGame;
+        closeGame.Enable();
     }
 
     private void OnDisable()
@@ -91,5 +100,6 @@ public class SceneChanger : MonoBehaviour
         acceptanceScene.Disable();
         hubScene.Disable();
         museumScene.Disable();
+        closeGame.Disable();
     }
 }

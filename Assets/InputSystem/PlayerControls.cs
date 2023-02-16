@@ -1007,6 +1007,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""HubScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""c73906e9-7657-49f8-824a-cca27128e9f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""DepressionScene"",
                     ""type"": ""Button"",
                     ""id"": ""f07250f8-716e-44db-a48e-a4dc75edfbca"",
@@ -1028,15 +1037,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": ""AngerScene"",
                     ""type"": ""Button"",
                     ""id"": ""c65b2815-e064-4aaf-9b9e-cef792f316cb"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""HubScene"",
-                    ""type"": ""Button"",
-                    ""id"": ""c73906e9-7657-49f8-824a-cca27128e9f2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1068,6 +1068,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""94f6e691-eb76-4e9f-aade-babbe24e5816"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1085,7 +1094,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2927d436-03c7-4997-bb56-93782c26f282"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<Keyboard>/5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -1096,7 +1105,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""23c5203d-f4ca-426e-843b-33e4e7540f0f"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -1107,7 +1116,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2cf15228-9880-43f8-961b-bf0136cf8718"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -1118,7 +1127,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""246cb10d-8643-4704-858a-de40dcb040e6"",
-                    ""path"": ""<Keyboard>/5"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -1128,12 +1137,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2d7a7263-fbec-4fa0-826b-3c61d7b570d0"",
-                    ""path"": ""<Keyboard>/6"",
+                    ""id"": ""6a9cecf9-18c4-4d25-a958-ec01037afc7b"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""MuseumScene"",
+                    ""action"": ""CloseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1454,13 +1463,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Scenes
         m_Scenes = asset.FindActionMap("Scenes", throwIfNotFound: true);
         m_Scenes_DenialScene = m_Scenes.FindAction("DenialScene", throwIfNotFound: true);
+        m_Scenes_HubScene = m_Scenes.FindAction("HubScene", throwIfNotFound: true);
         m_Scenes_DepressionScene = m_Scenes.FindAction("DepressionScene", throwIfNotFound: true);
         m_Scenes_BargainingScene = m_Scenes.FindAction("BargainingScene", throwIfNotFound: true);
         m_Scenes_AngerScene = m_Scenes.FindAction("AngerScene", throwIfNotFound: true);
-        m_Scenes_HubScene = m_Scenes.FindAction("HubScene", throwIfNotFound: true);
         m_Scenes_MuseumScene = m_Scenes.FindAction("MuseumScene", throwIfNotFound: true);
         m_Scenes_AcceptanceScene = m_Scenes.FindAction("AcceptanceScene", throwIfNotFound: true);
         m_Scenes_CameraScene = m_Scenes.FindAction("CameraScene", throwIfNotFound: true);
+        m_Scenes_CloseGame = m_Scenes.FindAction("CloseGame", throwIfNotFound: true);
         // Ghost
         m_Ghost = asset.FindActionMap("Ghost", throwIfNotFound: true);
         m_Ghost_Move = m_Ghost.FindAction("Move", throwIfNotFound: true);
@@ -1972,25 +1982,27 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Scenes;
     private IScenesActions m_ScenesActionsCallbackInterface;
     private readonly InputAction m_Scenes_DenialScene;
+    private readonly InputAction m_Scenes_HubScene;
     private readonly InputAction m_Scenes_DepressionScene;
     private readonly InputAction m_Scenes_BargainingScene;
     private readonly InputAction m_Scenes_AngerScene;
-    private readonly InputAction m_Scenes_HubScene;
     private readonly InputAction m_Scenes_MuseumScene;
     private readonly InputAction m_Scenes_AcceptanceScene;
     private readonly InputAction m_Scenes_CameraScene;
+    private readonly InputAction m_Scenes_CloseGame;
     public struct ScenesActions
     {
         private @PlayerControls m_Wrapper;
         public ScenesActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @DenialScene => m_Wrapper.m_Scenes_DenialScene;
+        public InputAction @HubScene => m_Wrapper.m_Scenes_HubScene;
         public InputAction @DepressionScene => m_Wrapper.m_Scenes_DepressionScene;
         public InputAction @BargainingScene => m_Wrapper.m_Scenes_BargainingScene;
         public InputAction @AngerScene => m_Wrapper.m_Scenes_AngerScene;
-        public InputAction @HubScene => m_Wrapper.m_Scenes_HubScene;
         public InputAction @MuseumScene => m_Wrapper.m_Scenes_MuseumScene;
         public InputAction @AcceptanceScene => m_Wrapper.m_Scenes_AcceptanceScene;
         public InputAction @CameraScene => m_Wrapper.m_Scenes_CameraScene;
+        public InputAction @CloseGame => m_Wrapper.m_Scenes_CloseGame;
         public InputActionMap Get() { return m_Wrapper.m_Scenes; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2003,6 +2015,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @DenialScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDenialScene;
                 @DenialScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDenialScene;
                 @DenialScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDenialScene;
+                @HubScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
+                @HubScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
+                @HubScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
                 @DepressionScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDepressionScene;
                 @DepressionScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDepressionScene;
                 @DepressionScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnDepressionScene;
@@ -2012,9 +2027,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AngerScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAngerScene;
                 @AngerScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAngerScene;
                 @AngerScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnAngerScene;
-                @HubScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
-                @HubScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
-                @HubScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnHubScene;
                 @MuseumScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
                 @MuseumScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
                 @MuseumScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnMuseumScene;
@@ -2024,6 +2036,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CameraScene.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCameraScene;
                 @CameraScene.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCameraScene;
                 @CameraScene.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCameraScene;
+                @CloseGame.started -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCloseGame;
+                @CloseGame.performed -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCloseGame;
+                @CloseGame.canceled -= m_Wrapper.m_ScenesActionsCallbackInterface.OnCloseGame;
             }
             m_Wrapper.m_ScenesActionsCallbackInterface = instance;
             if (instance != null)
@@ -2031,6 +2046,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @DenialScene.started += instance.OnDenialScene;
                 @DenialScene.performed += instance.OnDenialScene;
                 @DenialScene.canceled += instance.OnDenialScene;
+                @HubScene.started += instance.OnHubScene;
+                @HubScene.performed += instance.OnHubScene;
+                @HubScene.canceled += instance.OnHubScene;
                 @DepressionScene.started += instance.OnDepressionScene;
                 @DepressionScene.performed += instance.OnDepressionScene;
                 @DepressionScene.canceled += instance.OnDepressionScene;
@@ -2040,9 +2058,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AngerScene.started += instance.OnAngerScene;
                 @AngerScene.performed += instance.OnAngerScene;
                 @AngerScene.canceled += instance.OnAngerScene;
-                @HubScene.started += instance.OnHubScene;
-                @HubScene.performed += instance.OnHubScene;
-                @HubScene.canceled += instance.OnHubScene;
                 @MuseumScene.started += instance.OnMuseumScene;
                 @MuseumScene.performed += instance.OnMuseumScene;
                 @MuseumScene.canceled += instance.OnMuseumScene;
@@ -2052,6 +2067,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CameraScene.started += instance.OnCameraScene;
                 @CameraScene.performed += instance.OnCameraScene;
                 @CameraScene.canceled += instance.OnCameraScene;
+                @CloseGame.started += instance.OnCloseGame;
+                @CloseGame.performed += instance.OnCloseGame;
+                @CloseGame.canceled += instance.OnCloseGame;
             }
         }
     }
@@ -2204,13 +2222,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IScenesActions
     {
         void OnDenialScene(InputAction.CallbackContext context);
+        void OnHubScene(InputAction.CallbackContext context);
         void OnDepressionScene(InputAction.CallbackContext context);
         void OnBargainingScene(InputAction.CallbackContext context);
         void OnAngerScene(InputAction.CallbackContext context);
-        void OnHubScene(InputAction.CallbackContext context);
         void OnMuseumScene(InputAction.CallbackContext context);
         void OnAcceptanceScene(InputAction.CallbackContext context);
         void OnCameraScene(InputAction.CallbackContext context);
+        void OnCloseGame(InputAction.CallbackContext context);
     }
     public interface IGhostActions
     {

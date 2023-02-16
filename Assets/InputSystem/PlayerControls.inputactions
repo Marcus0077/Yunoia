@@ -985,6 +985,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "HubScene",
+                    "type": "Button",
+                    "id": "c73906e9-7657-49f8-824a-cca27128e9f2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "DepressionScene",
                     "type": "Button",
                     "id": "f07250f8-716e-44db-a48e-a4dc75edfbca",
@@ -1006,15 +1015,6 @@
                     "name": "AngerScene",
                     "type": "Button",
                     "id": "c65b2815-e064-4aaf-9b9e-cef792f316cb",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "HubScene",
-                    "type": "Button",
-                    "id": "c73906e9-7657-49f8-824a-cca27128e9f2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1046,6 +1046,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CloseGame",
+                    "type": "Button",
+                    "id": "94f6e691-eb76-4e9f-aade-babbe24e5816",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1063,7 +1072,7 @@
                 {
                     "name": "",
                     "id": "2927d436-03c7-4997-bb56-93782c26f282",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1074,7 +1083,7 @@
                 {
                     "name": "",
                     "id": "23c5203d-f4ca-426e-843b-33e4e7540f0f",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1085,7 +1094,7 @@
                 {
                     "name": "",
                     "id": "2cf15228-9880-43f8-961b-bf0136cf8718",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1096,7 +1105,7 @@
                 {
                     "name": "",
                     "id": "246cb10d-8643-4704-858a-de40dcb040e6",
-                    "path": "<Keyboard>/5",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1106,12 +1115,12 @@
                 },
                 {
                     "name": "",
-                    "id": "2d7a7263-fbec-4fa0-826b-3c61d7b570d0",
-                    "path": "<Keyboard>/6",
+                    "id": "6a9cecf9-18c4-4d25-a958-ec01037afc7b",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MuseumScene",
+                    "action": "CloseGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

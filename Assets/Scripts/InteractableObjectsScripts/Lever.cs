@@ -20,10 +20,10 @@ public class Lever : MonoBehaviour
     public bool isActivated;
     private bool isPlayer;
     public bool isClone;
-    public bool Complete;
+    private bool Complete;
 
     // Lever countdown timer.
-    public float leverTimer;
+    private float leverTimer;
 
     // Lever UI references.
     public Image activateText;
@@ -35,6 +35,10 @@ public class Lever : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip leverSound;
     private bool audioPlayed;
+
+    public bool isSingleLever;
+    public bool isAiLever;
+    public GameObject[] aiCounterparts;
 
     // Get references and initialize variables when levers spawn.
     void Awake()
@@ -62,18 +66,26 @@ public class Lever : MonoBehaviour
         if (isActivated)
         {
             PlayAudioAndAnimation();
-            SubtractFromLeverTimer();
 
-            Debug.Log("A");
-
-            if ((Counterpart == null || Counterpart.GetComponent<Lever>().isActivated) && leverTimer > 0)
+            if (!isSingleLever)
             {
-                Debug.Log("B");
-                CompleteLeverSequence();
+                SubtractFromLeverTimer();
+
+                if (leverTimer > 0)
+                {
+                    if (Counterpart != null && Counterpart.GetComponent<Lever>().isActivated)
+                    {
+                        CompleteLeverSequence();
+                    }
+                }
+                else
+                {
+                    EndLeverSequence();
+                }
             }
-            else if (leverTimer <= 0)
+            else
             {
-                EndLeverSequence();
+                CompleteLeverSequence();
             }
         }
     }
@@ -106,14 +118,28 @@ public class Lever : MonoBehaviour
     {
         if (!Complete)
         {
-            
             Complete = true;
+            
             if(Counterpart != null)
             {
                 Counterpart.GetComponent<Lever>().Complete = true;
                 //Counterpart.GetComponent<Lever>().activateText.enabled = false;
             }
-            Door.GetComponent<Door>().Open();
+
+            if (!isAiLever)
+            {
+                Door.GetComponent<Door>().Open();
+            }
+            else
+            {
+                if (aiCounterparts != null)
+                {
+                    foreach (var aiCounterpart in aiCounterparts)
+                    {
+                        aiCounterpart.GetComponent<AiMovement>().canAiMove = true;
+                    }
+                }
+            }
 
             //activateText.enabled = false;
         }

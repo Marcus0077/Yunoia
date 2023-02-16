@@ -30,6 +30,8 @@ public class AiMovement : MonoBehaviour
 
     // AI Wandering Variables.
     private float wanderDistance;
+
+    public bool canAiMove;
     
     [Range(1.0f, 10.0f)]
     public float wanderDistanceMin;
@@ -59,9 +61,13 @@ public class AiMovement : MonoBehaviour
     private void FixedUpdate()
     {
         IsCloneSpawned();
-        DetermineCloneDistance();
 
-        if (isStoppedByCrystal && isFollowingCrystal && Vector3.Distance(this.transform.position, crytalPos) < 0.1)
+        if (canAiMove)
+        {
+            DetermineCloneDistance();
+        }
+
+        if (!isStoppedByCrystal && isFollowingCrystal && Vector3.Distance(this.transform.position, crytalPos) < 0.025)
         {
             isStoppedByCrystal = true;
         }

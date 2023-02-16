@@ -11,12 +11,13 @@ public class PlantDestroyer : MonoBehaviour
     public bool isMultipleCrystals;
     public int numCrystals;
     public int crystalsComplete;
+    public int thisCrystalComplete;
 
     private void Awake()
     {
         numCrystals = coCrystals.Length + 1;
-        Debug.Log(numCrystals);
 
+        thisCrystalComplete = 0;
         crystalsComplete = 0;
     }
 
@@ -24,6 +25,8 @@ public class PlantDestroyer : MonoBehaviour
     {
         if (other.CompareTag("Faceless"))
         {
+            this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
+            
             if (!isMultipleCrystals)
             {
                 foreach (var plantDestroyer in plantToDestroy)
@@ -33,21 +36,27 @@ public class PlantDestroyer : MonoBehaviour
             }
             else
             {
-                crystalsComplete += 1;
+                thisCrystalComplete = 1;
+                crystalsComplete = 1;
 
                 foreach (var coCrystal in coCrystals)
                 {
-                    crystalsComplete = crystalsComplete + coCrystal.GetComponent<PlantDestroyer>().crystalsComplete;
-                    Debug.Log(crystalsComplete);
+                    if (coCrystal.GetComponent<PlantDestroyer>().thisCrystalComplete == 1)
+                    {
+                        crystalsComplete =
+                            crystalsComplete + coCrystal.GetComponent<PlantDestroyer>().thisCrystalComplete;
+                    }
                 }
+                
+                Debug.Log(crystalsComplete);
 
                 if (crystalsComplete == numCrystals)
                 {
-                    foreach (var plantDestroyer in plantToDestroy)
+                    foreach (var plant in plantToDestroy)
                     {
-                        if (plantDestroyer != null)
+                        if (plant != null)
                         {
-                            Destroy(plantDestroyer);
+                            Destroy(plant);
                         }
                     }
                 }

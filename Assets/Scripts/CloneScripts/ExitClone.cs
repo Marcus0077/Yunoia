@@ -60,6 +60,9 @@ public class ExitClone : MonoBehaviour
     {
         summonControls = new PlayerControls();
         
+        exitClone = summonControls.SummonClone.ExitClone;
+        exitClone.Enable();
+        
         Player = GameObject.FindWithTag("Player");
 
         basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
@@ -87,7 +90,7 @@ public class ExitClone : MonoBehaviour
         
         anim = GetComponent<Animator>();
     }
-    
+
     // Called each frame.
     private void Update()
     {
@@ -230,13 +233,6 @@ public class ExitClone : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         
         isRunning = false;
-    }
-    
-    // Enable input action map controls.
-    private void OnEnable()
-    {
-        exitClone = summonControls.SummonClone.ExitClone;
-        exitClone.Enable();
     }
 
     // Disable input action map controls.

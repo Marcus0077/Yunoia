@@ -47,8 +47,6 @@ public class AiMovement : MonoBehaviour
     private void Awake()
     {
         aiAgent = this.GetComponent<NavMeshAgent>();
-        
-        //wanderCoroutine = Wander();
 
         isRunning = false;
         isStoppedByCrystal = false;

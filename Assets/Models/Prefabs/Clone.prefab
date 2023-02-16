@@ -5889,7 +5889,6 @@ GameObject:
   - component: {fileID: 5243249086005743272}
   - component: {fileID: 5827308682441603356}
   - component: {fileID: 5827308682441603358}
-  - component: {fileID: 8960577420141974533}
   - component: {fileID: 4153748680547471086}
   - component: {fileID: 307182109869249534}
   - component: {fileID: 8397525453568900783}
@@ -5985,19 +5984,6 @@ MonoBehaviour:
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8960577420141974533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5827308682441603353}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9eceb5dd45902040a025d2c3318c192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cloneHead: {fileID: 0}
 --- !u!114 &4153748680547471086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6049,6 +6035,7 @@ MonoBehaviour:
   radius: 12
   playerRB: {fileID: 5827308682441603359}
   player: {fileID: -8715429646849006418}
+  grappleActive: 0
   canYank: 0
   yankReady: 0
   canReverseSwing: 1

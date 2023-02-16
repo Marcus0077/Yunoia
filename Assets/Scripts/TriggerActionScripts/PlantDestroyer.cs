@@ -14,7 +14,7 @@ public class PlantDestroyer : MonoBehaviour
 
     private void Awake()
     {
-        numCrystals = coCrystals.Length;
+        numCrystals = coCrystals.Length + 1;
         Debug.Log(numCrystals);
 
         crystalsComplete = 0;

@@ -31,7 +31,7 @@ public class LoadVSDenial : MonoBehaviour
         {
             StopCoroutine(LoadDenial());
 
-            SceneManager.LoadScene("VSDenial");
+            SceneManager.LoadScene("DenialFinal");
         }
     }
     
@@ -44,6 +44,6 @@ public class LoadVSDenial : MonoBehaviour
         
         yield return new WaitForSeconds(58f);
 
-        SceneManager.LoadScene("VSDenial");
+        SceneManager.LoadScene("DenialFinal");
     }
 }

@@ -40,10 +40,10 @@ public class SceneTransition : MonoBehaviour
 
             if (sceneToTransfer == "BargainingFinal")
             {
-                DataManager.gameData.position.Set(0.0f, 1.685f, -1.85f);
+                DataManager.gameData.position.Set(-300.0f, 0.75f, -136.55f);
             }
 
-            if (sceneToTransfer == "VSDenial")
+            if (sceneToTransfer == "DenialFinal")
             {
                 DataManager.gameData.position.Set(-0.22f, 45.0f, 37.29f);
             }
@@ -58,13 +58,13 @@ public class SceneTransition : MonoBehaviour
                 DataManager.gameData.position.Set(11.73f, 0.0f, 10.0f);
             }
 
-            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name != "VSDenial")
+            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name != "DenialFinal")
             {
                 DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
                 GameManager.Instance.CompleteLevel(level);
             }
             
-            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name == "VSDenial")
+            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name == "DenialFinal")
             {
                 DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
             }

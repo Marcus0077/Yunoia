@@ -976,18 +976,9 @@
             "id": "8379664d-373e-4316-97a0-0aabe99b24e9",
             "actions": [
                 {
-                    "name": "AngerScene",
+                    "name": "DenialScene",
                     "type": "Button",
-                    "id": "c65b2815-e064-4aaf-9b9e-cef792f316cb",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "BargainingScene",
-                    "type": "Button",
-                    "id": "0ea02045-b826-417a-9d19-cd80c8cc2e56",
+                    "id": "54befe8e-dee2-49b8-83b5-a00f3b2bc31f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1003,18 +994,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DenialScene",
+                    "name": "BargainingScene",
                     "type": "Button",
-                    "id": "54befe8e-dee2-49b8-83b5-a00f3b2bc31f",
+                    "id": "0ea02045-b826-417a-9d19-cd80c8cc2e56",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AcceptanceScene",
+                    "name": "AngerScene",
                     "type": "Button",
-                    "id": "3df64762-cd97-4f45-a7e9-d29ca282f0fe",
+                    "id": "c65b2815-e064-4aaf-9b9e-cef792f316cb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1039,6 +1030,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AcceptanceScene",
+                    "type": "Button",
+                    "id": "3df64762-cd97-4f45-a7e9-d29ca282f0fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CameraScene",
                     "type": "Button",
                     "id": "6ff967f6-e516-4478-9be7-7f97ff370aab",
@@ -1051,41 +1051,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "2927d436-03c7-4997-bb56-93782c26f282",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "AngerScene",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2cf15228-9880-43f8-961b-bf0136cf8718",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "BargainingScene",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "23c5203d-f4ca-426e-843b-33e4e7540f0f",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "DepressionScene",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f3a79e4a-8828-4332-909f-8ca6f7b79f0c",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1095,19 +1062,41 @@
                 },
                 {
                     "name": "",
-                    "id": "1bd01edb-b093-4c22-8691-19a4c0941152",
-                    "path": "<Keyboard>/5",
+                    "id": "2927d436-03c7-4997-bb56-93782c26f282",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "AcceptanceScene",
+                    "action": "AngerScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23c5203d-f4ca-426e-843b-33e4e7540f0f",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DepressionScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cf15228-9880-43f8-961b-bf0136cf8718",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "BargainingScene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "246cb10d-8643-4704-858a-de40dcb040e6",
-                    "path": "<Keyboard>/6",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1118,22 +1107,11 @@
                 {
                     "name": "",
                     "id": "2d7a7263-fbec-4fa0-826b-3c61d7b570d0",
-                    "path": "<Keyboard>/7",
+                    "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "MuseumScene",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f63ed48b-c78b-48f0-9a73-353d4815c30a",
-                    "path": "<Keyboard>/8",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraScene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -19,6 +19,8 @@ public class SceneTransition : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        if(SceneManager.GetActiveScene().name != sceneName)
+            DataManager.gameData.checkpointed = false;
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }

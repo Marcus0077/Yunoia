@@ -19,6 +19,7 @@ public class BasicMovement : MonoBehaviour
     
     // Script References
     public LimitedMovementCam limitedMovementCam;
+    public Grapple grapple;
     
     // Movement variables
     public Rigidbody playerRB;
@@ -315,14 +316,24 @@ public class BasicMovement : MonoBehaviour
 
     // Applies jump force to player if they press the jump button and
     // if they are on the ground.
+    // Added condition for currently using the grapple (Marcus)
     void JumpPlayer()
     {
         IsGrounded();
 
-        if (jump.WasPressedThisFrame() && isGrounded && canMove)
+        if (jump.WasPressedThisFrame())
         {
-            playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
-            //jumpSound.Play();
+            if (isGrounded && canMove)
+            {
+                playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+                //jumpSound.Play();
+            }
+            else if (grapple.grappleActive)
+            {
+                playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+                //jumpSound.Play();
+            }
+            
         }
     }
 

@@ -6771,6 +6771,10 @@ PrefabInstance:
       value: Switch Places
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410519, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
+      propertyPath: grapple
+      value: 
+      objectReference: {fileID: 1804445680587551990}
+    - target: {fileID: 8325761764747410519, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 4749780632195472214}
@@ -7022,6 +7026,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
   m_PrefabInstance: {fileID: 7674593359417362523}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1804445680587551990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8325761764747410605, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
+  m_PrefabInstance: {fileID: 7674593359417362523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804445680587551994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &1804445680587551992 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 8325761764747410595, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
@@ -7131,6 +7146,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 02d8d900-8e37-44d5-afb9-d9d24b71c693
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  closeGame:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 88d35dea-a3e6-4b2f-bdad-5e5ab2b43619
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

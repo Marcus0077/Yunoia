@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScaleMeasure : MonoBehaviour
 {
-    public float weight = 0, minionScale = 1, cloneWeight = 2, facelessWeight = 1;
+    public float weight = 0, minionScale = 1, cloneWeight = 2, facelessWeight = 1, boxWeight = 1;
     int minionCount;
     BasicMovement player;
     BasicMovement clone;
@@ -33,6 +33,10 @@ public class ScaleMeasure : MonoBehaviour
         {
             weight += facelessWeight;
         }
+        else if (collider.tag == "BoxScale")
+        {
+            weight += boxWeight;
+        }
     }
 
     void OnTriggerExit(Collider collider)
@@ -51,6 +55,10 @@ public class ScaleMeasure : MonoBehaviour
         else if (collider.tag == "Faceless")
         {
             weight -= facelessWeight;
+        }
+        else if (collider.tag == "BoxScale")
+        {
+            weight -= boxWeight;
         }
     }
 

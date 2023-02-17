@@ -13,7 +13,7 @@ public class ScaleControl : MonoBehaviour
     GameObject navHandler;
     [SerializeField] // what axis should the scale move in (currently only y axis is used in game)
     Vector3 axis;
-    float compareValue = 0, frame = -1;
+    float compareValue = 0, frame = -1, freezeAtRight, freezeAtLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +22,8 @@ public class ScaleControl : MonoBehaviour
         rightPos = right.transform.position;
         oldLeftPos = leftPos;
         oldRightPos = rightPos;
+        freezeAtRight = oldRightPos.y - freezeAt * unitDistance;
+        freezeAtLeft = oldLeftPos.y - freezeAt * unitDistance;
         compareValue = 0;
         navHandler = GameObject.FindGameObjectWithTag("NavmeshHandler");
     }
@@ -35,10 +37,11 @@ public class ScaleControl : MonoBehaviour
             // start at 0 frame to start lerp
             frame = 0;
             compareValue = right.GetComponent<ScaleMeasure>().weight - left.GetComponent<ScaleMeasure>().weight;
+            Debug.Log(compareValue);
             oldLeftPos = left.transform.position;
             oldRightPos = right.transform.position;
         }
-        if ((right.transform.position.y <= freezeAt && compareValue > 0) || (left.transform.position.y <= freezeAt && compareValue < 0))//make it for every axis
+        if ((right.transform.position.y <= freezeAtRight && compareValue >= freezeAt) || (left.transform.position.y <= freezeAtLeft && compareValue <= -freezeAt))//make it for every axis
         {
             return;
         }
@@ -49,13 +52,17 @@ public class ScaleControl : MonoBehaviour
             left.transform.position = Vector3.Lerp(oldLeftPos, new Vector3(leftPos.x + unitDistance * axis.x * compareValue, leftPos.y + unitDistance * axis.y * compareValue, leftPos.z + unitDistance * axis.z * compareValue), frame / 60f * speed);
             right.transform.position = Vector3.Lerp(oldRightPos, new Vector3(rightPos.x + unitDistance * axis.x * -compareValue, rightPos.y + unitDistance * axis.y * -compareValue, rightPos.z + unitDistance * axis.z * -compareValue), frame / 60f * speed);
             if(navHandler != null)
+            {
                 //navHandler.GetComponent<NavMeshHandler>().BuildScaleNavMesh();
+            }
             frame++;
         }
         else if (frame != -1)
         {
             if (navHandler != null)
-                navHandler.GetComponent<NavMeshHandler>().BuildAllNavMesh();
+            {
+                //navHandler.GetComponent<NavMeshHandler>().BuildAllNavMesh();
+            }
             frame = -1;
         }
     }

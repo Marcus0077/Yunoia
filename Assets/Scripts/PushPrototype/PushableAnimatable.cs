@@ -44,6 +44,12 @@ public class PushableAnimatable : Pushable
     {
         anim.SetBool(data.animationBool, true);
         yield return WaitForAnimation(); // have real name
+        if(data.kinematicOff)
+        {
+            //anim.applyRootMotion = false;
+            anim.enabled = false;
+            rb.isKinematic = false;
+        }
         if(toBeDestroyed)
         {
             Destroy(gameObject);

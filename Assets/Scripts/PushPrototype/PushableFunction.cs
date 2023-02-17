@@ -12,7 +12,7 @@ public class PushableFunction : ScriptableObject
     // activatable: runs functions inside this class, changeColor: -, destroy: destroys pushed object on completion of all tasks, animation: plays animation
     // canReturn: returns if speed is capped, constraints: -, stackPush: can be pushed while moving from last push
     [SerializeField]
-    bool activatable, changeColor, destroy, animation, canReturn, constraintX, constraintY, constraintZ, stackPush = true;
+    bool activatable, changeColor, destroy, animation, canReturn, constraintX, constraintY, constraintZ, stackPush = true, turnKinematicOff = false;
     [SerializeField] // color: color for changeColor
     Color color;
     [SerializeField] // animationName: name of the bool used in the animator for specific animation state (connected to default state in a 2 way connection)
@@ -39,6 +39,18 @@ public class PushableFunction : ScriptableObject
         set
         {
             destroy = value;
+        }
+    }
+
+    public bool kinematicOff
+    {
+        get
+        {
+            return turnKinematicOff;
+        }
+        set
+        {
+            turnKinematicOff = value;
         }
     }
 
@@ -138,10 +150,17 @@ public class PushableFunction : ScriptableObject
     {
         if(activatable)
         {
-            if (destroy && !animation)
+            if (!animation)
             {
-                Destroy(pushedObj);
-                return;
+                if(destroy)
+                {
+                    Destroy(pushedObj);
+                    return;
+                }
+                if(turnKinematicOff)
+                {
+                    pushedObj.GetComponent<Rigidbody>().isKinematic = false;
+                }
             }
             if (changeColor)
             {

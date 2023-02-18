@@ -15,6 +15,7 @@ public class Grapple : MonoBehaviour
     public float stopDistanceFar;
     public float taughtDistance = 3.0f;
     [SerializeField] float maxSwingHeight = float.MaxValue;
+    public float heightCapDistance = 1.3f;
     
     // Experimental player tracker while grappling
     [SerializeField] Vector3 lastPlayerPos;
@@ -43,7 +44,7 @@ public class Grapple : MonoBehaviour
     // Conditions for grapple movement
     public bool grappleActive;
     public bool swinging = false;
-    bool ready = true;
+    public bool ready = true;
     public bool canYank = false;
     public bool yankReady = false;
     public bool canReverseSwing = true;
@@ -92,7 +93,7 @@ public class Grapple : MonoBehaviour
         // Initializes maxSwingHeight for 'GrappleYank' points once in the air allowing for a reliable swing
         if (yankReady && !player.isGrounded && needYankSwing)
         {
-            maxSwingHeight = playerRB.position.y + 1.5f;
+            maxSwingHeight = playerRB.position.y + heightCapDistance;
             needYankSwing = false;
         }
 
@@ -129,20 +130,8 @@ public class Grapple : MonoBehaviour
             grappleNeedsDeath = true;
         }
 
-        // Fires the grapple if the input is pressed, bestHook is initialized, the grapple is inactive, 
-        // and the grapple is ready
-        if (bestHook != null && hook == null && shootHook.IsPressed() && ready == true)
-        {
-            hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
-            shoot.Play();
-
-            grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, this.transform.rotation);
-
-            hook.Initialize(this, shootTransform);
-            StartCoroutine(DestroyHookAfterLifetime());
-        }
         // Old/Updated
-        else if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
+        if (hook != null && (cancelHook.IsPressed() || releasedHook)) // input testing
         {
             DestroyHook(); 
             releasedHook = false; // input testing
@@ -153,17 +142,6 @@ public class Grapple : MonoBehaviour
             return;
         }
         
-        // Conditions for a Yank. These include being attached to a 'GrappleYank' point, 
-        // and finishing the YankDelay() coroutine (makes yankReady = true)
-        if (canYank && yankReady)
-        {
-            if (grappleActive && shootHook.IsPressed() && player.isGrounded)
-            {
-                yankReady = false;
-                playerRB.AddForce((hook.transform.position - transform.position) * yankSpeedStrong, ForceMode.Impulse);
-                yank.Play();
-            }
-        }
         /*else if (!yankHook)
         {
             if (grappleActive && shootHook.IsPressed() && player.isGrounded)
@@ -212,6 +190,34 @@ public class Grapple : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // Fires the grapple if the input is pressed, bestHook is initialized, the grapple is inactive, 
+        // and the grapple is ready
+        if (bestHook != null && hook == null && shootHook.WasPressedThisFrame() && ready == true)
+        {
+            hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
+            shoot.Play();
+
+            grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, this.transform.rotation);
+
+            hook.Initialize(this, shootTransform);
+            StartCoroutine(DestroyHookAfterLifetime());
+        }
+
+        // Conditions for a Yank. These include being attached to a 'GrappleYank' point, 
+        // and finishing the YankDelay() coroutine (makes yankReady = true)
+        if (canYank && yankReady)
+        {
+            if (grappleActive && shootHook.WasPressedThisFrame() && player.isGrounded)
+            {
+                yankReady = false;
+                playerRB.AddForce((hook.transform.position - transform.position) * yankSpeedStrong, ForceMode.Impulse);
+                yank.Play();
+            }
+        }
+    }
+
     // Shoots grapple and sets all booleans allowing for a forward swing
     public void StartGrapple()
     {
@@ -221,7 +227,7 @@ public class Grapple : MonoBehaviour
         forwardSwing = true;
 
         stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 4.0f;
-        maxSwingHeight = playerRB.position.y + 1.5f;
+        maxSwingHeight = playerRB.position.y + heightCapDistance;
 
         if (canYank)
         {
@@ -267,7 +273,7 @@ public class Grapple : MonoBehaviour
     // If the grapple connects with a grapple point 
     private IEnumerator ExtendLifetime()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3.0f);
 
         DestroyHook();
     }
@@ -401,9 +407,27 @@ public class Grapple : MonoBehaviour
         canCheckPos = false;
         lastPlayerPos = transform.position;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
+        CheckMovement();
         canCheckPos = true;
+    }
+
+    // Compares current player's position to lastPlayerPos and destroys the hook
+    // if there isn't enough change in the x and y values 
+    void CheckMovement()
+    {
+        if (!player.isGrounded)
+        {
+            if (Math.Abs(transform.position.x - lastPlayerPos.x) < 0.1f)
+            {
+                DestroyHook();
+            }
+            else if (Math.Abs(transform.position.y - lastPlayerPos.y) < 0.1f)
+            {
+                DestroyHook();
+            }
+        }
     }
 
     // Sets player's max velocity
@@ -445,7 +469,7 @@ public class Grapple : MonoBehaviour
 
     public void ResetSwingConditions()
     {
-        ready = false;
+        ready = true;
         canYank = false;
         yankReady = false;
         grappleActive = false;
@@ -456,6 +480,7 @@ public class Grapple : MonoBehaviour
         recoverySwing = false;
         swinging = false;
         maxSwingHeight = float.MaxValue;
+        lastPlayerPos = Vector3.zero;
     }
 
     // Enable input action map controls.

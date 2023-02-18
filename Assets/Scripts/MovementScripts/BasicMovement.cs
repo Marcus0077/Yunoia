@@ -221,7 +221,7 @@ public class BasicMovement : MonoBehaviour
                 playerRB.constraints = RigidbodyConstraints.FreezeRotation;
                 isFrozen = false;
             }
-
+            
             if (SceneManager.GetActiveScene().name == "VSDenial")
             {
                 moveDirection = Quaternion.AngleAxis(0, Vector3.right) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());

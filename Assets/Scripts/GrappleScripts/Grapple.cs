@@ -8,6 +8,7 @@ public class Grapple : MonoBehaviour
 {
     // Speed and distance restrictions
     float pullSpeed = 0.27f;
+    float recoveryPullSpeed = 0.4f;
     [SerializeField] float yankSpeedStrong = 0.7f;
     [SerializeField] float yankSpeedWeak = 0.7f;
     public float stopDistanceClose = 2.5f;
@@ -41,6 +42,7 @@ public class Grapple : MonoBehaviour
 
     // Conditions for grapple movement
     public bool grappleActive;
+    public bool swinging = false;
     bool ready = true;
     public bool canYank = false;
     public bool yankReady = false;
@@ -48,6 +50,7 @@ public class Grapple : MonoBehaviour
     public  bool canApplyForce = true;
     public bool forwardSwing = true;
     public bool needYankSwing = true;
+    public bool recoverySwing = false;
     float cdRemaining;
 
     public PlayerControls grappleControls;
@@ -76,6 +79,16 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (playerRB.position.y > maxSwingHeight)
+        {
+            DestroyHook();
+        }
+
+        if (grappleActive && !player.isGrounded)
+        {
+            swinging = true;
+        }
+
         // Initializes maxSwingHeight for 'GrappleYank' points once in the air allowing for a reliable swing
         if (yankReady && !player.isGrounded && needYankSwing)
         {
@@ -192,7 +205,7 @@ public class Grapple : MonoBehaviour
             playerRB.AddForce(Physics.gravity * 7.0f * playerRB.mass);
         }*/
 
-        //  Runs the GrappleForce() coroutine while the grapple is active
+        //  Runs the GrappleForce() method while the grapple is active
         if (grappleActive)
         {
             GrappleForce();
@@ -207,13 +220,10 @@ public class Grapple : MonoBehaviour
         yankReady = false;
         forwardSwing = true;
 
-        stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 3.0f;
+        stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 4.0f;
+        maxSwingHeight = playerRB.position.y + 1.5f;
 
-        if (!canYank)
-        {
-            maxSwingHeight = playerRB.position.y + 1.5f;
-        }
-        else if (canYank)
+        if (canYank)
         {
             StartCoroutine(YankDelay());
         }
@@ -228,15 +238,7 @@ public class Grapple : MonoBehaviour
         }
 
         // Reset all swing/force conditions
-        ready = false;
-        canYank = false;
-        yankReady = false;
-        grappleActive = false;
-        canCheckPos = true;
-        canApplyForce = true;
-        canReverseSwing = true;
-        needYankSwing = true;
-        maxSwingHeight = float.MaxValue;
+        ResetSwingConditions();
 
         Destroy(hook.gameObject);
         hook = null;
@@ -327,8 +329,7 @@ public class Grapple : MonoBehaviour
             DestroyHook();
         }
 
-        // Once the player reaches maxSwingHeight mid swing, they have completed once cycle and are 
-        // ready to swing backwards
+        // Once the player reaches maxSwingHeight mid swing, they have completed once cycle
         if ((playerRB.position.y > maxSwingHeight) && canApplyForce)
         {
             // Temporary Coroutine Swap
@@ -347,17 +348,38 @@ public class Grapple : MonoBehaviour
             return;
         }
 
+        if (playerRB.velocity.y < -5.0f)
+        {
+            recoverySwing = true;
+            StartCoroutine(RecoverySwing());
+        }
+
         /*if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || (playerRB.position.y > maxSwingHeight))
         {
             playerRB.AddRelativeForce(Vector3.down * 1.0f, ForceMode.VelocityChange);
         }*/
-        else if (canApplyForce)
+        if (canApplyForce)
         {
-            playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
+            if (recoverySwing)
+            {
+                playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
+                * recoveryPullSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
                 * pullSpeed, ForceMode.Impulse);
+            }
         }
 
         return;
+    }
+
+    private IEnumerator RecoverySwing()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        recoverySwing = false;
     }
 
     // Adds horizontal force for forward and backward swings relative to the player direction
@@ -369,7 +391,7 @@ public class Grapple : MonoBehaviour
         }
         else
         {
-            playerRB.AddRelativeForce(-7.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+            //playerRB.AddRelativeForce(-7.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
         }
     }
 
@@ -419,6 +441,21 @@ public class Grapple : MonoBehaviour
         {
             DestroyHook();
         }
+    }
+
+    public void ResetSwingConditions()
+    {
+        ready = false;
+        canYank = false;
+        yankReady = false;
+        grappleActive = false;
+        canCheckPos = true;
+        canApplyForce = true;
+        canReverseSwing = true;
+        needYankSwing = true;
+        recoverySwing = false;
+        swinging = false;
+        maxSwingHeight = float.MaxValue;
     }
 
     // Enable input action map controls.

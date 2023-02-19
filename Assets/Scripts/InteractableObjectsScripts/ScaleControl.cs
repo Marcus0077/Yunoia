@@ -9,11 +9,11 @@ public class ScaleControl : MonoBehaviour
     Vector3 leftPos, rightPos;
     Vector3 oldLeftPos, oldRightPos;
     [SerializeField] // unitDistance: how many unity units should object move for each weight difference in Iris', speed: -, freezeAt: what is the lowest position the scale should go to
-    float unitDistance = 1, speed = 1, freezeAt = -1;
+    float unitDistance = 1, speed = 1, freezeAtLeft = -1, freezeAtRight = -1;
     GameObject navHandler;
     [SerializeField] // what axis should the scale move in (currently only y axis is used in game)
     Vector3 axis;
-    float compareValue = 0, frame = -1, freezeAtRight, freezeAtLeft;
+    float compareValue = 0, frame = -1, freezeAtRightPos, freezeAtLeftPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +22,8 @@ public class ScaleControl : MonoBehaviour
         rightPos = right.transform.position;
         oldLeftPos = leftPos;
         oldRightPos = rightPos;
-        freezeAtRight = oldRightPos.y - freezeAt * unitDistance;
-        freezeAtLeft = oldLeftPos.y - freezeAt * unitDistance;
+        freezeAtRightPos = oldRightPos.y - freezeAtRight * unitDistance;
+        freezeAtLeftPos = oldLeftPos.y - freezeAtLeft * unitDistance;
         compareValue = 0;
         navHandler = GameObject.FindGameObjectWithTag("NavmeshHandler");
     }
@@ -41,7 +41,7 @@ public class ScaleControl : MonoBehaviour
             oldLeftPos = left.transform.position;
             oldRightPos = right.transform.position;
         }
-        if ((right.transform.position.y <= freezeAtRight && compareValue >= freezeAt) || (left.transform.position.y <= freezeAtLeft && compareValue <= -freezeAt))//make it for every axis
+        if ((right.transform.position.y <= freezeAtRightPos && compareValue >= freezeAtRight) || (left.transform.position.y <= freezeAtLeftPos && compareValue <= freezeAtLeft))//make it for every axis
         {
             return;
         }

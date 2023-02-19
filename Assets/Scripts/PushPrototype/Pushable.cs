@@ -210,6 +210,10 @@ public class Pushable : MonoBehaviour
         }
         foreach (ContactPoint contact in collision.contacts)
         {
+            if(contact.otherCollider.gameObject.tag != "IgnoreCollider")
+            {
+                continue;
+            }
             if(contact.otherCollider.gameObject.tag != "Player")
             {
                 totalVelocity -= (Mathf.Max(0, queuedVelocity) + collision.relativeVelocity.magnitude);

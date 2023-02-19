@@ -9,11 +9,11 @@ public class ScaleControl : MonoBehaviour
     Vector3 leftPos, rightPos;
     Vector3 oldLeftPos, oldRightPos;
     [SerializeField] // unitDistance: how many unity units should object move for each weight difference in Iris', speed: -, freezeAt: what is the lowest position the scale should go to
-    float unitDistance = 1, speed = 1, freezeAtLeft = -1, freezeAtRight = -1;
+    float unitDistance = 1, speed = 1, freezeAtLeft = -1, freezeAtRight = -1, leftMod = 1, rightMod = 1;
     GameObject navHandler;
     [SerializeField] // what axis should the scale move in (currently only y axis is used in game)
     Vector3 axis;
-    float compareValue = 0, frame = -1, freezeAtRightPos, freezeAtLeftPos;
+    public float compareValue = 0, frame = -1, freezeAtRightPos, freezeAtLeftPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +41,7 @@ public class ScaleControl : MonoBehaviour
             oldLeftPos = left.transform.position;
             oldRightPos = right.transform.position;
         }
-        if ((right.transform.position.y <= freezeAtRightPos && compareValue >= freezeAtRight) || (left.transform.position.y <= freezeAtLeftPos && compareValue <= freezeAtLeft))//make it for every axis
+        if ((right.transform.position.y <= freezeAtRightPos && compareValue >= freezeAtRight) || (left.transform.position.y <= freezeAtLeftPos && compareValue <= -freezeAtLeft))//make it for every axis
         {
             return;
         }
@@ -49,8 +49,8 @@ public class ScaleControl : MonoBehaviour
         if (frame * speed <= 60 && frame >= 0)
         {
             // position is calculated using Iris as a unit weight of 1, difference in weight * unitDistance
-            left.transform.position = Vector3.Lerp(oldLeftPos, new Vector3(leftPos.x + unitDistance * axis.x * compareValue, leftPos.y + unitDistance * axis.y * compareValue, leftPos.z + unitDistance * axis.z * compareValue), frame / 60f * speed);
-            right.transform.position = Vector3.Lerp(oldRightPos, new Vector3(rightPos.x + unitDistance * axis.x * -compareValue, rightPos.y + unitDistance * axis.y * -compareValue, rightPos.z + unitDistance * axis.z * -compareValue), frame / 60f * speed);
+            left.transform.position = Vector3.Lerp(oldLeftPos, new Vector3(leftPos.x + unitDistance * axis.x * compareValue * leftMod, leftPos.y + unitDistance * axis.y * compareValue * leftMod, leftPos.z + unitDistance * axis.z * compareValue * leftMod), frame / 60f * speed);
+            right.transform.position = Vector3.Lerp(oldRightPos, new Vector3(rightPos.x + unitDistance * axis.x * -compareValue * rightMod, rightPos.y + unitDistance * axis.y * -compareValue * rightMod, rightPos.z + unitDistance * axis.z * -compareValue * rightMod), frame / 60f * speed);
             if(navHandler != null)
             {
                 //navHandler.GetComponent<NavMeshHandler>().BuildScaleNavMesh();

@@ -16,10 +16,11 @@ public class GameManager : MonoBehaviour
     private static readonly string Depr = "Depression";
     private static readonly string Barg = "Barg";
     private static readonly string Anger = "Anger";
+    private static readonly string Denial = "Denial";
     private static readonly string TextColor = "TextColor";
 
     public string[] statics = { Firstplay,BGMPref,SFXPref,MasPref,Sensitivity,TextColor };
-    public string[] levelNames = { Depr, Barg, Anger };
+    public string[] levelNames = { Depr, Barg, Anger, Denial };
     public double[] settings = new double[System.Enum.GetValues(typeof(Settings)).Length];
 
     public static GameManager instance;
@@ -251,5 +252,6 @@ public enum Levels
 {
     DEP = 0,
     BAR = 1,
-    ANG = 2
+    ANG = 2,
+    DEN = 3
 }

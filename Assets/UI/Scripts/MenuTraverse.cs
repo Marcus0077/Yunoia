@@ -75,7 +75,6 @@ public class MenuTraverse : MonoBehaviour
             else
             {
                 menuAltMove = playerControls.Menu.AltMove;
-                Debug.Log(menuAltMove);
                 menuAltMove.started += ctx => StartMoveCursor();
                 menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
                 menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
@@ -86,6 +85,14 @@ public class MenuTraverse : MonoBehaviour
             menuCancel = playerControls.Menu.Back;
             menuCancel.performed += ctx => Back();
         }
+    }
+
+    void makeAltMove()
+    {
+        menuAltMove = playerControls.Menu.AltMove;
+        menuAltMove.started += ctx => StartMoveCursor();
+        menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
+        menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
     }
 
     public virtual void Back()
@@ -104,6 +111,10 @@ public class MenuTraverse : MonoBehaviour
         }
         else
         {
+            if (menuAltMove == null)
+            {
+                makeAltMove();
+            }
             menuAltMove.Enable();
         }
         menuPress.Enable();
@@ -124,6 +135,10 @@ public class MenuTraverse : MonoBehaviour
         }
         else
         {
+            if(menuAltMove == null)
+            {
+                makeAltMove();
+            }
             menuAltMove.Disable();
         }
         menuPress.Disable();

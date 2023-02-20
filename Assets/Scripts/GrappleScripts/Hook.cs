@@ -55,6 +55,7 @@ public class Hook : MonoBehaviour
             //lineRenderer.enabled = true;
             rigid.useGravity = false;
             rigid.isKinematic = true;
+            //rigid.position = bestHookCenter;
 
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 
@@ -71,6 +72,7 @@ public class Hook : MonoBehaviour
             rigid.useGravity = false;
             rigid.isKinematic = true;
             grapple.canYank = true;
+            //rigid.position = bestHookCenter;
 
             Instantiate(grappleAttach, transform.position, Quaternion.identity);
 

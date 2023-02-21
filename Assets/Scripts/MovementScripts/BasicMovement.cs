@@ -433,6 +433,13 @@ public class BasicMovement : MonoBehaviour
             limitedMovementCam.GetCurrentCameraData(curRoom);
             limitedMovementCam.SetCurrentPlayer(this.gameObject);
         }
+        else if (other.CompareTag("Camera10"))
+        {
+            curRoom = 10;
+            
+            limitedMovementCam.GetCurrentCameraData(curRoom);
+            limitedMovementCam.SetCurrentPlayer(this.gameObject);
+        }
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

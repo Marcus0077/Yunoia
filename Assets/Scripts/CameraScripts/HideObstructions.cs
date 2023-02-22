@@ -10,22 +10,18 @@ public class HideObstructions : MonoBehaviour
 {
     public Transform[] Obstructions;
 
-    private void Awake()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Clone"))
         {
             foreach (var obstruction in Obstructions)
             {
-                obstruction.GetComponent<MeshRenderer>().enabled = !obstruction.GetComponent<MeshRenderer>().enabled;
+                obstruction.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+
+                if (obstruction.GetComponent<MeshCollider>())
+                {
+                    obstruction.GetComponent<MeshCollider>().enabled = false;
+                }
             }
         }
     }

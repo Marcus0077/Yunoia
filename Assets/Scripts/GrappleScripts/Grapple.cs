@@ -404,7 +404,7 @@ public class Grapple : MonoBehaviour
         }
         else if (forwardSwing)
         {
-            playerRB.AddRelativeForce(7.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+            playerRB.AddRelativeForce(8.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
         }
     }
 
@@ -428,11 +428,11 @@ public class Grapple : MonoBehaviour
         {
             if (Math.Abs(transform.position.x - lastPlayerPos.x) < 0.1f)
             {
-                DestroyHook();
+                //DestroyHook();
             }
             else if (Math.Abs(transform.position.y - lastPlayerPos.y) < 0.1f)
             {
-                DestroyHook();
+                //DestroyHook();
             }
         }
     }

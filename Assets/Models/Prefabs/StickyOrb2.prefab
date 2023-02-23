@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a5ac2e9f70f3e544bf9fa8bfa555031, type: 2}
+  - {fileID: 2100000, guid: 228cbbfcb6e34c9438e40eac3cd52ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,9 +101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f8e0977b94c5a45b679350bb381bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushCounter: 0
   queuedVelocity: 0
   totalVelocity: 0
   canReturn: 0
+  canPush: 1
+  capSpeed: 1
   data: {fileID: 11400000, guid: c32fe07262072254eac942f608092932, type: 2}
   orb: {fileID: 5761842697464177421, guid: 100cd221adbfa4f43b93fe92997ec3b2, type: 3}
   player: {fileID: 0}

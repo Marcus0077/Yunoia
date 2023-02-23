@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6ae183fba5d2f1947a66993d86ddcce8, type: 2}
+  - {fileID: 2100000, guid: 530c6dae16d0fdd4eae16b325bf3beb1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,14 +136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d7618a2cf75914180d7252029ceaa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushCounter: 0
   queuedVelocity: 0
   totalVelocity: 0
   canReturn: 0
+  canPush: 1
+  capSpeed: 1
   data: {fileID: 11400000, guid: c32fe07262072254eac942f608092932, type: 2}
   stickyOrb: {fileID: 1477132796423374369, guid: f170c668fbddbc8409211d3a9c87986e, type: 3}
   player: {fileID: 0}
   detectDistance: 5
   movespeed: 1
+  timeToDelay: 0
 --- !u!54 &5568504409342811832
 Rigidbody:
   m_ObjectHideFlags: 0

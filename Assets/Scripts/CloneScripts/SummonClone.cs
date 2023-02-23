@@ -28,6 +28,7 @@ public class SummonClone : MonoBehaviour
     public LayerMask ground;
     public LayerMask wall;
     public LayerMask scale;
+    public LayerMask stairs;
 
     // Audio variables.
     [SerializeField] AudioSource cloneSound;
@@ -64,14 +65,15 @@ public class SummonClone : MonoBehaviour
         RaycastHit hit;
 
         // Debug rays.
-        Debug.DrawRay(transform.position, Vector3.right * 1.5f, Color.green, 2f);
-        Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 2f);
+        Debug.DrawRay(transform.position, Vector3.right * 1.5f, Color.green, 1.5f);
+        Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 1.5f);
         
         
-        if ((Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, wall)) 
-            || (Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, ground)) 
-            || (!Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1f, ground)
-            && !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1f, scale)))
+        if ((Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, wall))
+            || (Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, ground))
+            || (!Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.5f, ground)
+            && !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.5f, scale))
+            && !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.5f, stairs))
         {
             // Debug text if clone cannot be summoned.
             Debug.Log("Clone cannot be summoned here.");

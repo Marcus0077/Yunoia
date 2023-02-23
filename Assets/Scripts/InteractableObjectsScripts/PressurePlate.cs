@@ -53,6 +53,13 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    public void CloneOnPlate()
+    {
+        HideWall();
+
+        isClone = true;
+    }
+
     // Removes blocker when pressure plate is activated.
     public void HideWall()
     {

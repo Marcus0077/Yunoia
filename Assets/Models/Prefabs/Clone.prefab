@@ -6017,12 +6017,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22779eb17a77ab40aa429f10639ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yankSpeedStrong: 4
   yankSpeedWeak: 0.9
-  stopDistanceClose: 2.5
   stopDistanceFar: 0
   taughtDistance: 3
   maxSwingHeight: 3.4028235e+38
+  heightCapDistance: 1.3
   lastPlayerPos: {x: 0, y: 0, z: 0}
   canCheckPos: 1
   hookPrefab: {fileID: 1899701454814698178, guid: 9296164fe98bfff42846ab84181fe74d, type: 3}
@@ -6036,12 +6035,16 @@ MonoBehaviour:
   playerRB: {fileID: 5827308682441603359}
   player: {fileID: -8715429646849006418}
   grappleActive: 0
+  swinging: 0
+  yanking: 0
+  ready: 1
   canYank: 0
   yankReady: 0
   canReverseSwing: 1
   canApplyForce: 1
   forwardSwing: 1
   needYankSwing: 1
+  recoverySwing: 0
   shootHook:
     m_Name: Shoot Hook
     m_Type: 0
@@ -6177,6 +6180,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   limitedMovementCam: {fileID: 0}
+  grapple: {fileID: 0}
   playerRB: {fileID: 5827308682441603359}
   moveDirection: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
@@ -6188,7 +6192,7 @@ MonoBehaviour:
   moveStartTimeDivider: 0.05
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4160
+    m_Bits: 69696
   groundPoint: {fileID: 5827308682340208283}
   jumpForce: 0
   isGrounded: 0

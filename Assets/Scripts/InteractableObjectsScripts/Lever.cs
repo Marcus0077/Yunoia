@@ -128,7 +128,14 @@ public class Lever : MonoBehaviour
 
             if (!isAiLever)
             {
-                Door.GetComponent<Door>().Open();
+                if (Door.CompareTag("Door"))
+                {
+                    Door.GetComponent<Door>().Open();
+                }
+                else
+                {
+                    Destroy(Door);
+                }
             }
             else
             {

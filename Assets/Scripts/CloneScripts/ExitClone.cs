@@ -80,7 +80,7 @@ public class ExitClone : MonoBehaviour
         despawnClone = false;
         
         cloneActiveTimer = 30.0f;
-        despawnCloneTimer = 2.0f;
+        despawnCloneTimer = 1.25f;
         
         //activeTimerText = GameObject.FindGameObjectWithTag("Active Timer").GetComponent<TextMeshProUGUI>();
         //activeTimerText.color = Color.white;
@@ -114,7 +114,7 @@ public class ExitClone : MonoBehaviour
         }
         else if (!exitClone.IsPressed() && despawnCloneTimer != 2)
         {
-            despawnCloneTimer = 2.0f;
+            despawnCloneTimer = 1.25f;
             despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
         }
 

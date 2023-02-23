@@ -365,7 +365,7 @@ public class Grapple : MonoBehaviour
             recoverySwing = true;
             StartCoroutine(RecoverySwing());
         }
-
+        
         /*if (Vector3.Distance(transform.position, hook.transform.position) <= taughtDistance || (playerRB.position.y > maxSwingHeight))
         {
             playerRB.AddRelativeForce(Vector3.down * 1.0f, ForceMode.VelocityChange);

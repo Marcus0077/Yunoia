@@ -35,9 +35,9 @@ public class MenuTraverse : MonoBehaviour
             playerControls = new PlayerControls();
             if (!GameManager.Instance.GetMouseCursor())
             {
-                menuMove = playerControls.Menu.Move;
-                menuMove.performed += ctx => StartMove(ctx);
-                menuMove.canceled += ctx => CancelMove();
+                //menuMove = playerControls.Menu.Move;
+                //menuMove.performed += ctx => StartMove(ctx);
+                //menuMove.canceled += ctx => CancelMove();
                 //menuAltMove = playerControls.Menu.AltMove;
                 //menuAltMove.performed += ctx => StartMove(ctx);
                 //menuAltMove.canceled += ctx => CancelMove();
@@ -65,9 +65,9 @@ public class MenuTraverse : MonoBehaviour
             playerControls = new PlayerControls();
             if (!GameManager.Instance.GetMouseCursor())
             {
-                menuMove = playerControls.Menu.Move;
-                menuMove.performed += ctx => StartMove(ctx);
-                menuMove.canceled += ctx => CancelMove();
+                //menuMove = playerControls.Menu.Move;
+                //menuMove.performed += ctx => StartMove(ctx);
+                //menuMove.canceled += ctx => CancelMove();
                 //menuAltMove = playerControls.Menu.AltMove;
                 //menuAltMove.performed += ctx => StartMove(ctx);
                 //menuAltMove.canceled += ctx => CancelMove();
@@ -106,8 +106,7 @@ public class MenuTraverse : MonoBehaviour
         GameManager.Instance.SetColor();
         if (!GameManager.Instance.GetMouseCursor())
         {
-            menuMove.Enable();
-            //menuAltMove.Enable();
+            //menuMove.Enable();
         }
         else
         {
@@ -130,8 +129,7 @@ public class MenuTraverse : MonoBehaviour
     {
         if (!GameManager.Instance.GetMouseCursor())
         {
-            menuMove.Disable();
-            //menuAltMove.Disable();   
+            //menuMove.Disable();
         }
         else
         {

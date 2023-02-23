@@ -14,6 +14,7 @@ public class RebindingComponent : MonoBehaviour
     SummonClone cloner;
     Grapple grapple;
     TextMeshProUGUI displayText;
+    InputActionRebindingExtensions.RebindingOperation rebindOperation;
     string binding;
     InputAction action;
     // Start is called before the first frame update
@@ -45,11 +46,18 @@ public class RebindingComponent : MonoBehaviour
 
     public void RemapButtonClicked()
     {
-        var rebindOperation = action.PerformInteractiveRebinding()
+        rebindOperation = action.PerformInteractiveRebinding()
                     // To avoid accidental input from mouse motion
                     .WithControlsExcluding("Mouse")
                     .OnMatchWaitForAnother(0.1f)
+                    .OnComplete(operation => RebindCompletion())
                     .Start();
+    }
+
+    void RebindCompletion()
+    {
+        OnEnable();
+        rebindOperation.Dispose();
     }
 }
 

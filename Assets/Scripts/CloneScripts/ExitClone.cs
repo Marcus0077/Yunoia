@@ -211,7 +211,7 @@ public class ExitClone : MonoBehaviour
 
         if (isOnLever)
         {
-            lever.activateText.enabled = false;
+            //lever.activateText.enabled = false;
             lever.isClone = false;
         }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class SummonClone : MonoBehaviour
 {
@@ -28,12 +29,15 @@ public class SummonClone : MonoBehaviour
     public LayerMask ground;
     public LayerMask wall;
     public LayerMask scale;
-    public LayerMask stairs;
 
     // Audio variables.
     [SerializeField] AudioSource cloneSound;
     [SerializeField] Animator uiAnim;
     [SerializeField] Animator uiAnimCover;
+    
+    // Dynamic Clone Spawn Variables
+    private float[] cloneSpawnsX = { 1.5f, -1.5f, 0, 0};
+    private float[] cloneSpawnsZ = { 0, 0, 1.5f, -1.5f};
 
     // Get references and initialize variables when player spawns.
     void Awake()
@@ -48,7 +52,7 @@ public class SummonClone : MonoBehaviour
     // Called each frame.
     void Update()
     {
-        if (!cloneSummoned && summonAClone.WasPressedThisFrame())
+        if (summonAClone.WasPressedThisFrame())
         {
             SummonAClone();
         }
@@ -59,56 +63,80 @@ public class SummonClone : MonoBehaviour
     // Freezes player and deactivates ability to summon a clone.
     void SummonAClone()
     {
-        Vector3 rightOfPlayer = new Vector3(transform.position.x + 1.5f, transform.position.y - 0.25f, 
-            transform.position.z);
-        
-        RaycastHit hit;
-
-        // Debug rays.
-        Debug.DrawRay(transform.position, Vector3.right * 1.5f, Color.green, 1.5f);
-        Debug.DrawRay(rightOfPlayer, Vector3.down * 1f, Color.green, 1.5f);
-        
-        
-        if ((Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, wall))
-            || (Physics.Raycast(transform.position, Vector3.right, out hit, 1.5f, ground))
-            || (!Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.5f, ground)
-            && !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.5f, scale))
-            && !Physics.Raycast(rightOfPlayer, Vector3.down, out hit, 1.5f, stairs))
+        for (int i = 0; i < 4; i++)
         {
-            // Debug text if clone cannot be summoned.
-            Debug.Log("Clone cannot be summoned here.");
-        }
-        else
-        {
-            cloneSound.Play();
-            
-            this.GetComponent<Grapple>().DestroyHook();
-            this.GetComponent<AbilityPush>().DestroyShape();
-
-            basicMovementPlayer.canMove = false;
-            this.GetComponent<Grapple>().enabled = false;
-            this.GetComponent<AbilityPush>().enabled = false;
-        
-            cloneSummoned = true;
-        
-            clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + (Vector3.right + new Vector3(0f, 0f, -.75f)), 
-                Quaternion.LookRotation(-Vector3.forward));
-
-            if (uiAnim != null)
+            if (!cloneSummoned)
             {
-                clone.GetComponent<CloneInteractions>().anim = uiAnim;
-                clone.GetComponent<ExitClone>().anim = uiAnim;
-                clone.GetComponent<CloneInteractions>().animCover = uiAnimCover;
-                clone.GetComponent<ExitClone>().animCover = uiAnimCover;
-                uiAnim.SetBool("isClone", true);
-                uiAnimCover.SetBool("isClone", true);
+                Vector3 rayByPlayer = new Vector3(transform.position.x + cloneSpawnsX[i], transform.position.y,
+                    transform.position.z + cloneSpawnsZ[i]);
+
+                Vector3 direction = Vector3.zero;
+
+                if (i == 0)
+                {
+                    direction = Vector3.right;
+                }
+                else if (i == 1)
+                {
+                    direction = Vector3.left;
+                }
+                else if (i == 2)
+                {
+                    direction = Vector3.forward;
+                }
+                else if (i == 3)
+                {
+                    direction = Vector3.back;
+                }
+
+                RaycastHit hit;
+
+
+                // Debug rays.
+                Debug.DrawRay(transform.position, direction * 1.5f, Color.green, 1.5f);
+                Debug.DrawRay(rayByPlayer, Vector3.down * 1.5f, Color.green, 1.5f);
+
+
+                if ((Physics.Raycast(transform.position, direction, out hit, 1.5f, wall))
+                    || (Physics.Raycast(transform.position, direction, out hit, 1.5f, ground))
+                    || (!Physics.Raycast(rayByPlayer, Vector3.down, out hit, 1.5f, ground)
+                        && !Physics.Raycast(rayByPlayer, Vector3.down, out hit, 1.5f, scale)))
+                {
+                    // Debug text if clone cannot be summoned.
+                    Debug.Log("Clone cannot be summoned here.");
+                }
+                else
+                {
+                    cloneSound.Play();
+
+                    this.GetComponent<Grapple>().DestroyHook();
+                    this.GetComponent<AbilityPush>().DestroyShape();
+
+                    basicMovementPlayer.canMove = false;
+                    this.GetComponent<Grapple>().enabled = false;
+                    this.GetComponent<AbilityPush>().enabled = false;
+
+                    cloneSummoned = true;
+
+                    clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + direction,
+                        Quaternion.LookRotation(-Vector3.forward));
+
+                    if (uiAnim != null)
+                    {
+                        clone.GetComponent<CloneInteractions>().anim = uiAnim;
+                        clone.GetComponent<ExitClone>().anim = uiAnim;
+                        clone.GetComponent<CloneInteractions>().animCover = uiAnimCover;
+                        clone.GetComponent<ExitClone>().animCover = uiAnimCover;
+                        uiAnim.SetBool("isClone", true);
+                        uiAnimCover.SetBool("isClone", true);
+                    }
+
+                    GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
+
+                    StartCoroutine(Cooldown());
+                }
             }
-
-            GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
-
-            StartCoroutine(Cooldown());
         }
-
     }
 
     // Subtracts from clone summon cooldown timer while it is above 0, 

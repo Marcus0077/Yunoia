@@ -48,6 +48,9 @@ public class ExitClone : MonoBehaviour
     private bool isOnPressurePlate;
     private bool isOnLever;
     private bool isOnDoor;
+    
+    // Layer Mask Variables
+    public LayerMask pPlateLayer;
 
     public float Timer
     {
@@ -89,12 +92,22 @@ public class ExitClone : MonoBehaviour
         despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
         
         anim = GetComponent<Animator>();
+        
+        CheckForInteractables();
     }
 
-    // Called each frame.
-    private void Update()
+    private void CheckForInteractables()
     {
-        
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, pPlateLayer))
+        {
+            Debug.Log("on pplate");
+            
+            pressurePlate = hit.transform.GameObject().GetComponent<PressurePlate>();
+            pressurePlate.CloneOnPlate();
+            isOnPressurePlate = true;
+        }
     }
     
     // Called between frames.
@@ -247,16 +260,17 @@ public class ExitClone : MonoBehaviour
         if (other.CompareTag("PressurePlate"))
         {
             pressurePlate = other.GetComponent<PressurePlate>();
-            isOnPressurePlate = true;
+
+            if (pressurePlate.isClone)
+            {
+                isOnPressurePlate = true;
+            }
         }
         else if (other.CompareTag("Lever"))
         {
             lever = other.GetComponent<Lever>();
 
-            if (lever.isClone)
-            {
-                isOnLever = true;
-            }
+            isOnLever = true;
         }
         else if (other.CompareTag("Door"))
         {

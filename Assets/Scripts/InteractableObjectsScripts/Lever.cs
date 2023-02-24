@@ -18,7 +18,7 @@ public class Lever : MonoBehaviour
 
     // Bool Variables.
     public bool isActivated;
-    private bool isPlayer;
+    public bool isPlayer;
     public bool isClone;
     private bool Complete;
 
@@ -179,7 +179,7 @@ public class Lever : MonoBehaviour
 
             isPlayer = true;
         }
-        else if (other.CompareTag("Clone") && !isPlayer && !Complete)
+        else if (other.CompareTag("Clone") && !Complete)
         {
             //activateText.enabled = true;
             

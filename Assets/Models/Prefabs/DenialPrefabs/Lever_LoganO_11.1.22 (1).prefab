@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5038095284636703125}
   - component: {fileID: 5892682543130508129}
   - component: {fileID: 5750970727461809909}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 42d710259cf3c7148aa33144b1f7397b, type: 2}
+  - {fileID: 2100000, guid: 2f8d68a353c3e3c4c8903185acc1d589, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 666308050380896054}
   - component: {fileID: 8134635546710338515}
   - component: {fileID: 4556364387509657618}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Lever_LoganO_11.1.22 (1)
   m_TagString: Lever
   m_Icon: {fileID: 0}
@@ -137,12 +137,13 @@ MonoBehaviour:
   Door: {fileID: 0}
   isActivated: 0
   isClone: 0
-  Complete: 0
-  leverTimer: 0
   activateText: {fileID: 0}
   animator: {fileID: 8748093705663572579}
   audioSource: {fileID: 4556364387509657618}
   leverSound: {fileID: 8300000, guid: 975c68c52301dea4ea013e95fffdf0b4, type: 3}
+  isSingleLever: 0
+  isAiLever: 0
+  aiCounterparts: []
 --- !u!65 &666308050380896054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,8 +155,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17762722, y: 0.1150185, z: 0.20329654}
-  m_Center: {x: -0.0016459625, y: 0.048428714, z: -0.00013596218}
+  m_Size: {x: 0.17762722, y: 0.13947031, z: 0.20329654}
+  m_Center: {x: -0.0016459625, y: 0.06065462, z: -0.00013596217}
 --- !u!65 &8134635546710338515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -375,7 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5833593819222912740}
   - component: {fileID: 8748093705663572579}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Animator
   m_TagString: Lever
   m_Icon: {fileID: 0}
@@ -469,6 +470,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7917291961305824890, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -5731229141766309534, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: -5731229141766309534, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -477,12 +486,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever_low
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 7216655632450529714, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6b0a0329822515d41b84780e1d31f145, type: 2}
+      objectReference: {fileID: 2100000, guid: 2f8d68a353c3e3c4c8903185acc1d589, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
+--- !u!1 &7453436770852840552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}
+  m_PrefabInstance: {fileID: 7759284967091837241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7206648488647465612
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453436770852840552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17762722, y: 0.13947031, z: 0.20329654}
+  m_Center: {x: -0.0016459625, y: 0.06065462, z: -0.00013596217}
 --- !u!4 &7792421340425027282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 02f27d59b5ca5224e924a8b54c9a3d68, type: 3}

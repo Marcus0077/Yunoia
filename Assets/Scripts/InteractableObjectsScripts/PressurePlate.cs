@@ -13,6 +13,8 @@ public class PressurePlate : MonoBehaviour
     public bool isClone;
     public AudioSource audioSource;
     public AudioClip ppSound;
+    public float cooldownTime = 5f;
+    private bool inCooldown;
     
 
     // Get references and initialize variables when pressure plates spawn.
@@ -22,6 +24,14 @@ public class PressurePlate : MonoBehaviour
         isClone = false;
     }
 
+    private IEnumerator Cooldown()
+    {
+     //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+     inCooldown = true;
+     yield return new WaitForSeconds(cooldownTime);
+     inCooldown = false;
+    }
+
     // Determine whether player or clone is on this pressure plate and activate it.
     private void OnTriggerEnter(Collider other)
     {
@@ -29,14 +39,21 @@ public class PressurePlate : MonoBehaviour
         {
             HideWall();
             audioSource.PlayOneShot(ppSound);
+            
             isPlayer = true;
+             if(!inCooldown)
+         StartCoroutine(Cooldown());
+    
         }
         else if (other.CompareTag("Clone") && !isPlayer)
         {
             HideWall();
+            audioSource.PlayOneShot(ppSound);
 
             isClone = true;
         }
+
+        
     }
 
     // Determine whether player or clone is exiting this pressure plate and deactivate it.

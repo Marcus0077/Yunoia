@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TipController : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip butterflyrisAwakeSound;
     public Transform box;
 
     public CanvasGroup background;
@@ -15,6 +17,7 @@ public class TipController : MonoBehaviour
 
         box.localPosition = new Vector2(0, -Screen.height);
         box.LeanMoveLocalY(-150, 0.5f).setEaseOutExpo().delay = 0.1f;
+        audioSource.PlayOneShot(butterflyrisAwakeSound);
     }
 
     public void CloseDialog()

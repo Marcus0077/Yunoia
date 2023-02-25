@@ -5,6 +5,10 @@ using UnityEngine;
 // Adds upwards force to a bounce pad ignoring gravity physics
 public class BounceFree : MonoBehaviour
 {
+
+    public AudioSource audioSource;
+    public AudioClip bounceVar1Sound;
+
     [SerializeField]
     float additiveForce;
     // Start is called before the first frame update
@@ -20,6 +24,7 @@ public class BounceFree : MonoBehaviour
         if (player != null)
         {
             player.playerRB.AddForce(transform.up * additiveForce);
+            audioSource.PlayOneShot(bounceVar1Sound);
         }
     }
     

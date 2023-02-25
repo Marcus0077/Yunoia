@@ -56,7 +56,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 8271585201208302744}
   - {fileID: -2832918425470189756}
-  m_RendererFeatureMap: 981c666fea92ca7244bf3094b373afd8
+  - {fileID: 8151469408735177368}
+  m_RendererFeatureMap: 981c666fea92ca7244bf3094b373afd898aa1f293dd61f71
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 0}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -93,6 +94,23 @@ MonoBehaviour:
   m_ClusteredRendering: 0
   m_TileSize: 32
   m_IntermediateTextureMode: 1
+--- !u!114 &8151469408735177368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afc38c2d1fc5794db8af8261ba5f3b1, type: 3}
+  m_Name: Custom Pass
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
+  Event: 250
 --- !u!114 &8271585201208302744
 MonoBehaviour:
   m_ObjectHideFlags: 0

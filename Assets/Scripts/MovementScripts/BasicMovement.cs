@@ -328,7 +328,7 @@ public class BasicMovement : MonoBehaviour
                 playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
                 //jumpSound.Play();
             }
-            else if (grapple.grappleActive)
+            else if (grapple != null && grapple.grappleActive)
             {
                 playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
                 //jumpSound.Play();

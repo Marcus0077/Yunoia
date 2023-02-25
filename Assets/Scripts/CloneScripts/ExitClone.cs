@@ -8,6 +8,11 @@ using TMPro;
 
 public class ExitClone : MonoBehaviour
 {
+
+    public AudioSource audioSource;
+    public AudioClip beginDestructSound;
+    public AudioClip destructSound;
+
     // UI Clone Active Timer
     public TextMeshProUGUI activeTimerText;
     
@@ -123,6 +128,7 @@ public class ExitClone : MonoBehaviour
             {
                 despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
                 despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+                audioSource.PlayOneShot(beginDestructSound);
             }
         }
         else if (!exitClone.IsPressed() && despawnCloneTimer != 2)
@@ -164,6 +170,7 @@ public class ExitClone : MonoBehaviour
     {
         if (despawnClone)
         {
+           
             CheckInteractables();
 
             if (this.GetComponent<AbilityPush>().chargeEffectDestroy != null)
@@ -186,7 +193,8 @@ public class ExitClone : MonoBehaviour
 
             this.GetComponent<Grapple>().DestroyHook();
             this.GetComponent<AbilityPush>().DestroyShape();
-            
+             
+             audioSource.PlayOneShot(destructSound);
             summonClone.cloneSummoned = false;
             basicMovementPlayer.canMove = true;
             

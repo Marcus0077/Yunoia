@@ -12,6 +12,8 @@ public class PlantDestroyer : MonoBehaviour
     public int numCrystals;
     public int crystalsComplete;
     public int thisCrystalComplete;
+    public AudioSource audioSource;
+    public AudioClip purifierSound;
 
     private void Awake()
     {
@@ -45,6 +47,7 @@ public class PlantDestroyer : MonoBehaviour
                     {
                         crystalsComplete =
                             crystalsComplete + coCrystal.GetComponent<PlantDestroyer>().thisCrystalComplete;
+                            audioSource.PlayOneShot(purifierSound);
                     }
                 }
                 

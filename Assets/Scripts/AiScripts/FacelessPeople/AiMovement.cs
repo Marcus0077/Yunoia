@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class AiMovement : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip detectionSound;
     // Navmesh agent reference.
     [SerializeField] private NavMeshAgent aiAgent;
 
@@ -27,6 +29,7 @@ public class AiMovement : MonoBehaviour
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
     private IEnumerator wanderCoroutine;
+    
 
     // AI Wandering Variables.
     private float wanderDistance;
@@ -79,8 +82,9 @@ public class AiMovement : MonoBehaviour
     {
         if (distanceBetweenClone < 4 && !isFollowingCrystal)
         {
+            
             ChaseClone();
-
+            //audioSource.PlayOneShot(detectionSound); needs cd
             if (isRunning)
             {
                 StopCoroutine(wanderCoroutine);

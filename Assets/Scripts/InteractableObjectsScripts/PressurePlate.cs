@@ -11,6 +11,9 @@ public class PressurePlate : MonoBehaviour
     // Bool variables.
     private bool isPlayer;
     public bool isClone;
+    public AudioSource audioSource;
+    public AudioClip ppSound;
+    
 
     // Get references and initialize variables when pressure plates spawn.
     private void Awake()
@@ -25,7 +28,7 @@ public class PressurePlate : MonoBehaviour
         if (other.CompareTag("Player") && !isClone)
         {
             HideWall();
-
+            audioSource.PlayOneShot(ppSound);
             isPlayer = true;
         }
         else if (other.CompareTag("Clone") && !isPlayer)

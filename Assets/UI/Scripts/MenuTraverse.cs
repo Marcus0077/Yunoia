@@ -9,7 +9,7 @@ public class MenuTraverse : MonoBehaviour
     [SerializeField]
     protected OnButtonHover[] buttons;
     [SerializeField]
-    protected MenuTraverse prevMenu;
+    protected MenuTraverse prevMenu, nextMenu;
     public int activeIndex;
     protected int amount;
     protected Vector2 cursorMovement;
@@ -144,13 +144,15 @@ public class MenuTraverse : MonoBehaviour
         ExitAll();
         stop = true;
         moving = null;
-        if (prevMenu != null)
+        if (prevMenu != null && (nextMenu == null || !nextMenu.gameObject.active))
+        {
+            Debug.Log(nextMenu.gameObject.active);
             prevMenu.OnEnable();
+        }
     }
 
     public virtual void PressMenu()
     {
-        Debug.Log(activeIndex);
         buttons[activeIndex].Press();
     }
 

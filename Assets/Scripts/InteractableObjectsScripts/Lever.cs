@@ -170,7 +170,7 @@ public class Lever : MonoBehaviour
     // and grants interaction to whichever one is in the trigger.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isClone && !Complete)
+        if (other.CompareTag("Player") && !Complete)
         {
             //activateText.enabled = true;
             
@@ -196,8 +196,6 @@ public class Lever : MonoBehaviour
     {
         if (other.CompareTag("Player") && isPlayer)
         {
-            Debug.Log("works");
-            
             //activateText.enabled = false;
             
             playerInteractions.canPressLever = false;

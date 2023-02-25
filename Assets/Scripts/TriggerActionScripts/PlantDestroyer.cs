@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlantDestroyer : MonoBehaviour
 {
@@ -62,8 +63,19 @@ public class PlantDestroyer : MonoBehaviour
                             Destroy(plant);
                         }
                     }
+
+                    if (numCrystals == 4)
+                    {
+                        StartCoroutine(LoadHub());
+                    }
                 }
             }
         }
+    }
+
+    private IEnumerator LoadHub()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("HubFinal");
     }
 }

@@ -9,13 +9,14 @@ public class PressurePlate : MonoBehaviour
     public GameObject Blocker;
 
     // Bool variables.
-    private bool isPlayer;
+    public bool isPlayer;
     public bool isClone;
-    public AudioSource audioSource;
-    public AudioClip ppSound;
-    public float cooldownTime = 5f;
     private bool inCooldown;
     
+    public AudioSource audioSource;
+    public AudioClip ppSound;
+    
+    public float cooldownTime = 5f;
 
     // Get references and initialize variables when pressure plates spawn.
     private void Awake()
@@ -35,7 +36,7 @@ public class PressurePlate : MonoBehaviour
     // Determine whether player or clone is on this pressure plate and activate it.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isClone)
+        if (other.CompareTag("Player"))
         {
             HideWall();
             audioSource.PlayOneShot(ppSound);
@@ -45,7 +46,7 @@ public class PressurePlate : MonoBehaviour
          StartCoroutine(Cooldown());
     
         }
-        else if (other.CompareTag("Clone") && !isPlayer)
+        else if (other.CompareTag("Clone"))
         {
             HideWall();
             audioSource.PlayOneShot(ppSound);

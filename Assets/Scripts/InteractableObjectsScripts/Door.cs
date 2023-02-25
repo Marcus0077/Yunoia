@@ -12,7 +12,7 @@ public class Door : MonoBehaviour
 
     public Image activateText;
     public bool canInteract;
-    private bool isPlayer;
+    public bool isPlayer;
     public bool isClone;
     private CloneInteractions cloneInteractions;
     private PlayerInteractions playerInteractions;

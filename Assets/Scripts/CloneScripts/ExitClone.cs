@@ -226,20 +226,32 @@ public class ExitClone : MonoBehaviour
     {
         if (isOnPressurePlate)
         {
-            pressurePlate.AppearWall();
             pressurePlate.isClone = false;
+            
+            if (!pressurePlate.isPlayer)
+            {
+                pressurePlate.AppearWall();
+            }
         }
 
         if (isOnLever)
         {
-            //lever.activateText.enabled = false;
             lever.isClone = false;
+
+            if (!lever.isPlayer)
+            {
+                //lever.activateText.enabled = false;
+            }
         }
 
         if (isOnDoor && door.activateText != null)
         {
-            door.activateText.enabled = false;
             door.isClone = false;
+
+            if (!door.isPlayer)
+            {
+                door.activateText.enabled = false;
+            }
         }
     }
 
@@ -269,10 +281,7 @@ public class ExitClone : MonoBehaviour
         {
             pressurePlate = other.GetComponent<PressurePlate>();
 
-            if (pressurePlate.isClone)
-            {
-                isOnPressurePlate = true;
-            }
+            isOnPressurePlate = true;
         }
         else if (other.CompareTag("Lever"))
         {
@@ -283,11 +292,8 @@ public class ExitClone : MonoBehaviour
         else if (other.CompareTag("Door"))
         {
             door = other.GetComponent<Door>();
-
-            if (door.isClone)
-            {
-                isOnDoor = true;
-            }
+            
+            isOnDoor = true;
         }
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1720594846475588801}
   - component: {fileID: 3357661769188792596}
   - component: {fileID: 7782716193029643481}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Ai
   m_TagString: Faceless
   m_Icon: {fileID: 0}
@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c012c7f73fceb40ad85af59b5666b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  detectionSound: {fileID: 0}
   aiAgent: {fileID: 1720594846475588801}
+  canAiMove: 0
   wanderDistanceMin: 2
   wanderDistanceMax: 5
   wanderPauseMin: 1
@@ -160,8 +163,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -8821898357758354140, guid: e1476e7096664e3459b170c6756a65bc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1476e7096664e3459b170c6756a65bc, type: 3}
 --- !u!4 &2162019911874943637 stripped
 Transform:

@@ -128,11 +128,16 @@ public class ExitClone : MonoBehaviour
             {
                 despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
                 despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
-                audioSource.PlayOneShot(beginDestructSound);
+                if (audioSource.clip != beginDestructSound)
+                {
+                    audioSource.clip = beginDestructSound;
+                    audioSource.Play();
+                }
             }
         }
         else if (!exitClone.IsPressed() && despawnCloneTimer != 2)
         {
+            audioSource.clip = null;
             despawnCloneTimer = 1.25f;
             despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
         }
@@ -193,8 +198,9 @@ public class ExitClone : MonoBehaviour
 
             this.GetComponent<Grapple>().DestroyHook();
             this.GetComponent<AbilityPush>().DestroyShape();
-             
-             audioSource.PlayOneShot(destructSound);
+            
+            AudioSource.PlayClipAtPoint(destructSound,transform.position);
+
             summonClone.cloneSummoned = false;
             basicMovementPlayer.canMove = true;
             

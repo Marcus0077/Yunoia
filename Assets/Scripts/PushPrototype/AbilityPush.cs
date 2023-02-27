@@ -8,7 +8,7 @@ public class AbilityPush : MonoBehaviour
     [SerializeField] // maxChargeLevel: how many stages a push can charge up to, minPush: smallest value a push can be
     int maxChargeLevel = 1, minPush = 1;
     [SerializeField]
-    float chargeSpeed = 1, cooldown = 1, shieldCooldown, shieldDuration;
+    float chargeSpeed = 1, cooldown = 1, shieldCooldown, shieldDuration, delayTime;
     // chargeTime: tracks how long push was charging
     float chargeTime;
     // shield: tracks if shield action is queued, shielded: tracks if player is shielded
@@ -84,6 +84,7 @@ public class AbilityPush : MonoBehaviour
         smallEffectDestroy.transform.GetChild(2).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
         smallEffectDestroy.transform.GetChild(3).localScale = new Vector3(smallPushRadius, smallPushRadius, smallPushRadius);
         DelayedPush a = smallEffectDestroy.AddComponent<DelayedPush>();
+        a.delayTime = delayTime;
         a.pusher = gameObject;
         // Tell particle destroyer to destroy small push particles.
         smallPushNeedsDeath = true;
@@ -176,6 +177,7 @@ public class AbilityPush : MonoBehaviour
         largeEffectDestroy.transform.GetChild(6).localScale = new Vector3(pushRadius, pushRadius, pushRadius);
         largeEffectDestroy.transform.GetChild(7).localScale = new Vector3(pushRadius / 2, 1f, pushRadius / 2);
         DelayedPush a = largeEffectDestroy.transform.GetChild(5).gameObject.AddComponent<DelayedPush>();
+        a.delayTime = delayTime;
         a.pusher = gameObject;
         // Tell particle destroyer to destroy large push particles.
         largePushNeedsDeath = true;

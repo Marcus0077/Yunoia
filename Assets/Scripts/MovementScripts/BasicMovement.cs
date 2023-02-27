@@ -227,10 +227,18 @@ public class BasicMovement : MonoBehaviour
                 moveDirection = Quaternion.AngleAxis(0, Vector3.right) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
                 playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
             }
-            else
+            else if (grapple != null)
             {
                 moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
-                playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+
+                if (grapple.grappleActive && !isGrounded)
+                {
+                    playerRB.velocity = new Vector3(0.0f, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+                }
+                else
+                {
+                    playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+                }
             }
         
             LookPlayer();

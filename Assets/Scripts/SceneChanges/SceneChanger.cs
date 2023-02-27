@@ -23,36 +23,50 @@ public class SceneChanger : MonoBehaviour
     {
         if (angerScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("AngerFinal");
         }
 
         if (bargainingScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("BargainingFinal");
         }
 
         if (depressionScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("DepressionFinal");
         }
 
         if (denialScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("DenialFinal");
         }
 
         if (acceptanceScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("AcceptanceFinal");
         }
 
         if (hubScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("HubFinal");
         }
 
         if (museumScene.IsPressed())
         {
+            DataManager.gameData.checkpointed = false;
+            DataManager.gameData.level = 1;
             SceneManager.LoadScene("museum");
         }
 

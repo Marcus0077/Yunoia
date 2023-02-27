@@ -78,7 +78,6 @@ public class Grapple : MonoBehaviour
         SetMaxVelocity(maxVelocity);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (playerRB.position.y > maxSwingHeight)

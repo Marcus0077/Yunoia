@@ -16,6 +16,8 @@ public class PlantDestroyer : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip purifierSound;
 
+    public Levels level;
+
     private void Awake()
     {
         numCrystals = coCrystals.Length + 1;
@@ -77,5 +79,7 @@ public class PlantDestroyer : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("HubFinal");
+        DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
+        GameManager.Instance.CompleteLevel(level);
     }
 }

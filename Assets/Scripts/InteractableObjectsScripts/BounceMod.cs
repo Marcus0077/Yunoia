@@ -18,14 +18,15 @@ public class BounceMod : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (maxMinions == 0)
-        {
-            return;
-        }
         BasicMovement player = collider.gameObject.GetComponent<BasicMovement>();
         if (player != null)
         {
             bounceMat.bounciness = startBounce + ((1 - startBounce) / maxMinions * player.attachedMinionCount);
+        }
+
+        if (maxMinions == 0)
+        {
+            return;
         }
     }
     

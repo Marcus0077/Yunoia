@@ -146,7 +146,6 @@ public class MenuTraverse : MonoBehaviour
         moving = null;
         if (prevMenu != null && (nextMenu == null || !nextMenu.gameObject.active))
         {
-            Debug.Log(nextMenu.gameObject.active);
             prevMenu.OnEnable();
         }
     }
@@ -236,6 +235,7 @@ public class MenuTraverse : MonoBehaviour
     {
         foreach (OnButtonHover button in buttons)
             button.OnHoverExit();
+        activeIndex = -1;
     }
 
     // Update is called once per frame

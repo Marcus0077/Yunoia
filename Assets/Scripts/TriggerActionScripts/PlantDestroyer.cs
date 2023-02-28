@@ -20,7 +20,7 @@ public class PlantDestroyer : MonoBehaviour
 
     private void Awake()
     {
-        numCrystals = coCrystals.Length + 1;
+        //numCrystals = coCrystals.Length + 1;
 
         thisCrystalComplete = 0;
         crystalsComplete = 0;
@@ -50,7 +50,7 @@ public class PlantDestroyer : MonoBehaviour
                     {
                         crystalsComplete =
                             crystalsComplete + coCrystal.GetComponent<PlantDestroyer>().thisCrystalComplete;
-                            audioSource.PlayOneShot(purifierSound);
+                            //audioSource.PlayOneShot(purifierSound);
                     }
                 }
                 

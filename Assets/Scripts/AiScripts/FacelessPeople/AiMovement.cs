@@ -8,47 +8,42 @@ using Random = UnityEngine.Random;
 
 public class AiMovement : MonoBehaviour
 {
+    // Audio variables.
     public AudioSource audioSource;
     public AudioClip detectionSound;
-    // Navmesh agent reference.
+    
+    // NavMeshAgent reference.
     [SerializeField] private NavMeshAgent aiAgent;
-
-    // Bool variables.
-    private bool isRunning;
-
-    // Distance between clone and Faceless AI.
-    private float distanceBetweenClone;
 
     // Target positioning variables.
     private Vector3 targetPos;
-    private Vector3 lastPos;
     private Vector3 clonePos;
+    private float distanceBetweenClone;
     
-    // Stops clone when on stopping crystal.
+    // AI x Crystal Pressure Plate variables.
     private bool isStoppedByCrystal;
     private bool isFollowingCrystal;
     private Vector3 crytalPos;
-    private IEnumerator wanderCoroutine;
-    
-
-    // AI Wandering Variables.
-    private float wanderDistance;
-
     public bool canAiMove;
+
+    // AI Wandering variables.
+    private float wanderDistance;
+    private IEnumerator wanderCoroutine;
+    private bool isRunning;
     
     [Range(1.0f, 10.0f)]
-    public float wanderDistanceMin;
+    public float wanderDistanceMin; // Minimum distance an AI can wander.
     
     [Range(1.0f, 10.0f)]
-    public float wanderDistanceMax;
+    public float wanderDistanceMax; // Maximum distance an AI can wander.
     
     [Range(0.5f, 5.0f)]
-    public float wanderPauseMin;
+    public float wanderPauseMin; // Minimum amount of time an AI can wait before wandering again.
+
+    [Range(0.5f, 5.0f)] 
+    public float wanderPauseMax; // Maximum amount of time an AI can wait before wandering again.
     
-    [Range(0.5f, 5.0f)]
-    public float wanderPauseMax;
-    
-    // Get references and initialize variables when Faceless AI is spawned.
+    // Get references and initialize variables when the AI is initialised.
     private void Awake()
     {
         aiAgent = this.GetComponent<NavMeshAgent>();
@@ -56,35 +51,38 @@ public class AiMovement : MonoBehaviour
         isRunning = false;
         isStoppedByCrystal = false;
         isFollowingCrystal = false;
-
+        
         distanceBetweenClone = 100f;
     }
     
-    // Called between frames.
+    // This method is called between frames.
     private void FixedUpdate()
     {
-        IsCloneSpawned();
-
+        // If the AI can move, check to see if the clone is spawned & close by.
         if (canAiMove)
         {
+            IsCloneSpawned();
             DetermineCloneDistance();
         }
 
+        // If the AI has entered a crystal pressure plate, is moving towards the middle of it,
+        // and is close enough to the middle of the pressure plate to stop, then stop the AI.
         if (!isStoppedByCrystal && isFollowingCrystal && Vector3.Distance(this.transform.position, crytalPos) < 0.025)
         {
             isStoppedByCrystal = true;
         }
     }
 
-    // Determines whether clone is close enough to chase and attack. 
-    // If not, return to pathing loop.
+    // LEFT OFF HERE FOR CODE CLEANUP.
     private void DetermineCloneDistance()
     {
         if (distanceBetweenClone < 4 && !isFollowingCrystal)
         {
             
             ChaseClone();
+            
             //audioSource.PlayOneShot(detectionSound); needs cd
+            
             if (isRunning)
             {
                 StopCoroutine(wanderCoroutine);
@@ -155,7 +153,7 @@ public class AiMovement : MonoBehaviour
             }
         }
         
-        yield return new WaitForSeconds(Random.Range(wanderPauseMax, wanderPauseMax));
+        yield return new WaitForSeconds(Random.Range(wanderPauseMin, wanderPauseMax));
         
         Debug.Log("found spot");
         

@@ -12,9 +12,6 @@ public class CloneInteractions : MonoBehaviour
     // Script references
     public BasicMovement basicMovementPlayer;
     public BasicMovement basicMovementClone;
-    public SummonClone summonClone;
-    public ExitClone exitClone;
-    public CombatHandler combatHandler;
     public AbilityPush cloneAbilityPush;
     public Lever lever;
     public Door door;
@@ -23,56 +20,43 @@ public class CloneInteractions : MonoBehaviour
     // Player game object reference.
     public GameObject Player;
     
-    // Input variables
+    // Input variables.
     public PlayerControls playerControls;
     public InputAction switchPlaces;
     public InputAction press;
-
-    // Clone version bool.
-    public bool cloneRestored;
     
-    // Interactable Bools
+    // Interactable Booleans.
     public bool canPressLever;
     public bool canPressDoor;
 
-    // Particle Variables
+    // Particle Variables.
     public GameObject duplicateParticles;
     private float footPos;
 
-    //Clone UI Experiment here
+    // Animation variables.
     public Animator anim;
     public Animator animCover;
 
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
+        playerControls = new PlayerControls();
+        
         Player = GameObject.FindWithTag("Player");
 
+        cloneAbilityPush = this.GetComponent<AbilityPush>();
         cloneAbilityPush.restored = Player.GetComponent<AbilityPush>().restored;
-        
         basicMovementPlayer = Player.GetComponent<BasicMovement>();
         basicMovementClone = this.GetComponent<BasicMovement>();
-        summonClone = FindObjectOfType<SummonClone>();
-        exitClone = FindObjectOfType<ExitClone>();
-        combatHandler = FindObjectOfType<CombatHandler>();
         limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), Player.GetComponent<Collider>(), true);
 
-        //smoothCameraFollow.target = this.transform;
-        
-        playerControls = new PlayerControls();
-
-        if (combatHandler != null)
-        {
-            combatHandler.cloneHP = 3;
-            //combatHandler.healthText.text = "Clone Health: " + combatHandler.cloneHP + "/3";
-        }
-
-        cloneRestored = true;
         canPressLever = false;
 
         footPos = duplicateParticles.transform.position.y;
+
+        StartCoroutine(DestroyCloneParticles());
     }
     
 
@@ -80,7 +64,6 @@ public class CloneInteractions : MonoBehaviour
     private void Update()
     {
         SwitchPlaces();
-
         CheckLeverPress();
         CheckDoorPress();
         
@@ -89,10 +72,25 @@ public class CloneInteractions : MonoBehaviour
     // Called between frames.
     private void FixedUpdate()
     {
-        duplicateParticles.transform.position = new Vector3(duplicateParticles.transform.position.x, footPos, duplicateParticles.transform.position.z);
+        // Force clone particles to follow the clone's feet as long as the particles still exist.
+        if (duplicateParticles != null)
+        {
+            duplicateParticles.transform.position = new Vector3(duplicateParticles.transform.position.x, footPos,
+                duplicateParticles.transform.position.z);
+        }
+    }
+
+    // Destroy the clone particles 2 seconds after it spawns.
+    private IEnumerator DestroyCloneParticles()
+    {
+        yield return new WaitForSeconds(2f);
+        
+        Destroy(duplicateParticles);
     }
 
     // Checks if clone can activate a lever and whether they activated it.
+    // If they can activate it and it is not activated yet, allow them to
+    // activate it.
     void CheckLeverPress()
     {
         if (canPressLever && press.WasPressedThisFrame())
@@ -105,11 +103,13 @@ public class CloneInteractions : MonoBehaviour
     }
 
     // Checks if clone can activate a door and whether they activated it.
+    // If they can activate it and it is not activated yet, allow them to
+    // activate it.
     void CheckDoorPress()
     {
         if (canPressDoor && press.WasPressedThisFrame())
         {
-            if (door != null && door.canInteract)
+            if (door != null && door.canInteract && this.GetComponent<BasicMovement>().canMove)
             {
                 door.Open();
             }
@@ -122,6 +122,9 @@ public class CloneInteractions : MonoBehaviour
     {
         if (switchPlaces.WasReleasedThisFrame())
         {
+            // If we are currently in control of the clone, 
+            // give control to the player, and switch the camera to the player.
+            // Destroys and disables clone abilities in the process.
             if (basicMovementPlayer.canMove == false)
             {
                 limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
@@ -144,9 +147,10 @@ public class CloneInteractions : MonoBehaviour
 
                 Player.GetComponent<Grapple>().enabled = true;
                 Player.GetComponent<AbilityPush>().enabled = true;
-                
-                //basicMovementPlayer.CheckCameraState();
             }
+            // If we are currently in control of the player, 
+            // give control to the clone, and switch the camera to the clone.
+            // Destroys and disables player abilities in the process.
             else if (basicMovementClone.canMove == false)
             {
                 limitedMovementCam.GetCurrentCameraData(basicMovementClone.curRoom);
@@ -169,8 +173,6 @@ public class CloneInteractions : MonoBehaviour
 
                 Player.GetComponent<Grapple>().enabled = false;
                 Player.GetComponent<AbilityPush>().enabled = false;
-                
-                //basicMovementClone.CheckCameraState();
             }
         }
     }

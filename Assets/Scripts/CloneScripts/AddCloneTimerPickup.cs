@@ -6,19 +6,17 @@ using UnityEngine;
 
 public class AddCloneTimerPickup : MonoBehaviour
 {
+    // Float that stores this pickup's time value.
     public float timeToAdd;
-    // Start is called before the first frame update
+    
+    // Initialize pickup's time value when it is initialised.
     void Awake()
     {
         timeToAdd = 5f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // If the clone pickup this object, destroy this object and 
+    // add 'timeToAdd' amount of time to the clone's timer.
     public void OnTriggerEnter(Collider other)
     {
         if (other.GameObject().CompareTag("Clone"))

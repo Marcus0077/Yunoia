@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class YeetTheClone : MonoBehaviour
 {
+    // Literally just despawns the clone if the clone walks through this trigger.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Clone"))

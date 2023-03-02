@@ -6,8 +6,12 @@ using UnityEngine.ProBuilder;
 
 public class RenderFaceless : MonoBehaviour
 {
+    // Array of Faceless AI Game Objects that do not need
+    // to be rendered yet.
     public GameObject[] Facelesses;
-    // Start is called before the first frame update
+    
+    // At the beginning of the game, disable the mesh renderer for 
+    // all Faceless AI that are in future rooms.
     void Start()
     {
         foreach (var Faceless in Facelesses)
@@ -16,6 +20,8 @@ public class RenderFaceless : MonoBehaviour
         }
     }
 
+    // If we have reached a room that contains un-rendered Faceless AIs, 
+    // turn their renderer back on so that we can see them.
     private void OnTriggerEnter(Collider other)
     {
         foreach (var Faceless in Facelesses)

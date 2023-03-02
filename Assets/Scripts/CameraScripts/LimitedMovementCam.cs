@@ -31,10 +31,10 @@ public class LimitedMovementCam : MonoBehaviour
     // Return Sphere to player Cooldown Timer.
     public float returnToPlayerTimer;
 
-    // Camera Variables.
+    // Reference to the current camera.
     public CinemachineVirtualCameraBase curCamera;
 
-    // Confiner Variables.
+    // Camera Confiner Variables.
     public CinemachineConfiner curConfiner;
     private float curConfinerScaleX;
     private float curConfinerPosX;
@@ -47,17 +47,17 @@ public class LimitedMovementCam : MonoBehaviour
     private float leftYBound;
     private float rightYBound;
 
-    // Offset Values.
+    // Offset value between the sphere and the camera.
     private Vector3 camBallOffset;
 
-    // Tells camera whether to follow player or sphere.
+    // Checks if camera is following player or sphere.
     public bool isCamFollowingPlayer;
 
     // Make ball travel back to player if clone actions are being used
     // or player is moving.
     public bool forceBallToPlayer;
 
-    // Start is called before the first frame update
+    // Get references and initialize variables when the Camera is initialised.
     void Awake()
     {
         playerControls = new PlayerControls();
@@ -68,13 +68,16 @@ public class LimitedMovementCam : MonoBehaviour
         transform.position = Vector3.MoveTowards
             (transform.position, playerPos, returnSpeed * Time.deltaTime);
 
+        // If we are starting from a checkpoint, set the camera to
+        // that checkpoint's camera.
         if (DataManager.gameData.level > 0)
         {
             GetCurrentCameraData((int)DataManager.gameData.level);
         }
+        // If we are in the first room of a level, set the camera
+        // to the first room's camera.
         else
         {
-            Debug.Log("sets to 1");
             GetCurrentCameraData(1);
         }
 
@@ -90,6 +93,8 @@ public class LimitedMovementCam : MonoBehaviour
         camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
     }
 
+    // Takes a new player as a parameter and sets the current camera's follow target
+    // to the new player, and forces the ball to that players position.
     public void SetCurrentPlayer(GameObject newPlayer)
     {
         Player = newPlayer;
@@ -101,7 +106,7 @@ public class LimitedMovementCam : MonoBehaviour
         camFollowSphere.transform.position = Player.transform.position;
     }
     
-    // Changes camera depending on the main camera's animator state.
+    // Changes the current camera depending on the main camera's animator state.
     public void GetCurrentCameraData(int newRoom)
     {
         curCamera = GameObject.FindGameObjectWithTag
@@ -109,14 +114,17 @@ public class LimitedMovementCam : MonoBehaviour
         
         GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>().SetInteger("roomNum", newRoom);
 
+        // Get the confiner data of the new camera.
         GetCurrentConfinerData();
     }
 
-    // Grab all needed information about the current camera's confiner.
+    // Grab all needed information about the current camera's confiner
+    // by grabbing the confiner's scale values, position values, and setting
+    // the follow sphere's movement bounds based on these values.
     public void GetCurrentConfinerData()
     {
         curConfiner = curCamera.GetComponent<CinemachineConfiner>();
-
+        
         curConfinerScaleX = curConfiner.m_BoundingVolume.transform.lossyScale.x * .5f;
         curConfinerPosX = (curConfiner.m_BoundingVolume.transform.position.x);
         
@@ -130,34 +138,39 @@ public class LimitedMovementCam : MonoBehaviour
         rightYBound = (curConfinerPosY + curConfinerScaleY);
     }
 
-    // Clamp the position of the camera follow sphere to the bounds of the confiner.
+    // Clamp the position of the camera follow sphere to the bounds of the
+    // current camera's confiner.
     void ClampCameraFollowSphere()
     {
         Vector3 position = camFollowSphere.transform.position;
 
-        // position.x = Mathf.Clamp(position.x, leftXBound - camBallOffset.x, rightXBound - camBallOffset.x);
         position.x = Mathf.Clamp(position.x, leftXBound, rightXBound);
         position.y = Mathf.Clamp(position.y, leftYBound - camBallOffset.y, rightYBound - camBallOffset.y);
             
         camFollowSphere.transform.position = position;
     }
 
-    // Update is called each frame.
+    // Called each frame.
     void Update()
     {
+        // If the player is not moving and the sphere is not following
+        // the player, clamp the follow sphere to the bounds of the 
+        // current camera's confiner.
         if (isCamFollowingPlayer == false && !playerMove.IsPressed())
         {
             ClampCameraFollowSphere();
         }
 
+        // If we were forcing the follow sphere to the player and it has reached the player
+        // force it no longer.
         if (forceBallToPlayer && camMove.IsPressed() 
-                              && Vector3.Distance(camFollowSphere.transform.position, playerPos) < 1f)
+                              && Vector3.Distance(camFollowSphere.transform.position, playerPos) < 0.25f)
         {
             forceBallToPlayer = false;
         }
     }
 
-    // FixedUpdate is called between frames.
+    // Called between frames.
     void FixedUpdate()
     {
         playerPos = Player.transform.position;

@@ -35,7 +35,7 @@ public class SummonClone : MonoBehaviour
     [SerializeField] Animator uiAnim;
     [SerializeField] Animator uiAnimCover;
     
-    // Dynamic Clone Spawn Variables
+    // Dynamic Clone Spawn Variables / position.
     private float[] cloneSpawnsX = { 1.5f, -1.5f, 0, 0};
     private float[] cloneSpawnsZ = { 0, 0, 1.5f, -1.5f};
 
@@ -52,19 +52,23 @@ public class SummonClone : MonoBehaviour
     // Called each frame.
     void Update()
     {
+        // If the 'summon clone' button was pressed, attempt to summon a clone.
         if (summonAClone.WasPressedThisFrame())
         {
             SummonAClone();
         }
     }
     
-    // Summons a clone at a specified location if they are not too close to a solid object 
-    // and if the clone will spawn on the ground, using raycasts.
-    // Freezes player and deactivates ability to summon a clone.
+    // Checks 4 points around the clone for a valid point to summon the clone.
+    // If the point is valid (on the ground and not too close to a wall) then 
+    // summon the clone.
     void SummonAClone()
     {
+        // Check all 4 points around the clone.
         for (int i = 0; i < 4; i++)
         {
+            // If the clone has not been summoned, check this spot with rays and summon it if
+            // the spot is valid.
             if (!cloneSummoned)
             {
                 Vector3 rayByPlayer = new Vector3(transform.position.x + cloneSpawnsX[i], transform.position.y,
@@ -72,6 +76,9 @@ public class SummonClone : MonoBehaviour
 
                 Vector3 direction = Vector3.zero;
 
+                // Set the direction for the ray to cast in and clone to
+                // be summoned in depending on what point around the clone 
+                // we are currently checking.
                 if (i == 0)
                 {
                     direction = Vector3.right;
@@ -90,13 +97,12 @@ public class SummonClone : MonoBehaviour
                 }
 
                 RaycastHit hit;
-
-
+                
                 // Debug rays.
                 Debug.DrawRay(transform.position, direction * 1.5f, Color.green, 1.5f);
                 Debug.DrawRay(rayByPlayer, Vector3.down * 1.5f, Color.green, 1.5f);
-
-
+                
+                // Check if the current point is valid using raycasts.
                 if ((Physics.Raycast(transform.position, direction, out hit, 1.5f, wall))
                     || (Physics.Raycast(transform.position, direction, out hit, 1.5f, ground))
                     || (!Physics.Raycast(rayByPlayer, Vector3.down, out hit, 1.5f, ground)
@@ -105,22 +111,27 @@ public class SummonClone : MonoBehaviour
                     // Debug text if clone cannot be summoned.
                     Debug.Log("Clone cannot be summoned here.");
                 }
+                // If this the point is valid, summon the clone.
                 else
                 {
                     cloneSound.Play();
 
+                    //Destroy the player's abilities.
                     this.GetComponent<Grapple>().DestroyHook();
                     this.GetComponent<AbilityPush>().DestroyShape();
 
+                    // Disable 
                     basicMovementPlayer.canMove = false;
                     this.GetComponent<Grapple>().enabled = false;
                     this.GetComponent<AbilityPush>().enabled = false;
 
                     cloneSummoned = true;
 
+                    // Summon clone.
                     clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + direction,
                         Quaternion.LookRotation(-Vector3.forward));
 
+                    // Set clone UI if the animator exists.
                     if (uiAnim != null)
                     {
                         clone.GetComponent<CloneInteractions>().anim = uiAnim;
@@ -131,22 +142,24 @@ public class SummonClone : MonoBehaviour
                         uiAnimCover.SetBool("isClone", true);
                     }
 
+                    // Set camera to clone.
                     GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
-
+                    
                     StartCoroutine(Cooldown());
                 }
             }
         }
     }
 
-    // Subtracts from clone summon cooldown timer while it is above 0, 
-    // and returns the current timer value.
+    // Subtracts from clone summon cooldown timer while it is above 0.
     private IEnumerator Cooldown()
     {
         cdRemaining = cooldown;
+        
         while (cdRemaining > 0)
         {
             cdRemaining -= Time.deltaTime;
+            
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }

@@ -1,71 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonSwitcher : MonoBehaviour
 {
-    public GameObject button1, button2, button3, button4;
-
-    [SerializeField] bool button1Active, button2Active, button3Active, button4Active;
+    public Transform button1, button2; 
+    public Button startButton, settingsButton;
+    public int currentButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        button1Active = true;
-
-        button2Active = false;
-
-        button3Active = false;
-
-        button4Active = false;
+        currentButton = 0;
+        settingsButton.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.D))
-       {
+        if(Input.GetKey(KeyCode.D))
+        {
             NextButton();
-       } 
+        }
+
+        if(Input.GetKey(KeyCode.A))
+        {
+            PrevButton();
+        }
     }
 
     public void NextButton()
     {
-        if(button1Active)
-        {
-            button1.SetActive(false);
-            button2.SetActive(true);
+        button1.LeanMoveLocalX(-400, 0.5f).setEaseOutExpo();
 
-            button1Active = false;
-            button2Active = true;
-        }
+        button2.LeanMoveLocalX(0, 0.5f).setEaseOutExpo();
 
-        if(button2Active)
-        {
-            button2.SetActive(false);
-            button3.SetActive(true);
+        startButton.enabled = false;
 
-            button2Active = false;
-            button3Active = true;
-        }
+        settingsButton.enabled = true;
+    }
 
-        if(button3Active)
-        {
-            button3.SetActive(false);
-            button4.SetActive(true);
+    public void PrevButton()
+    {
+        button1.LeanMoveLocalX(0, 0.5f).setEaseOutExpo();
 
-            button3Active = false;
-            button4Active = true;
-        }
+        button2.LeanMoveLocalX(400, 0.5f).setEaseOutExpo();
 
-        if(button4Active)
-        {
-            button4.SetActive(false);
-            button1.SetActive(true);
+        startButton.enabled = true;
 
-            button4Active = false;
-            button1Active = true;
-        }
+        settingsButton.enabled = false;
     }
 }
 

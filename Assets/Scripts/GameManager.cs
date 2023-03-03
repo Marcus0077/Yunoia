@@ -190,7 +190,12 @@ public class GameManager : MonoBehaviour
         GameObject pause = GameObject.FindGameObjectWithTag("Pause");
         if (pause != null)
         {
-            pause.GetComponent<PauseMenu>().playerControls.Enable();
+            pause.GetComponent<MenuTraverse>().playerControls.Enable();
+        }
+        GameObject pauseController = GameObject.FindGameObjectWithTag("PauseController");
+        if (pauseController != null)
+        {
+            pauseController.GetComponent<PauseMenu>().playerControls.Enable();
         }
     }
 
@@ -218,7 +223,12 @@ public class GameManager : MonoBehaviour
         GameObject pause = GameObject.FindGameObjectWithTag("Pause");
         if(pause != null)
         {
-            pause.GetComponent<PauseMenu>().playerControls.Disable();
+            pause.GetComponent<MenuTraverse>().playerControls.Disable();
+        }
+        GameObject pauseController = GameObject.FindGameObjectWithTag("PauseController");
+        if (pauseController != null)
+        {
+            pauseController.GetComponent<PauseMenu>().playerControls.Disable();
         }
     }
 

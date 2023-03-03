@@ -14,7 +14,7 @@ public class MenuTraverse : MonoBehaviour
     protected int amount;
     protected Vector2 cursorMovement;
     protected Vector3 mousePosition;
-    protected PlayerControls playerControls;
+    public PlayerControls playerControls;
     protected InputAction menuMove, menuAltMove, menuPress, menuCancel;
     protected bool stop, move;
     protected float time = .2f;

@@ -89,10 +89,38 @@ public class MenuTraverse : MonoBehaviour
 
     void makeAltMove()
     {
-        menuAltMove = playerControls.Menu.AltMove;
-        menuAltMove.started += ctx => StartMoveCursor();
-        menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
-        menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
+        if (playerControls == null)
+        {
+            playerControls = new PlayerControls();
+            if (!GameManager.Instance.GetMouseCursor())
+            {
+                //menuMove = playerControls.Menu.Move;
+                //menuMove.performed += ctx => StartMove(ctx);
+                //menuMove.canceled += ctx => CancelMove();
+                //menuAltMove = playerControls.Menu.AltMove;
+                //menuAltMove.performed += ctx => StartMove(ctx);
+                //menuAltMove.canceled += ctx => CancelMove();
+            }
+            else
+            {
+                menuAltMove = playerControls.Menu.AltMove;
+                menuAltMove.started += ctx => StartMoveCursor();
+                menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
+                menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
+                //menuAltMove.performed += ctx => StartMoveCursor(ctx);
+            }
+            menuPress = playerControls.Menu.Press;
+            menuPress.performed += ctx => PressMenu();
+            menuCancel = playerControls.Menu.Back;
+            menuCancel.performed += ctx => Back();
+        }
+        else
+        {
+            menuAltMove = playerControls.Menu.AltMove;
+            menuAltMove.started += ctx => StartMoveCursor();
+            menuAltMove.performed += ctx => cursorMovement = ctx.ReadValue<Vector2>();
+            menuAltMove.canceled += ctx => cursorMovement = Vector2.zero;
+        }
     }
 
     public virtual void Back()

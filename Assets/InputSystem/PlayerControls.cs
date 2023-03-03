@@ -843,7 +843,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -854,7 +854,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -876,7 +876,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -887,7 +887,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -909,7 +909,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -920,7 +920,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1216,6 +1216,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""4bda9572-4c35-4d27-a18b-0774606c9330"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1379,7 +1388,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftBracket"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Sensitivity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1390,10 +1399,32 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightBracket"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Sensitivity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8c52619-5f6d-4f3e-833f-049979a1efcb"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e371ef0d-db4d-49dd-8263-f848521599d3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1490,6 +1521,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Ghost_Camera = m_Ghost.FindAction("Camera", throwIfNotFound: true);
         m_Ghost_Sprint = m_Ghost.FindAction("Sprint", throwIfNotFound: true);
         m_Ghost_Sensitivity = m_Ghost.FindAction("Sensitivity", throwIfNotFound: true);
+        m_Ghost_Exit = m_Ghost.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -2095,6 +2127,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Ghost_Camera;
     private readonly InputAction m_Ghost_Sprint;
     private readonly InputAction m_Ghost_Sensitivity;
+    private readonly InputAction m_Ghost_Exit;
     public struct GhostActions
     {
         private @PlayerControls m_Wrapper;
@@ -2105,6 +2138,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_Ghost_Camera;
         public InputAction @Sprint => m_Wrapper.m_Ghost_Sprint;
         public InputAction @Sensitivity => m_Wrapper.m_Ghost_Sensitivity;
+        public InputAction @Exit => m_Wrapper.m_Ghost_Exit;
         public InputActionMap Get() { return m_Wrapper.m_Ghost; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2132,6 +2166,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Sensitivity.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnSensitivity;
                 @Sensitivity.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnSensitivity;
                 @Sensitivity.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnSensitivity;
+                @Exit.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnExit;
             }
             m_Wrapper.m_GhostActionsCallbackInterface = instance;
             if (instance != null)
@@ -2154,6 +2191,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Sensitivity.started += instance.OnSensitivity;
                 @Sensitivity.performed += instance.OnSensitivity;
                 @Sensitivity.canceled += instance.OnSensitivity;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
         }
     }
@@ -2250,5 +2290,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnSensitivity(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }

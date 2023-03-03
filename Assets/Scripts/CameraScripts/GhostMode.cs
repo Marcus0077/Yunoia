@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 // Ghost mode for debugging
 public class GhostMode : MonoBehaviour
 {
-    PlayerControls playerControls;
-    InputAction move, up, down, camera, shift, mouseSense;
+    public PlayerControls playerControls;
+    InputAction move, up, down, camera, shift, mouseSense, exit;
     public float speed, vSpeed, sensitivity; // read from gameManager?
     Vector3 moveAmount;
     Vector2 totalRot;
@@ -37,6 +37,14 @@ public class GhostMode : MonoBehaviour
         down.canceled += ctx => Elevate(0);
         camera = playerControls.Ghost.Camera;
         camera.performed += ctx => { totalRot += ctx.ReadValue<Vector2>() * sensitivity; transform.rotation = Quaternion.Euler(-(totalRot.y - 360 * Mathf.Floor(totalRot.y / 360)), totalRot.x - 360 * Mathf.Floor(totalRot.x / 360), 0); };
+        exit = playerControls.Ghost.Exit;
+        exit.performed += ctx => ToggleGhost();
+    }
+
+    void ToggleGhost()
+    {
+        Debug.Log("a");
+        GameManager.Instance.ToggleGhost();
     }
 
     void AddMouseSensitivity(float value)
@@ -65,6 +73,7 @@ public class GhostMode : MonoBehaviour
         camera.Enable();
         shift.Enable();
         mouseSense.Enable();
+        exit.Enable();
     }
 
     // Disable input action map controls.
@@ -76,6 +85,7 @@ public class GhostMode : MonoBehaviour
         camera.Disable();
         shift.Disable();
         mouseSense.Disable();
+        exit.Disable();
     }
 
     // Update is called once per frame

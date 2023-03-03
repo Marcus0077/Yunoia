@@ -31,9 +31,10 @@ public class TipDisplayer : MonoBehaviour
             }
         }
 
-        else if(isOpen)
+        else if(isOpen && Input.GetKeyDown(KeyCode.E))
         {
             prompt.SetActive(false);
+            tc.CloseDialog();
         }
     }
 

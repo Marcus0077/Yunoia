@@ -7,15 +7,21 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     // Speed and distance restrictions
+    float initialPullSpeed = 0.0f;
     float pullSpeed = 0.27f;
     float recoveryPullSpeed = 0.4f;
+
+    float initalHorizSpeed = 0.0f;
+    float horizSpeed = 10.0f;
+    float recoveryHorizSpeed = 10.0f;
+
     float yankSpeedStrong = 3.0f;
     [SerializeField] float yankSpeedWeak = 0.7f;
     float stopDistanceClose = 2.5f;
     public float stopDistanceFar;
     public float taughtDistance = 3.0f;
     [SerializeField] float maxSwingHeight = float.MaxValue;
-    public float heightCapDistance = 1.3f;
+    float heightCapDistance = 1.0f;
     
     // Experimental player tracker while grappling
     [SerializeField] Vector3 lastPlayerPos;
@@ -53,6 +59,7 @@ public class Grapple : MonoBehaviour
     public bool forwardSwing = true;
     public bool needYankSwing = true;
     public bool recoverySwing = false;
+    public bool initalSwingForce = false;
     float cdRemaining;
 
     public PlayerControls grappleControls;
@@ -76,6 +83,7 @@ public class Grapple : MonoBehaviour
         grappleActive = false;
 
         SetMaxVelocity(maxVelocity);
+        ResetSwingConditions();
     }
 
     void FixedUpdate()
@@ -345,19 +353,24 @@ public class Grapple : MonoBehaviour
         {
             // Temporary Coroutine Swap
             //StartCoroutine(ReverseSwing());
-            StartCoroutine(RemoveForce());
-        }
-
-        // Maintains horizontal force if the player is in the air and force can be applied
-        if (!player.isGrounded && canApplyForce)
-        {
-            HorizontalSwing();
+            //StartCoroutine(RemoveForce());
         }
 
         if (player.isGrounded)
         {
             return;
         }
+
+        // Maintains horizontal force if the player is in the air and force can be applied
+        if (canApplyForce)
+        {
+            HorizontalSwing();
+        }
+
+        /*if (initalSwingForce)
+        {
+            StartCoroutine(InitialSwingForce());
+        }*/
 
         if (playerRB.velocity.y < -5.0f)
         {
@@ -371,7 +384,7 @@ public class Grapple : MonoBehaviour
         }*/
 
         if (canApplyForce && !yanking)
-        {
+        { 
             if (recoverySwing)
             {
                 playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
@@ -382,6 +395,17 @@ public class Grapple : MonoBehaviour
                 playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
                 * pullSpeed, ForceMode.Impulse);
             }
+            
+            /*if (initalSwingForce)
+            {
+                playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
+                * initialPullSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                playerRB.AddRelativeForce((hook.transform.position - transform.position).normalized 
+                * pullSpeed, ForceMode.Impulse);
+            }*/
         }
 
         return;
@@ -399,12 +423,31 @@ public class Grapple : MonoBehaviour
     {
         if (recoverySwing)
         {
-            playerRB.AddRelativeForce(10.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+            playerRB.AddRelativeForce(recoveryHorizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
         }
         else if (forwardSwing)
         {
-            playerRB.AddRelativeForce(8.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+            playerRB.AddRelativeForce(horizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
         }
+
+        /*else if (forwardSwing)
+        {
+            if (initalSwingForce)
+            {
+                playerRB.AddRelativeForce(initalHorizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
+            }
+            else
+            {
+                playerRB.AddRelativeForce(horizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
+            }
+        }*/
+    }
+
+    private IEnumerator InitialSwingForce()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        initalSwingForce = false;
     }
 
     // Experimental coroutine that tracks the player's position while swinging
@@ -459,18 +502,13 @@ public class Grapple : MonoBehaviour
     }*/
 
     // 
-    private IEnumerator RemoveForce()
+    private IEnumerator ForceDelay()
     {
         canApplyForce = false;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         canApplyForce = true;
-
-        if (hook != null)
-        {
-            DestroyHook();
-        }
     }
 
     public void ResetSwingConditions()
@@ -486,6 +524,7 @@ public class Grapple : MonoBehaviour
         recoverySwing = false;
         swinging = false;
         yanking = false;
+        //initalSwingForce = false;
         maxSwingHeight = float.MaxValue;
         lastPlayerPos = Vector3.zero;
     }

@@ -12,6 +12,7 @@ public class OnTextToggleHover : OnButtonHover
     protected Settings prefName;
     [SerializeField]
     protected Color[] colors;
+    int index = 0;
 
     public override void OnEnable()
     {
@@ -28,16 +29,18 @@ public class OnTextToggleHover : OnButtonHover
     void ToggleOn()
     {
         GameManager.Instance.textColor = true;
+        GameManager.Instance.SetColor();
     }
 
     void ToggleOff()
     {
         GameManager.Instance.textColor = false;
+        //GameManager.Instance.menuTraverse
     }
 
     void Toggled()
     {
-        if(on.enabled)
+        if(GameManager.Instance.textColor)
         {
             ToggleOff();
         }

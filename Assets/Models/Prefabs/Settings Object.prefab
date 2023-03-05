@@ -256,7 +256,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -368,8 +368,8 @@ RectTransform:
   m_Father: {fileID: 77410845794446113}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.5699998}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 7362372789040775667}
   - component: {fileID: 5946411223629125384}
   - component: {fileID: 2728732935969844724}
-  - component: {fileID: 3076094324176129588}
+  - component: {fileID: 8899636655916988300}
   m_Layer: 5
   m_Name: Text Color
   m_TagString: Untagged
@@ -477,8 +477,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3076094324176129588}
-          m_TargetAssemblyTypeName: OnToggleHover, Assembly-CSharp
+        - m_Target: {fileID: 8899636655916988300}
+          m_TargetAssemblyTypeName: OnTextToggleHover, Assembly-CSharp
           m_MethodName: OnHoverEnter
           m_Mode: 1
           m_Arguments:
@@ -508,7 +508,7 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 6
+            m_IntArgument: 8
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -529,8 +529,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3076094324176129588}
-          m_TargetAssemblyTypeName: OnToggleHover, Assembly-CSharp
+        - m_Target: {fileID: 8899636655916988300}
+          m_TargetAssemblyTypeName: OnTextToggleHover, Assembly-CSharp
           m_MethodName: OnHoverExit
           m_Mode: 1
           m_Arguments:
@@ -597,8 +597,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3076094324176129588}
-        m_TargetAssemblyTypeName: OnToggleHover, Assembly-CSharp
+      - m_Target: {fileID: 8899636655916988300}
+        m_TargetAssemblyTypeName: OnTextToggleHover, Assembly-CSharp
         m_MethodName: Press
         m_Mode: 1
         m_Arguments:
@@ -609,7 +609,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3076094324176129588
+--- !u!114 &8899636655916988300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -618,19 +618,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2632581664683535760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4eab853efe5d34aaaca40f403c3e7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b525b0dbdfde3b4cbfd69f36fd79e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 2632581664683535760}
-  hoverXSize: 1
-  hoverYSize: 1
+  hoverXSize: 1.2
+  hoverYSize: 1.2
   exitXSize: 1
   exitYSize: 1
-  hoverColor: {r: 1, g: 1, b: 1, a: 1}
-  nuetralColor: {r: 1, g: 1, b: 1, a: 1}
-  on: {fileID: 0}
-  off: {fileID: 0}
-  prefName: 6
+  hoverColor: {r: 0, g: 0, b: 0, a: 0}
+  nuetralColor: {r: 0, g: 0, b: 0, a: 0}
+  displayText: {fileID: 6871072021125163221}
+  prefName: 5
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &2798106815276604913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7560509112517518755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1906,6 +1910,7 @@ MonoBehaviour:
   - {fileID: 1224753479681069929}
   - {fileID: 8889913178669141669}
   - {fileID: 2137761046200948247}
+  - {fileID: 8899636655916988300}
   prevMenu: {fileID: 0}
   nextMenu: {fileID: 0}
   activeIndex: 0
@@ -1982,7 +1987,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2133,8 +2138,8 @@ RectTransform:
   m_Father: {fileID: 7560509112473035649}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.5699998}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2906,7 +2911,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3476,8 +3481,8 @@ RectTransform:
   m_Father: {fileID: 7560509113611878416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.5699998}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3590,7 +3595,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4455,8 +4460,8 @@ RectTransform:
   m_Father: {fileID: 7560509112897956596}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.57}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

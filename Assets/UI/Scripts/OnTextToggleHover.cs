@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,31 +17,43 @@ public class OnTextToggleHover : OnButtonHover
 
     public override void OnEnable()
     {
-        if(GameManager.Instance.GetFloat(prefName) > 0)
+        if (GameManager.Instance.textColor)
         {
+            index = Array.FindIndex(colors, color => color == GameManager.Instance.ConvertFloatToHex(GameManager.Instance.GetFloat(prefName)));
             ToggleOn();
         }
         else
         {
+            index = 0;
             ToggleOff();
         }
     }
 
     void ToggleOn()
     {
+        displayText.text = "Text color on";
         GameManager.Instance.textColor = true;
+        GameManager.Instance.SetFloat(prefName, (float)GameManager.Instance.ConvertHexToFloat(colors[index]));
         GameManager.Instance.SetColor();
     }
 
     void ToggleOff()
     {
+        displayText.text = "Text color off";
+        displayText.color = Color.white;
         GameManager.Instance.textColor = false;
-        //GameManager.Instance.menuTraverse
+        GameManager.Instance.SetFloat(prefName, -1);
+        //Reload scene to fix text color I guess.
     }
 
     void Toggled()
     {
-        if(GameManager.Instance.textColor)
+        index++;
+        if (index >= colors.Length)
+        {
+            index = 0;
+        }
+        if (index == 0)
         {
             ToggleOff();
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public string[] statics;
     public string[] levelNames;
-    public double[] settings;
+    public float[] settings;
 
     public static GameManager instance;
     public bool ghost = false, menuCursor = false, textColor = false;
@@ -61,16 +62,16 @@ public class GameManager : MonoBehaviour
         texts.ForEach(text => text.color = newColor);
     }
 
-    double ConvertHexToFloat(Color color)
+    public float ConvertHexToFloat(Color color)
     {
-        return double.Parse(color.r.ToString("000") + color.g.ToString("000") + color.b.ToString("000"));
+        Color32 color_byte = new Color32((byte)(color.r * 255), (byte)(color.g * 255), (byte)(color.b * 255), (byte)(color.a * 255));
+        return float.Parse(color_byte.r.ToString("000") + color_byte.g.ToString("000") + color_byte.b.ToString("000"));
     }
 
-    Color ConvertFloatToHex(double value)
+    public Color ConvertFloatToHex(float value)
     {
         string colorString = value.ToString("000000000");
-        Debug.Log(colorString);
-        return new Color(float.Parse(colorString.Substring(0, 3)), float.Parse(colorString.Substring(3, 3)), float.Parse(colorString.Substring(6, 3)), 255);
+        return new Color32(Byte.Parse(colorString.Substring(0, 3)), Byte.Parse(colorString.Substring(3, 3)), Byte.Parse(colorString.Substring(6, 3)), 255);
     }
 
     // Start is called before the first frame update
@@ -88,13 +89,14 @@ public class GameManager : MonoBehaviour
 
         statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble};
         levelNames = new string[] {Depr, Barg, Anger, Denial };
-        settings = new double[System.Enum.GetValues(typeof(Settings)).Length];
+        settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
 
         player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.sceneLoaded += OnSceneLoaded;
         // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
         if (PlayerPrefs.GetFloat(Firstplay) == 0)
         {
+            textColor = false;
             PlayerPrefs.SetFloat(Sensitivity,.5f);
             PlayerPrefs.SetFloat(MasPref,.5f);
             PlayerPrefs.SetFloat(BGMPref,1);
@@ -119,6 +121,14 @@ public class GameManager : MonoBehaviour
             settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
             settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
             settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
+            if(settings[(int)Settings.TXTCLR] == -1)
+            {
+                textColor = false;
+            }
+            else
+            {
+                textColor = true;
+            }
             settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
         }
     }
@@ -126,6 +136,7 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         DataManager.gameData = new GameData();
+        textColor = false;
         PlayerPrefs.SetFloat(Sensitivity, .5f);
         PlayerPrefs.SetFloat(MasPref, .5f);
         PlayerPrefs.SetFloat(BGMPref, 1);
@@ -298,4 +309,3 @@ public enum Levels
     ANG = 2,
     DEN = 3
 }
-

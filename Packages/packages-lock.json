@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.unity.2d.sprite": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {}
-    },
     "com.unity.burst": {
       "version": "1.6.5",
       "depth": 1,
@@ -88,6 +82,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.postprocessing": {
+      "version": "3.2.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.probuilder": {
       "version": "5.0.6",
       "depth": 0,
@@ -153,16 +156,6 @@
         "com.unity.render-pipelines.core": "12.1.7",
         "com.unity.searcher": "4.9.1"
       }
-    },
-    "com.unity.terrain-tools": {
-      "version": "4.0.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.terrain": "1.0.0",
-        "com.unity.modules.terrainphysics": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
       "version": "1.1.31",

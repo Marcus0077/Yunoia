@@ -28,11 +28,14 @@ public class MenuTraverseWithBars : MenuTraverse
 
     public override void PressMenu()
     {
+        if (activeIndex < 0)
+            return;
         if (buttons[activeIndex].GetComponent<OnBarHover>() != null)
         {
             barEnter = true;
             return;
         }
+        
         buttons[activeIndex].Press();
     }
 

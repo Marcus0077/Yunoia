@@ -90,7 +90,10 @@ public class Rumbler : MonoBehaviour
         var gamepad = GetGamepad();
         if (gamepad == null)
             return;
-        
+
+        if (GameManager.Instance.GetFloat(Settings.RUMB) < 1)
+            return;
+
         switch (activeRumbePattern)
         {
             case RumblePattern.Constant:

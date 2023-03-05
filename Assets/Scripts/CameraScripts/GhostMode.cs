@@ -43,7 +43,6 @@ public class GhostMode : MonoBehaviour
 
     void ToggleGhost()
     {
-        Debug.Log("a");
         GameManager.Instance.ToggleGhost();
     }
 

@@ -150,7 +150,9 @@ public class MenuTraverse : MonoBehaviour
         activeIndex = 0;
         buttons[activeIndex].OnHoverEnter();
         if (prevMenu != null)
-            prevMenu.OnDisable();
+        {
+            //prevMenu.OnDisable();
+        }
     }
 
     public void OnDisable()
@@ -174,12 +176,14 @@ public class MenuTraverse : MonoBehaviour
         moving = null;
         if (prevMenu != null && (nextMenu == null || !nextMenu.gameObject.active))
         {
-            prevMenu.OnEnable();
+            //prevMenu.OnEnable();
         }
     }
 
     public virtual void PressMenu()
     {
+        if (activeIndex < 0)
+            return;
         buttons[activeIndex].Press();
     }
 

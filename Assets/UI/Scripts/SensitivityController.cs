@@ -8,7 +8,7 @@ public class SensitivityController : MonoBehaviour
     [SerializeField]
     Settings prefName;
 
-    void Start()
+    void OnEnable()
     {
         GetComponent<Slider>().value = GameManager.Instance.GetFloat(prefName);
     }

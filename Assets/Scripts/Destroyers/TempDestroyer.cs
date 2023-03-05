@@ -9,6 +9,7 @@ public class TempDestroyer : MonoBehaviour
     string nameOfData;
     public List<Pushable> pushables;
     public int count;
+    public GameObject warning;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class TempDestroyer : MonoBehaviour
         if(count <= 0)
         {
             Destroy(gameObject);
+            Destroy(warning);
         }
     }
 }

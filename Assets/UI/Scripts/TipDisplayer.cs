@@ -33,8 +33,7 @@ public class TipDisplayer : MonoBehaviour
 
         else if(isOpen && Input.GetKeyDown(KeyCode.E))
         {
-            prompt.SetActive(false);
-            tc.CloseDialog();
+            StartCoroutine(CloseMessage());
         }
     }
 
@@ -43,6 +42,16 @@ public class TipDisplayer : MonoBehaviour
         tc.CloseDialog();
         isOpen = false;
         prompt.SetActive(false);
+    }
+
+    private IEnumerator CloseMessage()
+    {
+        prompt.SetActive(true);
+        tc.CloseDialog();
+
+        yield return new WaitForSeconds(1f);
+
+        isOpen = false;
     }
 
     /*void Awake()

@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     GameObject spawnedGhost;
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
     public float time;
+    public MenuTraverse menuTraverse;
     public static GameManager Instance
     {
         get
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat(MasPref,.5f);
             PlayerPrefs.SetFloat(BGMPref,1);
             PlayerPrefs.SetFloat(SFXPref,1);
-            PlayerPrefs.SetFloat(TextColor, 255255255);
+            PlayerPrefs.SetFloat(TextColor, -1);
             PlayerPrefs.SetFloat(Rumble, 1);
             settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
             settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
@@ -129,7 +130,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat(MasPref, .5f);
         PlayerPrefs.SetFloat(BGMPref, 1);
         PlayerPrefs.SetFloat(SFXPref, 1);
-        PlayerPrefs.SetFloat(TextColor, 255255255);
+        PlayerPrefs.SetFloat(TextColor, -1);
         PlayerPrefs.SetFloat(Rumble, 1);
         settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
         settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);

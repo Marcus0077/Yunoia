@@ -9,6 +9,11 @@ public class OnButtonHover : MonoBehaviour
     public float hoverXSize, hoverYSize, exitXSize, exitYSize;
     public Color hoverColor, nuetralColor;
 
+    public virtual void OnEnable()
+    {
+        
+    }
+
     public void OnHoverEnter()
     {
         LeanTween.color(button.GetComponent<RectTransform>(), hoverColor, .5f).setEaseInOutQuint().setIgnoreTimeScale(true);

@@ -1,22 +1,50 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class OnBarHover : OnButtonHover
+public class OnTextToggleHover : OnButtonHover
 {
     [SerializeField]
-    Settings prefName;
+    protected TextMeshProUGUI displayText;
+    [SerializeField]
+    protected Settings prefName;
+    [SerializeField]
+    protected Color[] colors;
 
     public override void OnEnable()
     {
-        GetComponent<Slider>().value = GameManager.Instance.GetFloat(prefName);
+        if(GameManager.Instance.GetFloat(prefName) > 0)
+        {
+            ToggleOn();
+        }
+        else
+        {
+            ToggleOff();
+        }
     }
 
-    public void OnChangeSlider(float value)
+    void ToggleOn()
     {
-        GameManager.Instance.SetFloat(prefName, value);
-        PlayerPrefs.Save();
+        GameManager.Instance.textColor = true;
+    }
+
+    void ToggleOff()
+    {
+        GameManager.Instance.textColor = false;
+    }
+
+    void Toggled()
+    {
+        if(on.enabled)
+        {
+            ToggleOff();
+        }
+        else
+        {
+            ToggleOn();
+        }
     }
 
     public void OnHoverEnter()
@@ -33,12 +61,6 @@ public class OnBarHover : OnButtonHover
 
     public void Press()
     {
-        //GetComponent<Button>().onClick.Invoke();
-    }
-
-    public void Move(int amount)
-    {
-        GetComponent<Slider>().value = Mathf.Clamp(GetComponent<Slider>().value + amount / 100f, 0, 1);
-        
+        Toggled();
     }
 }

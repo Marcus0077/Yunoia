@@ -10,10 +10,16 @@ public class OnToggleHover : OnButtonHover
     [SerializeField]
     protected Settings prefName;
 
-    void Awake()
+    public override void OnEnable()
     {
-        on.enabled = false;
-        off.enabled = true;
+        if(GameManager.Instance.GetFloat(prefName) > 0)
+        {
+            ToggleOn();
+        }
+        else
+        {
+            ToggleOff();
+        }
     }
 
     void ToggleOn()

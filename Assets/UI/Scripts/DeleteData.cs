@@ -13,6 +13,7 @@ public class DeleteData : MonoBehaviour
     public void DeleteSettings()
     {
         GameManager.Instance.NewGame();
+        GameManager.Instance.menuTraverse.ResetSettings();
     }
 
     // Update is called once per frame

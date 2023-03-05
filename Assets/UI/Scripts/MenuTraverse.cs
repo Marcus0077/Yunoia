@@ -132,6 +132,7 @@ public class MenuTraverse : MonoBehaviour
     public void OnEnable()
     {
         GameManager.Instance.SetColor();
+        GameManager.Instance.menuTraverse = this;
         if (!GameManager.Instance.GetMouseCursor())
         {
             //menuMove.Enable();
@@ -281,6 +282,15 @@ public class MenuTraverse : MonoBehaviour
             mousePosition += new Vector3(cursorMovement.x, cursorMovement.y, 0) * 50 * GameManager.Instance.GetFloat(Settings.SENSE);
             //Debug.Log(currentPosition);
             Mouse.current.WarpCursorPosition(mousePosition);
+        }
+    }
+
+    public void ResetSettings()
+    {
+        
+        foreach (OnButtonHover button in buttons)
+        {
+            button.OnEnable();
         }
     }
 }

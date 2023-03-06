@@ -27,7 +27,7 @@ public class MenuTraverse : MonoBehaviour
         get { return move; }
         set { move = value; }
     }
-    // Start is called before the first frame update
+    // Potentially make menuMove only triggers and swap future tabs in settings
     void Start()
     {
         if (playerControls == null)
@@ -87,6 +87,7 @@ public class MenuTraverse : MonoBehaviour
         }
     }
 
+    // GameManager prefab does not run early enough, so need a backup plan for it altmove isn't set correctly
     void makeAltMove()
     {
         if (playerControls == null)
@@ -129,6 +130,7 @@ public class MenuTraverse : MonoBehaviour
             buttons[backIndex].Press();
     }
 
+    //previous menu is already enabled through the button click, so not necessary
     public void OnEnable()
     {
         GameManager.Instance.SetColor();
@@ -181,6 +183,7 @@ public class MenuTraverse : MonoBehaviour
         }
     }
 
+    //Invokes the click on the button/slider/toggle
     public virtual void PressMenu()
     {
         if (activeIndex < 0)
@@ -188,6 +191,7 @@ public class MenuTraverse : MonoBehaviour
         buttons[activeIndex].Press();
     }
 
+    //Not used currently, can be converted for tabs -> activeIndex into tabIndex, add fields for different tab menus
     public virtual void MoveMenu()
     {
         if (amount != 0)
@@ -228,6 +232,7 @@ public class MenuTraverse : MonoBehaviour
         move = false;
     }
 
+    //can be removed
     protected IEnumerator SlowMoveMenu()
     {
         yield return null;
@@ -252,6 +257,7 @@ public class MenuTraverse : MonoBehaviour
          
     }
 
+    //used when hovering any button/slider/trigger
     public void EnterCurrent(int index)
     {
         buttons[index].OnHoverEnter();
@@ -285,9 +291,9 @@ public class MenuTraverse : MonoBehaviour
         }
     }
 
+    //Doesn't reset anything, just shows the effect of resetting without needing to back out
     public void ResetSettings()
     {
-        
         foreach (OnButtonHover button in buttons)
         {
             button.OnEnable();

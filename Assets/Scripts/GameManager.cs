@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Scene needs to be reloaded to turn off text color
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (!textColor)
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         texts.ForEach(text => text.color = newColor);
     }
 
+    //Color conversion methods (uses bytes for easier storage)
     public float ConvertHexToFloat(Color color)
     {
         Color32 color_byte = new Color32((byte)(color.r * 255), (byte)(color.g * 255), (byte)(color.b * 255), (byte)(color.a * 255));
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        DataManager.gameData = new GameData();
+        DataManager.gameData = new GameData();//remove this to make it only a new settings button?
         textColor = false;
         PlayerPrefs.SetFloat(Sensitivity, .5f);
         PlayerPrefs.SetFloat(MasPref, .5f);
@@ -173,6 +175,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat(statics[(int)index], value);
     }
 
+    // Level completion data (move to DataManager?)
     public void CompleteLevel(Levels level)
     {
         PlayerPrefs.SetInt(levelNames[(int)level], 1);

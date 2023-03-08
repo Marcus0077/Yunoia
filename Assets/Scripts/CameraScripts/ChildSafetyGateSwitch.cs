@@ -23,7 +23,7 @@ public class ChildSafetyGateSwitch : MonoBehaviour
     // set the gates to active, thus activating the physical camera bounds.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Clone"))
+        if (other.CompareTag("Player"))
         {
             foreach (var childSafetyGate in childSafetyGates)
             {

@@ -13,5 +13,9 @@ public class YeetTheClone : MonoBehaviour
         {
             other.GetComponent<ExitClone>().despawnClone = true;
         }
+        else if (other.CompareTag("Player") && GameObject.FindWithTag("Clone") != null)
+        {
+            GameObject.FindWithTag("Clone").GetComponent<ExitClone>().despawnClone = true;
+        }
     }
 }

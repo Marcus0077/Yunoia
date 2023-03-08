@@ -107,7 +107,7 @@ public class BasicMovement : MonoBehaviour
             minionDeath.SetActive(false);
         }
 
-        moveSpeed = 4f;
+        moveSpeed = 5f;
         maxSpeed = 18f;
         jumpForce = 8f;
         accelerationValue = 1f;

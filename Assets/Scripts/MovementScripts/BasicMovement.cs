@@ -71,6 +71,11 @@ public class BasicMovement : MonoBehaviour
 
     public GameObject winScreen;
     
+    // Anger Room Variables.
+    public bool inAngerRoom;
+    public HideObstructions curAngerRoomPartialTrigger;
+    public HideObstructions curAngerRoomFullTrigger;
+    
     // Get references and initialize variables when player spawns.
     void Awake()
     {
@@ -99,6 +104,28 @@ public class BasicMovement : MonoBehaviour
             curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
             
             limitedMovementCam.SetCurrentPlayer(this.gameObject);
+
+            if (GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().inAngerRoom)
+            {
+                inAngerRoom = true;
+
+                if (GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curAngerRoomFullTrigger 
+                    != null)
+                {
+                    curAngerRoomFullTrigger = GameObject.FindGameObjectWithTag("Player").
+                        GetComponent<BasicMovement>().curAngerRoomFullTrigger;
+                    
+                    curAngerRoomFullTrigger.isClone = true;
+                }
+                if (GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curAngerRoomPartialTrigger 
+                    != null)
+                {
+                    curAngerRoomPartialTrigger = GameObject.FindGameObjectWithTag("Player").
+                        GetComponent<BasicMovement>().curAngerRoomPartialTrigger;
+                    
+                    curAngerRoomPartialTrigger.isClone = true;
+                }
+            }
         }
 
         if (GameObject.FindWithTag("MinionDeath") != null)
@@ -287,7 +314,6 @@ public class BasicMovement : MonoBehaviour
 
             foreach (GameObject Minion in GameObject.FindGameObjectsWithTag("Minion"))
             {
-                Debug.Log("Minion kilt");
                 Destroy(Minion);
             }
             

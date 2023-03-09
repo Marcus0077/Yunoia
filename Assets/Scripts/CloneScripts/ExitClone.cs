@@ -172,23 +172,7 @@ public class ExitClone : MonoBehaviour
 
             // Destroy any particle effects that were created by the clone 
             // and are not destroyed yet.
-            if (this.GetComponent<AbilityPush>().chargeEffectDestroy != null)
-            {
-                Destroy(this.GetComponent<AbilityPush>().chargeEffectDestroy);
-            }
-
-            if (this.GetComponent<AbilityPush>().smallEffectDestroy != null)
-            {
-                Destroy(this.GetComponent<AbilityPush>().smallEffectDestroy);
-            }
-            if (this.GetComponent<AbilityPush>().largeEffectDestroy != null)
-            {
-                Destroy(this.GetComponent<AbilityPush>().largeEffectDestroy);
-            }
-            if (this.GetComponent<Grapple>().grappleEffectDestroy != null)
-            {
-                Destroy(this.GetComponent<Grapple>().grappleEffectDestroy);
-            }
+            DestroyParticles();
 
             // Destroy clone abilities.
             this.GetComponent<Grapple>().DestroyHook();
@@ -227,6 +211,29 @@ public class ExitClone : MonoBehaviour
         {
             // Countdown the clone's active timer until it is despawned.
             CloneCountdownTimer();
+        }
+    }
+
+    // Destroy any particle effects that were created by the clone 
+    // and are not destroyed yet.
+    private void DestroyParticles()
+    {
+        if (this.GetComponent<AbilityPush>().chargeEffectDestroy != null)
+        {
+            Destroy(this.GetComponent<AbilityPush>().chargeEffectDestroy);
+        }
+
+        if (this.GetComponent<AbilityPush>().smallEffectDestroy != null)
+        {
+            Destroy(this.GetComponent<AbilityPush>().smallEffectDestroy);
+        }
+        if (this.GetComponent<AbilityPush>().largeEffectDestroy != null)
+        {
+            Destroy(this.GetComponent<AbilityPush>().largeEffectDestroy);
+        }
+        if (this.GetComponent<Grapple>().grappleEffectDestroy != null)
+        {
+            Destroy(this.GetComponent<Grapple>().grappleEffectDestroy);
         }
     }
 
@@ -269,6 +276,31 @@ public class ExitClone : MonoBehaviour
             if (!door.isPlayer)
             {
                 door.activateText.enabled = false;
+            }
+        }
+
+        if (GetComponent<BasicMovement>().inAngerRoom)
+        { 
+            if (GetComponent<BasicMovement>().curAngerRoomPartialTrigger != null)
+            {
+                GetComponent<BasicMovement>().curAngerRoomPartialTrigger.isClone = false;
+                
+                if (!GetComponent<BasicMovement>().curAngerRoomPartialTrigger.isPlayer)
+                {
+                    GetComponent<BasicMovement>().curAngerRoomPartialTrigger.PartialViewWalls();
+                }
+            }
+            
+            if (GetComponent<BasicMovement>().curAngerRoomFullTrigger != null)
+            {
+                GetComponent<BasicMovement>().curAngerRoomFullTrigger.isClone = false;
+
+                if (!GetComponent<BasicMovement>().curAngerRoomFullTrigger.isPlayer)
+                {
+                    Debug.Log("attempts to make chair viewable");
+                    
+                    GetComponent<BasicMovement>().curAngerRoomFullTrigger.FullyViewWalls();
+                }
             }
         }
     }

@@ -24,9 +24,12 @@ public class RenderFaceless : MonoBehaviour
     // turn their renderer back on so that we can see them.
     private void OnTriggerEnter(Collider other)
     {
-        foreach (var Faceless in Facelesses)
+        if (other.CompareTag("Player"))
         {
-            Faceless.GetComponent<MeshRenderer>().enabled = true;
+            foreach (var Faceless in Facelesses)
+            {
+                Faceless.GetComponent<MeshRenderer>().enabled = true;
+            }
         }
     }
 }

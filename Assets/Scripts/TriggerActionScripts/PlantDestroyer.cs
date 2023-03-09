@@ -20,7 +20,7 @@ public class PlantDestroyer : MonoBehaviour
 
     private void Awake()
     {
-        //numCrystals = coCrystals.Length + 1;
+        numCrystals = coCrystals.Length + 1;
 
         thisCrystalComplete = 0;
         crystalsComplete = 0;
@@ -77,7 +77,8 @@ public class PlantDestroyer : MonoBehaviour
 
     private IEnumerator LoadHub()
     {
-        yield return new WaitForSeconds(1f);
+        GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+        yield return new WaitForSeconds(1.25f);
         SceneManager.LoadScene("HubFinal");
         DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
         GameManager.Instance.CompleteLevel(level);

@@ -460,19 +460,23 @@ public class BasicMovement : MonoBehaviour
     // Changes active camera depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.ToString().Trim(other.tag.ToString()[other.tag.ToString().Length-1]).CompareTo("Camera") == 0)
+        if (this.CompareTag("Player") || other.GetComponent<YeetTheClone>() == null)
         {
-            curRoom = other.tag.ToCharArray()[other.tag.ToCharArray().Length - 1] - 48;
-            
-            limitedMovementCam.GetCurrentCameraData(curRoom);
-            limitedMovementCam.SetCurrentPlayer(this.gameObject);
-        }
-        else if (other.CompareTag("Camera10"))
-        {
-            curRoom = 10;
-            
-            limitedMovementCam.GetCurrentCameraData(curRoom);
-            limitedMovementCam.SetCurrentPlayer(this.gameObject);
+            if (other.tag.ToString().Trim(other.tag.ToString()[other.tag.ToString().Length - 1]).CompareTo("Camera") ==
+                0)
+            {
+                curRoom = other.tag.ToCharArray()[other.tag.ToCharArray().Length - 1] - 48;
+
+                limitedMovementCam.GetCurrentCameraData(curRoom);
+                limitedMovementCam.SetCurrentPlayer(this.gameObject);
+            }
+            else if (other.CompareTag("Camera10"))
+            {
+                curRoom = 10;
+
+                limitedMovementCam.GetCurrentCameraData(curRoom);
+                limitedMovementCam.SetCurrentPlayer(this.gameObject);
+            }
         }
     }
     

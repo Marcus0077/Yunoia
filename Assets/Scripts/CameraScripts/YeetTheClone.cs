@@ -6,16 +6,31 @@ using UnityEngine;
 
 public class YeetTheClone : MonoBehaviour
 {
+    private bool passedRoom;
+
+    private void Awake()
+    {
+        passedRoom = false;
+    }
+
     // Literally just despawns the clone if the clone walks through this trigger.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Clone"))
+        if (!passedRoom)
         {
-            other.GetComponent<ExitClone>().despawnClone = true;
-        }
-        else if (other.CompareTag("Player") && GameObject.FindWithTag("Clone") != null)
-        {
-            GameObject.FindWithTag("Clone").GetComponent<ExitClone>().despawnClone = true;
+            if (other.CompareTag("Clone"))
+            {
+                other.GetComponent<ExitClone>().despawnClone = true;
+            }
+            else if (other.CompareTag("Player"))
+            {
+                if (GameObject.FindWithTag("Clone") != null)
+                {
+                    GameObject.FindWithTag("Clone").GetComponent<ExitClone>().despawnClone = true;
+                }
+
+                passedRoom = true;
+            }
         }
     }
 }

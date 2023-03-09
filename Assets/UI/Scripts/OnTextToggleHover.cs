@@ -33,7 +33,7 @@ public class OnTextToggleHover : OnButtonHover
     {
         displayText.text = "Text color on";
         GameManager.Instance.textColor = true;
-        GameManager.Instance.SetFloat(prefName, (float)GameManager.Instance.ConvertHexToFloat(colors[index]));
+        GameManager.Instance.SetFloat(prefName, (float)GameManager.Instance.ConvertHexToFloat(colors[index])); // error here
         GameManager.Instance.SetColor();
     }
 

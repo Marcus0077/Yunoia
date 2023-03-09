@@ -324,6 +324,7 @@ public class AbilityPush : MonoBehaviour
     void Awake()
     {
         pushControls = new PlayerControls();
+        GameManager.Instance.GetInputs(pushControls);
         pushAction = pushControls.Push.Push;
         pushAction.performed += ctx => PushPress();
         pushAction.canceled += ctx => PushRelease();

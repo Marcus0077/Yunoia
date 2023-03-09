@@ -26,12 +26,13 @@ public class GameManager : MonoBehaviour
     public float[] settings;
 
     public static GameManager instance;
-    public bool ghost = false, menuCursor = false, textColor = false;
+    public bool ghost = false, menuCursor = false, textColor = false, rebinded = false;
     [SerializeField]
     GameObject player, ghostObj;
     GameObject spawnedGhost;
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
     public float time;
+    public string controlScheme, rebinds;
     public MenuTraverse menuTraverse;
     public static GameManager Instance
     {
@@ -52,6 +53,20 @@ public class GameManager : MonoBehaviour
             return;
         texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
         texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
+    }
+
+    public void GetInputs(PlayerControls pc)
+    {
+        if(!rebinded)
+        {
+            if (player == null)
+                player = GameObject.FindGameObjectWithTag("Player");
+            if (rebinds == "")
+                rebinds = PlayerPrefs.GetString("rebinds");
+            if (rebinds != "")
+                pc.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
+            rebinded = true;
+        }
     }
 
     public void SetColor()
@@ -92,8 +107,8 @@ public class GameManager : MonoBehaviour
         statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble};
         levelNames = new string[] {Depr, Barg, Anger, Denial };
         settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
-
-        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.sceneLoaded += OnSceneLoaded;
         // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
         if (PlayerPrefs.GetFloat(Firstplay) == 0)
@@ -278,19 +293,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnEnabled()
+    public static void SelectControlScheme(string value)
     {
-        
-    }
-
-    void OnDisable()
-    {
-        
-    }
-
-    void FixedUpdate()
-    {
-        
+        GameManager.Instance.controlScheme = value;
     }
 }
 

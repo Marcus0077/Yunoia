@@ -52,7 +52,7 @@ public class RebindingComponent : MonoBehaviour
                 action[0] = movement.dash;
                 break;
         }
-        int bindingIndex = action[0].GetBindingIndex(group: player.GetComponent<PlayerInput>().currentControlScheme);
+        int bindingIndex = action[0].GetBindingIndex(group: GameManager.Instance.controlScheme);
         action[0].GetBindingDisplayString(bindingIndex, out string device, out binding);
         displayText.text += binding;
     }
@@ -64,8 +64,6 @@ public class RebindingComponent : MonoBehaviour
             rebindOperation.Dispose();
         }
         rebindOperation = action[0].PerformInteractiveRebinding()
-            // To avoid accidental input from mouse motion
-            .WithControlsExcluding("Mouse")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => RebindCompletion())
             .Start();
@@ -73,6 +71,9 @@ public class RebindingComponent : MonoBehaviour
 
     void RebindCompletion()
     {
+        var rebinds = player.GetComponent<PlayerInput>().actions.SaveBindingOverridesAsJson();
+        Debug.Log(rebinds);
+        PlayerPrefs.SetString("Rebinds", rebinds);
         OnEnable();
         rebindOperation.Dispose();
     }

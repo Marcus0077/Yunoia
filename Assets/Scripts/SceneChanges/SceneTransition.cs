@@ -63,15 +63,10 @@ public class SceneTransition : MonoBehaviour
                 DataManager.gameData.position.Set(11.73f, 0.0f, 10.0f);
             }
 
-            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name != "DenialFinal")
+            if(sceneToTransfer == "HubFinal")
             {
-                DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
+                DataManager.gameData.position.Set(2.3f, 42.4f, 16.3f);
                 GameManager.Instance.CompleteLevel(level);
-            }
-            
-            if(sceneToTransfer == "HubFinal" && SceneManager.GetActiveScene().name == "DenialFinal")
-            {
-                DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
             }
 
             SceneManager.LoadScene(sceneToTransfer);

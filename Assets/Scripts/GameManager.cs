@@ -130,55 +130,55 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DataManager.ReadFile();
+            statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble };
+            levelNames = new string[] { Depr, Barg, Anger, Denial };
+            settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
+            if (player == null)
+                player = GameObject.FindGameObjectWithTag("Player");
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
+            if (PlayerPrefs.GetFloat(Firstplay) == 0)
+            {
+                textColor = false;
+                PlayerPrefs.SetFloat(Sensitivity, .5f);
+                PlayerPrefs.SetFloat(MasPref, .5f);
+                PlayerPrefs.SetFloat(BGMPref, 1);
+                PlayerPrefs.SetFloat(SFXPref, 1);
+                PlayerPrefs.SetFloat(TextColor, -1);
+                PlayerPrefs.SetFloat(Rumble, 1);
+                settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
+                settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
+                settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
+                settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
+                settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
+                settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
+                PlayerPrefs.SetFloat(Firstplay, -1);
+                //PlayerPrefs.SetInt(Depr, 0);
+                //PlayerPrefs.SetInt(Barg, 0);
+                //PlayerPrefs.SetInt(Anger, 0);
+            }
+            else
+            {
+                settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
+                settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
+                settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
+                settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
+                settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
+                if (settings[(int)Settings.TXTCLR] == -1)
+                {
+                    textColor = false;
+                }
+                else
+                {
+                    textColor = true;
+                }
+                settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
+            }
         }
         else
         {
             Destroy(gameObject);
-        }
-
-        statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble};
-        levelNames = new string[] {Depr, Barg, Anger, Denial };
-        settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
-        if (player == null)
-            player = GameObject.FindGameObjectWithTag("Player");
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
-        if (PlayerPrefs.GetFloat(Firstplay) == 0)
-        {
-            textColor = false;
-            PlayerPrefs.SetFloat(Sensitivity,.5f);
-            PlayerPrefs.SetFloat(MasPref,.5f);
-            PlayerPrefs.SetFloat(BGMPref,1);
-            PlayerPrefs.SetFloat(SFXPref,1);
-            PlayerPrefs.SetFloat(TextColor, -1);
-            PlayerPrefs.SetFloat(Rumble, 1);
-            settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
-            settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
-            settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
-            settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
-            settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
-            settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
-            PlayerPrefs.SetFloat(Firstplay, -1);
-            //PlayerPrefs.SetInt(Depr, 0);
-            //PlayerPrefs.SetInt(Barg, 0);
-            //PlayerPrefs.SetInt(Anger, 0);
-        }
-        else
-        {
-            settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
-            settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
-            settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
-            settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
-            settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
-            if(settings[(int)Settings.TXTCLR] == -1)
-            {
-                textColor = false;
-            }
-            else
-            {
-                textColor = true;
-            }
-            settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
         }
     }
 

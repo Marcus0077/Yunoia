@@ -205,7 +205,8 @@ public class PauseMenu : MonoBehaviour
     {
         PauseVideo();
         DisableInput();
-        
+        DataManager.WriteFile();
+
         pauseMenu.SetActive(true);
         BGBlur.SetActive(true);
         

@@ -33,7 +33,15 @@ public class DataManager
 [System.Serializable]
 public class GameData
 {
-    public int level = -1;
     public bool checkpointed = false;
+    public CheckpointData[] checkpointDatas = new CheckpointData[System.Enum.GetValues(typeof(Levels)).Length];
+    public bool[] levelCompletion = new bool[System.Enum.GetValues(typeof(Levels)).Length];
+}
+
+[System.Serializable]
+public class CheckpointData
+{
+    public int room = -1;
     public Vector3 position = Vector3.zero;
 }
+

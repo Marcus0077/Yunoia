@@ -79,8 +79,10 @@ public class PlantDestroyer : MonoBehaviour
     {
         GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
         yield return new WaitForSeconds(1.25f);
-        SceneManager.LoadScene("HubFinal");
-        DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
+        GameManager.Instance.SetCheckpoint(Levels.HUB, new Vector3(0.92f, 47.07f, 19.93f));
+        DataManager.gameData.checkpointed = false;
+        //DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
         GameManager.Instance.CompleteLevel(level);
+        SceneManager.LoadScene("HubFinal");
     }
 }

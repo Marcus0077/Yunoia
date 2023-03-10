@@ -70,9 +70,13 @@ public class LimitedMovementCam : MonoBehaviour
 
         // If we are starting from a checkpoint, set the camera to
         // that checkpoint's camera.
-        if (DataManager.gameData.level > 0)
+        //if (DataManager.gameData.level > 0)
+        //{
+        //    GetCurrentCameraData((int)DataManager.gameData.level);
+        //}
+        if (DataManager.gameData.checkpointed)
         {
-            GetCurrentCameraData((int)DataManager.gameData.level);
+            GetCurrentCameraData(DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room);
         }
         // If we are in the first room of a level, set the camera
         // to the first room's camera.

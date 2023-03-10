@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour
     private static readonly string Sensitivity = "Sensitivity";
     private static readonly string Rumble = "Rumble";
     private static readonly string Depr = "Depression";
-    private static readonly string Barg = "Barg";
+    private static readonly string Barg = "Bargaining";
     private static readonly string Anger = "Anger";
     private static readonly string Denial = "Denial";
+    private static readonly string Hub = "Hub";
     private static readonly string TextColor = "TextColor";
 
     public string[] statics;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
     public float time;
     public string controlScheme, rebinds;
+    public int currentLevel;
     public MenuTraverse menuTraverse;
     public static GameManager Instance
     {
@@ -53,6 +55,31 @@ public class GameManager : MonoBehaviour
             return;
         texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
         texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
+    }
+
+    public void SetLevel(int value)
+    {
+        currentLevel = value;
+    }
+
+    public void SetLevel(Levels value)
+    {
+        currentLevel = (int)value;
+    }
+
+    public void SetCheckpoint(int value, Vector3 pos)
+    {
+        DataManager.gameData.checkpointDatas[value].position = pos;
+    }
+
+    public void SetCheckpoint(Levels value, Vector3 pos)
+    {
+        DataManager.gameData.checkpointDatas[(int)value].position = pos;
+    }
+
+    public CheckpointData GetCheckpoint()
+    {
+        return DataManager.gameData.checkpointDatas[currentLevel];
     }
 
     public void GetInputs(PlayerControls pc)
@@ -127,9 +154,9 @@ public class GameManager : MonoBehaviour
             settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
             settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
             PlayerPrefs.SetFloat(Firstplay, -1);
-            PlayerPrefs.SetInt(Depr, 0);
-            PlayerPrefs.SetInt(Barg, 0);
-            PlayerPrefs.SetInt(Anger, 0);
+            //PlayerPrefs.SetInt(Depr, 0);
+            //PlayerPrefs.SetInt(Barg, 0);
+            //PlayerPrefs.SetInt(Anger, 0);
         }
         else
         {
@@ -167,9 +194,9 @@ public class GameManager : MonoBehaviour
         settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
         settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
         PlayerPrefs.SetFloat(Firstplay, -1);
-        PlayerPrefs.SetInt(Depr, 0);
-        PlayerPrefs.SetInt(Barg, 0);
-        PlayerPrefs.SetInt(Anger, 0);
+        //PlayerPrefs.SetInt(Depr, 0);
+        //PlayerPrefs.SetInt(Barg, 0);
+        //PlayerPrefs.SetInt(Anger, 0);
     }
 
     // Is game using a cursor controlled by keyboard?
@@ -193,12 +220,14 @@ public class GameManager : MonoBehaviour
     // Level completion data (move to DataManager?)
     public void CompleteLevel(Levels level)
     {
-        PlayerPrefs.SetInt(levelNames[(int)level], 1);
+        DataManager.gameData.levelCompletion[(int)level] = true;
+        //PlayerPrefs.SetInt(levelNames[(int)level], 1);
     }
 
     public bool GetLevelStatus(Levels level)
     {
-        return PlayerPrefs.GetInt(levelNames[(int)level]) == 1;
+        return DataManager.gameData.levelCompletion[(int)level];
+        //return PlayerPrefs.GetInt(levelNames[(int)level]) == 1;
     }
 
     // Toggles ghost mode at player position while freezing time (maybe have an oldTimeScale variable if it becomes a problem)
@@ -312,8 +341,11 @@ public enum Settings
 
 public enum Levels
 {
-    DEP = 0,
-    BAR = 1,
-    ANG = 2,
-    DEN = 3
+    NA = 0,
+    DEN = 1,
+    HUB = 2,
+    DEP = 3,
+    BAR = 4,
+    ANG = 5,
+
 }

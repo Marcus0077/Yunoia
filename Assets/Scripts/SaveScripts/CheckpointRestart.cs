@@ -23,12 +23,12 @@ public class CheckpointRestart : MonoBehaviour
         
         if (DataManager.gameData.checkpointed)
         {
-            Debug.Log(DataManager.gameData.level);
+            //Debug.Log(DataManager.gameData.level);
             // limitedMovementCam.GetCurrentCameraData(DataManager.gameData.level);
             // limitedMovementCam.SetCurrentPlayer(GameObject.FindGameObjectWithTag("Player"));
-            
-            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().Play("Room" + DataManager.gameData.level);
-            transform.position = DataManager.gameData.position;
+            GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().SetInteger("roomNum",DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room);
+            //GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().Play("Room" + DataManager.gameData.level);
+            transform.position = GameManager.Instance.GetCheckpoint().position;
         }
         checkpointControls = new PlayerControls();
         restartAction = checkpointControls.Checkpoint.Restart;

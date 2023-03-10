@@ -90,9 +90,10 @@ public class BasicMovement : MonoBehaviour
                 winScreen.SetActive(false);
             }
 
-            if (DataManager.gameData.level > 0)
+            if (DataManager.gameData.checkpointed)
             {
-                curRoom = DataManager.gameData.level;
+                curRoom = DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room;
+                //curRoom = DataManager.gameData.level;
             }
             else
             {

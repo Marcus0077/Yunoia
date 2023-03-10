@@ -20,12 +20,11 @@ public class Checkpoint : MonoBehaviour
         if (hit.tag == "Player")
         {
             DataManager.gameData.checkpointed = true;
-            DataManager.gameData.level = GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum"); // camera doesn't use animator anymore?
-            Debug.Log(DataManager.gameData.level);
-            //DataManager.gameData.position = transform.position + Vector3.right;
-            DataManager.gameData.position = hit.transform.position;
+            DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room = GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum");
+            DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].position = hit.transform.position;
+            //DataManager.gameData.level = GameObject.FindWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum");
+            //DataManager.gameData.position = hit.transform.position;
             GameObject.FindWithTag("Save Icon").GetComponent<Animator>().SetTrigger("Saving");
-    
             Destroy(this);
         }
     }

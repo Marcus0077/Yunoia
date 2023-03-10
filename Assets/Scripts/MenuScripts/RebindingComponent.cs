@@ -8,6 +8,8 @@ public class RebindingComponent : MonoBehaviour
 {
     [SerializeField]
     Controls type;
+    [SerializeField]
+    CanvasGroup dimmer;
     GameObject player;
     AbilityPush push;
     BasicMovement movement;
@@ -59,22 +61,36 @@ public class RebindingComponent : MonoBehaviour
 
     public void RemapButtonClicked()
     {
+        dimmer.alpha = 1;
         if(rebindOperation != null)
         {
             rebindOperation.Dispose();
         }
         rebindOperation = action[0].PerformInteractiveRebinding()
+            .WithBindingGroup(GameManager.Instance.controlScheme)
+            .WithCancelingThrough("<Keyboard>/escape")
+            .WithCancelingThrough("<Gamepad>/start")
             .OnMatchWaitForAnother(0.1f)
-            .OnComplete(operation => RebindCompletion())
-            .Start();
+            .WithControlsExcluding("<Keyboard>/anyKey")
+            .WithControlsExcluding("<Mouse>/press")
+            .OnCancel(operation => dimmer.alpha = 0)
+            .OnComplete(operation => RebindCompletion());
+        foreach (var bindings in GameManager.Instance.GetComponent<PlayerInput>().actions.bindings)
+        {
+            if (bindings.path == action[0].bindings[0].path.ToString())
+                continue;
+            rebindOperation.WithControlsExcluding(bindings.path);
+        }
+        rebindOperation.Start();
     }
 
     void RebindCompletion()
     {
-        var rebinds = player.GetComponent<PlayerInput>().actions.SaveBindingOverridesAsJson();
+        var rebinds = GameManager.Instance.GetComponent<PlayerInput>().actions.SaveBindingOverridesAsJson();
         Debug.Log(rebinds);
         PlayerPrefs.SetString("Rebinds", rebinds);
         OnEnable();
+        dimmer.alpha = 0;
         rebindOperation.Dispose();
     }
 }

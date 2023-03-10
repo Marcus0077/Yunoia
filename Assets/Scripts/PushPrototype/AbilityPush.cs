@@ -15,7 +15,7 @@ public class AbilityPush : MonoBehaviour
     bool ableToPush = true, charging = false, shield = false, shielded = false;
     [SerializeField]
     public bool restored, ableToShield;
-    public PlayerControls pushControls;
+    public InputActionAsset pushControls;
     public InputAction pushAction;
     // pushedLevel: what stage a push is at (corresponding to charge levels)
     public int pushedLevel;
@@ -257,7 +257,7 @@ public class AbilityPush : MonoBehaviour
     }
 
     // When player presses push
-    void PushPress()
+    void PushPress(InputAction.CallbackContext context = new InputAction.CallbackContext())
     {
         charging = true;
         if (ableToPush)
@@ -278,7 +278,7 @@ public class AbilityPush : MonoBehaviour
     }
 
     // When player releases push (or called automatically for shield)
-    void PushRelease()
+    void PushRelease(InputAction.CallbackContext context = new InputAction.CallbackContext())
     {
         charging = false;
         
@@ -323,11 +323,12 @@ public class AbilityPush : MonoBehaviour
 
     void Awake()
     {
-        pushControls = new PlayerControls();
-        GameManager.Instance.GetInputs(pushControls);
-        pushAction = pushControls.Push.Push;
-        pushAction.performed += ctx => PushPress();
-        pushAction.canceled += ctx => PushRelease();
+        pushControls = GameManager.Instance.GetComponent<PlayerInput>().actions;
+        GameManager.Instance.GetInputs();
+        pushAction = pushControls["Push"];
+        //pushAction = pushControls.Push.Push;
+        pushAction.performed += PushPress;
+        pushAction.canceled += PushRelease;
     }
 
     // Enable input action map controls.
@@ -340,5 +341,11 @@ public class AbilityPush : MonoBehaviour
     private void OnDisable()
     {
         pushAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        pushAction.performed -= PushPress;
+        pushAction.canceled -= PushRelease;
     }
 }

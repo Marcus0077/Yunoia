@@ -87,16 +87,14 @@ public class GameManager : MonoBehaviour
         return DataManager.gameData.checkpointDatas[currentLevel];
     }
 
-    public void GetInputs(PlayerControls pc)
+    public void GetInputs()
     {
         if(!rebinded)
         {
-            if (player == null)
-                player = GameObject.FindGameObjectWithTag("Player");
             if (rebinds == "")
-                rebinds = PlayerPrefs.GetString("rebinds");
+                rebinds = PlayerPrefs.GetString("Rebinds");
             if (rebinds != "")
-                pc.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
+                GameManager.Instance.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
             rebinded = true;
         }
     }
@@ -148,6 +146,7 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetFloat(SFXPref, 1);
                 PlayerPrefs.SetFloat(TextColor, -1);
                 PlayerPrefs.SetFloat(Rumble, 1);
+                PlayerPrefs.SetString("Rebinds", "");
                 settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
                 settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
                 settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
@@ -193,6 +192,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat(SFXPref, 1);
         PlayerPrefs.SetFloat(TextColor, -1);
         PlayerPrefs.SetFloat(Rumble, 1);
+        PlayerPrefs.SetString("Rebinds", "");
+        GameManager.Instance.GetComponent<PlayerInput>().actions.RemoveAllBindingOverrides();
+        GetInputs();
         settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
         settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
         settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);

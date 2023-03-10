@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DataManager.ReadFile();
+            DataManager.gameData.checkpointed = false;
             statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble };
             levelNames = new string[] { Depr, Barg, Anger, Denial };
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];

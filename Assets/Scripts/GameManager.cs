@@ -77,9 +77,9 @@ public class GameManager : MonoBehaviour
         DataManager.gameData.checkpointDatas[(int)value].position = pos;
     }
 
-    public void SetCheckpoint(int value, CheckpointData data)
+    public void SetCheckpoint(CheckpointData data)
     {
-        DataManager.gameData.checkpointDatas[(int)value] = data;
+        DataManager.gameData.checkpointDatas[currentLevel] = data;
     }
 
     public CheckpointData GetCheckpoint()

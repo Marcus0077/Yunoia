@@ -248,4 +248,10 @@ public class PauseMenu : MonoBehaviour
     {
         pause.Disable();
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit Button Works!");
+        Application.Quit();
+    }
 }

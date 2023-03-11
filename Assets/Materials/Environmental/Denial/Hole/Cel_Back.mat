@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7467226599247878976
+--- !u!114 &-9106607883967553317
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cel_HubIslandMain
+  m_Name: Cel_Back
   m_Shader: {fileID: 4800000, guid: e88aeddd2ef1f934d805981244872e27, type: 3}
   m_ValidKeywords:
   - _HALFTONESHAPE_DOT
@@ -28,6 +28,7 @@ Material:
   - _OUTLINE
   - _RIMLIGHTING_ON
   m_InvalidKeywords:
+  - _METALLICGLOSSMAP
   - _METALLICSPECGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,11 +41,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: b091242b3c8ce224984b532ac2c69143, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5403a1eb747b9754dad8aed7879ec0c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 81b3ed1314c19fc4aa0fa4c0c3ac71c6, type: 3}
+        m_Texture: {fileID: 2800000, guid: faf98258559dc7b4d8f0b8b15edc8987, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -88,11 +89,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b091242b3c8ce224984b532ac2c69143, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5403a1eb747b9754dad8aed7879ec0c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 5a02c2df008b16a46b70ad1e1af7a8bd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 43e6fb6e6cb2f974993154cfeb24873a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -150,10 +151,10 @@ Material:
     - _FaceShadowMapPow: 0.2
     - _FaceShadowSmoothness: 0
     - _FlattenGI: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
     - _GlossinessSource: 0
-    - _GlossyReflections: 0
+    - _GlossyReflections: 1
     - _HairSpecExponent: 128
     - _HairSpecNoiseStrength: 1
     - _HairSpecularSize: 0.8
@@ -174,6 +175,7 @@ Material:
     - _HatchingRotation: 0
     - _HatchingSmoothness: 0.1
     - _Metallic: 0
+    - _Mode: 0
     - _NoiseScale: 1
     - _NoiseStrength: 0.1
     - _OcclusionStrength: 1
@@ -181,7 +183,7 @@ Material:
     - _OutlineMode: 0
     - _OutlineWidth: 5
     - _OverrideShadowColor: 0
-    - _Parallax: 0.005
+    - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimEnabled: 1
@@ -190,7 +192,7 @@ Material:
     - _RimPower: 0.01
     - _Shininess: 0
     - _SizeFalloff: 0
-    - _Smoothness: 0.5
+    - _Smoothness: 1
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SpecClipMaskScale: 1
@@ -206,6 +208,7 @@ Material:
     - _StencilRef: 0
     - _StepViaRampTexture: 0
     - _Surface: 0
+    - _UVSec: 0
     - _UseRampColor: 0
     - _WorkflowMode: 1
     - _ZWrite: 1

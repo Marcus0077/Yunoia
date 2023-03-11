@@ -232,14 +232,17 @@ public class AiMovement : MonoBehaviour
     {
         if (other.CompareTag("AIStop"))
         {
-            if (isWanderRunning)
+            if (other.GetComponent<PlantDestroyer>().coAI == this.GameObject())
             {
-                StopCoroutine(wanderCoroutine);
-            }
+                if (isWanderRunning)
+                {
+                    StopCoroutine(wanderCoroutine);
+                }
 
-            crytalPos = other.transform.position;
-            aiAgent.SetDestination(crytalPos);
-            isFollowingCrystal = true;
+                crytalPos = other.transform.position;
+                aiAgent.SetDestination(crytalPos);
+                isFollowingCrystal = true;
+            }
         }
     }
 }

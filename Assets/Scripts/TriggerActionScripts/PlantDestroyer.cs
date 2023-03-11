@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,10 +15,13 @@ public class PlantDestroyer : MonoBehaviour
     public int numCrystals;
     public int crystalsComplete;
     public int thisCrystalComplete;
+    
     public AudioSource audioSource;
     public AudioClip purifierSound;
 
     public Levels level;
+
+    public GameObject coAI;
 
     private void Awake()
     {
@@ -30,6 +35,7 @@ public class PlantDestroyer : MonoBehaviour
     {
         if (other.CompareTag("Faceless"))
         {
+            Debug.Log("FacelessEntered");
             this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
             
             if (!isMultipleCrystals)
@@ -39,8 +45,10 @@ public class PlantDestroyer : MonoBehaviour
                     Destroy(plantDestroyer);
                 }
             }
-            else
+            else if (thisCrystalComplete == 0)
             {
+                coAI = other.GameObject();
+                
                 thisCrystalComplete = 1;
                 crystalsComplete = 1;
 
@@ -79,7 +87,7 @@ public class PlantDestroyer : MonoBehaviour
     {
         GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
         yield return new WaitForSeconds(1.25f);
-        GameManager.Instance.SetCheckpoint(Levels.HUB, new Vector3(0.92f, 47.07f, 19.93f));
+        //GameManager.Instance.SetCheckpoint(Levels.HUB, new Vector3(0.92f, 47.07f, 19.93f));
         DataManager.gameData.checkpointed = false;
         //DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
         GameManager.Instance.CompleteLevel(level);

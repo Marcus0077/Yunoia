@@ -58,10 +58,12 @@ public class LimitedMovementCam : MonoBehaviour
     public bool forceBallToPlayer;
 
     // Get references and initialize variables when the Camera is initialised.
-    void Awake()
+    void Start()
     {
         playerControls = new PlayerControls();
         
+        EnablePlayerControls();
+
         Player = GameObject.FindWithTag("Player");
         playerPos = Player.transform.position;
         
@@ -222,9 +224,8 @@ public class LimitedMovementCam : MonoBehaviour
                 returnSpeed * Time.deltaTime);
         }
     }
-    
-    // Enable input action map controls.
-    private void OnEnable()
+
+    private void EnablePlayerControls()
     {
         playerMove = playerControls.Movement.Move;
         playerMove.Enable();
@@ -234,13 +235,5 @@ public class LimitedMovementCam : MonoBehaviour
 
         cloneButton = playerControls.SummonClone.SwitchPlaces;
         cloneButton.Enable();
-    }
-
-    // Disable input action map controls.
-    private void OnDisable()
-    {
-        playerMove.Disable();
-        camMove.Disable();
-        cloneButton.Disable();
     }
 }

@@ -88,8 +88,7 @@ public class ExitClone : MonoBehaviour
         cloneActiveTimer = 30.0f;
         despawnCloneTimer = 1.25f;
         
-        //despawnTimerText = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<TextMeshProUGUI>();
-        //despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+
         cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
         cloneIcon.fillAmount = 0;
 
@@ -129,7 +128,6 @@ public class ExitClone : MonoBehaviour
             else
             {
                 despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
-                //despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
                 cloneIcon.fillAmount = 1;
                 
                 if (audioSource.clip != beginDestructSound)
@@ -145,7 +143,6 @@ public class ExitClone : MonoBehaviour
             audioSource.clip = null;
             
             despawnCloneTimer = 1.25f;
-            //despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
             cloneIcon.fillAmount = 0;
         }
 
@@ -197,7 +194,6 @@ public class ExitClone : MonoBehaviour
 
             //activeTimerText.text = "";
             //combatHandler.healthText.text = "";
-            //despawnTimerText.text = "";
             cloneIcon.fillAmount = 0;
 
             // Give camera view and control back to player.

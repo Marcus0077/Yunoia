@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class ExitClone : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class ExitClone : MonoBehaviour
     public AudioClip destructSound;
     
     // Temporary Despawn Timer UI.
-    public TextMeshProUGUI despawnTimerText;
+    public float despawnTimerText;
+    public Image cloneIcon;
     
     // Animation variables.
     public Animator anim;
@@ -86,9 +88,11 @@ public class ExitClone : MonoBehaviour
         cloneActiveTimer = 30.0f;
         despawnCloneTimer = 1.25f;
         
-        despawnTimerText = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<TextMeshProUGUI>();
-        despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
-        
+        //despawnTimerText = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<TextMeshProUGUI>();
+        //despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+        cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
+        cloneIcon.fillAmount = 0;
+
         anim = GetComponent<Animator>();
         
         CheckForInteractables();
@@ -125,7 +129,8 @@ public class ExitClone : MonoBehaviour
             else
             {
                 despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
-                despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+                //despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+                cloneIcon.fillAmount = 1;
                 
                 if (audioSource.clip != beginDestructSound)
                 {
@@ -140,7 +145,8 @@ public class ExitClone : MonoBehaviour
             audioSource.clip = null;
             
             despawnCloneTimer = 1.25f;
-            despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+            //despawnTimerText.text = "Clone Despawns In: " + Math.Round(despawnCloneTimer, 2);
+            cloneIcon.fillAmount = 0;
         }
 
         // Check if the clone needs to be despawned or not.
@@ -191,7 +197,8 @@ public class ExitClone : MonoBehaviour
 
             //activeTimerText.text = "";
             //combatHandler.healthText.text = "";
-            despawnTimerText.text = "";
+            //despawnTimerText.text = "";
+            cloneIcon.fillAmount = 0;
 
             // Give camera view and control back to player.
             limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);

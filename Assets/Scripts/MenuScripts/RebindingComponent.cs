@@ -86,7 +86,7 @@ public class RebindingComponent : MonoBehaviour
 
     void RebindCompletion()
     {
-        var rebinds = GameManager.Instance.GetComponent<PlayerInput>().actions.SaveBindingOverridesAsJson();
+        var rebinds = action[0].SaveBindingOverridesAsJson();
         Debug.Log(rebinds);
         PlayerPrefs.SetString("Rebinds", rebinds);
         OnEnable();

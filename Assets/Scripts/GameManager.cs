@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     GameObject player, ghostObj;
     GameObject spawnedGhost;
     List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
+    public List<IAbility> abilities = new List<IAbility>();
     public float time;
     public string controlScheme, rebinds;
     public int currentLevel;
@@ -89,15 +90,23 @@ public class GameManager : MonoBehaviour
         return DataManager.gameData.checkpointDatas[currentLevel];
     }
 
-    public void GetInputs()
+    public void GetInputs(PlayerControls actions)
     {
         if(!rebinded)
         {
             if (rebinds == "")
                 rebinds = PlayerPrefs.GetString("Rebinds");
             if (rebinds != "")
-                GameManager.Instance.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
+                actions.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
             rebinded = true;
+        }
+    }
+
+    public void GetAllInputs()
+    {
+        foreach(IAbility ability in abilities)
+        {
+            ability.ResetRebind();
         }
     }
 
@@ -195,8 +204,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat(TextColor, -1);
         PlayerPrefs.SetFloat(Rumble, 1);
         PlayerPrefs.SetString("Rebinds", "");
-        GameManager.Instance.GetComponent<PlayerInput>().actions.RemoveAllBindingOverrides();
-        GetInputs();
+        GetAllInputs();
+        //GameManager.Instance.GetComponent<PlayerInput>().actions.RemoveAllBindingOverrides();
+        //GetInputs();
         settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
         settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
         settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
@@ -400,6 +410,11 @@ public class GameManager : MonoBehaviour
             clone.GetComponent<CloneInteractions>().playerControls.Enable();
         }
     }
+}
+
+public interface IAbility
+{
+    public void ResetRebind();
 }
 
 public enum Settings

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AbilityPush : MonoBehaviour
+public class AbilityPush : MonoBehaviour, IAbility
 {
     [SerializeField] // maxChargeLevel: how many stages a push can charge up to, minPush: smallest value a push can be
     int maxChargeLevel = 1, minPush = 1;
@@ -15,7 +15,7 @@ public class AbilityPush : MonoBehaviour
     bool ableToPush = true, charging = false, shield = false, shielded = false;
     [SerializeField]
     public bool restored, ableToShield;
-    public InputActionAsset pushControls;
+    public PlayerControls pushControls;
     public InputAction pushAction;
     // pushedLevel: what stage a push is at (corresponding to charge levels)
     public int pushedLevel;
@@ -323,12 +323,20 @@ public class AbilityPush : MonoBehaviour
 
     void Awake()
     {
-        pushControls = GameManager.Instance.GetComponent<PlayerInput>().actions;
-        GameManager.Instance.GetInputs();
-        pushAction = pushControls["Push"];
+        pushControls = new PlayerControls();// GameManager.Instance.GetComponent<PlayerInput>().actions;
+        GameManager.Instance.abilities.Add(this);
+        ResetRebind();
+        pushAction = pushControls.Push.Push;//["Push"];
         //pushAction = pushControls.Push.Push;
         pushAction.performed += PushPress;
         pushAction.canceled += PushRelease;
+    }
+
+    public void ResetRebind()
+    {
+        pushControls.RemoveAllBindingOverrides();
+        GameManager.Instance.GetInputs(pushControls);
+        Debug.Log(pushControls.Push.Push);
     }
 
     // Enable input action map controls.
@@ -345,6 +353,7 @@ public class AbilityPush : MonoBehaviour
 
     private void OnDestroy()
     {
+        GameManager.Instance.abilities.Remove(this);
         pushAction.performed -= PushPress;
         pushAction.canceled -= PushRelease;
     }

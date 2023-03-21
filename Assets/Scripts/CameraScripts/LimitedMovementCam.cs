@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class LimitedMovementCam : MonoBehaviour
 {
     // Input Variables.
-    PlayerControls playerControls;
+    public PlayerControls playerControls;
     public InputAction camMove;
     public InputAction playerMove;
     public InputAction cloneButton;
@@ -235,5 +235,12 @@ public class LimitedMovementCam : MonoBehaviour
 
         cloneButton = playerControls.SummonClone.SwitchPlaces;
         cloneButton.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerMove.Disable();
+        camMove.Disable();
+        cloneButton.Disable();
     }
 }

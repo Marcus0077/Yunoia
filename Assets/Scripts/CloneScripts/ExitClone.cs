@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 
 public class ExitClone : MonoBehaviour
@@ -37,7 +38,7 @@ public class ExitClone : MonoBehaviour
     public GameObject Player;
 
     // Input variables.
-    PlayerControls summonControls;
+    public PlayerControls summonControls;
     private InputAction exitClone;
 
     // Despawn clone variables.
@@ -169,6 +170,18 @@ public class ExitClone : MonoBehaviour
     {
         if (despawnClone)
         {
+            //Set all Faceless AI that are free to wander.
+            foreach (var Faceless in GameObject.FindObjectsOfType<AiMovement>())
+            {
+                if (Faceless.canAiMove && !Faceless.isStoppedByCrystal && !Faceless.isFollowingCrystal)
+                {
+
+                    Faceless.wanderCoroutine = Faceless.Wander();
+                    StartCoroutine(Faceless.wanderCoroutine);
+                    Faceless.isWanderRunning = true;
+                }
+            }
+            
            // Check to see if the clone was within range of any interactable 
            // objects before despawning.
             CheckInteractables();

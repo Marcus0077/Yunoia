@@ -10,9 +10,13 @@ public class TempDestroyer : MonoBehaviour
     public List<Pushable> pushables;
     public int count;
     public GameObject warning;
+    
+    private GameManager gameManager;
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        
         // Get all pushable objects with the same data with name nameOfData
         pushables = (from go in new List<Pushable>(FindObjectsOfType<Pushable>()) where go.Data() != null && go.Data().name == nameOfData select go).ToList();
         for(int index = 0; index < pushables.Count; index++)
@@ -28,8 +32,20 @@ public class TempDestroyer : MonoBehaviour
     {
         if(count <= 0)
         {
-            Destroy(gameObject);
-            Destroy(warning);
+            count = 1;
+
+            StartCoroutine(CompletePuzzle());
         }
+    }
+
+    private IEnumerator CompletePuzzle()
+    {
+        float waitTime = 2.5f;
+        
+        StartCoroutine(gameManager.ShowPuzzle(11, waitTime));
+
+        yield return new WaitForSeconds(waitTime);
+        Destroy(gameObject);
+        Destroy(warning);
     }
 }

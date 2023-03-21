@@ -21,15 +21,15 @@ public class AiMovement : MonoBehaviour
     private float distanceBetweenClone;
     
     // AI x Crystal Pressure Plate variables.
-    private bool isStoppedByCrystal;
-    private bool isFollowingCrystal;
+    public bool isStoppedByCrystal;
+    public bool isFollowingCrystal;
     private Vector3 crytalPos;
     public bool canAiMove;
 
     // AI Wandering variables.
     private float wanderDistance;
-    private IEnumerator wanderCoroutine;
-    private bool isWanderRunning;
+    public IEnumerator wanderCoroutine;
+    public bool isWanderRunning;
     
     [Range(1.0f, 10.0f)]
     public float wanderDistanceMin; // Minimum distance an AI can wander.
@@ -59,7 +59,7 @@ public class AiMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // If the AI can move, check to see if the clone is spawned & close by.
-        if (canAiMove)
+        if (canAiMove && !isStoppedByCrystal && !isFollowingCrystal)
         {
             IsCloneSpawned();
             DetermineCloneDistance();
@@ -78,11 +78,13 @@ public class AiMovement : MonoBehaviour
     {
         // If the clone is close enough and the AI is not on a crystal
         // pressure plate, then chase the clone.
-        if (distanceBetweenClone < 4 && !isFollowingCrystal)
+        if (distanceBetweenClone <= 4 && !isFollowingCrystal)
         {
-            
-            ChaseClone();
-            
+            if (GameObject.FindWithTag("Clone") != null)
+            {
+                ChaseClone();
+            }
+
             //audioSource.PlayOneShot(detectionSound); needs cd
             
             // If the AI was previously wandering, stop them so that they
@@ -95,12 +97,16 @@ public class AiMovement : MonoBehaviour
         }
         // If the AI is not close to the clone, not on a crystal pressure plate,
         // and not currently wandering, allow AI to wander.
-        else if (!isStoppedByCrystal && !isFollowingCrystal && !isWanderRunning)
+        else if (!isStoppedByCrystal && !isFollowingCrystal && !isWanderRunning && distanceBetweenClone > 4)
         {
             aiAgent.isStopped = false;
             
             wanderCoroutine = Wander();
             StartCoroutine(wanderCoroutine);
+        }
+        else if (!isWanderRunning)
+        {
+            Debug.Log("??????");
         }
     }
 
@@ -134,7 +140,7 @@ public class AiMovement : MonoBehaviour
 
     // Finds a random point for the AI to walk to, checks to make sure that the point
     // is not close to any crystal pressure plates, and makes AI walk to that point.
-    private IEnumerator Wander()
+    public IEnumerator Wander()
     {
         isWanderRunning = true;
         
@@ -161,7 +167,7 @@ public class AiMovement : MonoBehaviour
             // If so, set that point as invalid.
             foreach (var plantDestroyers in GameObject.FindObjectsOfType<PlantDestroyer>())
             {
-                if (Vector3.Distance(targetPos, plantDestroyers.transform.position) < 5f)
+                if (Vector3.Distance(targetPos, plantDestroyers.transform.position) < 2f)
                 {
                     canWalk = false;
                 }
@@ -234,14 +240,16 @@ public class AiMovement : MonoBehaviour
         {
             if (other.GetComponent<PlantDestroyer>().coAI == this.GameObject())
             {
+                isFollowingCrystal = true;
+                
                 if (isWanderRunning)
                 {
+                    isWanderRunning = false;
                     StopCoroutine(wanderCoroutine);
                 }
 
                 crytalPos = other.transform.position;
                 aiAgent.SetDestination(crytalPos);
-                isFollowingCrystal = true;
             }
         }
     }

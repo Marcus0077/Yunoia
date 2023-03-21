@@ -8,6 +8,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    
+    
     // Strings for settings and stage names
     private static readonly string Firstplay = "First Play";
     private static readonly string BGMPref = "BGM Pref";
@@ -333,6 +335,70 @@ public class GameManager : MonoBehaviour
     public static void SelectControlScheme(string value)
     {
         GameManager.Instance.controlScheme = value;
+    }
+    
+    public IEnumerator ShowPuzzle(int puzzleID, float waitTime)
+    {
+        DisableInput();
+        
+        GameObject mainCam = GameObject.FindGameObjectWithTag("StateDrivenCam"); 
+        
+        int previousCamState = mainCam.GetComponent<Animator>()
+            .GetInteger("roomNum");
+        
+        mainCam.GetComponent<Animator>().SetInteger("roomNum", puzzleID);
+        
+        yield return new WaitForSeconds(waitTime);
+        
+        mainCam.GetComponent<Animator>().SetInteger("roomNum", previousCamState);
+        
+        EnableInput();
+    }
+    
+    public void DisableInput()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        
+        player.GetComponent<BasicMovement>().playerControls.Disable();
+        player.GetComponent<AbilityPush>().pushControls.Disable();
+        player.GetComponent<Grapple>().grappleControls.Disable();
+        player.GetComponent<SummonClone>().summonControls.Disable();
+        player.GetComponent<PlayerInteractions>().playerControls.Disable();
+        player.GetComponentInChildren<LimitedMovementCam>().playerControls.Disable();
+
+        if (GameObject.FindGameObjectWithTag("Clone") != null)
+        {
+            GameObject clone = GameObject.FindGameObjectWithTag("Clone");
+            
+            clone.GetComponent<BasicMovement>().playerControls.Disable();
+            clone.GetComponent<AbilityPush>().pushControls.Disable();
+            clone.GetComponent<Grapple>().grappleControls.Disable();
+            clone.GetComponent<ExitClone>().summonControls.Disable();
+            clone.GetComponent<CloneInteractions>().playerControls.Disable();
+        }
+    }
+
+    public void EnableInput()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        
+        player.GetComponent<BasicMovement>().playerControls.Enable();
+        player.GetComponent<AbilityPush>().pushControls.Enable();
+        player.GetComponent<Grapple>().grappleControls.Enable();
+        player.GetComponent<SummonClone>().summonControls.Enable();
+        player.GetComponent<PlayerInteractions>().playerControls.Enable();
+        player.GetComponentInChildren<LimitedMovementCam>().playerControls.Enable();
+
+        if (GameObject.FindGameObjectWithTag("Clone") != null)
+        {
+            GameObject clone = GameObject.FindGameObjectWithTag("Clone");
+            
+            clone.GetComponent<BasicMovement>().playerControls.Enable();
+            clone.GetComponent<AbilityPush>().pushControls.Enable();
+            clone.GetComponent<Grapple>().grappleControls.Enable();
+            clone.GetComponent<ExitClone>().summonControls.Enable();
+            clone.GetComponent<CloneInteractions>().playerControls.Enable();
+        }
     }
 }
 

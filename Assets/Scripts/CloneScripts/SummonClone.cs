@@ -128,8 +128,17 @@ public class SummonClone : MonoBehaviour
                     cloneSummoned = true;
 
                     // Summon clone.
-                    clone = Instantiate(ClonePrefab, basicMovementPlayer.playerRB.position + direction,
-                        Quaternion.LookRotation(-Vector3.forward));
+                    Vector3 aboveGround = new Vector3(basicMovementPlayer.playerRB.position.x,
+                        basicMovementPlayer.playerRB.position.y, basicMovementPlayer.playerRB.position.z) + direction;
+
+                    RaycastHit spawnHit;
+
+                    Physics.Raycast(new Vector3(aboveGround.x, aboveGround.y + 2f, aboveGround.z),
+                        Vector3.down, out spawnHit, 2f, ground);
+
+                    Vector3 newAboveGround = new Vector3(aboveGround.x, aboveGround.y + spawnHit.point.y + 0.5f, aboveGround.z);
+                    
+                    clone = Instantiate(ClonePrefab, newAboveGround, Quaternion.LookRotation(-Vector3.forward));
 
                     // Set clone UI if the animator exists.
                     if (uiAnim != null)

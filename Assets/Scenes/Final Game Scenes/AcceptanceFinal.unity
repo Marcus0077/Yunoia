@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -488,6 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535968902}
   - component: {fileID: 535968901}
+  - component: {fileID: 535968903}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -572,6 +573,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &535968903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535968900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &839600647
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,10 +632,18 @@ MonoBehaviour:
   - Depression
   - Barg
   - Anger
+  settings: []
   ghost: 0
   menuCursor: 0
+  textColor: 0
+  rebinded: 0
   player: {fileID: 1804445680587551994, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
   ghostObj: {fileID: 3169690673374037347, guid: d0008c29af1b0ca40a863262d4b450d6, type: 3}
+  time: 0
+  controlScheme: 
+  rebinds: 
+  currentLevel: 0
+  menuTraverse: {fileID: 0}
 --- !u!4 &839600649
 Transform:
   m_ObjectHideFlags: 0
@@ -1198,15 +1227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412f635d606aaa04c9735b6796b9814e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exit:
-    m_Name: Exit
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d42f72df-e800-4838-9292-0f66562a26b1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  Obstructions: []
+  partiallyDissappear: 0
+  reAppear: 0
+  counterpartObject: {fileID: 0}
+  isPlayer: 0
+  isClone: 0
+  allowCloneIn: 0
 --- !u!1 &1558863524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1431,8 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 1587877542}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 1491376671}
   m_Instructions:
   - m_FullHash: -1593943380
     m_VirtualCamera: {fileID: 1491376671}

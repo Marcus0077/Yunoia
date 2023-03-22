@@ -23,12 +23,51 @@ public class PlantDestroyer : MonoBehaviour
 
     public GameObject coAI;
 
+    public int puzzleNum;
+    private GameManager gameManager;
+    public bool hasPuzzleCam;
+
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         numCrystals = coCrystals.Length + 1;
 
         thisCrystalComplete = 0;
         crystalsComplete = 0;
+    }
+    private IEnumerator CompletePuzzle()
+    {
+        if (hasPuzzleCam)
+        {
+            float waitTime = 2.5f;
+
+            gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
+
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        if (isMultipleCrystals)
+        {
+            foreach (var plant in plantToDestroy)
+            {
+                if (plant != null)
+                {
+                    Destroy(plant);
+                }
+            }
+
+            if (numCrystals == 4)
+            {
+                StartCoroutine(LoadHub());
+            }
+        }
+        else
+        {
+            foreach (var plantDestroyer in plantToDestroy)
+            {
+                Destroy(plantDestroyer);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,10 +79,10 @@ public class PlantDestroyer : MonoBehaviour
             
             if (!isMultipleCrystals)
             {
-                foreach (var plantDestroyer in plantToDestroy)
-                {
-                    Destroy(plantDestroyer);
-                }
+                coAI = other.GameObject();
+                
+                Debug.Log();
+                StartCoroutine(CompletePuzzle());
             }
             else if (thisCrystalComplete == 0)
             {
@@ -66,18 +105,7 @@ public class PlantDestroyer : MonoBehaviour
 
                 if (crystalsComplete == numCrystals)
                 {
-                    foreach (var plant in plantToDestroy)
-                    {
-                        if (plant != null)
-                        {
-                            Destroy(plant);
-                        }
-                    }
-
-                    if (numCrystals == 4)
-                    {
-                        StartCoroutine(LoadHub());
-                    }
+                    StartCoroutine(CompletePuzzle());
                 }
             }
         }

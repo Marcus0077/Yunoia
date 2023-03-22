@@ -10,8 +10,11 @@ public class TempDestroyer : MonoBehaviour
     public List<Pushable> pushables;
     public int count;
     public GameObject warning;
+    public GameObject warningTrigger;
     
     private GameManager gameManager;
+
+    public int puzzleNum;
 
     void Start()
     {
@@ -42,10 +45,12 @@ public class TempDestroyer : MonoBehaviour
     {
         float waitTime = 2.5f;
         
-        StartCoroutine(gameManager.ShowPuzzle(11, waitTime));
+        gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
 
         yield return new WaitForSeconds(waitTime);
+        
         Destroy(gameObject);
-        Destroy(warning);
+        warningTrigger.SetActive(false);
+        warning.SetActive(false);
     }
 }

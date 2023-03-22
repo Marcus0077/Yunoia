@@ -11,6 +11,7 @@ public class Lever : MonoBehaviour
     // Script references.
     private CloneInteractions cloneInteractions;
     private PlayerInteractions playerInteractions;
+    private GameManager gameManager;
     
     // Game object references.
     public GameObject Counterpart;
@@ -20,7 +21,7 @@ public class Lever : MonoBehaviour
     public bool isActivated;
     public bool isPlayer;
     public bool isClone;
-    private bool Complete;
+    public bool Complete;
 
     // Lever countdown timer.
     private float leverTimer;
@@ -36,14 +37,22 @@ public class Lever : MonoBehaviour
     public AudioClip leverSound;
     private bool audioPlayed;
 
+    // Lever-type toggles and array of AI GameObjects if 
+    // AI lever is toggled.
     public bool isSingleLever;
     public bool isAiLever;
     public GameObject[] aiCounterparts;
+    
+    // Integer that determines which camera we will switch to on 
+    // puzzle completion.
+    public int puzzleNum;
 
     // Get references and initialize variables when levers spawn.
     void Awake()
     {
         //activateText.enabled = false;
+        
+        gameManager = FindObjectOfType<GameManager>();
 
         isActivated = false;
         isPlayer = false;
@@ -73,9 +82,9 @@ public class Lever : MonoBehaviour
 
                 if (leverTimer > 0)
                 {
-                    if (Counterpart != null && Counterpart.GetComponent<Lever>().isActivated)
+                    if (Counterpart != null && Counterpart.GetComponent<Lever>().isActivated && !Complete)
                     {
-                        CompleteLeverSequence();
+                        StartCoroutine(CompletePuzzle());
                     }
                 }
                 else
@@ -85,7 +94,7 @@ public class Lever : MonoBehaviour
             }
             else
             {
-                CompleteLeverSequence();
+                StartCoroutine(CompletePuzzle());
             }
         }
     }
@@ -112,45 +121,53 @@ public class Lever : MonoBehaviour
             leverTimer -= Time.deltaTime;
         }
     }
+    
+    private IEnumerator CompletePuzzle()
+    {
+        Complete = true;
+        Counterpart.GetComponent<Lever>().Complete = true;
+        
+        float waitTime = 2.5f;
+        
+        gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
+
+        yield return new WaitForSeconds(waitTime);
+        
+        CompleteLeverSequence();
+    }
 
     // Opens specified door if both levers have been activated before time runs out.
     void CompleteLeverSequence()
     {
-        if (!Complete)
+        if (Counterpart != null)
         {
-            Complete = true;
-            
-            if(Counterpart != null)
-            {
-                Counterpart.GetComponent<Lever>().Complete = true;
-                //Counterpart.GetComponent<Lever>().activateText.enabled = false;
-            }
+            Counterpart.GetComponent<Lever>().Complete = true;
+            //Counterpart.GetComponent<Lever>().activateText.enabled = false;
+        }
 
-            if (!isAiLever)
+        if (!isAiLever)
+        {
+            if (Door.CompareTag("Door"))
             {
-                if (Door.CompareTag("Door"))
-                {
-                    Door.GetComponent<Door>().Open();
-                }
-                else
-                {
-                    Destroy(Door);
-                }
+                Door.GetComponent<Door>().Open();
             }
             else
             {
-                if (aiCounterparts != null)
+                Destroy(Door);
+            }
+        }
+        else
+        {
+            if (aiCounterparts != null)
+            {
+                foreach (var aiCounterpart in aiCounterparts)
                 {
-                    foreach (var aiCounterpart in aiCounterparts)
-                    {
-                        aiCounterpart.GetComponent<AiMovement>().canAiMove = true;
-                    }
+                    aiCounterpart.GetComponent<AiMovement>().canAiMove = true;
                 }
             }
-
-            //activateText.enabled = false;
         }
-       
+
+        //activateText.enabled = false;
     }
 
     // Resets lever sequence if both levers were not activated before time runs out.

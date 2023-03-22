@@ -78,7 +78,7 @@ public class AiMovement : MonoBehaviour
     {
         // If the clone is close enough and the AI is not on a crystal
         // pressure plate, then chase the clone.
-        if (distanceBetweenClone <= 4 && !isFollowingCrystal)
+        if (distanceBetweenClone <= 4 && !isFollowingCrystal && !isStoppedByCrystal)
         {
             if (GameObject.FindWithTag("Clone") != null)
             {
@@ -103,10 +103,6 @@ public class AiMovement : MonoBehaviour
             
             wanderCoroutine = Wander();
             StartCoroutine(wanderCoroutine);
-        }
-        else if (!isWanderRunning)
-        {
-            Debug.Log("??????");
         }
     }
 

@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -346,19 +348,26 @@ public class GameManager : MonoBehaviour
     {
         GameManager.Instance.controlScheme = value;
     }
+
+    public void ShowPuzzleWrapper(int puzzleID, float waitTime)
+    {
+        StartCoroutine(ShowPuzzle(puzzleID, waitTime));
+    }
     
     public IEnumerator ShowPuzzle(int puzzleID, float waitTime)
     {
         DisableInput();
         
-        GameObject mainCam = GameObject.FindGameObjectWithTag("StateDrivenCam"); 
-        
+        GameObject mainCam = GameObject.FindGameObjectWithTag("StateDrivenCam");
+
         int previousCamState = mainCam.GetComponent<Animator>()
             .GetInteger("roomNum");
         
         mainCam.GetComponent<Animator>().SetInteger("roomNum", puzzleID);
         
-        yield return new WaitForSeconds(waitTime);
+        Debug.Log("before puzzle wait");
+        yield return new WaitForSeconds(waitTime + 0.5f);
+        Debug.Log("after puzzle wait");
         
         mainCam.GetComponent<Animator>().SetInteger("roomNum", previousCamState);
         

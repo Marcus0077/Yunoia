@@ -81,7 +81,7 @@ public class PlantDestroyer : MonoBehaviour
             {
                 coAI = other.GameObject();
                 
-                // Debug.Log(); debug after indep. study...
+                Debug.Log("Puzzle Routine Plays."); 
                 StartCoroutine(CompletePuzzle());
             }
             else if (thisCrystalComplete == 0)

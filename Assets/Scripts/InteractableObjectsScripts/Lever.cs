@@ -94,7 +94,10 @@ public class Lever : MonoBehaviour
             }
             else
             {
-                StartCoroutine(CompletePuzzle());
+                if (!Complete)
+                {
+                    StartCoroutine(CompletePuzzle());
+                }
             }
         }
     }
@@ -125,8 +128,12 @@ public class Lever : MonoBehaviour
     private IEnumerator CompletePuzzle()
     {
         Complete = true;
-        Counterpart.GetComponent<Lever>().Complete = true;
-        
+
+        if (!isSingleLever)
+        {
+            Counterpart.GetComponent<Lever>().Complete = true;
+        }
+
         float waitTime = 2.5f;
         
         gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
@@ -141,7 +148,6 @@ public class Lever : MonoBehaviour
     {
         if (Counterpart != null)
         {
-            Counterpart.GetComponent<Lever>().Complete = true;
             //Counterpart.GetComponent<Lever>().activateText.enabled = false;
         }
 

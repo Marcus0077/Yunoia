@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     // Sets prototype scene to active and set time scale to normal when play button is pressed.
     public void PlayGame()
     {
+        DataManager.WriteFile();
         GameManager.Instance.SetLevel(Levels.DEN);
         GameManager.Instance.SetCheckpoint(Levels.DEN, new Vector3(-0.2f, 45f, 37.3f));
 

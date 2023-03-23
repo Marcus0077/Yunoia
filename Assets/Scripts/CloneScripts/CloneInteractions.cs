@@ -41,8 +41,9 @@ public class CloneInteractions : MonoBehaviour
     void Awake()
     {
         playerControls = new PlayerControls();
-        
         Player = GameObject.FindWithTag("Player");
+        switchPlaces = Player.GetComponent<SummonClone>().switchPlaces;
+        press = playerControls.Interaction.Press;
 
         cloneAbilityPush = this.GetComponent<AbilityPush>();
         cloneAbilityPush.restored = Player.GetComponent<AbilityPush>().restored;
@@ -193,10 +194,7 @@ public class CloneInteractions : MonoBehaviour
     // Enable input action map controls.
     private void OnEnable()
     {
-        switchPlaces = playerControls.SummonClone.SwitchPlaces;
         switchPlaces.Enable();
-
-        press = playerControls.Interaction.Press;
         press.Enable();
     }
     

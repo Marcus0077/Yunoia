@@ -7,14 +7,16 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 
-public class SummonClone : MonoBehaviour
+public class SummonClone : MonoBehaviour, IAbility
 {
     // Script references
     private BasicMovement basicMovementPlayer;
 
     // Input variables
-    public PlayerControls summonControls;
+    public InputActionAsset summonControls;
     public InputAction summonAClone;
+    public InputAction switchPlaces;
+    public InputAction exitClone;
 
     // Clone Summon variables
     public GameObject ClonePrefab;
@@ -44,8 +46,13 @@ public class SummonClone : MonoBehaviour
     {
         basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
 
-        summonControls = new PlayerControls();
-        
+        summonControls = GameManager.Instance.GetComponent<PlayerInput>().actions;
+        GameManager.Instance.abilities.Add(this);
+        ResetRebind();
+        summonAClone = summonControls["SummonAClone"];
+        switchPlaces = summonControls["SwitchPlaces"];
+        exitClone = summonControls["ExitClone"];
+
         cloneSummoned = false;
     }
 
@@ -189,7 +196,6 @@ public class SummonClone : MonoBehaviour
     // Enable input action map controls.
     private void OnEnable()
     {
-        summonAClone = summonControls.SummonClone.SummonAClone;
         summonAClone.Enable();
     }
 
@@ -197,5 +203,11 @@ public class SummonClone : MonoBehaviour
     private void OnDisable()
     {
         summonAClone.Disable();
+    }
+
+    public void ResetRebind()
+    {
+        //summonControls.RemoveAllBindingOverrides();
+        summonControls = GameManager.Instance.GetInputs(summonControls);
     }
 }

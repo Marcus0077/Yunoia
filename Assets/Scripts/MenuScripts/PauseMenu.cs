@@ -81,9 +81,7 @@ public class PauseMenu : MonoBehaviour
             // Disable input for the player.
             if (player.GetComponent<BasicMovement>() != null)
             {
-                player.GetComponent<BasicMovement>().move.Disable();
-                player.GetComponent<BasicMovement>().jump.Disable();
-                player.GetComponent<BasicMovement>().dash.Disable();
+                player.GetComponent<BasicMovement>().playerControls.Disable();
             }
 
             if (player.GetComponent<SummonClone>() != null)
@@ -100,7 +98,7 @@ public class PauseMenu : MonoBehaviour
 
             if (player.GetComponent<AbilityPush>() != null)
             {
-                player.GetComponent<AbilityPush>().pushAction.Disable();
+                player.GetComponent<AbilityPush>().pushControls.Disable();
             }
         }
 
@@ -109,9 +107,7 @@ public class PauseMenu : MonoBehaviour
             //Disable input for the clone.
             if (clone.GetComponent<BasicMovement>() != null)
             {
-                clone.GetComponent<BasicMovement>().move.Disable();
-                clone.GetComponent<BasicMovement>().jump.Disable();
-                clone.GetComponent<BasicMovement>().dash.Disable();
+                clone.GetComponent<BasicMovement>().playerControls.Disable();
             }
 
             if (clone.GetComponent<SummonClone>() != null)
@@ -128,7 +124,7 @@ public class PauseMenu : MonoBehaviour
 
             if (clone.GetComponent<AbilityPush>() != null)
             {
-                clone.GetComponent<AbilityPush>().pushAction.Disable();
+                clone.GetComponent<AbilityPush>().pushControls.Disable();
             }
         }
     }
@@ -149,9 +145,7 @@ public class PauseMenu : MonoBehaviour
             // Enable input for the player.
             if (player.GetComponent<BasicMovement>() != null)
             {
-                player.GetComponent<BasicMovement>().move.Enable();
-                player.GetComponent<BasicMovement>().jump.Enable();
-                player.GetComponent<BasicMovement>().dash.Enable();
+                player.GetComponent<BasicMovement>().playerControls.Enable();
             }
 
             if (player.GetComponent<SummonClone>() != null)
@@ -168,7 +162,7 @@ public class PauseMenu : MonoBehaviour
 
             if (player.GetComponent<AbilityPush>() != null)
             {
-                player.GetComponent<AbilityPush>().pushAction.Enable();
+                player.GetComponent<AbilityPush>().pushControls.Enable();
             }
         }
 
@@ -177,9 +171,7 @@ public class PauseMenu : MonoBehaviour
             //Enable input for the clone.
             if (clone.GetComponent<BasicMovement>() != null)
             {
-                clone.GetComponent<BasicMovement>().move.Enable();
-                clone.GetComponent<BasicMovement>().jump.Enable();
-                clone.GetComponent<BasicMovement>().dash.Enable();
+                clone.GetComponent<BasicMovement>().playerControls.Enable();
             }
 
             if (clone.GetComponent<SummonClone>() != null)
@@ -196,7 +188,7 @@ public class PauseMenu : MonoBehaviour
 
             if (clone.GetComponent<AbilityPush>() != null)
             {
-                clone.GetComponent<AbilityPush>().pushAction.Enable();
+                clone.GetComponent<AbilityPush>().pushControls.Enable();
             }
         }
     }
@@ -204,7 +196,8 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         PauseVideo();
-        DisableInput();
+        //DisableInput();
+        GameManager.Instance.DisableInput();
         DataManager.WriteFile();
 
         pauseMenu.SetActive(true);
@@ -225,11 +218,13 @@ public class PauseMenu : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Outro") != null)
         {
             if (!GameObject.FindGameObjectWithTag("Outro").activeInHierarchy)
-                EnableInput();
+                //EnableInput();
+                GameManager.Instance.EnableInput();
         }
         else
         {
-            EnableInput();
+            //EnableInput();
+            GameManager.Instance.EnableInput();
         }
 
         pauseMenu.SetActive(false);

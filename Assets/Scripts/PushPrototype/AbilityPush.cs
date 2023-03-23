@@ -15,7 +15,7 @@ public class AbilityPush : MonoBehaviour, IAbility
     bool ableToPush = true, charging = false, shield = false, shielded = false;
     [SerializeField]
     public bool restored, ableToShield;
-    public PlayerControls pushControls;
+    public InputActionAsset pushControls;
     public InputAction pushAction;
     // pushedLevel: what stage a push is at (corresponding to charge levels)
     public int pushedLevel;
@@ -45,7 +45,7 @@ public class AbilityPush : MonoBehaviour, IAbility
     
 
     [SerializeField] private AudioSource source;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -281,7 +281,6 @@ public class AbilityPush : MonoBehaviour, IAbility
     void PushRelease(InputAction.CallbackContext context = new InputAction.CallbackContext())
     {
         charging = false;
-        
         if (ableToPush)
         {
             //start animation
@@ -323,38 +322,36 @@ public class AbilityPush : MonoBehaviour, IAbility
 
     void Awake()
     {
-        pushControls = new PlayerControls();// GameManager.Instance.GetComponent<PlayerInput>().actions;
+        pushControls = GameManager.Instance.GetComponent<PlayerInput>().actions;// new PlayerControls();
         GameManager.Instance.abilities.Add(this);
         ResetRebind();
-        pushAction = pushControls.Push.Push;//["Push"];
+        pushAction = pushControls["Push"];
+        pushAction.Enable();
         //pushAction = pushControls.Push.Push;
-        pushAction.performed += PushPress;
-        pushAction.canceled += PushRelease;
     }
 
     public void ResetRebind()
     {
-        pushControls.RemoveAllBindingOverrides();
-        GameManager.Instance.GetInputs(pushControls);
-        Debug.Log(pushControls.Push.Push);
+        //pushControls.RemoveAllBindingOverrides();
+        pushControls = GameManager.Instance.GetInputs(pushControls);
     }
 
     // Enable input action map controls.
     private void OnEnable()
     {
-        pushAction.Enable();
+        pushAction.performed += PushPress;
+        pushAction.canceled += PushRelease;
     }
 
     // Disable input action map controls.
     private void OnDisable()
     {
-        pushAction.Disable();
+        pushAction.performed -= PushPress;
+        pushAction.canceled -= PushRelease;
     }
 
     private void OnDestroy()
     {
         GameManager.Instance.abilities.Remove(this);
-        pushAction.performed -= PushPress;
-        pushAction.canceled -= PushRelease;
     }
 }

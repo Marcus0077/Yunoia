@@ -39,7 +39,7 @@ public class ExitClone : MonoBehaviour
 
     // Input variables.
     public PlayerControls summonControls;
-    private InputAction exitClone;
+    public InputAction exitClone;
 
     // Despawn clone variables.
     public bool despawnClone;
@@ -66,12 +66,10 @@ public class ExitClone : MonoBehaviour
     void Awake()
     {
         summonControls = new PlayerControls();
-        
-        exitClone = summonControls.SummonClone.ExitClone;
+        Player = GameObject.FindWithTag("Player");
+        exitClone = Player.GetComponent<SummonClone>().exitClone;
         exitClone.Enable();
         
-        Player = GameObject.FindWithTag("Player");
-
         basicMovementPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>();
         basicMovementClone = GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>();
         

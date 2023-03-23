@@ -10,8 +10,8 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    
-    
+
+
     // Strings for settings and stage names
     private static readonly string Firstplay = "First Play";
     private static readonly string BGMPref = "BGM Pref";
@@ -92,24 +92,22 @@ public class GameManager : MonoBehaviour
         return DataManager.gameData.checkpointDatas[currentLevel];
     }
 
-    public void GetInputs(PlayerControls actions)
+    public InputActionAsset GetInputs(InputActionAsset action)
     {
         if(!rebinded)
         {
             if (rebinds == "")
                 rebinds = PlayerPrefs.GetString("Rebinds");
             if (rebinds != "")
-                actions.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
+                action.LoadBindingOverridesFromJson(rebinds);//player.GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(rebinds);
             rebinded = true;
         }
+        return action;
     }
 
     public void GetAllInputs()
     {
-        foreach(IAbility ability in abilities)
-        {
-            ability.ResetRebind();
-        }
+        GetComponent<PlayerInput>().actions.RemoveAllBindingOverrides();
     }
 
     public void SetColor()
@@ -197,6 +195,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
+        PlayerPrefs.DeleteAll();
         DataManager.gameData = new GameData();//remove this to make it only a new settings button?
         textColor = false;
         PlayerPrefs.SetFloat(Sensitivity, .5f);
@@ -258,11 +257,11 @@ public class GameManager : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            if(player == null)
+            if (player == null)
                 return;
         }
         ghost = !ghost;
-        if(ghost)
+        if (ghost)
         {
             Time.timeScale = 0;
             BlockPlayerInput();
@@ -313,7 +312,7 @@ public class GameManager : MonoBehaviour
 
     public void BlockPlayerInput()
     {
-        if(player == null)
+        if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
             if (player == null)
@@ -333,7 +332,7 @@ public class GameManager : MonoBehaviour
             clone.GetComponent<CloneInteractions>().playerControls.Disable();
         }
         GameObject pause = GameObject.FindGameObjectWithTag("Pause");
-        if(pause != null)
+        if (pause != null)
         {
             pause.GetComponent<MenuTraverse>().playerControls.Disable();
         }
@@ -353,42 +352,39 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ShowPuzzle(puzzleID, waitTime));
     }
-    
+
     public IEnumerator ShowPuzzle(int puzzleID, float waitTime)
     {
         DisableInput();
-        
+
         GameObject mainCam = GameObject.FindGameObjectWithTag("StateDrivenCam");
 
         int previousCamState = mainCam.GetComponent<Animator>()
             .GetInteger("roomNum");
-        
+
         mainCam.GetComponent<Animator>().SetInteger("roomNum", puzzleID);
-        
+
         Debug.Log("before puzzle wait");
         yield return new WaitForSeconds(waitTime + 0.5f);
         Debug.Log("after puzzle wait");
-        
+
         mainCam.GetComponent<Animator>().SetInteger("roomNum", previousCamState);
-        
+
         EnableInput();
     }
-    
+
     public void DisableInput()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
         player.GetComponent<BasicMovement>().playerControls.Disable();
         player.GetComponent<AbilityPush>().pushControls.Disable();
         player.GetComponent<Grapple>().grappleControls.Disable();
         player.GetComponent<SummonClone>().summonControls.Disable();
         player.GetComponent<PlayerInteractions>().playerControls.Disable();
         player.GetComponentInChildren<LimitedMovementCam>().playerControls.Disable();
-
         if (GameObject.FindGameObjectWithTag("Clone") != null)
         {
             GameObject clone = GameObject.FindGameObjectWithTag("Clone");
-            
             clone.GetComponent<BasicMovement>().playerControls.Disable();
             clone.GetComponent<AbilityPush>().pushControls.Disable();
             clone.GetComponent<Grapple>().grappleControls.Disable();
@@ -400,18 +396,15 @@ public class GameManager : MonoBehaviour
     public void EnableInput()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
         player.GetComponent<BasicMovement>().playerControls.Enable();
         player.GetComponent<AbilityPush>().pushControls.Enable();
         player.GetComponent<Grapple>().grappleControls.Enable();
         player.GetComponent<SummonClone>().summonControls.Enable();
         player.GetComponent<PlayerInteractions>().playerControls.Enable();
         player.GetComponentInChildren<LimitedMovementCam>().playerControls.Enable();
-
         if (GameObject.FindGameObjectWithTag("Clone") != null)
         {
             GameObject clone = GameObject.FindGameObjectWithTag("Clone");
-            
             clone.GetComponent<BasicMovement>().playerControls.Enable();
             clone.GetComponent<AbilityPush>().pushControls.Enable();
             clone.GetComponent<Grapple>().grappleControls.Enable();

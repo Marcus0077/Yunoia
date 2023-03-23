@@ -72,7 +72,7 @@ public class Rumbler : MonoBehaviour
     // Unity MonoBehaviors
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
+        _playerInput = GameManager.Instance.GetComponent<PlayerInput>();
         
         playerControls = new PlayerControls();
         grapple = playerControls.Grapple.ShootHook;

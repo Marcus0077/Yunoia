@@ -9,10 +9,10 @@ using UnityEngine.InputSystem;
 using TMPro;
 using Unity.VisualScripting;
 
-public class BasicMovement : MonoBehaviour
+public class BasicMovement : MonoBehaviour, IAbility
 {
     // Input variables
-    public PlayerControls playerControls;
+    public InputActionAsset playerControls;
     public InputAction move;
     public InputAction jump;
     public InputAction dash;
@@ -75,11 +75,16 @@ public class BasicMovement : MonoBehaviour
     public bool inAngerRoom;
     public HideObstructions curAngerRoomPartialTrigger;
     public HideObstructions curAngerRoomFullTrigger;
-    
+
     // Get references and initialize variables when player spawns.
     void Awake()
     {
-        playerControls = new PlayerControls();
+        playerControls = GameManager.Instance.GetComponent<PlayerInput>().actions;// new PlayerControls();
+        GameManager.Instance.abilities.Add(this);
+        ResetRebind();
+        move = playerControls["Move"];
+        jump = playerControls["Jump"];
+        dash = playerControls["Dash"];
         limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
 
@@ -440,22 +445,17 @@ public class BasicMovement : MonoBehaviour
     // Enable input action map controls.
     private void OnEnable()
     {
-        move = playerControls.Movement.Move;
         move.Enable();
-
-        jump = playerControls.Movement.Jump;
         jump.Enable();
-
-        dash = playerControls.Movement.Dash;
         dash.Enable();
     }
 
     // Disable input action map controls.
     private void OnDisable()
     {
-        move.Disable();
-        jump.Disable();
-        dash.Disable();
+        //move.Disable();
+        //jump.Disable();
+        //dash.Disable();
     }
 
     // Changes active camera depending on where the player is on the level.
@@ -527,5 +527,15 @@ public class BasicMovement : MonoBehaviour
         yield return new WaitForSeconds(0.68f);
 
         runSoundOneCanPlay = true;
+    }
+
+    public void ResetRebind()
+    {
+        playerControls = GameManager.Instance.GetInputs(playerControls);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.abilities.Remove(this);
     }
 }

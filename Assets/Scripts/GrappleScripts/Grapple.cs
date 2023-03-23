@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class Grapple : MonoBehaviour
+public class Grapple : MonoBehaviour, IAbility
 {
     // Speed and distance restrictions
     float initialPullSpeed = 0.0f;
@@ -62,7 +62,7 @@ public class Grapple : MonoBehaviour
     public bool initalSwingForce = false;
     float cdRemaining;
 
-    public PlayerControls grappleControls;
+    public InputActionAsset grappleControls;
     public InputAction shootHook, cancelHook, extendGrapple;
 
     [SerializeField] private AudioSource shoot;
@@ -529,15 +529,19 @@ public class Grapple : MonoBehaviour
         lastPlayerPos = Vector3.zero;
     }
 
+    void Awake()
+    {
+        grappleControls = GameManager.Instance.GetComponent<PlayerInput>().actions;
+        GameManager.Instance.abilities.Add(this);
+        ResetRebind();
+        shootHook = grappleControls["ShootHook"];
+        cancelHook = grappleControls["CancelHook"];
+    }
+
     // Enable input action map controls.
     private void OnEnable()
     {
-        grappleControls = new PlayerControls();
-
-        shootHook = grappleControls.Grapple.ShootHook;
         shootHook.Enable();
-
-        cancelHook = grappleControls.Grapple.CancelHook;
         cancelHook.Enable();
     }
 
@@ -546,5 +550,16 @@ public class Grapple : MonoBehaviour
     {
         shootHook.Disable();
         cancelHook.Disable();
+    }
+
+    public void ResetRebind()
+    {
+        //grappleControls.RemoveAllBindingOverrides();
+        grappleControls = GameManager.Instance.GetInputs(grappleControls);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.abilities.Remove(this);
     }
 }

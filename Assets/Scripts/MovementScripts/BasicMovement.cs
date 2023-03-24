@@ -171,6 +171,12 @@ public class BasicMovement : MonoBehaviour, IAbility
     {
         JumpPlayer();
         ActivateDash();
+        SoundActivation();
+    }
+
+    void SoundActivation()
+    {
+        GetComponent<AudioListener>().enabled = canMove;
     }
 
     // Plays the walking animation if this game object is moving, 

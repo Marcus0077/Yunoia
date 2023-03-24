@@ -6081,6 +6081,7 @@ GameObject:
   - component: {fileID: 4181361517068783824}
   - component: {fileID: 714148114063855633}
   - component: {fileID: 6366286162391475576}
+  - component: {fileID: 8140463967426123410}
   m_Layer: 11
   m_Name: Clone
   m_TagString: Clone
@@ -6184,11 +6185,21 @@ MonoBehaviour:
   audioSource: {fileID: 6920073357945925072}
   beginDestructSound: {fileID: 8300000, guid: 2b884012d1670154caa3b1eb4e2e6e73, type: 3}
   destructSound: {fileID: 8300000, guid: c69b7613f08bdf04fb0bac459aa964d2, type: 3}
-  despawnTimerText: {fileID: 0}
+  despawnTimerText: 0
+  cloneIcon: {fileID: 0}
   anim: {fileID: 0}
   animCover: {fileID: 0}
   limitedMovementCam: {fileID: 0}
   Player: {fileID: 0}
+  exitClone:
+    m_Name: Exit Clone
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b30cdd1d-d4d8-46e7-baa9-b70e1e8a1f0c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   despawnClone: 0
   despawnCloneTimer: 0
   pPlateLayer:
@@ -6235,6 +6246,7 @@ MonoBehaviour:
   needYankSwing: 1
   recoverySwing: 0
   initalSwingForce: 0
+  grappleControls: {fileID: 0}
   shootHook:
     m_Name: Shoot Hook
     m_Type: 0
@@ -6344,6 +6356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f2e08a9856f014397c94d52a8dfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerControls: {fileID: 0}
   move:
     m_Name: Move
     m_Type: 0
@@ -6488,6 +6501,14 @@ MonoBehaviour:
   player: {fileID: -8715429646849006418}
   shootTransform: {fileID: 224377010961569212}
   playerRB: {fileID: 5827308682441603359}
+--- !u!81 &8140463967426123410
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827308682441603353}
+  m_Enabled: 1
 --- !u!1 &5865379364369446831
 GameObject:
   m_ObjectHideFlags: 0

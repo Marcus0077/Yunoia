@@ -24,7 +24,8 @@ public class BounceFree : MonoBehaviour
         if (player != null)
         {
             player.playerRB.AddForce(transform.up * additiveForce);
-            audioSource.PlayOneShot(bounceVar1Sound);
+            audioSource.Play();
+            //audioSource.PlayOneShot(bounceVar1Sound);
         }
     }
     

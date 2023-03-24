@@ -49,9 +49,12 @@ public class GameManager : MonoBehaviour
             {
                 instance = new GameManager();
             }
+            
             return instance;
         }
     }
+
+    private bool isPuzzleCamOn;
 
     //Scene needs to be reloaded to turn off text color
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -191,6 +194,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        isPuzzleCamOn = false;
     }
 
     public void NewGame()
@@ -355,22 +360,35 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator ShowPuzzle(int puzzleID, float waitTime)
     {
-        DisableInput();
+        if (!isPuzzleCamOn)
+        {
+            isPuzzleCamOn = true;
+            
+            DisableInput();
 
-        GameObject mainCam = GameObject.FindGameObjectWithTag("StateDrivenCam");
+            if (GameObject.FindGameObjectWithTag("Clone") != null)
+            {
+                GameObject clone = GameObject.FindGameObjectWithTag("Clone");
+                clone.GetComponent<ExitClone>().Timer += waitTime + 0.5f;
+            }
 
-        int previousCamState = mainCam.GetComponent<Animator>()
-            .GetInteger("roomNum");
+            GameObject mainCam = GameObject.FindGameObjectWithTag("StateDrivenCam");
 
-        mainCam.GetComponent<Animator>().SetInteger("roomNum", puzzleID);
+            int previousCamState = mainCam.GetComponent<Animator>()
+                .GetInteger("roomNum");
 
-        Debug.Log("before puzzle wait");
-        yield return new WaitForSeconds(waitTime + 0.5f);
-        Debug.Log("after puzzle wait");
+            mainCam.GetComponent<Animator>().SetInteger("roomNum", puzzleID);
 
-        mainCam.GetComponent<Animator>().SetInteger("roomNum", previousCamState);
+            Debug.Log("before puzzle wait");
+            yield return new WaitForSeconds(waitTime + 0.5f);
+            Debug.Log("after puzzle wait");
 
-        EnableInput();
+            mainCam.GetComponent<Animator>().SetInteger("roomNum", previousCamState);
+
+            EnableInput();
+
+            isPuzzleCamOn = false;
+        }
     }
 
     public void DisableInput()
@@ -382,6 +400,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<SummonClone>().summonControls.Disable();
         player.GetComponent<PlayerInteractions>().playerControls.Disable();
         player.GetComponentInChildren<LimitedMovementCam>().playerControls.Disable();
+        
         if (GameObject.FindGameObjectWithTag("Clone") != null)
         {
             GameObject clone = GameObject.FindGameObjectWithTag("Clone");
@@ -402,6 +421,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<SummonClone>().summonControls.Enable();
         player.GetComponent<PlayerInteractions>().playerControls.Enable();
         player.GetComponentInChildren<LimitedMovementCam>().playerControls.Enable();
+        
         if (GameObject.FindGameObjectWithTag("Clone") != null)
         {
             GameObject clone = GameObject.FindGameObjectWithTag("Clone");

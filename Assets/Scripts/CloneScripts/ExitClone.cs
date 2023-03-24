@@ -92,23 +92,6 @@ public class ExitClone : MonoBehaviour
         cloneIcon.fillAmount = 0;
 
         anim = GetComponent<Animator>();
-        
-        CheckForInteractables();
-    }
-
-    // Checks if the clone was spawned on or within an interactable collider or trigger.
-    // If so, allow the clone to interact with that interactable.
-    // Only accounts for pressure plates right now.
-    private void CheckForInteractables()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, pPlateLayer))
-        {
-            pressurePlate = hit.transform.GameObject().GetComponent<PressurePlate>();
-            pressurePlate.CloneOnPlate();
-            isOnPressurePlate = true;
-        }
     }
     
     // Called between frames.

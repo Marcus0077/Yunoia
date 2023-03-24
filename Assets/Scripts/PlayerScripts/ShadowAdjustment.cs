@@ -19,7 +19,7 @@ public class ShadowAdjustment : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance, ~(1 << 3)))
         {
-            Debug.Log((maxDistance - hit.distance) / maxDistance);
+            //Debug.Log((maxDistance - hit.distance) / maxDistance);
             //shadow.pivot = new Vector3(0, 0, hit.distance);
             shadow.size = new Vector3((maxDistance - hit.distance) / maxDistance, (maxDistance - hit.distance) / maxDistance, shadow.size.z);
         }

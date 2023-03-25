@@ -32,10 +32,11 @@ public class SummonClone : MonoBehaviour, IAbility
     public LayerMask wall;
     public LayerMask scale;
 
-    // Audio variables.
+    // Audio and UI variables.
     [SerializeField] AudioSource cloneSound;
     [SerializeField] Animator uiAnim;
     [SerializeField] Animator uiAnimCover;
+    [SerializeField] GameObject UIWarning;
     
     // Dynamic Clone Spawn Variables / position.
     private float[] cloneSpawnsX = { 1.5f, -1.5f, 0, 0};
@@ -117,6 +118,7 @@ public class SummonClone : MonoBehaviour, IAbility
                 {
                     // Debug text if clone cannot be summoned.
                     Debug.Log("Clone cannot be summoned here.");
+                    UIWarning.SetActive(true);
                 }
                 // If this the point is valid, summon the clone.
                 else

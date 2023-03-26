@@ -136,7 +136,6 @@ public class GameManager : MonoBehaviour
         return new Color32(Byte.Parse(colorString.Substring(0, 3)), Byte.Parse(colorString.Substring(3, 3)), Byte.Parse(colorString.Substring(6, 3)), 255);
     }
 
-    // Start is called before the first frame update
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

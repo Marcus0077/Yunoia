@@ -23,7 +23,7 @@ public class NewSettingsController : MonoBehaviour
             AudioSource remove = new AudioSource();
             foreach (AudioSource audioSource in sources)
             {
-                if (audioSource.gameObject.name == "GameManager") ;
+                if (audioSource.gameObject.name == "GameManager");
                 {
                     remove = audioSource;
                 }
@@ -40,6 +40,10 @@ public class NewSettingsController : MonoBehaviour
         {
             Source = new AudioSource[1];
             Source[0] = GameManager.Instance.GetComponent<AudioSource>();
+        }
+        foreach (AudioSource audioSource in Source)
+        {
+            audioSource.outputAudioMixerGroup = Mixer.FindMatchingGroups("Master")[0];
         }
     }
 

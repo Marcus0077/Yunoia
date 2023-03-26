@@ -9,14 +9,18 @@ public class RenderFaceless : MonoBehaviour
     // Array of Faceless AI Game Objects that do not need
     // to be rendered yet.
     public GameObject[] Facelesses;
+    public int thisLevel;
     
     // At the beginning of the game, disable the mesh renderer for 
     // all Faceless AI that are in future rooms.
     void Start()
     {
-        foreach (var Faceless in Facelesses)
+        if (DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room != thisLevel)
         {
-            Faceless.GetComponent<MeshRenderer>().enabled = false;
+            foreach (var Faceless in Facelesses)
+            {
+                Faceless.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
         }
     }
 
@@ -28,7 +32,7 @@ public class RenderFaceless : MonoBehaviour
         {
             foreach (var Faceless in Facelesses)
             {
-                Faceless.GetComponent<MeshRenderer>().enabled = true;
+                Faceless.GetComponent<SkinnedMeshRenderer>().enabled = true;
             }
         }
     }

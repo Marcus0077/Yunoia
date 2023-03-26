@@ -25,6 +25,10 @@ public class AiMovement : MonoBehaviour
     public bool isFollowingCrystal;
     private Vector3 crytalPos;
     public bool canAiMove;
+    
+    // Animation variables
+    public Animator AiAnimator;
+    private bool chasingClone;
 
     // AI Wandering variables.
     private float wanderDistance;
@@ -47,10 +51,12 @@ public class AiMovement : MonoBehaviour
     private void Awake()
     {
         aiAgent = this.GetComponent<NavMeshAgent>();
+        aiAgent.speed = 2;
 
         isWanderRunning = false;
         isStoppedByCrystal = false;
         isFollowingCrystal = false;
+        chasingClone = false;
         
         distanceBetweenClone = 100f;
     }
@@ -70,6 +76,19 @@ public class AiMovement : MonoBehaviour
         if (!isStoppedByCrystal && isFollowingCrystal && Vector3.Distance(this.transform.position, crytalPos) < 0.025)
         {
             isStoppedByCrystal = true;
+        }
+
+        if (aiAgent.velocity.magnitude > 0.5f && chasingClone && AiAnimator.GetInteger("isMoving") != 1)
+        {
+            AiAnimator.SetInteger("isMoving", 1);
+        }
+        else if (aiAgent.velocity.magnitude > 0.5f && !chasingClone && AiAnimator.GetInteger("isMoving") != 2)
+        {
+            AiAnimator.SetInteger("isMoving", 2);
+        }
+        else if (aiAgent.velocity.magnitude <= 0.5f && AiAnimator.GetInteger("isMoving") != 0)
+        {
+            AiAnimator.SetInteger("isMoving", 0);
         }
     }
 
@@ -111,6 +130,13 @@ public class AiMovement : MonoBehaviour
     {
         if (GameObject.FindWithTag("Clone") != null && !isWanderRunning)
         {
+            if (!chasingClone)
+            {
+                chasingClone = true;
+            }
+            
+            aiAgent.speed = 5.5f;
+            
             LookAtClone();
             FollowClone();
         }
@@ -139,6 +165,13 @@ public class AiMovement : MonoBehaviour
     public IEnumerator Wander()
     {
         isWanderRunning = true;
+        
+        if (chasingClone)
+        {
+            chasingClone = false;
+        }
+
+        aiAgent.speed = 2;
         
         // Determines if a point is valid or not.
         bool canWalk;

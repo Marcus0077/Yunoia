@@ -46,9 +46,12 @@ public class Lever : MonoBehaviour
     // Integer that determines which camera we will switch to on 
     // puzzle completion.
     public int puzzleNum;
+    
+    // Animation Variables
+    public Animator cageAnimator;
 
     // Get references and initialize variables when levers spawn.
-    void Awake()
+    void Start()
     {
         //activateText.enabled = false;
         
@@ -169,6 +172,7 @@ public class Lever : MonoBehaviour
                 foreach (var aiCounterpart in aiCounterparts)
                 {
                     aiCounterpart.GetComponent<AiMovement>().canAiMove = true;
+                    cageAnimator.SetBool("openedCage", true);
                 }
             }
         }

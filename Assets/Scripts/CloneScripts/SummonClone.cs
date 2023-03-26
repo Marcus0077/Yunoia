@@ -38,7 +38,7 @@ public class SummonClone : MonoBehaviour, IAbility
     [SerializeField] Animator uiAnimCover;
     [SerializeField] GameObject UIWarning;
     
-    // Dynamic Clone Spawn Variables / position.
+    // Dynamic Clone Spawn Variables / Position.
     private float[] cloneSpawnsX = { 1.5f, -1.5f, 0, 0};
     private float[] cloneSpawnsZ = { 0, 0, 1.5f, -1.5f};
 
@@ -118,7 +118,6 @@ public class SummonClone : MonoBehaviour, IAbility
                 {
                     // Debug text if clone cannot be summoned.
                     Debug.Log("Clone cannot be summoned here.");
-                    UIWarning.SetActive(true);
                 }
                 // If this the point is valid, summon the clone.
                 else
@@ -166,6 +165,11 @@ public class SummonClone : MonoBehaviour, IAbility
                     StartCoroutine(Cooldown());
                 }
             }
+        }
+
+        if (!cloneSummoned)
+        {
+            UIWarning.SetActive(true);
         }
     }
 

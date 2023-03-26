@@ -52,8 +52,8 @@ public class SceneChanger : MonoBehaviour
         if (acceptanceScene.IsPressed())
         {
             DataManager.gameData.checkpointed = false;
-            GameManager.Instance.SetLevel(Levels.NA);
-            SceneManager.LoadScene("AcceptanceFinal");
+            GameManager.Instance.SetLevel(Levels.ACC);
+            SceneManager.LoadScene("AcceptanceFinalLevel");
         }
 
         if (hubScene.IsPressed())

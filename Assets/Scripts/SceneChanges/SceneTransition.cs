@@ -98,6 +98,13 @@ public class SceneTransition : MonoBehaviour
                 //DataManager.gameData.position.Set(2.3f, 42.4f, 16.3f);
                 GameManager.Instance.CompleteLevel(level);
             }
+
+            if (sceneToTransfer == "AcceptanceFinalLevel")
+            {
+                GameManager.Instance.SetLevel(Levels.ACC);
+                checkpointData.position = new Vector3(-10.74f, 45.0f, 27.74f);
+            }
+
             GameManager.Instance.SetCheckpoint(checkpointData);
             DataManager.gameData.checkpointed = false;
             SceneManager.LoadScene(sceneToTransfer);

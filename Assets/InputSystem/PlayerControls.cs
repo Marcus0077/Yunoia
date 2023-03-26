@@ -1156,6 +1156,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""CloseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b304f516-e7b0-419d-a053-171a2c53d266"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AcceptanceScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

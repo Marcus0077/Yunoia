@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private static readonly string Anger = "Anger";
     private static readonly string Denial = "Denial";
     private static readonly string Hub = "Hub";
+    private static readonly string Accept = "Acceptance";
     private static readonly string TextColor = "TextColor";
 
     public string[] statics;
@@ -145,7 +146,7 @@ public class GameManager : MonoBehaviour
             DataManager.ReadFile();
             DataManager.gameData.checkpointed = false;
             statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble };
-            levelNames = new string[] { Depr, Barg, Anger, Denial };
+            levelNames = new string[] { Depr, Barg, Anger, Denial, Accept };
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
             if (player == null)
                 player = GameObject.FindGameObjectWithTag("Player");
@@ -458,5 +459,6 @@ public enum Levels
     DEP = 3,
     BAR = 4,
     ANG = 5,
+    ACC = 6
 
 }

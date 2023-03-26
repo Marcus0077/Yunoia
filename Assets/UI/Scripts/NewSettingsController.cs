@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,30 @@ public class NewSettingsController : MonoBehaviour
     {
         //Mixer.SetFloat("Volume", Mathf.Log10(PlayerPrefs.GetFloat("Volume") * 20));
         Mixer.SetFloat("Volume", PlayerPrefs.GetFloat(SliderPref));
+        if(Source.Length > 1)
+        {
+            List<AudioSource> sources = new List<AudioSource>(FindObjectsOfType<AudioSource>());
+            AudioSource remove = new AudioSource();
+            foreach (AudioSource audioSource in sources)
+            {
+                if (audioSource.gameObject.name == "GameManager") ;
+                {
+                    remove = audioSource;
+                }
+            }
+            if(remove != null)
+                sources.Remove(remove);
+            Source = new AudioSource[sources.Count];
+            for (int i = 0; i < sources.Count; i++)
+            {
+                Source[i] = sources[i];
+            }
+        }
+        else
+        {
+            Source = new AudioSource[1];
+            Source[0] = GameManager.Instance.GetComponent<AudioSource>();
+        }
     }
 
     public void OnChangeSlider(float Value)

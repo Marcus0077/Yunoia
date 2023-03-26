@@ -1,57 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class TipDisplayer : MonoBehaviour
 {
-    public GameObject message, prompt;
+    public GameObject message, prompt, player;
     public TextMeshProUGUI messageText;
     public float displayTime;
     public TipController tc;
-    private bool isOpen;
+    public InputActionAsset controls;
+    public InputAction interact;
+    public bool isOpen, closing;
 
     void Awake()
     {
+        controls = GameManager.Instance.GetComponent<PlayerInput>().actions;
+        controls.Enable();
+        interact = controls.FindActionMap("Interaction")["Press"];
         tc = GetComponent<TipController>();
         isOpen = false;
+        closing = false;
     }
     
-    void OnTriggerStay()
+    void OnTriggerEnter(Collider other)
     {
-        if(!isOpen)
+        if (other.tag == "Player")
         {
             prompt.SetActive(true);
-        
-            if(Input.GetKey(KeyCode.E) && !isOpen)
-            {
-                message.SetActive(true);
-                tc.OnEnable();
-                isOpen = true;
-            }
+            player = other.gameObject;
+            interact.performed += ToggleMessage;
         }
+    }
 
-        else if(isOpen && Input.GetKeyDown(KeyCode.E))
+    void OnTriggerExit(Collider other)
+    {
+        if(player !=null && other.gameObject.name == player.name)
         {
-            StartCoroutine(CloseMessage());
+            interact.performed -= ToggleMessage;
+            player = null;
+            if (isOpen)
+                tc.CloseDialog();
+            isOpen = false;
+            prompt.SetActive(false);
         }
     }
 
-    void OnTriggerExit()
+    void ToggleMessage(InputAction.CallbackContext context = new InputAction.CallbackContext())
     {
-        tc.CloseDialog();
-        isOpen = false;
-        prompt.SetActive(false);
-    }
-
-    private IEnumerator CloseMessage()
-    {
-        prompt.SetActive(true);
-        tc.CloseDialog();
-
-        yield return new WaitForSeconds(1f);
-
-        isOpen = false;
+        if (!isOpen)
+        {
+            prompt.SetActive(false);
+            message.SetActive(true);
+            tc.OnEnable();
+            isOpen = true;
+        }
+        else if(!closing)
+        {
+            prompt.SetActive(true);
+            closing = true;
+            tc.CloseDialog();
+        }
     }
 
     /*void Awake()

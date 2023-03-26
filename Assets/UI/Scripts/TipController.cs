@@ -29,6 +29,7 @@ public class TipController : MonoBehaviour
 
     public void OnComplete()
     {
-        //gameObject.SetActive(false);
+        GetComponent<TipDisplayer>().isOpen = false;
+        GetComponent<TipDisplayer>().closing = false;
     }
 }

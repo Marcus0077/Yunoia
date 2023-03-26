@@ -323,7 +323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Are you sure you want to Exit?
+  m_text: Select Control Scheme
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82d215b8636ad724791361ac28f6066b, type: 2}
   m_sharedMaterial: {fileID: -3301640088622963473, guid: 82d215b8636ad724791361ac28f6066b, type: 2}
@@ -1175,9 +1175,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: {fileID: 1499953887386253519}
   prompt: {fileID: 0}
+  player: {fileID: 0}
   messageText: {fileID: 1499953888323084821}
   displayTime: 5
   tc: {fileID: 0}
+  controls: {fileID: 0}
+  interact:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  isOpen: 0
+  closing: 0
 --- !u!225 &1499953887386253513
 CanvasGroup:
   m_ObjectHideFlags: 0

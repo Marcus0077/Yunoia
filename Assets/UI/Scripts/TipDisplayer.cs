@@ -64,6 +64,11 @@ public class TipDisplayer : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        interact.performed -= ToggleMessage;
+    }
+
     /*void Awake()
     {
         StartCoroutine(DisplayMessage());

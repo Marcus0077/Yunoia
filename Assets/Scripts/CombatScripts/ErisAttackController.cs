@@ -12,7 +12,7 @@ public class ErisAttackController : MonoBehaviour
     public ErisAttackStairs attackPrefab;
 
     public bool canAttack = false;
-    float velocity = -8.0f;
+    float velocity = -4.0f;
 
     public bool hit = false;
 

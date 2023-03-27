@@ -113,7 +113,7 @@ public class ExitClone : MonoBehaviour
                 if(cloneIcon == null)
                     cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
                 despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
-                //cloneIcon.fillAmount = 1;
+                cloneIcon.fillAmount = 1;
                 
                 if (audioSource.clip != beginDestructSound)
                 {
@@ -130,7 +130,7 @@ public class ExitClone : MonoBehaviour
             despawnCloneTimer = 1.25f;
             if (cloneIcon == null)
                 cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
-            //cloneIcon.fillAmount = 0;
+            cloneIcon.fillAmount = 0;
         }
 
         // Check if the clone needs to be despawned or not.
@@ -195,7 +195,7 @@ public class ExitClone : MonoBehaviour
             //combatHandler.healthText.text = "";
             if (cloneIcon == null)
                 cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
-            //cloneIcon.fillAmount = 0;
+            cloneIcon.fillAmount = 0;
 
             // Give camera view and control back to player.
             limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);

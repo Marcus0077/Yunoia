@@ -54,7 +54,7 @@ public class MusicPersist : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        GetMusic(scene.name);
+        //GetMusic(scene.name);
     }
 
     void GetMusic(string key)
@@ -74,7 +74,7 @@ public class MusicPersist : MonoBehaviour
         }
         else
         {
-            oldVol = audioSource.volume;
+            //oldVol = audioSource.volume;
             stop = true;
             //audioSource.clip = null;
         }

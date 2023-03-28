@@ -275,7 +275,8 @@ public class BasicMovement : MonoBehaviour, IAbility
             else if (grapple != null)
             {
                 //moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
-                moveDirection = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y - 90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                moveDirection = Quaternion.AngleAxis(FindObjectsOfType<LookAtCam>()[0].lookRotation.eulerAngles.y - 90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                
 
                 if (grapple.grappleActive && !isGrounded)
                 {

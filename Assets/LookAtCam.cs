@@ -11,7 +11,7 @@ public class LookAtCam : MonoBehaviour
     private Transform clonePos;
     
     private Vector3 targetUpVector;
-
+    public Quaternion lookRotation;
     private float speed = 2;
         
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class LookAtCam : MonoBehaviour
     {
         if (playerPos.GetComponent<BasicMovement>().canMove)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(playerPos.position - transform.position);
+            lookRotation = Quaternion.LookRotation(playerPos.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
             
             targetUpVector = new Vector3(transform.position.x, playerPos.position.y + 2f, transform.position.z);
@@ -36,7 +36,7 @@ public class LookAtCam : MonoBehaviour
             {
                 clonePos = GameObject.FindGameObjectWithTag("Clone").transform;
 
-                Quaternion lookRotation = Quaternion.LookRotation(clonePos.position - transform.position);
+                lookRotation = Quaternion.LookRotation(clonePos.position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
                 
                 targetUpVector = new Vector3(transform.position.x, clonePos.position.y + 2f, transform.position.z);

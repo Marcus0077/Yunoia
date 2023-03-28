@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public string controlScheme, rebinds;
     public int currentLevel;
     public MenuTraverse menuTraverse;
+    public LookAtCam camTurn;
     public static GameManager Instance
     {
         get
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             return;
         texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
         texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
+        camTurn = FindObjectsOfType<LookAtCam>()[0];
     }
 
     public void SetLevel(int value)
@@ -149,6 +151,7 @@ public class GameManager : MonoBehaviour
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
             if (player == null)
                 player = GameObject.FindGameObjectWithTag("Player");
+            camTurn = FindObjectsOfType<LookAtCam>()[0];
             SceneManager.sceneLoaded += OnSceneLoaded;
             // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
             if (PlayerPrefs.GetFloat(Firstplay) == 0)

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class LoadBargaining : MonoBehaviour
+public class AngerOutro : MonoBehaviour
 {
     // Input variables
     PlayerControls playerControls;

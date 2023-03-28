@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class LoadAnger : MonoBehaviour
+public class DepressionOutro : MonoBehaviour
 {
     // Input variables
     PlayerControls playerControls;

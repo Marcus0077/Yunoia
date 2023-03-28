@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class LoadMainMenu : MonoBehaviour
+public class BargainingIntro : MonoBehaviour
 {
     // Input variables
     PlayerControls playerControls;

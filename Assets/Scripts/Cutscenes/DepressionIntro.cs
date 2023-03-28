@@ -31,7 +31,7 @@ public class DepressionIntro : MonoBehaviour
         {
             StopCoroutine(OpenScene());
 
-            SceneManager.LoadScene("DepressionIntro");
+            SceneManager.LoadScene("DepressionFinal");
         }
     }
     
@@ -44,6 +44,6 @@ public class DepressionIntro : MonoBehaviour
         
         yield return new WaitForSeconds(12f);
 
-        SceneManager.LoadScene("DepressionIntro");
+        SceneManager.LoadScene("DepressionFinal");
     }
 }

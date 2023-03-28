@@ -54,6 +54,8 @@ public class SceneTransition : MonoBehaviour
                 GameManager.Instance.SetLevel(Levels.ANG);
                 checkpointData.position = new Vector3(-264.42f, 1.87f, 94.82f);
                 //DataManager.gameData.position.Set(-264.42f, 1.87f, 94.82f);
+
+                sceneToTransfer = "AngerIntro";
             }
 
             if (sceneToTransfer == "DepressionFinal")
@@ -61,6 +63,8 @@ public class SceneTransition : MonoBehaviour
                 GameManager.Instance.SetLevel(Levels.DEP);
                 checkpointData.position = new Vector3(460.67f, 252.07f, 114.31f);
                 //DataManager.gameData.position.Set(460.67f, 252.07f, 114.31f);
+
+                sceneToTransfer = "DepressionIntro";
             }
 
             if (sceneToTransfer == "BargainingFinal")
@@ -68,6 +72,8 @@ public class SceneTransition : MonoBehaviour
                 GameManager.Instance.SetLevel(Levels.BAR);
                 checkpointData.position = new Vector3(-300.0f, 0.75f, -136.55f);
                 //DataManager.gameData.position.Set(-300.0f, 0.75f, -136.55f);
+
+                sceneToTransfer = "BargainingIntro";
             }
 
             if (sceneToTransfer == "DenialFinal")
@@ -97,6 +103,19 @@ public class SceneTransition : MonoBehaviour
                 checkpointData.position = new Vector3(2.3f, 42.4f, 16.3f);
                 //DataManager.gameData.position.Set(2.3f, 42.4f, 16.3f);
                 GameManager.Instance.CompleteLevel(level);
+
+                if (SceneManager.GetActiveScene().name == "AngerFinal")
+                {
+                    sceneToTransfer = "AngerOutro";
+                }
+                else if (SceneManager.GetActiveScene().name == "BargainingFinal")
+                {
+                    sceneToTransfer = "BargainingOutro";
+                }
+                else if (SceneManager.GetActiveScene().name == "DepressionFinal")
+                {
+                    sceneToTransfer = "DepressionOutro";
+                }
             }
 
             if (sceneToTransfer == "AcceptanceFinalLevel")

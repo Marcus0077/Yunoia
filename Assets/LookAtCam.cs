@@ -12,7 +12,9 @@ public class LookAtCam : MonoBehaviour
     
     private Vector3 targetUpVector;
     public Quaternion lookRotation;
-    private float speed = 2;
+    
+    public float speed;
+    public float cameraHeightOffset;
         
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,7 @@ public class LookAtCam : MonoBehaviour
             lookRotation = Quaternion.LookRotation(playerPos.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
             
-            targetUpVector = new Vector3(transform.position.x, playerPos.position.y + 2f, transform.position.z);
+            targetUpVector = new Vector3(transform.position.x, playerPos.position.y + cameraHeightOffset, transform.position.z);
         }
         else
         {
@@ -39,7 +41,7 @@ public class LookAtCam : MonoBehaviour
                 lookRotation = Quaternion.LookRotation(clonePos.position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
                 
-                targetUpVector = new Vector3(transform.position.x, clonePos.position.y + 2f, transform.position.z);
+                targetUpVector = new Vector3(transform.position.x, clonePos.position.y + cameraHeightOffset, transform.position.z);
             }
         }
 

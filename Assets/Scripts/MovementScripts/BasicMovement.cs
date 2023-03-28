@@ -64,6 +64,8 @@ public class BasicMovement : MonoBehaviour, IAbility
     private bool hasTransitioned;
     public Transform transitionPos;
 
+    public bool canRotateCam;
+
     // Animation Variables
     [SerializeField] private Animator animator;
 
@@ -156,6 +158,7 @@ public class BasicMovement : MonoBehaviour, IAbility
         canMove = true;
         isFrozen = false;
         hasTransitioned = false;
+        canRotateCam = true;
     }
     
     // Called between frames.
@@ -275,7 +278,7 @@ public class BasicMovement : MonoBehaviour, IAbility
             else if (grapple != null)
             {
                 Debug.Log(GameManager.Instance.camTurn);
-                if(GameManager.Instance.camTurn != null)
+                if(GameManager.Instance.camTurn != null && canRotateCam)
                 {
                     moveDirection = Quaternion.AngleAxis(FindObjectsOfType<LookAtCam>()[0].lookRotation.eulerAngles.y - 90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
                 }

@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.Mathematics;
 using UnityEditor.Experimental;
 using UnityEngine;
 
 public class LookAtCam : MonoBehaviour
 {
     private Transform playerPos;
-    private Vector3 playerUpVector;
+    private Transform clonePos;
+    
+    private Vector3 targetUpVector;
+
+    private float speed = 2;
         
     // Start is called before the first frame update
     void Start()
@@ -18,8 +23,26 @@ public class LookAtCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerUpVector = new Vector3(transform.position.x, playerPos.position.y, transform.position.z);
-        transform.LookAt(playerPos);
-        transform.position = playerUpVector;
+        if (playerPos.GetComponent<BasicMovement>().canMove)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(playerPos.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
+            
+            targetUpVector = new Vector3(transform.position.x, playerPos.position.y + 2f, transform.position.z);
+        }
+        else
+        {
+            if (GameObject.FindGameObjectWithTag("Clone") != null)
+            {
+                clonePos = GameObject.FindGameObjectWithTag("Clone").transform;
+
+                Quaternion lookRotation = Quaternion.LookRotation(clonePos.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
+                
+                targetUpVector = new Vector3(transform.position.x, clonePos.position.y + 2f, transform.position.z);
+            }
+        }
+
+        transform.position = targetUpVector;
     }
 }

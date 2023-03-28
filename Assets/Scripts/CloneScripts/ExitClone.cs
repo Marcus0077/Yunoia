@@ -89,8 +89,11 @@ public class ExitClone : MonoBehaviour
         
 
         cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
-        if(cloneIcon != null)
+
+        if (cloneIcon != null)
+        {
             cloneIcon.fillAmount = 0;
+        }
 
         anim = GetComponent<Animator>();
     }
@@ -110,8 +113,11 @@ public class ExitClone : MonoBehaviour
             // subtract time from it and play the destruction sound.
             else
             {
-                if(cloneIcon == null)
+                if (cloneIcon == null)
+                {
                     cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
+                }
+
                 despawnCloneTimer = despawnCloneTimer - Time.deltaTime;
                 cloneIcon.fillAmount = 1;
                 
@@ -126,10 +132,13 @@ public class ExitClone : MonoBehaviour
         else if (!exitClone.IsPressed() && despawnCloneTimer != 2)
         {
             audioSource.clip = null;
-            
             despawnCloneTimer = 1.25f;
+
             if (cloneIcon == null)
+            {
                 cloneIcon = GameObject.FindGameObjectWithTag("DespawnTimer").GetComponent<Image>();
+            }
+
             cloneIcon.fillAmount = 0;
         }
 
@@ -156,7 +165,7 @@ public class ExitClone : MonoBehaviour
     {
         if (despawnClone)
         {
-            //Set all Faceless AI that are free to wander.
+            //Set all Faceless AI that are free to wander; MIGHT DELETE (test first)...
             foreach (var Faceless in GameObject.FindObjectsOfType<AiMovement>())
             {
                 if (Faceless.canAiMove && !Faceless.isStoppedByCrystal && !Faceless.isFollowingCrystal)
@@ -198,8 +207,11 @@ public class ExitClone : MonoBehaviour
             cloneIcon.fillAmount = 0;
 
             // Give camera view and control back to player.
-            limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
-            limitedMovementCam.SetCurrentPlayer(basicMovementPlayer.gameObject);
+            if (limitedMovementCam != null)
+            {
+                limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
+                limitedMovementCam.SetCurrentPlayer(basicMovementPlayer.gameObject);
+            }
 
             // If the animator exists, tell it that the clone is despawned.
             if (anim != null)

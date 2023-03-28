@@ -79,7 +79,7 @@ public class BasicMovement : MonoBehaviour, IAbility
     // Get references and initialize variables when player spawns.
     void Awake()
     {
-        playerControls = GameManager.Instance.GetComponent<PlayerInput>().actions;// new PlayerControls();
+        playerControls = GameManager.Instance.GetComponent<PlayerInput>().actions; // new PlayerControls();
         GameManager.Instance.abilities.Add(this);
         ResetRebind();
         move = playerControls["Move"];
@@ -108,8 +108,11 @@ public class BasicMovement : MonoBehaviour, IAbility
         else
         {
             curRoom = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom;
-            
-            limitedMovementCam.SetCurrentPlayer(this.gameObject);
+
+            if (limitedMovementCam != null)
+            {
+                limitedMovementCam.SetCurrentPlayer(this.gameObject);
+            }
 
             if (GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().inAngerRoom)
             {
@@ -253,6 +256,9 @@ public class BasicMovement : MonoBehaviour, IAbility
     // Applies dash if player uses dash input.
     void MovePlayer()
     {
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        
         if (canMove == true)
         {
             if (isFrozen)

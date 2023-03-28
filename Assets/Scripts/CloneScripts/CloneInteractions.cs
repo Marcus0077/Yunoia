@@ -128,9 +128,12 @@ public class CloneInteractions : MonoBehaviour
             // Destroys and disables clone abilities in the process.
             if (basicMovementPlayer.canMove == false)
             {
-                limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
-                limitedMovementCam.SetCurrentPlayer(basicMovementPlayer.GameObject());
-                    
+                if (limitedMovementCam != null)
+                {
+                    limitedMovementCam.GetCurrentCameraData(basicMovementPlayer.curRoom);
+                    limitedMovementCam.SetCurrentPlayer(basicMovementPlayer.GameObject());
+                }
+
                 if (anim != null)
                 {
                     anim.SetBool("isClone", false);
@@ -154,9 +157,12 @@ public class CloneInteractions : MonoBehaviour
             // Destroys and disables player abilities in the process.
             else if (basicMovementClone.canMove == false)
             {
-                limitedMovementCam.GetCurrentCameraData(basicMovementClone.curRoom);
-                limitedMovementCam.SetCurrentPlayer(basicMovementClone.GameObject());
-                
+                if (limitedMovementCam != null)
+                {
+                    limitedMovementCam.GetCurrentCameraData(basicMovementClone.curRoom);
+                    limitedMovementCam.SetCurrentPlayer(basicMovementClone.GameObject());
+                }
+
                 if (anim != null)
                 {
                     anim.SetBool("isClone", true);

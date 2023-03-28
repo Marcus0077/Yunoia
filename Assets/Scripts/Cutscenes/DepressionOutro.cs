@@ -22,28 +22,28 @@ public class DepressionOutro : MonoBehaviour
         playerControls = new PlayerControls();
         skipCutscene = playerControls.Cutscene.SkipCutscene;
         skipCutscene.Enable();
-        StartCoroutine(OpenMainMenu());
+        StartCoroutine(OpenScene());
     }
 
     void Update()
     {
         if (skipCutscene.WasPressedThisFrame() && canSkip)
         {
-            StopCoroutine(OpenMainMenu());
+            StopCoroutine(OpenScene());
 
-            SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene("HubFinal");
         }
     }
     
-    private IEnumerator OpenMainMenu()
+    private IEnumerator OpenScene()
     {
         yield return new WaitForSeconds(3f);
 
         aToSkip.SetActive(true);
         canSkip = true;
         
-        yield return new WaitForSeconds(40f);
+        yield return new WaitForSeconds(13f);
 
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("HubFinal");
     }
 }

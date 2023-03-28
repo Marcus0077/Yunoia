@@ -119,6 +119,6 @@ public class PlantDestroyer : MonoBehaviour
         DataManager.gameData.checkpointed = false;
         //DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);
         GameManager.Instance.CompleteLevel(level);
-        SceneManager.LoadScene("HubFinal");
+        SceneManager.LoadScene("BargainingOutro");
     }
 }

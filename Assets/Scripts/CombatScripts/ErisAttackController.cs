@@ -58,7 +58,7 @@ public class ErisAttackController : MonoBehaviour
     {
         canAttack = false;
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(8.0f);
 
         if (!hit)
         {

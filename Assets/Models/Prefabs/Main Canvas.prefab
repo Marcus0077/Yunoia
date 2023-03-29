@@ -2164,6 +2164,7 @@ GameObject:
   - component: {fileID: 1499953887930225560}
   - component: {fileID: 1499953887930225562}
   - component: {fileID: 1499953887930225561}
+  - component: {fileID: 5375906418455611344}
   m_Layer: 5
   m_Name: Lose Text
   m_TagString: Untagged
@@ -2219,7 +2220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Get back up and try again
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82d215b8636ad724791361ac28f6066b, type: 2}
   m_sharedMaterial: {fileID: -3301640088622963473, guid: 82d215b8636ad724791361ac28f6066b, type: 2}
@@ -2288,6 +2289,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5375906418455611344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499953887930225567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681b7822f0929f144bac9fe32aade90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quotes:
+  - Get back up and try again
+  random: 0
+  text: {fileID: 1499953887930225561}
 --- !u!1 &1499953888008964235
 GameObject:
   m_ObjectHideFlags: 0

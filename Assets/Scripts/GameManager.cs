@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public float time;
     public string controlScheme, rebinds;
     public int currentLevel;
+    public int deathIndex;
     public MenuTraverse menuTraverse;
     public LookAtCam camTurn;
     public static GameManager Instance
@@ -68,13 +69,23 @@ public class GameManager : MonoBehaviour
         camTurn = FindObjectsOfType<LookAtCam>()[0];
     }
 
+    public void FindCamTurn()
+    {
+        if(camTurn == null)
+            camTurn = FindObjectsOfType<LookAtCam>()[0];
+    }
+
     public void SetLevel(int value)
     {
+        if (currentLevel != value)
+            deathIndex = 0;
         currentLevel = value;
     }
 
     public void SetLevel(Levels value)
     {
+        if (currentLevel != (int)value)
+            deathIndex = 0;
         currentLevel = (int)value;
     }
 

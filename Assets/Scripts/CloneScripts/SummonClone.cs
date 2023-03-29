@@ -163,13 +163,11 @@ public class SummonClone : MonoBehaviour, IAbility
                     GameObject.FindGameObjectWithTag("Clone").GetComponent<BasicMovement>().CheckCameraState();
                     
                     StartCoroutine(Cooldown());
-                    
-                    // Start coroutine to not allow switching until after clone is spawned.
                 }
             }
         }
 
-        if (!cloneSummoned)
+        if (!cloneSummoned && UIWarning != null)
         {
             UIWarning.SetActive(true);
         }

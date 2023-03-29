@@ -37,6 +37,8 @@ public class CloneInteractions : MonoBehaviour
     public Animator anim;
     public Animator animCover;
 
+    private bool canSwitch;
+
     // Get references and initialize variables when clone is instantiated.
     void Awake()
     {
@@ -58,6 +60,15 @@ public class CloneInteractions : MonoBehaviour
         footPos = duplicateParticles.transform.position.y;
 
         StartCoroutine(DestroyCloneParticles());
+        
+        if (switchPlaces.IsPressed())
+        {
+            canSwitch = false;
+        }
+        else
+        {
+            canSwitch = true;
+        }
     }
     
 
@@ -121,7 +132,7 @@ public class CloneInteractions : MonoBehaviour
     // currently in control.
     private void SwitchPlaces()
     {
-        if (switchPlaces.WasReleasedThisFrame())
+        if (switchPlaces.WasReleasedThisFrame() && canSwitch)
         {
             // If we are currently in control of the clone, 
             // give control to the player, and switch the camera to the player.
@@ -181,6 +192,10 @@ public class CloneInteractions : MonoBehaviour
                 Player.GetComponent<Grapple>().enabled = false;
                 Player.GetComponent<AbilityPush>().enabled = false;
             }
+        }
+        else if (switchPlaces.WasReleasedThisFrame() && !canSwitch)
+        {
+            canSwitch = true;
         }
     }
     

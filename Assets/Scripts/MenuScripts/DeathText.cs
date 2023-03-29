@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class DeathText : MonoBehaviour
 {
     [SerializeField]
+    [TextArea]
     string[] quotes;
     [SerializeField]
     bool random = false;

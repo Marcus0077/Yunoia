@@ -89,8 +89,15 @@ public class BasicMovement : MonoBehaviour, IAbility
         dash = playerControls["Dash"];
         limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
-        if(GameManager.Instance.camTurn == null)
-            GameManager.Instance.camTurn = FindObjectsOfType<LookAtCam>()[0];
+
+        if (GameObject.FindObjectOfType<LookAtCam>() != null)
+        {
+            if (GameManager.Instance.camTurn == null)
+            {
+                GameManager.Instance.camTurn = FindObjectsOfType<LookAtCam>()[0];
+            }
+        }
+
         if (this.GameObject().CompareTag("Player"))
         {
             if (winScreen != null)

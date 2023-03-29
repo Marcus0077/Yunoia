@@ -162,7 +162,11 @@ public class GameManager : MonoBehaviour
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
             if (player == null)
                 player = GameObject.FindGameObjectWithTag("Player");
-            camTurn = FindObjectsOfType<LookAtCam>()[0];
+            if (FindObjectOfType<LookAtCam>() != null)
+            {
+                camTurn = FindObjectsOfType<LookAtCam>()[0];
+            }
+
             SceneManager.sceneLoaded += OnSceneLoaded;
             // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
             if (PlayerPrefs.GetFloat(Firstplay) == 0)

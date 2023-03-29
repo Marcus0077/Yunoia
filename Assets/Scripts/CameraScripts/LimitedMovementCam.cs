@@ -57,6 +57,8 @@ public class LimitedMovementCam : MonoBehaviour
     // or player is moving.
     public bool forceBallToPlayer;
 
+    public bool canUseFreeCam;
+
     // Get references and initialize variables when the Camera is initialised.
     void Start()
     {
@@ -72,10 +74,6 @@ public class LimitedMovementCam : MonoBehaviour
 
         // If we are starting from a checkpoint, set the camera to
         // that checkpoint's camera.
-        //if (DataManager.gameData.level > 0)
-        //{
-        //    GetCurrentCameraData((int)DataManager.gameData.level);
-        //}
         if (DataManager.gameData.checkpointed)
         {
             GetCurrentCameraData(DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room);
@@ -162,7 +160,7 @@ public class LimitedMovementCam : MonoBehaviour
         // If the player is not moving and the sphere is not following
         // the player, clamp the follow sphere to the bounds of the 
         // current camera's confiner.
-        if (isCamFollowingPlayer == false && !playerMove.IsPressed())
+        if (isCamFollowingPlayer == false && !playerMove.IsPressed() && canUseFreeCam)
         {
             ClampCameraFollowSphere();
         }

@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 1144875423}
   m_Layer: 0
   m_Name: CameraFollowSphere
-  m_TagString: Untagged
+  m_TagString: FreeCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   curConfiner: {fileID: 0}
   isCamFollowingPlayer: 0
   forceBallToPlayer: 0
+  canUseFreeCam: 1
 --- !u!65 &1144875423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6937,15 +6938,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.44
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41.42
+      value: 104.24
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.21
+      value: 16.8
       objectReference: {fileID: 0}
     - target: {fileID: 8325761764747410603, guid: 0bd428d540d00ad4d861868cd1e04ce6, type: 3}
       propertyPath: m_LocalRotation.w

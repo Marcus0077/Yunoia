@@ -22,7 +22,6 @@ public class FinalCamTransition : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<BasicMovement>().canRotateCam = false;
-            GameObject.FindWithTag("FreeCam").GetComponent<LimitedMovementCam>().enabled = true;
         }
     }
 }

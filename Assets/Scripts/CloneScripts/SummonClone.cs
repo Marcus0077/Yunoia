@@ -146,7 +146,7 @@ public class SummonClone : MonoBehaviour, IAbility
 
                     Vector3 newAboveGround = new Vector3(aboveGround.x, aboveGround.y + spawnHit.point.y + 0.5f, aboveGround.z);
                     
-                    clone = Instantiate(ClonePrefab, newAboveGround, Quaternion.LookRotation(-Vector3.forward));
+                    clone = Instantiate(ClonePrefab, newAboveGround, Quaternion.LookRotation(this.transform.TransformDirection(Vector3.forward)));
 
                     // Set clone UI if the animator exists.
                     if (uiAnim != null)

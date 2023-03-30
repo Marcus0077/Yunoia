@@ -27,9 +27,13 @@ public class PlantDestroyer : MonoBehaviour
     private GameManager gameManager;
     public bool hasPuzzleCam;
 
+    private Animator pPlateAnimator;
+
     private void Awake()
     {
+        pPlateAnimator = GetComponent<Animator>();
         gameManager = FindObjectOfType<GameManager>();
+        
         numCrystals = coCrystals.Length + 1;
 
         thisCrystalComplete = 0;
@@ -76,6 +80,11 @@ public class PlantDestroyer : MonoBehaviour
         {
             Debug.Log("FacelessEntered");
             this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
+
+            if (pPlateAnimator != null)
+            {
+                pPlateAnimator.SetBool("plateDown", true);
+            }
             
             if (!isMultipleCrystals)
             {

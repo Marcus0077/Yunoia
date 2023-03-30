@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 
 public class BasicMovement : MonoBehaviour, IAbility
@@ -68,6 +69,9 @@ public class BasicMovement : MonoBehaviour, IAbility
 
     // Animation Variables
     [SerializeField] private Animator animator;
+    private float animRunSpeed;
+    private float animRunAccelerator;
+    
 
     GameObject minionDeath;
 
@@ -89,6 +93,15 @@ public class BasicMovement : MonoBehaviour, IAbility
         dash = playerControls["Dash"];
         limitedMovementCam = FindObjectOfType<LimitedMovementCam>();
         stateDrivenCamAnimator = GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>();
+
+        if (this.GetComponentInChildren<Animator>() != null)
+        {
+            animator = this.GetComponentInChildren<Animator>();
+        }
+        else
+        {
+            Debug.Log("animator returned null value.");
+        }
 
         if (GameObject.FindObjectOfType<LookAtCam>() != null)
         {
@@ -159,6 +172,8 @@ public class BasicMovement : MonoBehaviour, IAbility
         accelerationValue = 1f;
         dashCooldown = 0f;
         dashAccelerate = 0;
+        animRunSpeed = 0;
+        animRunAccelerator = 0.075f;
         
         logFormulaCoefficient = .6f;
         logFormulaModifier = 2f;
@@ -199,11 +214,30 @@ public class BasicMovement : MonoBehaviour, IAbility
     {
         if (move.IsPressed() && canMove)
         {
-            animator.SetBool("IsWalking", true);
+            if (animRunSpeed < Mathf.Abs(move.ReadValue<Vector2>().x) + Mathf.Abs(move.ReadValue<Vector2>().y))
+            {
+                animRunSpeed += animRunAccelerator;
+            }
+            else
+            {
+                animRunSpeed = Mathf.Abs(move.ReadValue<Vector2>().x) + Mathf.Abs(move.ReadValue<Vector2>().y);
+            }
+
+            animator.SetFloat("Speed", animRunSpeed);
         }
         else
         {
-            animator.SetBool("IsWalking", false);
+            if (animRunSpeed > 0)
+            {
+                animRunSpeed -= animRunAccelerator;
+                
+            }
+            else
+            {
+                animRunSpeed = 0;
+            }
+
+            animator.SetFloat("Speed", animRunSpeed);
         }
     }
 
@@ -398,6 +432,7 @@ public class BasicMovement : MonoBehaviour, IAbility
             if (isGrounded && canMove)
             {
                 playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+                animator.SetBool("Jump", true);
                 //jumpSound.Play();
             }
             else if (grapple != null && grapple.grappleActive)
@@ -417,6 +452,7 @@ public class BasicMovement : MonoBehaviour, IAbility
         if (dash.WasPressedThisFrame() && move.IsPressed() && dashCooldown <= 0 && !isFrozen)
         {
             dashSound.Play();
+            animator.SetBool("Dash", true);
 
             dashAccelerate = 1;
             dashCooldown = 3f;

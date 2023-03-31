@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -21,11 +22,14 @@ public class PressurePlate : MonoBehaviour
     public float cooldownTime = 5f;
 
     public int puzzleNum;
+    
+    private Animator pPlateAnimator;
 
     // Get references and initialize variables when pressure plates spawn.
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+        pPlateAnimator = this.GetComponent<Animator>();
         
         isPlayer = false;
         isClone = false;
@@ -71,7 +75,6 @@ public class PressurePlate : MonoBehaviour
     
     private IEnumerator CompletePuzzle()
     {
-        Debug.Log("Started Unlock");
         float waitTime = 2.5f;
         
         gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
@@ -79,8 +82,6 @@ public class PressurePlate : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         
         HideWall();
-        audioSource.PlayOneShot(ppSound);
-        Debug.Log("Ended Unlock");
     }
 
     // Determine whether player or clone is exiting this pressure plate and deactivate it.
@@ -111,6 +112,9 @@ public class PressurePlate : MonoBehaviour
     {
         Blocker.GetComponent<Renderer>().enabled = false;
         Blocker.GetComponent<Collider>().enabled = false;
+        
+        pPlateAnimator.SetBool("plateDown", true);
+        audioSource.PlayOneShot(ppSound);
     }
     
     // Adds blocker back when pressure plate is deactivated.
@@ -118,5 +122,7 @@ public class PressurePlate : MonoBehaviour
     {
         Blocker.GetComponent<Renderer>().enabled = true;
         Blocker.GetComponent<Collider>().enabled = true;
+        
+        pPlateAnimator.SetBool("plateDown", false);
     }
 }

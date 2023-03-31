@@ -11,7 +11,7 @@ public class FadeBlack : MonoBehaviour
         FadeToTransparent();
     }
 
-    public void FadeToBlack()
+     public void FadeToBlack()
     {
         LeanTween.color(GetComponent<RectTransform>(), Color.black, 1.5f).setEaseInOutQuint();
     }
@@ -19,5 +19,5 @@ public class FadeBlack : MonoBehaviour
     public void FadeToTransparent()
     {
         LeanTween.color(GetComponent<RectTransform>(), Color.clear, 3f);
-    }
+    } 
 }

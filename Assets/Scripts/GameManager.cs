@@ -66,13 +66,13 @@ public class GameManager : MonoBehaviour
             return;
         texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
         texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
-        camTurn = FindObjectsOfType<LookAtCam>()[0];
+        camTurn = FindObjectOfType<LookAtCam>();
     }
 
     public void FindCamTurn()
     {
         if(camTurn == null)
-            camTurn = FindObjectsOfType<LookAtCam>()[0];
+            camTurn = FindObjectOfType<LookAtCam>();
     }
 
     public void SetLevel(int value)

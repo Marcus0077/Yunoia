@@ -77,6 +77,9 @@ public class PressurePlate : MonoBehaviour
     {
         float waitTime = 2.5f;
         
+        pPlateAnimator.SetBool("plateDown", true);
+        audioSource.PlayOneShot(ppSound);
+        
         gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
 
         yield return new WaitForSeconds(waitTime);
@@ -112,9 +115,6 @@ public class PressurePlate : MonoBehaviour
     {
         Blocker.GetComponent<Renderer>().enabled = false;
         Blocker.GetComponent<Collider>().enabled = false;
-        
-        pPlateAnimator.SetBool("plateDown", true);
-        audioSource.PlayOneShot(ppSound);
     }
     
     // Adds blocker back when pressure plate is deactivated.

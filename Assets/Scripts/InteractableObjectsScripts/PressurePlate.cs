@@ -16,7 +16,7 @@ public class PressurePlate : MonoBehaviour
     public bool isClone;
     private bool inCooldown;
     
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     public AudioClip ppSound;
     
     public float cooldownTime = 5f;
@@ -30,6 +30,8 @@ public class PressurePlate : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         pPlateAnimator = this.GetComponent<Animator>();
+        audioSource = this.GetComponent<AudioSource>();
+        
         
         isPlayer = false;
         isClone = false;
@@ -77,6 +79,9 @@ public class PressurePlate : MonoBehaviour
     {
         float waitTime = 2.5f;
         
+        pPlateAnimator.SetBool("plateDown", true);
+        audioSource.PlayOneShot(ppSound);
+        
         gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
 
         yield return new WaitForSeconds(waitTime);
@@ -112,9 +117,6 @@ public class PressurePlate : MonoBehaviour
     {
         Blocker.GetComponent<Renderer>().enabled = false;
         Blocker.GetComponent<Collider>().enabled = false;
-        
-        pPlateAnimator.SetBool("plateDown", true);
-        audioSource.PlayOneShot(ppSound);
     }
     
     // Adds blocker back when pressure plate is deactivated.

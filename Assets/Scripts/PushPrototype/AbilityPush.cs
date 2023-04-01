@@ -42,7 +42,8 @@ public class AbilityPush : MonoBehaviour, IAbility
     public float chargeRadius;
     public float pushRadius;
     public float smallPushRadius;
-    
+
+    Animator anim;
 
     [SerializeField] private AudioSource source;
 
@@ -52,6 +53,8 @@ public class AbilityPush : MonoBehaviour, IAbility
         smallPushNeedsDeath = false;
         largePushNeedsDeath = false;
         chargePushNeedsDeath = false;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Push logic
@@ -263,6 +266,7 @@ public class AbilityPush : MonoBehaviour, IAbility
         if (ableToPush)
         {
             //start animation
+            anim.SetBool("isPulse", true);
             if (!restored)
             {
                 range = minPush;
@@ -284,6 +288,7 @@ public class AbilityPush : MonoBehaviour, IAbility
         if (ableToPush)
         {
             //start animation
+            anim.SetBool("isPulse", false);
             if (restored && !shield)
             {
                 chargeTime = (Time.time - chargeTime) * chargeSpeed + minPush;

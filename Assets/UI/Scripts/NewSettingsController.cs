@@ -11,12 +11,21 @@ public class NewSettingsController : MonoBehaviour
     [SerializeField] private AudioSource[] Source;
     [SerializeField] private AudioMixMode MixMode;
 
-    private static readonly string SliderPref = "Volume";
+    [SerializeField]
+    Settings prefName;
 
     void Start()
     {
         //Mixer.SetFloat("Volume", Mathf.Log10(PlayerPrefs.GetFloat("Volume") * 20));
-        Mixer.SetFloat("Volume", PlayerPrefs.GetFloat(SliderPref));
+        switch (MixMode)
+        {
+            case AudioMixMode.LinearMixerVolume:
+                Mixer.SetFloat("Volume", (-80 + GameManager.Instance.GetFloat(prefName) * 100));
+                break;
+            case AudioMixMode.LogrithmicMixerVolume:
+                Mixer.SetFloat("Volume", Mathf.Log10(GameManager.Instance.GetFloat(prefName)) * 20);
+                break;
+        }
         if(Source.Length > 1)
         {
             List<AudioSource> sources = new List<AudioSource>(FindObjectsOfType<AudioSource>());

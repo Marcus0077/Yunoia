@@ -152,6 +152,10 @@ public class PushableFunction : ScriptableObject
     {
         if(activatable)
         {
+            if (sound != null)
+            {
+                AudioSource.PlayClipAtPoint(sound, pushedObj.transform.position, GameManager.Instance.GetFloat(Settings.SFX));
+            }
             if (!animation)
             {
                 if(destroy)
@@ -163,10 +167,6 @@ public class PushableFunction : ScriptableObject
                 {
                     pushedObj.GetComponent<Rigidbody>().isKinematic = false;
                 }
-            }
-            if(sound != null)
-            {
-                AudioSource.PlayClipAtPoint(sound, pushedObj.transform.position, GameManager.Instance.GetFloat(Settings.SFX));
             }
             if (changeColor)
             {

@@ -17,6 +17,8 @@ public class PushableFunction : ScriptableObject
     Color color;
     [SerializeField] // animationName: name of the bool used in the animator for specific animation state (connected to default state in a 2 way connection)
     string animationName;
+    [SerializeField]
+    AudioClip sound;
 
     public float delay
     {
@@ -161,6 +163,10 @@ public class PushableFunction : ScriptableObject
                 {
                     pushedObj.GetComponent<Rigidbody>().isKinematic = false;
                 }
+            }
+            if(sound != null)
+            {
+                AudioSource.PlayClipAtPoint(sound, pushedObj.transform.position, GameManager.Instance.GetFloat(Settings.SFX));
             }
             if (changeColor)
             {

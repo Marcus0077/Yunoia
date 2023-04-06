@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ScaleControl : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,7 @@ public class ScaleControl : MonoBehaviour
     [SerializeField] // what axis should the scale move in (currently only y axis is used in game)
     Vector3 axis;
     public float compareValue = 0, frame = -1, freezeAtRightPos, freezeAtLeftPos;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class ScaleControl : MonoBehaviour
         freezeAtLeftPos = oldLeftPos.y - freezeAtLeft * unitDistance;
         compareValue = 0;
         navHandler = GameObject.FindGameObjectWithTag("NavmeshHandler");
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +51,11 @@ public class ScaleControl : MonoBehaviour
         // Move left and right side until correct position is found for 60/speed frames.
         if (frame * speed <= 60 && frame >= 0)
         {
+            if (!audio.isPlaying)
+            {
+                Debug.Log("Playing");
+                audio.Play();
+            }
             // position is calculated using Iris as a unit weight of 1, difference in weight * unitDistance
             left.transform.position = Vector3.Lerp(oldLeftPos, new Vector3(leftPos.x + unitDistance * axis.x * compareValue * leftMod, leftPos.y + unitDistance * axis.y * compareValue * leftMod, leftPos.z + unitDistance * axis.z * compareValue * leftMod), frame / 60f * speed);
             right.transform.position = Vector3.Lerp(oldRightPos, new Vector3(rightPos.x + unitDistance * axis.x * -compareValue * rightMod, rightPos.y + unitDistance * axis.y * -compareValue * rightMod, rightPos.z + unitDistance * axis.z * -compareValue * rightMod), frame / 60f * speed);
@@ -63,6 +71,8 @@ public class ScaleControl : MonoBehaviour
             {
                 //navHandler.GetComponent<NavMeshHandler>().BuildAllNavMesh();
             }
+            Debug.Log("Stopping");
+            audio.Stop();
             frame = -1;
         }
     }

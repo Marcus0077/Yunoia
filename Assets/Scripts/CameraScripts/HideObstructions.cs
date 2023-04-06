@@ -26,8 +26,11 @@ public class HideObstructions : MonoBehaviour
     public bool isClone;
     public bool allowCloneIn;
 
+    private Animator cameraAnimator;
+    public int thisRoom;
+
     // Called when Hide Obstruction triggers are initialised.
-    private void Awake()
+    private void Start()
     {
         isPlayer = false;
         isClone = false;
@@ -42,6 +45,16 @@ public class HideObstructions : MonoBehaviour
             {
                 Counterpart = counterpartObject.GetComponents<HideObstructions>()[1];
             }
+        }
+        
+        if (GameObject.FindObjectOfType<CinemachineStateDrivenCamera>().GetComponent<Animator>() != null)
+        {
+            cameraAnimator = GameObject.FindObjectOfType<CinemachineStateDrivenCamera>().GetComponent<Animator>();
+        }
+        
+        if (cameraAnimator.GetInteger("roomNum") == thisRoom && thisRoom != 0)
+        {
+            FullyHideWalls();
         }
     }
 

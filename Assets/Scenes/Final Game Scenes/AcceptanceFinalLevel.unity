@@ -15121,6 +15121,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!95 &538043081 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1499953888450495608, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
+  m_PrefabInstance: {fileID: 1541033230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &544204955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33849,6 +33854,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1804445680587551989, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: uiAnim
+      value: 
+      objectReference: {fileID: 538043081}
+    - target: {fileID: 1804445680587551989, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: UIWarning
+      value: 
+      objectReference: {fileID: 2096792899}
+    - target: {fileID: 1804445680587551989, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: uiAnimCover
+      value: 
+      objectReference: {fileID: 538043081}
     - target: {fileID: 1804445680587551994, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_Name
       value: Player Variant
@@ -35245,54 +35262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 0}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 0}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!20 &1130757543
 Camera:
   m_ObjectHideFlags: 0
@@ -51361,6 +51330,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 608014907887421526, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 1499953887592502197, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -98999,6 +98972,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2096792899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 608014907887421526, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
+  m_PrefabInstance: {fileID: 1541033230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2099030764
 Mesh:
   m_ObjectHideFlags: 0

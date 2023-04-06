@@ -46,6 +46,11 @@ public class ScaleControl : MonoBehaviour
         }
         if ((right.transform.position.y <= freezeAtRightPos && compareValue >= freezeAtRight) || (left.transform.position.y <= freezeAtLeftPos && compareValue <= -freezeAtLeft))//make it for every axis
         {
+            if (audio.isPlaying)
+            {
+                Debug.Log("Stopping");
+                audio.Stop();
+            }
             return;
         }
         // Move left and right side until correct position is found for 60/speed frames.

@@ -94,7 +94,8 @@ public class LimitedMovementCam : MonoBehaviour
 
         forceBallToPlayer = false;
         
-        camBallOffset = curCamera.transform.position - camFollowSphere.transform.position;
+        camBallOffset.y = curCamera.GetComponent<CinemachineVirtualCamera>()
+            .GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y;
     }
 
     // Takes a new player as a parameter and sets the current camera's follow target
@@ -120,6 +121,9 @@ public class LimitedMovementCam : MonoBehaviour
 
         // Get the confiner data of the new camera.
         GetCurrentConfinerData();
+        
+        camBallOffset.y = curCamera.GetComponent<CinemachineVirtualCamera>()
+            .GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y;
     }
 
     // Grab all needed information about the current camera's confiner
@@ -129,11 +133,11 @@ public class LimitedMovementCam : MonoBehaviour
     {
         curConfiner = curCamera.GetComponent<CinemachineConfiner>();
         
-        curConfinerScaleX = curConfiner.m_BoundingVolume.transform.lossyScale.x * .5f;
-        curConfinerPosX = (curConfiner.m_BoundingVolume.transform.position.x);
+        curConfinerScaleX = (curConfiner.m_BoundingVolume.transform.lossyScale.x * .5f);
+        curConfinerPosX = Mathf.Abs(curConfiner.m_BoundingVolume.transform.position.x);
         
         curConfinerScaleY = curConfiner.m_BoundingVolume.transform.lossyScale.y * .5f;
-        curConfinerPosY = (curConfiner.m_BoundingVolume.transform.position.y);
+        curConfinerPosY = Mathf.Abs(curConfiner.m_BoundingVolume.transform.position.y);
 
         leftXBound = (curConfinerPosX - curConfinerScaleX);
         rightXBound = (curConfinerPosX + curConfinerScaleX);
@@ -217,9 +221,8 @@ public class LimitedMovementCam : MonoBehaviour
 
                 isCamFollowingPlayer = true;
             }
-            
-            transform.position = Vector3.MoveTowards(transform.position, playerPos, 
-                returnSpeed * Time.deltaTime);
+
+            transform.position = playerPos;
         }
     }
 

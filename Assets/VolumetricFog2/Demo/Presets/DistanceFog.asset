@@ -28,7 +28,7 @@ MonoBehaviour:
   detailScale: 0.35
   detailStrength: 0.5
   detailOffset: -0.5
-  density: 0.14
+  density: 0.15
   shape: 0
   border: 0.061
   verticalOffset: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
   distanceFallOff: 1
   maxDistance: 10000
   maxDistanceFallOff: 0
-  terrainFit: 0
+  terrainFit: 1
   terrainFitResolution: 128
   terrainLayerMask:
     serializedVersion: 2
@@ -44,12 +44,12 @@ MonoBehaviour:
   terrainFogHeight: 25
   terrainFogMinAltitude: 0
   terrainFogMaxAltitude: 150
-  albedo: {r: 0.8901961, g: 0.8901961, b: 0.8901961, a: 1}
-  enableDepthGradient: 0
+  albedo: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+  enableDepthGradient: 1
   depthGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
     key2: {r: 1, g: 0.3726415, b: 0.3726415, a: 0}
     key3: {r: 1, g: 0.3726415, b: 0.3726415, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
+    ctime1: 32748
     ctime2: 65535
     ctime3: 65535
     ctime4: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  depthGradientMaxDistance: 500
+  depthGradientMaxDistance: 250
   enableHeightGradient: 0
   heightGradient:
     serializedVersion: 2
@@ -108,7 +108,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   brightness: 1
   deepObscurance: 1
-  specularColor: {r: 1, g: 1, b: 0.8, a: 1}
+  specularColor: {r: 0.7924528, g: 0.5346529, b: 0, a: 1}
   specularThreshold: 0.637
   specularIntensity: 0.428
   turbulence: 0.73

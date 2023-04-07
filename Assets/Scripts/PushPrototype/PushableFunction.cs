@@ -19,6 +19,8 @@ public class PushableFunction : ScriptableObject
     string animationName;
     [SerializeField]
     AudioClip sound;
+    [SerializeField]
+    GameObject instance;
 
     public float delay
     {
@@ -155,6 +157,10 @@ public class PushableFunction : ScriptableObject
             if (sound != null)
             {
                 AudioSource.PlayClipAtPoint(sound, pushedObj.transform.position, GameManager.Instance.GetFloat(Settings.SFX));
+            }
+            if(instance != null)
+            {
+                Instantiate(instance, pushedObj.transform.position,Quaternion.identity);
             }
             if (!animation)
             {

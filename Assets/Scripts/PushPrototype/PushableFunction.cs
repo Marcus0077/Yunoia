@@ -20,7 +20,7 @@ public class PushableFunction : ScriptableObject
     [SerializeField]
     AudioClip sound;
     [SerializeField]
-    GameObject instance;
+    GameObject instance, instanceLocation;
 
     public float delay
     {
@@ -160,7 +160,15 @@ public class PushableFunction : ScriptableObject
             }
             if(instance != null)
             {
-                Instantiate(instance, pushedObj.transform.position,Quaternion.identity);
+                if(instanceLocation != null)
+                {
+                    Instantiate(instance, instanceLocation.transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(instance, pushedObj.transform.position, Quaternion.identity);
+                }
+                
             }
             if (!animation)
             {

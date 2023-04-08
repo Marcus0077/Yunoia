@@ -20,7 +20,9 @@ public class PushableFunction : ScriptableObject
     [SerializeField]
     AudioClip sound;
     [SerializeField]
-    GameObject instance, instanceLocation;
+    GameObject instance;
+    [SerializeField]
+    string instanceLocationName;
 
     public float delay
     {
@@ -160,9 +162,9 @@ public class PushableFunction : ScriptableObject
             }
             if(instance != null)
             {
-                if(instanceLocation != null)
+                if(instanceLocationName != null)
                 {
-                    Instantiate(instance, instanceLocation.transform.position, Quaternion.identity);
+                    Instantiate(instance, pushedObj.transform.Find(instanceLocationName).transform.position, Quaternion.identity);
                 }
                 else
                 {

@@ -529,7 +529,7 @@ public class BasicMovement : MonoBehaviour, IAbility
     // Changes active camera depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (this.CompareTag("Player") || other.GetComponent<YeetTheClone>() == null)
+        if (this.CompareTag("Player") || (other.GetComponent<YeetTheClone>() == null && this.CompareTag("Clone")))
         {
             if (other.tag.ToString().Trim(other.tag.ToString()[other.tag.ToString().Length - 1]).CompareTo("Camera") ==
                 0)

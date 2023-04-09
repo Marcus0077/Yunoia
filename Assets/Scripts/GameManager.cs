@@ -96,16 +96,19 @@ public class GameManager : MonoBehaviour
     public void SetCheckpoint(int value, Vector3 pos)
     {
         DataManager.gameData.checkpointDatas[value].position = pos;
+        DataManager.WriteFile();
     }
 
     public void SetCheckpoint(Levels value, Vector3 pos)
     {
         DataManager.gameData.checkpointDatas[(int)value].position = pos;
+        DataManager.WriteFile();
     }
 
     public void SetCheckpoint(CheckpointData data)
     {
         DataManager.gameData.checkpointDatas[currentLevel] = data;
+        DataManager.WriteFile();
     }
 
     public CheckpointData GetCheckpoint()

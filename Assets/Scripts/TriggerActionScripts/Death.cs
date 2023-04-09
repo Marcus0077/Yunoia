@@ -39,7 +39,7 @@ public class Death : MonoBehaviour
     {
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
         {
-            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
         }
 
         yield return new WaitForSeconds(1.5f);

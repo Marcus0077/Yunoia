@@ -121,7 +121,6 @@ public class BasicMovement : MonoBehaviour, IAbility
             if (DataManager.gameData.checkpointed)
             {
                 curRoom = DataManager.gameData.checkpointDatas[GameManager.Instance.currentLevel].room;
-                //curRoom = DataManager.gameData.level;
             }
             else
             {
@@ -379,7 +378,7 @@ public class BasicMovement : MonoBehaviour, IAbility
         
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
         {
-            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
             yield return new WaitForSeconds(1.5f);
 
             winScreen.SetActive(true);
@@ -409,7 +408,7 @@ public class BasicMovement : MonoBehaviour, IAbility
         yield return new WaitForSeconds(1.5f);
         
         GameObject.FindObjectOfType<PauseMenu>().EnableInput();
-        GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent();
+        GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent(3f);
         
     }
     
@@ -529,24 +528,40 @@ public class BasicMovement : MonoBehaviour, IAbility
     // Changes active camera depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (this.CompareTag("Player") || (other.GetComponent<YeetTheClone>() == null && this.CompareTag("Clone")))
+        if (other.GetComponent<Teleport>() || other.GetComponent<TeleToBeaver>())
         {
-            if (other.tag.ToString().Trim(other.tag.ToString()[other.tag.ToString().Length - 1]).CompareTo("Camera") ==
-                0)
-            {
-                curRoom = other.tag.ToCharArray()[other.tag.ToCharArray().Length - 1] - 48;
-
-                limitedMovementCam.GetCurrentCameraData(curRoom);
-                limitedMovementCam.SetCurrentPlayer(this.gameObject);
-            }
-            else if (other.CompareTag("Camera10"))
-            {
-                curRoom = 10;
-
-                limitedMovementCam.GetCurrentCameraData(curRoom);
-                limitedMovementCam.SetCurrentPlayer(this.gameObject);
-            }
+            StartCoroutine(delayedSwitchCamera(other));
         }
+        else if (this.CompareTag("Player") || (other.GetComponent<YeetTheClone>() == null && this.CompareTag("Clone")))
+        {
+            switchCamera(other);
+        }
+    }
+
+    private void switchCamera(Collider other)
+    {
+        if (other.tag.ToString().Trim(other.tag.ToString()[other.tag.ToString().Length - 1]).CompareTo("Camera") ==
+            0)
+        {
+            curRoom = other.tag.ToCharArray()[other.tag.ToCharArray().Length - 1] - 48;
+
+            limitedMovementCam.GetCurrentCameraData(curRoom);
+            limitedMovementCam.SetCurrentPlayer(this.gameObject);
+        }
+        else if (other.CompareTag("Camera10"))
+        {
+            curRoom = 10;
+
+            limitedMovementCam.GetCurrentCameraData(curRoom);
+            limitedMovementCam.SetCurrentPlayer(this.gameObject);
+        }
+    }
+    
+    private IEnumerator delayedSwitchCamera(Collider other)
+    {
+        yield return new WaitForSeconds(1f);
+        
+        switchCamera(other);
     }
     
     // Determines if player is on the ground or not using (4) raycasts.

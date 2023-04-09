@@ -8,16 +8,16 @@ public class FadeBlack : MonoBehaviour
 {
     private void Awake()
     {
-        FadeToTransparent();
+        FadeToTransparent(3f);
     }
 
-     public void FadeToBlack()
+     public void FadeToBlack(float waitTime)
     {
-        LeanTween.color(GetComponent<RectTransform>(), Color.black, 1.5f).setEaseInOutQuint();
+        LeanTween.color(GetComponent<RectTransform>(), Color.black, waitTime).setEaseInOutQuint();
     }
     
-    public void FadeToTransparent()
+    public void FadeToTransparent(float waitTime)
     {
-        LeanTween.color(GetComponent<RectTransform>(), Color.clear, 3f);
+        LeanTween.color(GetComponent<RectTransform>(), Color.clear, waitTime);
     } 
 }

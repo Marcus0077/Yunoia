@@ -9,22 +9,37 @@ public class Teleport : MonoBehaviour
     public GameObject player, terrain, ravine;
 
     private GameManager gameManager;
+    private FadeBlack blackScreen;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        gameManager
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        blackScreen = FindObjectOfType<FadeBlack>();
     }
 
     void OnTriggerEnter (Collider collider)
     {
-        
+        StartCoroutine(FadeInOutBlack(1.5f));
     }
 
-    private IEnumerator FadeInOut()
+    public IEnumerator FadeInOutBlack(float waitTime)
     {
+        gameManager.DisableInput();
+
+        if (GameObject.FindGameObjectWithTag("Clone") != null)
+        {
+            GameObject clone = GameObject.FindGameObjectWithTag("Clone");
+            clone.GetComponent<ExitClone>().Timer += waitTime;
+        }
+            
+        blackScreen.FadeToBlack(waitTime);
+
+        yield return new WaitForSeconds(waitTime);
         
         player.transform.position = teleportTarget.transform.position;
+        
+        yield return new WaitForSeconds(waitTime);
 
         if (ravine != null && terrain != null)
         {
@@ -32,6 +47,8 @@ public class Teleport : MonoBehaviour
             terrain.SetActive(true);
         }
         
-        LeanTween.color(GetComponent<RectTransform>(), Color.clear, 3f);
+        blackScreen.FadeToTransparent(waitTime);
+
+        gameManager.EnableInput();
     }
 }

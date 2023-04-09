@@ -56,13 +56,13 @@ public class PlayVideo : MonoBehaviour
       if (GameObject.FindObjectOfType<FadeBlack>() != null && GameObject.FindObjectOfType<PauseMenu>() != null)
       {
           GameObject.FindObjectOfType<PauseMenu>().DisableInput();
-          GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+          GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
           MusicPersist.Instance.GetComponent<AudioSource>().Stop();
 
           yield return new WaitForSeconds(1.5f);
 
           Destroy(GameObject.FindGameObjectWithTag("UIIcons"));
-          GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent();
+          GameObject.FindObjectOfType<FadeBlack>().FadeToTransparent(3f);
           videoPlayer.SetActive(true);
           
           yield return new WaitForSeconds(3f);

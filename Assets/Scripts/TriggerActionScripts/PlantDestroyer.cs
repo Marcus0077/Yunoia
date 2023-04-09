@@ -122,7 +122,7 @@ public class PlantDestroyer : MonoBehaviour
 
     private IEnumerator LoadHub()
     {
-        GameObject.FindObjectOfType<FadeBlack>().FadeToBlack();
+        GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
         yield return new WaitForSeconds(1.25f);
         //GameManager.Instance.SetCheckpoint(Levels.HUB, new Vector3(0.92f, 47.07f, 19.93f));
         DataManager.gameData.checkpointed = false;

@@ -2,6 +2,9 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 // Save files for game data (not for settings)
 public class DataManager
@@ -28,11 +31,20 @@ public class DataManager
         string gameDataToJson = JsonUtility.ToJson(gameData);
         File.WriteAllText(saveFilePath, gameDataToJson);
     }
+
+    public static void DeleteFile()
+    {
+        File.Delete(saveFilePath);
+#if UNITY_EDITOR
+        AssetDatabase.Refresh();
+#endif
+    }
 }
 
 [System.Serializable]
 public class GameData
 {
+    public int level;
     public bool checkpointed = false;
     public CheckpointData[] checkpointDatas = new CheckpointData[System.Enum.GetValues(typeof(Levels)).Length];
     public bool[] levelCompletion = new bool[System.Enum.GetValues(typeof(Levels)).Length];

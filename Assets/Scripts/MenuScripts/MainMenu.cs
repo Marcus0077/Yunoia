@@ -14,15 +14,26 @@ public class MainMenu : MonoBehaviour
     // Sets prototype scene to active and set time scale to normal when play button is pressed.
     public void PlayGame()
     {
-        DataManager.WriteFile();
-        GameManager.Instance.SetLevel(Levels.DEN);
-        GameManager.Instance.SetCheckpoint(Levels.DEN, new Vector3(-0.2f, 45f, 37.3f));
+        if(PlayerPrefs.GetFloat(GameManager.Firstplay) == 1)
+        {
+            Debug.Log("a");
+            DataManager.WriteFile();
+            GameManager.Instance.SetLevel(Levels.DEN);
+            GameManager.Instance.SetCheckpoint(Levels.DEN, new Vector3(-20.25f, 46.8f, 57.5f));
 
-        //DataManager.gameData.level = 1;
-        //DataManager.gameData.position = new Vector3(-0.2f, 45f, 37.3f);
+            //DataManager.gameData.level = 1;
+            //DataManager.gameData.position = new Vector3(-0.2f, 45f, 37.3f);
+
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("VSCutsceneIntro");
+            PlayerPrefs.SetFloat(GameManager.Firstplay, -1);
+        }
+        else
+        {
+            GameManager.Instance.SetLevel(DataManager.gameData.level);
+            SceneManager.LoadScene(GameManager.Instance.levelNames[GameManager.Instance.currentLevel]);
+        }
         
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("VSCutsceneIntro");
     }
     
     // Exits application when quit button is pressed.

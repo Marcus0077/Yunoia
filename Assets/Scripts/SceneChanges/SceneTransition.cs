@@ -36,8 +36,8 @@ public class SceneTransition : MonoBehaviour
 
     public void ChangeVariableScene(string sceneToTransfer)
     {
-        DataManager.gameData.checkpointed = false;
-        GameManager.Instance.SetLevel(Levels.NA);
+        //DataManager.gameData.checkpointed = false;
+        //GameManager.Instance.SetLevel(Levels.NA);
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneToTransfer);
     }

@@ -13,19 +13,19 @@ public class GameManager : MonoBehaviour
 
 
     // Strings for settings and stage names
-    private static readonly string Firstplay = "First Play";
-    private static readonly string BGMPref = "BGM Pref";
-    private static readonly string SFXPref = "SFX Pref";
-    private static readonly string MasPref = "Mas Pref";
-    private static readonly string Sensitivity = "Sensitivity";
-    private static readonly string Rumble = "Rumble";
-    private static readonly string Depr = "Depression";
-    private static readonly string Barg = "Bargaining";
-    private static readonly string Anger = "Anger";
-    private static readonly string Denial = "Denial";
-    private static readonly string Hub = "Hub";
-    private static readonly string Accept = "Acceptance";
-    private static readonly string TextColor = "TextColor";
+    public static readonly string Firstplay = "First Play";
+    public static readonly string BGMPref = "BGM Pref";
+    public static readonly string SFXPref = "SFX Pref";
+    public static readonly string MasPref = "Mas Pref";
+    public static readonly string Sensitivity = "Sensitivity";
+    public static readonly string Rumble = "Rumble";
+    public static readonly string Depr = "DepressionFinal";
+    public static readonly string Barg = "BargainingFinal";
+    public static readonly string Anger = "AngerFinal";
+    public static readonly string Denial = "DenialFinal";
+    public static readonly string Hub = "HubFinal";
+    public static readonly string Accept = "AcceptanceFinalLevel";
+    public static readonly string TextColor = "TextColor";
 
     public string[] statics;
     public string[] levelNames;
@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
         if (currentLevel != value)
             deathIndex = 0;
         currentLevel = value;
+        DataManager.gameData.level = value;
+        DataManager.WriteFile();
     }
 
     public void SetLevel(Levels value)
@@ -87,6 +89,8 @@ public class GameManager : MonoBehaviour
         if (currentLevel != (int)value)
             deathIndex = 0;
         currentLevel = (int)value;
+        DataManager.gameData.level = (int)value;
+        DataManager.WriteFile();
     }
 
     public void SetCheckpoint(int value, Vector3 pos)
@@ -156,9 +160,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DataManager.ReadFile();
-            DataManager.gameData.checkpointed = false;
             statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble };
-            levelNames = new string[] { Depr, Barg, Anger, Denial, Accept };
+            levelNames = new string[] { "NA", Denial, Hub, Depr, Barg, Anger, Accept };
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
             if (player == null)
                 player = GameObject.FindGameObjectWithTag("Player");
@@ -171,6 +174,7 @@ public class GameManager : MonoBehaviour
             // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
             if (PlayerPrefs.GetFloat(Firstplay) == 0)
             {
+                DataManager.gameData.checkpointed = false;
                 textColor = false;
                 PlayerPrefs.SetFloat(Sensitivity, .5f);
                 PlayerPrefs.SetFloat(MasPref, .5f);
@@ -185,7 +189,7 @@ public class GameManager : MonoBehaviour
                 settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
                 settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
                 settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
-                PlayerPrefs.SetFloat(Firstplay, -1);
+                PlayerPrefs.SetFloat(Firstplay, 1);
                 //PlayerPrefs.SetInt(Depr, 0);
                 //PlayerPrefs.SetInt(Barg, 0);
                 //PlayerPrefs.SetInt(Anger, 0);
@@ -219,8 +223,11 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         PlayerPrefs.DeleteAll();
-        DataManager.gameData = new GameData();//remove this to make it only a new settings button?
+        //DataManager.gameData = new GameData();//remove this to make it only a new settings button?
+        DataManager.DeleteFile();
+        DataManager.gameData = new GameData();
         textColor = false;
+        PlayerPrefs.SetFloat(Firstplay, 1);
         PlayerPrefs.SetFloat(Sensitivity, .5f);
         PlayerPrefs.SetFloat(MasPref, .5f);
         PlayerPrefs.SetFloat(BGMPref, 1);
@@ -237,7 +244,6 @@ public class GameManager : MonoBehaviour
         settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
         settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
         settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
-        PlayerPrefs.SetFloat(Firstplay, -1);
         //PlayerPrefs.SetInt(Depr, 0);
         //PlayerPrefs.SetInt(Barg, 0);
         //PlayerPrefs.SetInt(Anger, 0);

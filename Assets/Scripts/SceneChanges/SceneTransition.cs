@@ -49,6 +49,7 @@ public class SceneTransition : MonoBehaviour
         {
             var checkpointData = new CheckpointData();
             checkpointData.room = 1;
+            
             if (sceneToTransfer == "AngerFinal")
             {
                 GameManager.Instance.SetLevel(Levels.ANG);

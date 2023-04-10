@@ -29,15 +29,21 @@ public class PlantDestroyer : MonoBehaviour
 
     private Animator pPlateAnimator;
 
+    private string prefName;
+
     private void Awake()
     {
         pPlateAnimator = GetComponent<Animator>();
-        gameManager = FindObjectOfType<GameManager>();
-        
+        gameManager = GameManager.Instance;
+        prefName = gameObject.name + gameManager.currentLevel + GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum");
         numCrystals = coCrystals.Length + 1;
-
         thisCrystalComplete = 0;
         crystalsComplete = 0;
+        if (PlayerPrefs.GetFloat(prefName) == 1)
+        {
+            hasPuzzleCam = false;
+            CompletePlate();
+        }
     }
     private IEnumerator CompletePuzzle()
     {
@@ -80,7 +86,7 @@ public class PlantDestroyer : MonoBehaviour
         {
             Debug.Log("FacelessEntered");
             this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
-
+            PlayerPrefs.SetFloat(prefName, 1);
             if (pPlateAnimator != null)
             {
                 pPlateAnimator.SetBool("plateDown", true);
@@ -116,6 +122,44 @@ public class PlantDestroyer : MonoBehaviour
                 {
                     StartCoroutine(CompletePuzzle());
                 }
+            }
+        }
+    }
+
+    private void CompletePlate()
+    {
+        this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
+
+        if (pPlateAnimator != null)
+        {
+            pPlateAnimator.SetBool("plateDown", true);
+        }
+
+        if (!isMultipleCrystals)
+        {
+            Debug.Log("Puzzle Routine Plays.");
+            StartCoroutine(CompletePuzzle());
+        }
+        else if (thisCrystalComplete == 0)
+        {
+            thisCrystalComplete = 1;
+            crystalsComplete = 1;
+
+            foreach (var coCrystal in coCrystals)
+            {
+                if (coCrystal.GetComponent<PlantDestroyer>().thisCrystalComplete == 1)
+                {
+                    crystalsComplete =
+                        crystalsComplete + coCrystal.GetComponent<PlantDestroyer>().thisCrystalComplete;
+                    //audioSource.PlayOneShot(purifierSound);
+                }
+            }
+
+            Debug.Log(crystalsComplete);
+
+            if (crystalsComplete == numCrystals)
+            {
+                StartCoroutine(CompletePuzzle());
             }
         }
     }

@@ -10,6 +10,7 @@ public class PlantDestroyer : MonoBehaviour
 {
     public GameObject[] plantToDestroy;
     public GameObject[] coCrystals;
+    public GameObject[] facelessList;
 
     public bool isMultipleCrystals;
     public int numCrystals;
@@ -39,7 +40,7 @@ public class PlantDestroyer : MonoBehaviour
         numCrystals = coCrystals.Length + 1;
         thisCrystalComplete = 0;
         crystalsComplete = 0;
-        if (PlayerPrefs.GetFloat(prefName) == 1)
+        if (PlayerPrefs.GetFloat(prefName) >= 1)
         {
             hasPuzzleCam = false;
             CompletePlate();
@@ -85,8 +86,15 @@ public class PlantDestroyer : MonoBehaviour
         if (other.CompareTag("Faceless"))
         {
             Debug.Log("FacelessEntered");
+            for (int i = 0; i < facelessList.Length; i++)
+            {
+                if(facelessList[i] == other.gameObject)
+                {
+                    Debug.Log("found");
+                    PlayerPrefs.SetFloat(prefName, 1 + i);
+                }
+            }
             this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
-            PlayerPrefs.SetFloat(prefName, 1);
             if (pPlateAnimator != null)
             {
                 pPlateAnimator.SetBool("plateDown", true);
@@ -129,7 +137,7 @@ public class PlantDestroyer : MonoBehaviour
     private void CompletePlate()
     {
         this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
-
+        facelessList[(int)PlayerPrefs.GetFloat(prefName) - 1].SetActive(false);
         if (pPlateAnimator != null)
         {
             pPlateAnimator.SetBool("plateDown", true);

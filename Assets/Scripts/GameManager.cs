@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
             statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble };
             levelNames = new string[] { "NA", Denial, Hub, Depr, Barg, Anger, Accept };
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
+            DataManager.gameData.checkpointed = false;
             if (player == null)
                 player = GameObject.FindGameObjectWithTag("Player");
             if (FindObjectOfType<LookAtCam>() != null)

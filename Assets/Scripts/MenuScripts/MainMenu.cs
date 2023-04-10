@@ -31,6 +31,7 @@ public class MainMenu : MonoBehaviour
         else
         {
             GameManager.Instance.SetLevel(DataManager.gameData.level);
+            DataManager.gameData.checkpointed = true;
             SceneManager.LoadScene(GameManager.Instance.levelNames[GameManager.Instance.currentLevel]);
         }
         

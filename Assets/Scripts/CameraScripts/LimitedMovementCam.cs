@@ -60,10 +60,14 @@ public class LimitedMovementCam : MonoBehaviour
     public bool canUseFreeCam;
 
     // Get references and initialize variables when the Camera is initialised.
-    void Start()
+
+    private void Awake()
     {
         playerControls = new PlayerControls();
-        
+    }
+
+    void Start()
+    {
         EnablePlayerControls();
 
         Player = GameObject.FindWithTag("Player");

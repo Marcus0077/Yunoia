@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public static readonly string Hub = "HubFinal";
     public static readonly string Accept = "AcceptanceFinalLevel";
     public static readonly string TextColor = "TextColor";
+    public static readonly string ControlScheme = "ControlScheme";
 
     public string[] statics;
     public string[] levelNames;
@@ -163,7 +164,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DataManager.ReadFile();
-            statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble };
+            statics = new string[] { Firstplay, BGMPref, SFXPref, MasPref, Sensitivity, TextColor, Rumble, ControlScheme };
             levelNames = new string[] { "NA", Denial, Hub, Depr, Barg, Anger, Accept };
             settings = new float[System.Enum.GetValues(typeof(Settings)).Length];
             DataManager.gameData.checkpointed = false;
@@ -186,6 +187,7 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetFloat(SFXPref, 1);
                 PlayerPrefs.SetFloat(TextColor, -1);
                 PlayerPrefs.SetFloat(Rumble, 1);
+                PlayerPrefs.SetFloat(ControlScheme, 0);
                 PlayerPrefs.SetString("Rebinds", "");
                 settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
                 settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
@@ -193,6 +195,8 @@ public class GameManager : MonoBehaviour
                 settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
                 settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
                 settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
+                settings[(int)Settings.CTRL] = PlayerPrefs.GetFloat(ControlScheme);
+                SelectControlScheme(settings[(int)Settings.CTRL]);
                 PlayerPrefs.SetFloat(Firstplay, 1);
                 //PlayerPrefs.SetInt(Depr, 0);
                 //PlayerPrefs.SetInt(Barg, 0);
@@ -214,6 +218,8 @@ public class GameManager : MonoBehaviour
                     textColor = true;
                 }
                 settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
+                settings[(int)Settings.CTRL] = PlayerPrefs.GetFloat(ControlScheme);
+                SelectControlScheme(settings[(int)Settings.CTRL]);
             }
         }
         else
@@ -238,6 +244,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat(SFXPref, 1);
         PlayerPrefs.SetFloat(TextColor, -1);
         PlayerPrefs.SetFloat(Rumble, 1);
+        PlayerPrefs.SetFloat(ControlScheme, 0);
         PlayerPrefs.SetString("Rebinds", "");
         GetAllInputs();
         //GameManager.Instance.GetComponent<PlayerInput>().actions.RemoveAllBindingOverrides();
@@ -248,6 +255,8 @@ public class GameManager : MonoBehaviour
         settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
         settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
         settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
+        settings[(int)Settings.CTRL] = PlayerPrefs.GetFloat(ControlScheme);
+        SelectControlScheme(settings[(int)Settings.CTRL]);
         //PlayerPrefs.SetInt(Depr, 0);
         //PlayerPrefs.SetInt(Barg, 0);
         //PlayerPrefs.SetInt(Anger, 0);
@@ -268,6 +277,10 @@ public class GameManager : MonoBehaviour
     public void SetFloat(Settings index, float value)
     {
         settings[(int)index] = value;
+        if(index == Settings.CTRL)
+        {
+            SelectControlScheme(value);
+        }
         PlayerPrefs.SetFloat(statics[(int)index], value);
     }
 
@@ -381,6 +394,18 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.controlScheme = value;
     }
 
+    public static void SelectControlScheme(float value)
+    {
+        if(value == 0)
+        {
+            GameManager.Instance.controlScheme = "Keyboard&Mouse";
+        }
+        else
+        {
+            GameManager.Instance.controlScheme = "Controller";
+        }
+    }
+
     public void ShowPuzzleWrapper(int puzzleID, float waitTime)
     {
         StartCoroutine(ShowPuzzle(puzzleID, waitTime));
@@ -475,7 +500,8 @@ public enum Settings
     MAS = 3,
     SENSE = 4,
     TXTCLR = 5,
-    RUMB = 6
+    RUMB = 6,
+    CTRL = 7
 }
 
 public enum Levels

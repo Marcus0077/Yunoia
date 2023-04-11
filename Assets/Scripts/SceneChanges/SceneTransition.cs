@@ -101,7 +101,7 @@ public class SceneTransition : MonoBehaviour
             if(sceneToTransfer == "HubFinal")
             {
                 GameManager.Instance.SetLevel(Levels.HUB);
-                checkpointData.position = new Vector3(2.3f, 42.4f, 16.3f);
+                checkpointData.position = new Vector3(3.218f, 43.83f, 11.162779f);
                 //DataManager.gameData.position.Set(2.3f, 42.4f, 16.3f);
                 GameManager.Instance.CompleteLevel(level);
 

@@ -138,10 +138,10 @@ public class LimitedMovementCam : MonoBehaviour
         curConfiner = curCamera.GetComponent<CinemachineConfiner>();
         
         curConfinerScaleX = (curConfiner.m_BoundingVolume.transform.lossyScale.x * .5f);
-        curConfinerPosX = Mathf.Abs(curConfiner.m_BoundingVolume.transform.position.x);
+        curConfinerPosX = curConfiner.m_BoundingVolume.transform.position.x;
         
         curConfinerScaleY = curConfiner.m_BoundingVolume.transform.lossyScale.y * .5f;
-        curConfinerPosY = Mathf.Abs(curConfiner.m_BoundingVolume.transform.position.y);
+        curConfinerPosY = curConfiner.m_BoundingVolume.transform.position.y;
 
         leftXBound = (curConfinerPosX - curConfinerScaleX);
         rightXBound = (curConfinerPosX + curConfinerScaleX);

@@ -37,13 +37,14 @@ public class AngerMooseRun : MonoBehaviour
         
         gameManager.DisableInput();
         
-        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 8f, 18);
+        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 14f, 18);
         VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 30;
         
         yield return new WaitForSeconds(4f);
         
-        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 0, 0);
+        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 3.5f, 0);
         VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 12;
+        FindObjectOfType<LimitedMovementCam>().GetCurrentCameraData(1);
             
         gameManager.EnableInput();
             

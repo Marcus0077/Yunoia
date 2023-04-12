@@ -27,6 +27,7 @@ Material:
   - _NORMALMAP
   - _OUTLINE
   - _RIMLIGHTING_ON
+  - _SPECGLOSSMAP
   m_InvalidKeywords:
   - _METALLICGLOSSMAP
   - _METALLICSPECGLOSSMAP
@@ -109,7 +110,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c07309739cb70d64b81440bf8e70351f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularClipMask:
@@ -192,7 +193,7 @@ Material:
     - _RimPower: 0.01
     - _Shininess: 0
     - _SizeFalloff: 0
-    - _Smoothness: 1
+    - _Smoothness: 0.5
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SpecClipMaskScale: 1
@@ -200,7 +201,7 @@ Material:
     - _SpecSource: 0
     - _SpecularClipStrength: 0
     - _SpecularFalloff: 0.5
-    - _SpecularHighlights: 1
+    - _SpecularHighlights: 0
     - _SpecularSize: 0.25
     - _SpherizeNormalEnabled: 0
     - _SrcBlend: 1
@@ -225,6 +226,6 @@ Material:
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

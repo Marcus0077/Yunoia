@@ -3798,43 +3798,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3eb9bf0a4c0c5564cb2fd587b0eb43d7, type: 3}
   m_PrefabInstance: {fileID: 382737604}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &392033032
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &394618947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4139,7 +4102,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78fb4c786a38eda4b907dc7515c7e802, type: 2}
+  - {fileID: 2100000, guid: 4ac78a5bd8c225542b6aa0c814951710, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7086,6 +7049,43 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!84 &713646384
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &722937159
 GameObject:
   m_ObjectHideFlags: 0
@@ -12157,6 +12157,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 69920492175267464, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8396b2223bd1e2849b15e4944c85b4c8, type: 2}
+    - target: {fileID: 150495873403600721, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d322e9fa0c01f54cb78de162318247f, type: 2}
+    - target: {fileID: 529432470377137719, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1904889fa5e4d77478ccb70b141053cf, type: 2}
     - target: {fileID: 1804445680587551984, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -12221,6 +12233,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2825781747798587960, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d322e9fa0c01f54cb78de162318247f, type: 2}
+    - target: {fileID: 4425996186452142983, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2b216fcab87b204b83aea83db3b7df8, type: 2}
+    - target: {fileID: 5957268089055659040, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78d9eae71c46ace4699095fcb1a64a3e, type: 2}
+    - target: {fileID: 6422389790803562305, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e0be7bf25c8c7434eb69eea9066b8397, type: 2}
+    - target: {fileID: 7129473879216646860, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb2f42ee9a95b7a469e09eb4cb709c28, type: 2}
+    - target: {fileID: 7825468458231192358, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d322e9fa0c01f54cb78de162318247f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12acf3e51f82d24aa81ad44fe898f96, type: 3}
 --- !u!1001 &1201094401
@@ -15366,7 +15402,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 392033032}
+        m_Texture: {fileID: 713646384}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -15390,7 +15426,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.53160375, g: 0.53160375, b: 0.53160375, a: 0}
     - _DetailData: {r: 0.5, g: -0.5, b: 0.018516805, a: 1}
-    - _DetailWindDirection: {r: 0.07138796, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 10.255949, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: 10, b: 0.000001, a: 0.00014048303}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -15400,7 +15436,7 @@ Material:
     - _RayMarchSettings: {r: 6, g: 0.01, b: 0.5, a: 0.1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0.3213938, g: 0.76604444, b: -0.5566705, a: 0}
-    - _WindDirection: {r: 0.07138796, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 10.255949, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1001 &1528607415
 PrefabInstance:

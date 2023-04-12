@@ -24,6 +24,7 @@ public class PressurePlate : MonoBehaviour
     public int puzzleNum;
     
     private Animator pPlateAnimator;
+    public Animator doorAnimator;
 
     // Get references and initialize variables when pressure plates spawn.
     private void Awake()
@@ -31,6 +32,7 @@ public class PressurePlate : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         pPlateAnimator = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
+        doorAnimator = Blocker.GetComponent<Animator>();
         
         
         isPlayer = false;
@@ -115,16 +117,30 @@ public class PressurePlate : MonoBehaviour
     // Removes blocker when pressure plate is activated.
     public void HideWall()
     {
-        Blocker.GetComponent<Renderer>().enabled = false;
-        Blocker.GetComponent<Collider>().enabled = false;
+        if (doorAnimator != null)
+        {
+            doorAnimator.SetBool("DoorOpen", true);
+        }
+        else
+        {
+            Blocker.GetComponent<Renderer>().enabled = false;
+            Blocker.GetComponent<Collider>().enabled = false;
+        }
     }
     
     // Adds blocker back when pressure plate is deactivated.
     public void AppearWall()
     {
-        Blocker.GetComponent<Renderer>().enabled = true;
-        Blocker.GetComponent<Collider>().enabled = true;
-        
+        if (doorAnimator != null)
+        {
+            doorAnimator.SetBool("DoorOpen", false);
+        }
+        else
+        {
+            Blocker.GetComponent<Renderer>().enabled = true;
+            Blocker.GetComponent<Collider>().enabled = true;
+        }
+
         pPlateAnimator.SetBool("plateDown", false);
     }
 }

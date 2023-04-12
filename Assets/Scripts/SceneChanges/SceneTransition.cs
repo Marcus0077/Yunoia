@@ -11,15 +11,18 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     Levels level;
 
+    private FadeBlack fadeBlack;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        fadeBlack = FindObjectOfType<FadeBlack>();
     }
 
     public void RestartScene()
     {
         Time.timeScale = 1;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -31,7 +34,8 @@ public class SceneTransition : MonoBehaviour
             GameManager.Instance.SetLevel(level);
         }
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneToTransfer);
+        
+        StartCoroutine(FadeInOutBlack(1.5f));
     }
 
     public void ChangeVariableScene(string sceneToTransfer)
@@ -39,7 +43,8 @@ public class SceneTransition : MonoBehaviour
         //DataManager.gameData.checkpointed = false;
         //GameManager.Instance.SetLevel(Levels.NA);
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneToTransfer);
+
+        FadeInOutBlackVariable(1.5f, sceneToTransfer);
     }
 
     void OnTriggerEnter(Collider other)
@@ -127,9 +132,33 @@ public class SceneTransition : MonoBehaviour
 
             GameManager.Instance.SetCheckpoint(checkpointData);
             DataManager.gameData.checkpointed = false;
-            SceneManager.LoadScene(sceneToTransfer);
+
+
+            StartCoroutine(FadeInOutBlack(1.5f));
         }
 
+    }
+    
+    public IEnumerator FadeInOutBlack(float waitTime)
+    {
+        GameManager.instance.DisableInput();
+            
+        fadeBlack.FadeToBlack(waitTime);
+
+        yield return new WaitForSeconds(waitTime);
+        
+        SceneManager.LoadScene(sceneToTransfer);
+    }
+    
+    public IEnumerator FadeInOutBlackVariable(float waitTime, string sceneToTransfer)
+    {
+        GameManager.instance.DisableInput();
+            
+        fadeBlack.FadeToBlack(waitTime);
+
+        yield return new WaitForSeconds(waitTime);
+        
+        SceneManager.LoadScene(sceneToTransfer);
     }
 
     // Update is called once per frame

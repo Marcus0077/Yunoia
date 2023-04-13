@@ -32,8 +32,11 @@ public class PressurePlate : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         pPlateAnimator = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
-        doorAnimator = Blocker.GetComponent<Animator>();
-        
+
+        if (Blocker != null)
+        {
+            doorAnimator = Blocker.GetComponent<Animator>();
+        }
         
         isPlayer = false;
         isClone = false;

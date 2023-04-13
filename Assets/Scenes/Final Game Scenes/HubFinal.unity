@@ -3409,7 +3409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToTransfer: BargainingFinal
-  level: 4
+  level: 2
 --- !u!4 &279115602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3828696166651947548, guid: bb300743126827e4d931b0020bd4c13a, type: 3}
@@ -4481,43 +4481,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6074333803418105375, guid: 4a045407cc352884d8b7385aae4a5281, type: 3}
---- !u!84 &451769114
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &460017431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8681044365120164738, guid: c04a8e57ed347d247878fd63f33c2b7a, type: 3}
@@ -4778,7 +4741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToTransfer: AngerFinal
-  level: 5
+  level: 2
 --- !u!4 &497048005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43c070062860e884dbc867ac8327bc63, type: 3}
@@ -16263,7 +16226,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 451769114}
+        m_Texture: {fileID: 1613160108}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -16287,7 +16250,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.53160375, g: 0.53160375, b: 0.53160375, a: 0}
     - _DetailData: {r: 0.5, g: -0.5, b: 0.018516805, a: 1}
-    - _DetailWindDirection: {r: 0.07938845, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.8159935, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: 10, b: 0.000001, a: 0.00014048303}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -16297,7 +16260,7 @@ Material:
     - _RayMarchSettings: {r: 6, g: 0.01, b: 0.5, a: 0.1}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0.3213938, g: 0.76604444, b: -0.5566705, a: 0}
-    - _WindDirection: {r: 0.07938845, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.8159935, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1001 &1528607415
 PrefabInstance:
@@ -16729,6 +16692,43 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3892825576631971549, guid: a9f9844c92a7171499e280251e67d767, type: 3}
+--- !u!84 &1613160108
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1618119187
 GameObject:
   m_ObjectHideFlags: 0
@@ -18253,7 +18253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToTransfer: DepressionFinal
-  level: 3
+  level: 2
 --- !u!1001 &1734513400
 PrefabInstance:
   m_ObjectHideFlags: 0

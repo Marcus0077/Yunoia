@@ -15,7 +15,7 @@ public class Grapple : MonoBehaviour, IAbility
     float horizSpeed = 10.0f;
     float recoveryHorizSpeed = 10.0f;
 
-    float yankSpeedStrong = 3.0f;
+    float yankSpeedStrong = 6.0f;
     [SerializeField] float yankSpeedWeak = 0.7f;
     float stopDistanceClose = 2.5f;
     public float stopDistanceFar;
@@ -44,7 +44,7 @@ public class Grapple : MonoBehaviour, IAbility
     Hook hook;
     float changePerSecond;
     float grappleCooldown = 0.1f;
-    float maxVelocity = 19.0f;
+    float maxVelocity = 30.0f;
     float sqrMaxVelocity;
 
     // Conditions for grapple movement

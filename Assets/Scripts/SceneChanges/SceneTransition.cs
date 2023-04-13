@@ -67,7 +67,7 @@ public class SceneTransition : MonoBehaviour
             if (sceneToTransfer == "DepressionFinal")
             {
                 GameManager.Instance.SetLevel(Levels.DEP);
-                checkpointData.position = new Vector3(460.67f, 252.07f, 114.31f);
+                checkpointData.position = new Vector3(467.9f, 154.1f, 114.1f);
                 //DataManager.gameData.position.Set(460.67f, 252.07f, 114.31f);
 
                 sceneToTransfer = "DepressionIntro";

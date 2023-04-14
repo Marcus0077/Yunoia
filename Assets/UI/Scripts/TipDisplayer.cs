@@ -13,6 +13,8 @@ public class TipDisplayer : MonoBehaviour
     public InputActionAsset controls;
     public InputAction interact;
     public bool isOpen, closing;
+    public HintTrigger trigger;
+    public HintManager hm;
 
     void Awake()
     {
@@ -31,6 +33,7 @@ public class TipDisplayer : MonoBehaviour
             prompt.SetActive(true);
             player = other.gameObject;
             interact.performed += ToggleMessage;
+            trigger.DisplayHint();
         }
     }
 
@@ -55,12 +58,18 @@ public class TipDisplayer : MonoBehaviour
             message.SetActive(true);
             tc.OnEnable();
             isOpen = true;
+            trigger.DisplayHint();
         }
         else if(!closing)
         {
-            prompt.SetActive(true);
-            closing = true;
-            tc.CloseDialog();
+            hm.NextHint();
+
+            if(hm.NoHints == true)
+            {
+                closing = true;
+                tc.CloseDialog();
+                prompt.SetActive(true);
+            }
         }
     }
 

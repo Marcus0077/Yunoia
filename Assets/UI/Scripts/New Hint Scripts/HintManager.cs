@@ -7,7 +7,7 @@ using TMPro;
 public class HintManager : MonoBehaviour
 {
     public TextMeshProUGUI hintText;
-    public RectTransform bgbox;
+    public bool NoHints = false;
 
     Hint[] currentHint;
     int activeMessage = 0;
@@ -25,6 +25,7 @@ public class HintManager : MonoBehaviour
     {
         Hint hintToDisplay = currentHint[activeMessage];
         hintText.text = hintToDisplay.hint;
+        NoHints = false;
     }
 
     public void NextHint()
@@ -37,6 +38,12 @@ public class HintManager : MonoBehaviour
         else
         {
             Debug.Log("No More Hints.");
+            CloseHint();
         }
+    }
+
+    public void CloseHint()
+    {
+        NoHints = true;
     }
 }

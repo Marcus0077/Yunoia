@@ -8,11 +8,11 @@ public class MusicPersist : MonoBehaviour
 {
     string curr;
     public static MusicPersist instance;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     [SerializeField]
-    SceneMusic<string, AudioClip>[] music;
-    bool stop;
-    float oldVol;
+    public SceneMusic<string, AudioClip>[] music;
+    public bool stop, executeOnce;
+    public float oldVol;
 
     public static MusicPersist Instance
     {
@@ -36,13 +36,14 @@ public class MusicPersist : MonoBehaviour
         }
         else
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             Destroy(gameObject);
         }
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
         audioSource = GetComponent<AudioSource>();
     }
 
-    void OnEnabled()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -54,7 +55,7 @@ public class MusicPersist : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //GetMusic(scene.name);
+        GetMusic(scene.name);
     }
 
     void GetMusic(string key)
@@ -62,19 +63,28 @@ public class MusicPersist : MonoBehaviour
         List<AudioClip> clips = (from sceneMusic in music where sceneMusic.SceneName == key select sceneMusic.BGM).ToList();
         if (clips.Count > 0)
         {
-            if(audioSource.clip != null)
+            if(audioSource.clip != null && clips[0] != null)
             {
-                if(audioSource.clip.name == clips[0].name)
+                if (audioSource.clip.name == clips[0].name)
                 {
+                    stop = false;
                     return;
                 }
             }
+            if(clips[0] == null)
+            {
+                audioSource.clip = null;
+                stop = true;
+                return;
+            }
             audioSource.clip = clips[0];
             audioSource.Play();
+            stop = false;
         }
         else
         {
             //oldVol = audioSource.volume;
+            audioSource.clip = null;
             stop = true;
             //audioSource.clip = null;
         }
@@ -90,6 +100,7 @@ public class MusicPersist : MonoBehaviour
                 audioSource.Stop();
                 audioSource.volume = oldVol;
                 stop = false;
+                Debug.Log("Stopped");
             }
             audioSource.volume *= 0.95f;
         }

@@ -179,31 +179,12 @@ public class GameManager : MonoBehaviour
             // Set variables ready for a new game (create a button that sets Firstplay to 0 for new game?)
             if (PlayerPrefs.GetFloat(Firstplay) == 0)
             {
-                DataManager.gameData.checkpointed = false;
-                textColor = false;
-                PlayerPrefs.SetFloat(Sensitivity, .5f);
-                PlayerPrefs.SetFloat(MasPref, .5f);
-                PlayerPrefs.SetFloat(BGMPref, 1);
-                PlayerPrefs.SetFloat(SFXPref, 1);
-                PlayerPrefs.SetFloat(TextColor, -1);
-                PlayerPrefs.SetFloat(Rumble, 1);
-                PlayerPrefs.SetFloat(ControlScheme, 0);
-                PlayerPrefs.SetString("Rebinds", "");
-                settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
-                settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
-                settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
-                settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
-                settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
-                settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
-                settings[(int)Settings.CTRL] = PlayerPrefs.GetFloat(ControlScheme);
-                SelectControlScheme(settings[(int)Settings.CTRL]);
-                PlayerPrefs.SetFloat(Firstplay, 1);
-                //PlayerPrefs.SetInt(Depr, 0);
-                //PlayerPrefs.SetInt(Barg, 0);
-                //PlayerPrefs.SetInt(Anger, 0);
+                ResetSettings();
+                NewGame();
             }
             else
             {
+                settings[(int)Settings.FIRSTPLAY] = PlayerPrefs.GetFloat(Firstplay);
                 settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
                 settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
                 settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
@@ -230,36 +211,28 @@ public class GameManager : MonoBehaviour
         isPuzzleCamOn = false;
     }
 
-    public void NewGame()
+    public void ResetSettings()
     {
+        var tempFirstPlay = GetFloat(Settings.FIRSTPLAY);
         PlayerPrefs.DeleteAll();
-        //DataManager.gameData = new GameData();//remove this to make it only a new settings button?
-        DataManager.DeleteFile();
-        DataManager.gameData = new GameData();
         textColor = false;
-        PlayerPrefs.SetFloat(Firstplay, 1);
-        PlayerPrefs.SetFloat(Sensitivity, .5f);
-        PlayerPrefs.SetFloat(MasPref, .5f);
-        PlayerPrefs.SetFloat(BGMPref, 1);
-        PlayerPrefs.SetFloat(SFXPref, 1);
-        PlayerPrefs.SetFloat(TextColor, -1);
-        PlayerPrefs.SetFloat(Rumble, 1);
-        PlayerPrefs.SetFloat(ControlScheme, 0);
+        SetFloat(Settings.FIRSTPLAY, tempFirstPlay);
+        SetFloat(Settings.SENSE, .5f);
+        SetFloat(Settings.MAS, .5f);
+        SetFloat(Settings.BGM, 1);
+        SetFloat(Settings.SFX, 1);
+        SetFloat(Settings.TXTCLR, -1);
+        SetFloat(Settings.RUMB, 1);
+        SetFloat(Settings.CTRL, 0);
         PlayerPrefs.SetString("Rebinds", "");
         GetAllInputs();
-        //GameManager.Instance.GetComponent<PlayerInput>().actions.RemoveAllBindingOverrides();
-        //GetInputs();
-        settings[(int)Settings.SENSE] = PlayerPrefs.GetFloat(Sensitivity);
-        settings[(int)Settings.MAS] = PlayerPrefs.GetFloat(MasPref);
-        settings[(int)Settings.BGM] = PlayerPrefs.GetFloat(BGMPref);
-        settings[(int)Settings.SFX] = PlayerPrefs.GetFloat(SFXPref);
-        settings[(int)Settings.TXTCLR] = PlayerPrefs.GetFloat(TextColor);
-        settings[(int)Settings.RUMB] = PlayerPrefs.GetFloat(Rumble);
-        settings[(int)Settings.CTRL] = PlayerPrefs.GetFloat(ControlScheme);
-        SelectControlScheme(settings[(int)Settings.CTRL]);
-        //PlayerPrefs.SetInt(Depr, 0);
-        //PlayerPrefs.SetInt(Barg, 0);
-        //PlayerPrefs.SetInt(Anger, 0);
+    }
+
+    public void NewGame()
+    {
+        DataManager.DeleteFile();
+        DataManager.gameData = new GameData();
+        SetFloat(Settings.FIRSTPLAY, 1);
     }
 
     // Is game using a cursor controlled by keyboard?

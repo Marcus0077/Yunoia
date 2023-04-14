@@ -25,6 +25,10 @@ public class SceneChanger : MonoBehaviour
         {
             DataManager.gameData.checkpointed = false;
             GameManager.Instance.SetLevel(Levels.ANG);
+            var checkpointData = new CheckpointData();
+            checkpointData.room = 1;
+            checkpointData.position = new Vector3(-264.42f, 1.87f, 94.82f);
+            GameManager.Instance.SetCheckpoint(checkpointData);
             SceneManager.LoadScene("AngerFinal");
         }
 
@@ -32,6 +36,10 @@ public class SceneChanger : MonoBehaviour
         {
             DataManager.gameData.checkpointed = false;
             GameManager.Instance.SetLevel(Levels.BAR);
+            var checkpointData = new CheckpointData();
+            checkpointData.room = 1;
+            checkpointData.position = new Vector3(-300.0f, 0.75f, -136.55f);
+            GameManager.Instance.SetCheckpoint(checkpointData);
             SceneManager.LoadScene("BargainingFinal");
         }
 
@@ -39,6 +47,10 @@ public class SceneChanger : MonoBehaviour
         {
             DataManager.gameData.checkpointed = false;
             GameManager.Instance.SetLevel(Levels.DEP);
+            var checkpointData = new CheckpointData();
+            checkpointData.room = 1;
+            checkpointData.position = new Vector3(467.9f, 154.1f, 114.1f);
+            GameManager.Instance.SetCheckpoint(checkpointData);
             SceneManager.LoadScene("DepressionFinal");
         }
 
@@ -46,6 +58,10 @@ public class SceneChanger : MonoBehaviour
         {
             DataManager.gameData.checkpointed = false;
             GameManager.Instance.SetLevel(Levels.DEN);
+            var checkpointData = new CheckpointData();
+            checkpointData.room = 1;
+            checkpointData.position = new Vector3(-0.22f, 45.0f, 37.29f);
+            GameManager.Instance.SetCheckpoint(checkpointData);
             SceneManager.LoadScene("DenialFinal");
         }
 
@@ -53,6 +69,10 @@ public class SceneChanger : MonoBehaviour
         {
             DataManager.gameData.checkpointed = false;
             GameManager.Instance.SetLevel(Levels.ACC);
+            var checkpointData = new CheckpointData();
+            checkpointData.room = 1;
+            checkpointData.position = new Vector3(-10.74f, 45.0f, 27.74f);
+            GameManager.Instance.SetCheckpoint(checkpointData);
             SceneManager.LoadScene("AcceptanceFinalLevel");
         }
 
@@ -60,6 +80,10 @@ public class SceneChanger : MonoBehaviour
         {
             DataManager.gameData.checkpointed = false;
             GameManager.Instance.SetLevel(Levels.HUB);
+            var checkpointData = new CheckpointData();
+            checkpointData.room = 1;
+            checkpointData.position = new Vector3(3.218f, 43.83f, 11.162779f);
+            GameManager.Instance.SetCheckpoint(checkpointData);
             SceneManager.LoadScene("HubFinal");
         }
 

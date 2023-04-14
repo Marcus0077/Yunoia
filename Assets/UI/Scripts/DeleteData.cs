@@ -10,9 +10,14 @@ public class DeleteData : MonoBehaviour
         
     }
 
-    public void DeleteSettings()
+    public void NewGame()
     {
         GameManager.Instance.NewGame();
+    }
+
+    public void DeleteSettings()
+    {
+        GameManager.Instance.ResetSettings();
         GameManager.Instance.menuTraverse.ResetSettings();
     }
 

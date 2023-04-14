@@ -43,8 +43,7 @@ public class SceneTransition : MonoBehaviour
         //DataManager.gameData.checkpointed = false;
         //GameManager.Instance.SetLevel(Levels.NA);
         Time.timeScale = 1;
-
-        FadeInOutBlackVariable(1.5f, sceneToTransfer);
+        StartCoroutine(FadeInOutBlackVariable(1.5f, sceneToTransfer));
     }
 
     void OnTriggerEnter(Collider other)
@@ -141,7 +140,7 @@ public class SceneTransition : MonoBehaviour
     
     public IEnumerator FadeInOutBlack(float waitTime)
     {
-        GameManager.instance.DisableInput();
+        GameManager.Instance.DisableInput();
             
         fadeBlack.FadeToBlack(waitTime);
 
@@ -152,8 +151,8 @@ public class SceneTransition : MonoBehaviour
     
     public IEnumerator FadeInOutBlackVariable(float waitTime, string sceneToTransfer)
     {
-        GameManager.instance.DisableInput();
-            
+        GameManager.Instance.DisableInput();
+        
         fadeBlack.FadeToBlack(waitTime);
 
         yield return new WaitForSeconds(waitTime);

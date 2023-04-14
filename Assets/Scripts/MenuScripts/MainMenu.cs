@@ -14,9 +14,8 @@ public class MainMenu : MonoBehaviour
     // Sets prototype scene to active and set time scale to normal when play button is pressed.
     public void PlayGame()
     {
-        if(PlayerPrefs.GetFloat(GameManager.Firstplay) == 1)
+        if(GameManager.Instance.GetFloat(Settings.FIRSTPLAY) >= 0)
         {
-            Debug.Log("a");
             DataManager.WriteFile();
             GameManager.Instance.SetLevel(Levels.DEN);
             GameManager.Instance.SetCheckpoint(Levels.DEN, new Vector3(-20.25f, 46.8f, 57.5f));
@@ -25,8 +24,9 @@ public class MainMenu : MonoBehaviour
             //DataManager.gameData.position = new Vector3(-0.2f, 45f, 37.3f);
 
             Time.timeScale = 1f;
+            GameManager.Instance.SetFloat(Settings.FIRSTPLAY, -1);
             SceneManager.LoadScene("VSCutsceneIntro");
-            PlayerPrefs.SetFloat(GameManager.Firstplay, -1);
+            
         }
         else
         {

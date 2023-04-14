@@ -44,6 +44,11 @@ public class TeleToBeaver : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
         
+        if (GameObject.FindWithTag("Clone") != null)
+        {
+            GameObject.FindWithTag("Clone").GetComponent<ExitClone>().despawnClone = true;
+        }
+        
         player.transform.position = telePoint.transform.position;
         
         yield return new WaitForSeconds(waitTime);

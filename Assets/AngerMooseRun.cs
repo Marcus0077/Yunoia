@@ -33,17 +33,33 @@ public class AngerMooseRun : MonoBehaviour
 
     private IEnumerator KillMoose()
     {
-        Debug.Log("bruh moment");
-        
         gameManager.DisableInput();
         
         VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 14f, 18);
         VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 30;
         
         yield return new WaitForSeconds(4f);
-        
-        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 3.5f, 0);
-        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 12;
+
+        float duration = 1.5f;
+        float timePassed = 0f;
+
+        while (timePassed < duration)
+        {
+            float t = timePassed / duration;
+            
+            float y = Mathf.Lerp(14f, 3.5f, t);
+            float z = Mathf.Lerp(18f, 0f, t);
+            float dis = Mathf.Lerp(30f, 12f, t);
+
+            VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = 
+                new Vector3(0, y, z);
+            VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = dis;
+
+            timePassed += Time.deltaTime;
+
+            yield return null;
+        }
+
         FindObjectOfType<LimitedMovementCam>().GetCurrentCameraData(1);
             
         gameManager.EnableInput();

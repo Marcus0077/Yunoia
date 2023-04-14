@@ -11,7 +11,6 @@ public class Lever : MonoBehaviour
     // Script references.
     private CloneInteractions cloneInteractions;
     private PlayerInteractions playerInteractions;
-    private GameManager gameManager;
     
     // Game object references.
     public GameObject Counterpart;
@@ -54,8 +53,6 @@ public class Lever : MonoBehaviour
     void Start()
     {
         //activateText.enabled = false;
-        
-        gameManager = FindObjectOfType<GameManager>();
 
         isActivated = false;
         isPlayer = false;
@@ -139,7 +136,7 @@ public class Lever : MonoBehaviour
 
         float waitTime = 2.5f;
         
-        gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
+        GameManager.Instance.ShowPuzzleWrapper(puzzleNum, waitTime);
 
         yield return new WaitForSeconds(waitTime);
         

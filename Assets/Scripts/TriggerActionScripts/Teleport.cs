@@ -37,6 +37,11 @@ public class Teleport : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
         
+        if (GameObject.FindWithTag("Clone") != null)
+        {
+            GameObject.FindWithTag("Clone").GetComponent<ExitClone>().despawnClone = true;
+        }
+        
         player.transform.position = teleportTarget.transform.position;
         
         yield return new WaitForSeconds(waitTime);

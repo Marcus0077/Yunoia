@@ -7,6 +7,7 @@ public class ErisBoss : MonoBehaviour
 {
     public GameObject damageShield;
     public GameObject bossShield;
+    public Transform player;
     float health;
 
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class ErisBoss : MonoBehaviour
             StartCoroutine(PlayEndCutscene());
         }
 
-
+        this.transform.LookAt(player);
     }
 
     public void ErisHurt()

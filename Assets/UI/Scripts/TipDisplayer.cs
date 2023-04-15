@@ -6,8 +6,7 @@ using TMPro;
 
 public class TipDisplayer : MonoBehaviour
 {
-    public GameObject message, prompt, player;
-    public TextMeshProUGUI messageText;
+    public GameObject prompt, player;
     public float displayTime;
     public TipController tc;
     public InputActionAsset controls;
@@ -55,7 +54,6 @@ public class TipDisplayer : MonoBehaviour
         if (!isOpen)
         {
             prompt.SetActive(false);
-            message.SetActive(true);
             tc.OnEnable();
             isOpen = true;
             trigger.DisplayHint();

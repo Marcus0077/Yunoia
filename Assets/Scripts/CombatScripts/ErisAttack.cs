@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ErisAttackStairs : MonoBehaviour
+public class ErisAttack : MonoBehaviour
 {
     public bool secondaryEffect;
     public ErisAttackController controller;
@@ -22,7 +22,7 @@ public class ErisAttackStairs : MonoBehaviour
                 //Destroy(gameObject);
                 //Start explosion effect:
                 GameObject go = Instantiate(collisionParticles, gameObject.transform.position, gameObject.transform.rotation);
-                go.GetComponent<ErisAttackStairs>().controller = controller;
+                go.GetComponent<ErisAttack>().controller = controller;
                 Destroy(gameObject);
             }
         }

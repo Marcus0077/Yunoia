@@ -8,13 +8,17 @@ public class ErisAttackController : MonoBehaviour
 {
     public Rigidbody playerRB;
     public Transform playerTrans;
+    public Transform erisTrans;
+    public Transform target;
 
-    public ErisAttackStairs attackPrefab;
+    public ErisAttack attackPrefab;
 
     public bool canAttack = false;
-    float velocity = -4.0f;
+    float fallVelocity = -8.0f;
+    float attackSpeed = 10.0f;
 
     public bool hit = false;
+    public bool inBossRoom = false;
 
     public GameObject deathScreen, continueButton, menuButton;
 
@@ -26,16 +30,37 @@ public class ErisAttackController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (canAttack)
+        if (!inBossRoom)
         {
-            ErisAttackStairs attackSpawned = Instantiate(attackPrefab, 
-            new Vector3(playerTrans.position.x, playerTrans.position.y + 10.0f, playerTrans.position.z), 
-            Quaternion.identity);
+            if (canAttack)
+            {
+                ErisAttack attackSpawned = Instantiate(attackPrefab, 
+                new Vector3(playerTrans.position.x, playerTrans.position.y + 20.0f, playerTrans.position.z), 
+                Quaternion.identity);
             
-            attackSpawned.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, velocity, 0.0f);
-            attackSpawned.controller = this;
+                attackSpawned.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, fallVelocity, 0.0f);
+                attackSpawned.controller = this;
 
-            StartCoroutine(AttackCooldown());
+                StartCoroutine(AttackCooldown());
+            }
+        }
+        else if (inBossRoom)
+        {
+            if (canAttack)
+            {
+                target = playerTrans;
+
+                ErisAttack attackSpawned = Instantiate(attackPrefab, 
+                new Vector3(erisTrans.position.x, erisTrans.position.y, erisTrans.position.z), 
+                Quaternion.identity);
+
+                attackSpawned.transform.LookAt(target);
+            
+                attackSpawned.GetComponent<Rigidbody>().velocity = attackSpawned.transform.forward * attackSpeed;
+                attackSpawned.controller = this;
+
+                StartCoroutine(AttackCooldown());
+            }
         }
 
         if (hit)
@@ -58,7 +83,7 @@ public class ErisAttackController : MonoBehaviour
     {
         canAttack = false;
 
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(4.0f);
 
         if (!hit)
         {

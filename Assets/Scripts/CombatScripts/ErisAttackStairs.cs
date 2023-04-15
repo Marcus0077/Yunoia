@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class ErisAttackStairs : MonoBehaviour
 {
+    public bool secondaryEffect;
     public ErisAttackController controller;
+    public GameObject collisionParticles;
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Player"))
+        if(!secondaryEffect)
         {
-            controller.hit = true;
-            Destroy(gameObject);
+            if (collider.CompareTag("Player"))
+            {
+                controller.hit = true;
+                Destroy(gameObject);
+            }
+            else if (collider.CompareTag("Ground"))
+            {
+                //Destroy(gameObject);
+                //Start explosion effect:
+                GameObject go = Instantiate(collisionParticles, gameObject.transform.position, gameObject.transform.rotation);
+                go.GetComponent<ErisAttackStairs>().controller = controller;
+                Destroy(gameObject);
+            }
         }
-        else if (collider.CompareTag("Ground"))
+        else
         {
-            Destroy(gameObject);
+            if (collider.CompareTag("Player"))
+            {
+                Debug.Log("hit");
+                controller.hit = true;
+                Destroy(gameObject);
+            }
         }
     }
 }

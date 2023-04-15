@@ -73,6 +73,7 @@ public class ErisAttackController : MonoBehaviour
 
     private IEnumerator FadeThenDie()
     {
+        Debug.Log("dying");
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
         {
             GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);

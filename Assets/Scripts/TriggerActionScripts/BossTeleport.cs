@@ -12,7 +12,8 @@ public class BossTeleport : MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
         player.transform.position = teleportTarget.transform.position;
-
         controller.StopAllCoroutines();
+        controller.inBossRoom = true;
+        controller.canAttack = true;
     }
 }

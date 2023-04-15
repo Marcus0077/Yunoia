@@ -32,6 +32,9 @@ public class PlantDestroyer : MonoBehaviour
 
     private string prefName;
 
+    public GameObject aiPrefab;
+    private GameObject spawnedAI;
+
     private void Awake()
     {
         pPlateAnimator = GetComponent<Animator>();
@@ -136,6 +139,14 @@ public class PlantDestroyer : MonoBehaviour
 
     private void CompletePlate()
     {
+        if (aiPrefab != null)
+        {
+            spawnedAI = Instantiate(aiPrefab, transform.position, Quaternion.Euler(Vector3.forward));
+
+            spawnedAI.GetComponent<AiMovement>().canAiMove = false;
+        }
+        
+
         this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
         facelessList[(int)PlayerPrefs.GetFloat(prefName) - 1].SetActive(false);
         if (pPlateAnimator != null)

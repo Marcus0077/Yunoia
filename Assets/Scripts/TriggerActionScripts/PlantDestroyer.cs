@@ -39,10 +39,11 @@ public class PlantDestroyer : MonoBehaviour
     {
         pPlateAnimator = GetComponent<Animator>();
         gameManager = GameManager.Instance;
-        prefName = gameObject.name + gameManager.currentLevel + GameObject.FindGameObjectWithTag("StateDrivenCam").GetComponent<Animator>().GetInteger("roomNum");
+        prefName = gameObject.name + gameManager.currentLevel;
         numCrystals = coCrystals.Length + 1;
         thisCrystalComplete = 0;
         crystalsComplete = 0;
+        Debug.Log(PlayerPrefs.GetFloat(prefName));
         if (PlayerPrefs.GetFloat(prefName) >= 1)
         {
             hasPuzzleCam = false;

@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Death : MonoBehaviour
 {
-    public GameObject deathScreen;//, continueButton, menuButton;
-
     // Actions to take place upon touching the collider
     private void OnTriggerEnter(Collider other)
     {
@@ -43,8 +41,6 @@ public class Death : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.5f);
-        if (deathScreen == null)
-            deathScreen = GameObject.FindWithTag("DeathScreen");
-        deathScreen.SetActive(true);
+        GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
     }
 }

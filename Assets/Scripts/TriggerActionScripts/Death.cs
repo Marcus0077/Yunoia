@@ -35,6 +35,7 @@ public class Death : MonoBehaviour
 
     private IEnumerator FadeThenDie()
     {
+        GameManager.Instance.dying = true;
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
         {
             GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
@@ -42,5 +43,6 @@ public class Death : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
+        GameManager.Instance.dying = false;
     }
 }

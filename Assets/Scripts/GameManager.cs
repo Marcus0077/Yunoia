@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public float[] settings;
 
     public static GameManager instance;
-    public bool ghost = false, menuCursor = false, textColor = false, rebinded = false;
+    public bool ghost = false, menuCursor = false, textColor = false, rebinded = false, dying = false;
     [SerializeField]
     GameObject player, ghostObj;
     GameObject spawnedGhost;

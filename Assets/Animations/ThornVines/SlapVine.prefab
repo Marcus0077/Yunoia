@@ -60,9 +60,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &1191986001472670491
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,9 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &1276023032758347207
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,9 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &1775226228542725537
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,9 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &2092318087264849595
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,9 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &3020964235190195248
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,9 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &3283375041191984762
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,9 +522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &4309354273249160802
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,9 +582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &4663593316977975784
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,9 +642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &4857216988008298722
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,9 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &5568784051894920218
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5045046688356433568}
   - component: {fileID: 3671126161950257821}
+  - component: {fileID: 1275585236578034746}
   m_Layer: 0
   m_Name: SlapVine
   m_TagString: Untagged
@@ -786,6 +757,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1275585236578034746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568784051894920218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26966c3573f3f24189aab7b47a87bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders:
+  - {fileID: 1588636693489391902}
+  - {fileID: 8799861154281823295}
+  - {fileID: 6106038795871960207}
+  - {fileID: 411262026256721871}
+  - {fileID: 8407487462592735379}
+  - {fileID: 4665339529785690002}
+  - {fileID: 751643176015170002}
+  - {fileID: 5502661476721390907}
+  - {fileID: 1718495024692116654}
+  - {fileID: 1224193995210229626}
+  - {fileID: 88092132128313878}
+  - {fileID: 3073767393143780048}
+  - {fileID: 5820776334881289808}
+  - {fileID: 8566695024249272898}
+  - {fileID: 1709457440871082285}
+  - {fileID: 3446657009801865752}
 --- !u!1 &5713611546332136636
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,9 +846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &6691900175224008968
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,9 +906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &7397065010899031055
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,9 +966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &7797145937283223289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,9 +1057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &8481387049204113526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,9 +1117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}
 --- !u!1 &8718896659072037395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1177,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
-  continueButton: {fileID: 0}
-  menuButton: {fileID: 0}

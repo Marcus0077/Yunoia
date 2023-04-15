@@ -24,6 +24,8 @@ public class ErisBoss : MonoBehaviour
 
             StartCoroutine(PlayEndCutscene());
         }
+
+
     }
 
     public void ErisHurt()

@@ -76,6 +76,8 @@ public class Grapple : MonoBehaviour, IAbility
 
     public bool grappleNeedsDeath;
 
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,8 @@ public class Grapple : MonoBehaviour, IAbility
 
         SetMaxVelocity(maxVelocity);
         ResetSwingConditions();
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -95,6 +99,7 @@ public class Grapple : MonoBehaviour, IAbility
 
         if (grappleActive && !player.isGrounded)
         {
+            anim.SetBool("isGrapple", false);
             swinging = true;
         }
 
@@ -195,6 +200,7 @@ public class Grapple : MonoBehaviour, IAbility
             hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
             shoot.Play();
 
+            anim.SetBool("isGrapple", true);
             grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, this.transform.rotation);
 
             hook.Initialize(this, shootTransform);
@@ -207,6 +213,7 @@ public class Grapple : MonoBehaviour, IAbility
         {
             if (grappleActive && shootHook.WasPressedThisFrame() && player.isGrounded)
             {
+                anim.SetBool("isGrapple", false);
                 yankReady = false;
                 yanking = true;
                 yank.Play();
@@ -229,6 +236,7 @@ public class Grapple : MonoBehaviour, IAbility
     // Shoots grapple and sets all booleans allowing for a forward swing
     public void StartGrapple()
     {
+        anim.SetBool("isGrapple", true);
         ready = false;
         grappleActive = true;
         yankReady = false;
@@ -242,7 +250,6 @@ public class Grapple : MonoBehaviour, IAbility
             StartCoroutine(YankDelay());
         }
     }
-
     // Destroys an active grapple
     public void DestroyHook()
     {
@@ -250,6 +257,8 @@ public class Grapple : MonoBehaviour, IAbility
         {
             return;
         }
+
+        anim.SetBool("isGrapple", false);
 
         // Reset all swing/force conditions
         ResetSwingConditions();

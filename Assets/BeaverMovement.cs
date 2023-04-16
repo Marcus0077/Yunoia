@@ -7,9 +7,9 @@ public class BeaverMovement : MonoBehaviour
 {
     public GameObject [] waypoints;
     int current = 0;
-    float rotSpeed;
     float WPradius = 1; 
     public float speed;
+    
 
     void Update()
     {
@@ -21,8 +21,9 @@ public class BeaverMovement : MonoBehaviour
                 current = 0;
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed); 
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
 
+        
     } 
 
 }

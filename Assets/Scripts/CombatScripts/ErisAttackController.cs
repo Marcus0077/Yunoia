@@ -55,7 +55,8 @@ public class ErisAttackController : MonoBehaviour
                 new Vector3(erisTrans.position.x, erisTrans.position.y, erisTrans.position.z), 
                 Quaternion.identity);
                 attackSpawned.transform.LookAt(target);
-            
+                GameObject particleAttack = Instantiate(particles, new Vector3(erisTrans.position.x, erisTrans.position.y, erisTrans.position.z), particles.transform.rotation);
+                particleAttack.transform.LookAt(target);
                 attackSpawned.GetComponent<Rigidbody>().velocity = attackSpawned.transform.forward * attackSpeed;
                 attackSpawned.controller = this;
 

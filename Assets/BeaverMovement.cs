@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeaverMovement : MonoBehaviour
 
 {
-    public GameObject[] waypoints;
+    public GameObject [] waypoints;
     int current = 0;
     float rotSpeed;
     float WPradius = 1; 
@@ -16,12 +16,12 @@ public class BeaverMovement : MonoBehaviour
         if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
         {
             current++;
-            if (current >= waypoints.length)
+            if (current >= waypoints.Length)
             {
                 current = 0;
             }
         }
-        transform.position = Vector3.MoveTowards(transform.postion, waypoints[current].transform.position, Time.deltaTime * speed); 
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed); 
 
     } 
 

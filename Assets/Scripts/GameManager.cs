@@ -458,6 +458,20 @@ public class GameManager : MonoBehaviour
             clone.GetComponent<CloneInteractions>().playerControls.Enable();
         }
     }
+
+    public void StartEndCutscene(GameObject original, GameObject newObject)
+    {
+        StartCoroutine(PlayEndCutscene(original, newObject));
+    }
+
+    public IEnumerator PlayEndCutscene(GameObject original, GameObject newObject)
+    {
+        Instantiate(newObject, original.transform.position, newObject.transform.rotation);
+        Destroy(original);
+        yield return new WaitForSeconds(4.5f);
+
+        SceneManager.LoadScene("CutsceneEnd");
+    }
 }
 
 public interface IAbility

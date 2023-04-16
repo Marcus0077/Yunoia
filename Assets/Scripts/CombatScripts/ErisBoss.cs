@@ -8,7 +8,8 @@ public class ErisBoss : MonoBehaviour
     public GameObject damageShield;
     public GameObject bossShield;
     public Transform player;
-    float health;
+    public GameObject fallEris;
+    public float health;
 
     // Start is called before the first frame update
     void Awake()
@@ -23,7 +24,7 @@ public class ErisBoss : MonoBehaviour
         {
             bossShield.SetActive(false);
 
-            StartCoroutine(PlayEndCutscene());
+            GameManager.Instance.StartEndCutscene(gameObject, fallEris);
         }
 
         this.transform.LookAt(player);
@@ -45,10 +46,5 @@ public class ErisBoss : MonoBehaviour
         damageShield.SetActive(false);
     }
 
-    private IEnumerator PlayEndCutscene()
-    {
-        yield return new WaitForSeconds(3.0f);
-
-        SceneManager.LoadScene("CutsceneEnd");
-    }
+    
 }

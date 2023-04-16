@@ -20,7 +20,7 @@ public class ErisBoss : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (health <= 0)
+        if (health <= 0 && !damageShield.activeInHierarchy)
         {
             bossShield.SetActive(false);
 

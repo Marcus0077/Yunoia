@@ -21,8 +21,11 @@ public class ErisAttack : MonoBehaviour
             {
                 //Destroy(gameObject);
                 //Start explosion effect:
-                GameObject go = Instantiate(collisionParticles, gameObject.transform.position, gameObject.transform.rotation);
-                go.GetComponent<ErisAttack>().controller = controller;
+                if(collisionParticles != null)
+                {
+                    GameObject go = Instantiate(collisionParticles, gameObject.transform.position, gameObject.transform.rotation);
+                    go.GetComponent<ErisAttack>().controller = controller;
+                }
                 Destroy(gameObject);
             }
         }

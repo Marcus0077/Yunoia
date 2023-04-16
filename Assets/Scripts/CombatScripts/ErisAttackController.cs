@@ -20,6 +20,7 @@ public class ErisAttackController : MonoBehaviour
     public bool hit = false;
     public bool inBossRoom = false;
 
+    public GameObject particles;
     public GameObject deathScreen, continueButton, menuButton;
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class ErisAttackController : MonoBehaviour
                 ErisAttack attackSpawned = Instantiate(attackPrefab, 
                 new Vector3(playerTrans.position.x, playerTrans.position.y + 20.0f, playerTrans.position.z), 
                 Quaternion.identity);
-            
+                Instantiate(particles, new Vector3(playerTrans.position.x, playerTrans.position.y + 20.0f, playerTrans.position.z), particles.transform.rotation);
                 attackSpawned.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, fallVelocity, 0.0f);
                 attackSpawned.controller = this;
 
@@ -53,7 +54,6 @@ public class ErisAttackController : MonoBehaviour
                 ErisAttack attackSpawned = Instantiate(attackPrefab, 
                 new Vector3(erisTrans.position.x, erisTrans.position.y, erisTrans.position.z), 
                 Quaternion.identity);
-
                 attackSpawned.transform.LookAt(target);
             
                 attackSpawned.GetComponent<Rigidbody>().velocity = attackSpawned.transform.forward * attackSpeed;

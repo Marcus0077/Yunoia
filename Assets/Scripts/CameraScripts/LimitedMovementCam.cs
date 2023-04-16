@@ -97,9 +97,6 @@ public class LimitedMovementCam : MonoBehaviour
         moveSpeed = 6f;
 
         forceBallToPlayer = false;
-        
-        camBallOffset.y = curCamera.GetComponent<CinemachineVirtualCamera>()
-            .GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y;
     }
 
     // Takes a new player as a parameter and sets the current camera's follow target
@@ -125,9 +122,13 @@ public class LimitedMovementCam : MonoBehaviour
 
         // Get the confiner data of the new camera.
         GetCurrentConfinerData();
-        
-        camBallOffset.y = curCamera.GetComponent<CinemachineVirtualCamera>()
-            .GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y;
+
+        if (curCamera.GetComponent<CinemachineVirtualCamera>()
+                .GetCinemachineComponent<CinemachineFramingTransposer>() != null)
+        {
+            camBallOffset.y = curCamera.GetComponent<CinemachineVirtualCamera>()
+                .GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y;
+        }
     }
 
     // Grab all needed information about the current camera's confiner

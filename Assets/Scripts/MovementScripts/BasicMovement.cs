@@ -528,7 +528,7 @@ public class BasicMovement : MonoBehaviour, IAbility
     // Changes active camera depending on where the player is on the level.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Teleport>() || other.GetComponent<TeleToBeaver>())
+        if (other.GetComponent<Teleport>() || other.GetComponent<TeleToBeaver>() || other.GetComponent<BossTeleport>())
         {
             StartCoroutine(delayedSwitchCamera(other));
         }

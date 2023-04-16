@@ -26,7 +26,7 @@ public class YeetTheClone : MonoBehaviour
             {
                 if (GameObject.FindWithTag("Clone") != null)
                 {
-                    if ((this.GetComponent<TeleToBeaver>() == null && this.GetComponent<Teleport>() == null))
+                    if ((this.GetComponent<TeleToBeaver>() == null && this.GetComponent<Teleport>() == null && this.GetComponent<BossTeleport>() == null))
                     {
                         GameObject.FindWithTag("Clone").GetComponent<ExitClone>().despawnClone = true;
                     }

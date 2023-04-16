@@ -26,12 +26,6 @@ public class Teleport : MonoBehaviour
     public IEnumerator FadeInOutBlack(float waitTime)
     {
         gameManager.DisableInput();
-
-        if (GameObject.FindGameObjectWithTag("Clone") != null)
-        {
-            GameObject clone = GameObject.FindGameObjectWithTag("Clone");
-            clone.GetComponent<ExitClone>().Timer += waitTime;
-        }
             
         blackScreen.FadeToBlack(waitTime);
 

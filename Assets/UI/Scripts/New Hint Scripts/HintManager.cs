@@ -26,6 +26,10 @@ public class HintManager : MonoBehaviour
         Hint hintToDisplay = currentHint[activeMessage];
         hintText.text = hintToDisplay.hint;
         NoHints = false;
+        StopAllCoroutines();
+        StartCoroutine(TypeHint(hintToDisplay.hint));
+
+        //AnimateTextColor();
     }
 
     public void NextHint()
@@ -45,5 +49,22 @@ public class HintManager : MonoBehaviour
     public void CloseHint()
     {
         NoHints = true;
+    }
+
+    void AnimateTextColor()
+    {
+        LeanTween.textAlpha(hintText.rectTransform, 0, 0);
+        LeanTween.textAlpha(hintText.rectTransform, 1, 0.5f);
+        Debug.Log("Text faded");
+    }
+
+    IEnumerator TypeHint(string hint)
+    {
+        hintText.text = "";
+        foreach (char letter in hint.ToCharArray())
+        {
+            hintText.text += letter;
+            yield return null;
+        }
     }
 }

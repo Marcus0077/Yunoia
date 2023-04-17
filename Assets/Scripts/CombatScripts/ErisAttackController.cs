@@ -21,7 +21,6 @@ public class ErisAttackController : MonoBehaviour
     public bool inBossRoom = false;
 
     public GameObject particles;
-    public GameObject deathScreen, continueButton, menuButton;
 
     // Start is called before the first frame update
     void Awake()
@@ -68,7 +67,7 @@ public class ErisAttackController : MonoBehaviour
         {
             canAttack = false;
 
-            StartCoroutine(FadeThenDie());
+            //StartCoroutine(FadeThenDie());
             GameObject.FindObjectOfType<PauseMenu>().DisableInput();
         }
     }
@@ -92,23 +91,22 @@ public class ErisAttackController : MonoBehaviour
         }
     }
 
-    public void FadetoBlack()
-    {
-        StartCoroutine(FadeThenDie());
-    }
+    //public void FadetoBlack()
+    //{
+    //    StartCoroutine(FadeThenDie());
+    //}
 
-    private IEnumerator FadeThenDie()
-    {
-        Debug.Log("dying");
-        if (GameObject.FindObjectOfType<FadeBlack>() != null)
-        {
-            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
-        }
+    //private IEnumerator FadeThenDie()
+    //{
+    //    GameManager.Instance.dying = true;
+    //    if (GameObject.FindObjectOfType<FadeBlack>() != null)
+    //    {
+    //        GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
+    //    }
 
-        yield return new WaitForSeconds(1.5f);
-        
-        deathScreen.SetActive(true);
-        continueButton.SetActive(true);
-        menuButton.SetActive(true);
-    }
+    //    yield return new WaitForSeconds(1.5f);
+
+    //    GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
+    //    GameManager.Instance.dying = false;
+    //}
 }

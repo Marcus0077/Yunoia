@@ -8,8 +8,8 @@ public class Grapple : MonoBehaviour, IAbility
 {
     // Speed and distance restrictions
     float initialPullSpeed = 0.0f;
-    float pullSpeed = 0.27f;
-    float recoveryPullSpeed = 0.35f;
+    float pullSpeed = 0.28f;
+    float recoveryPullSpeed = 0.36f;
 
     float initalHorizSpeed = 0.0f;
     float horizSpeed = 10.0f;

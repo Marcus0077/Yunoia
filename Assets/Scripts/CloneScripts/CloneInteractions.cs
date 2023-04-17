@@ -186,11 +186,11 @@ public class CloneInteractions : MonoBehaviour
                 Player.GetComponent<Grapple>().DestroyHook();
                 Player.GetComponent<AbilityPush>().DestroyShape();
 
+                Player.GetComponent<Grapple>().enabled = false;
+                Player.GetComponent<AbilityPush>().enabled = false; 
+                
                 this.GetComponent<Grapple>().enabled = true;
                 this.GetComponent<AbilityPush>().enabled = true;
-
-                Player.GetComponent<Grapple>().enabled = false;
-                Player.GetComponent<AbilityPush>().enabled = false;
             }
         }
         else if (switchPlaces.WasReleasedThisFrame() && !canSwitch)

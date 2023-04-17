@@ -472,6 +472,24 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene("CutsceneEnd");
     }
+
+    public void StartDeath()
+    {
+        StartCoroutine(FadeThenDie());
+    }
+
+    public IEnumerator FadeThenDie()
+    {
+        GameManager.Instance.dying = true;
+        if (GameObject.FindObjectOfType<FadeBlack>() != null)
+        {
+            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+        GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
+        GameManager.Instance.dying = false;
+    }
 }
 
 public interface IAbility

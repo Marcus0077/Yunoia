@@ -11,8 +11,9 @@ public class Death : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FadeThenDie());
+            //StartCoroutine(FadeThenDie());
             GameObject.FindObjectOfType<PauseMenu>().DisableInput();
+            FadetoBlack();
         }
         else if (other.CompareTag("Clone"))
         {
@@ -30,19 +31,20 @@ public class Death : MonoBehaviour
 
     public void FadetoBlack()
     {
-        StartCoroutine(FadeThenDie());
+        //StartCoroutine(FadeThenDie());
+        GameManager.Instance.StartDeath();
     }
 
-    private IEnumerator FadeThenDie()
-    {
-        GameManager.Instance.dying = true;
-        if (GameObject.FindObjectOfType<FadeBlack>() != null)
-        {
-            GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
-        }
+    //private IEnumerator FadeThenDie()
+    //{
+    //    GameManager.Instance.dying = true;
+    //    if (GameObject.FindObjectOfType<FadeBlack>() != null)
+    //    {
+    //        GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
+    //    }
 
-        yield return new WaitForSeconds(1.5f);
-        GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
-        GameManager.Instance.dying = false;
-    }
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
+    //    GameManager.Instance.dying = false;
+    //}
 }

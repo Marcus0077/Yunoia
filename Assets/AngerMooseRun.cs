@@ -17,11 +17,16 @@ public class AngerMooseRun : MonoBehaviour
     {
         mooseAnimator = GetComponent<Animator>();
         gameManager = FindObjectOfType<GameManager>();
+
+        Debug.Log("Current Level: " + gameManager.currentLevel);
         
-        mooseAnimator.SetFloat("Speed", 8);
-        
-        killCoroutine = KillMoose();
-        StartCoroutine(killCoroutine);
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<BasicMovement>().curRoom == 1)
+        {
+            mooseAnimator.SetFloat("Speed", 8);
+
+            killCoroutine = KillMoose();
+            StartCoroutine(killCoroutine);
+        }
     }
 
     // Update is called once per frame

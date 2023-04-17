@@ -143,17 +143,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25128c5de2bb3304eb3e0130ebba94e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   music:
   - <SceneName>k__BackingField: Main Menu
     <BGM>k__BackingField: {fileID: 8300000, guid: 15039b9e4d1ebf649be432ab5946c068, type: 3}
-  - <SceneName>k__BackingField: VSDenial
+  - <SceneName>k__BackingField: DenialFinal
     <BGM>k__BackingField: {fileID: 8300000, guid: 0005f976a43a8d942953d7ebae1bbef5, type: 3}
   - <SceneName>k__BackingField: AngerFinal
-    <BGM>k__BackingField: {fileID: 8300000, guid: c63d033ae1369124b84c365eb05dcaca, type: 3}
+    <BGM>k__BackingField: {fileID: 8300000, guid: 0784d1f87892e73499d0ec1dc863839b, type: 3}
   - <SceneName>k__BackingField: BargainingFinal
     <BGM>k__BackingField: {fileID: 8300000, guid: fecdb4dca6bf6e64d972857bd3ff8465, type: 3}
   - <SceneName>k__BackingField: DepressionFinal
     <BGM>k__BackingField: {fileID: 8300000, guid: 1b59250616f8001449db75b175f539f7, type: 3}
+  - <SceneName>k__BackingField: AcceptanceFinalLevel
+    <BGM>k__BackingField: {fileID: 8300000, guid: a5641d1371bd1fd4cb1ead698571072d, type: 3}
+  stop: 0
+  executeOnce: 0
+  oldVol: 0
 --- !u!114 &8096450735782489430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +179,7 @@ MonoBehaviour:
   menuCursor: 1
   textColor: 0
   rebinded: 0
+  dying: 0
   player: {fileID: 0}
   ghostObj: {fileID: 3169690673374037347, guid: d0008c29af1b0ca40a863262d4b450d6, type: 3}
   time: 0

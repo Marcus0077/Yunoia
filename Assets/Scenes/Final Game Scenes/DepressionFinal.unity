@@ -19872,9 +19872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 536013738}
-  continueButton: {fileID: 536013738}
-  menuButton: {fileID: 536013738}
 --- !u!65 &450851235
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22960,9 +22957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 536013738}
-  continueButton: {fileID: 536013738}
-  menuButton: {fileID: 536013738}
 --- !u!65 &520307928
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29617,11 +29611,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!1 &536013738 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1499953889291332875, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
-  m_PrefabInstance: {fileID: 2095822776}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &538105414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 05ad7ea91cf352b4ca056408192b01ab, type: 3}
@@ -67797,9 +67786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 536013738}
-  continueButton: {fileID: 536013738}
-  menuButton: {fileID: 536013738}
 --- !u!65 &1417915096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89286,9 +89272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 536013738}
-  continueButton: {fileID: 536013738}
-  menuButton: {fileID: 536013738}
 --- !u!65 &1978892179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92520,17 +92503,6 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 2054877816, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
   m_PrefabInstance: {fileID: 2095822776}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2054877819 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2054877819, guid: 81ccb93bf6887d04e8588a13425a98ef, type: 3}
-  m_PrefabInstance: {fileID: 2095822776}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054877813}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde81327752b5d048bb368cba304038d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2054877820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96775,7 +96747,7 @@ PrefabInstance:
     - target: {fileID: 789476899823806466, guid: a7b39f75a6598be4fb233770723f497b, type: 3}
       propertyPath: tc
       value: 
-      objectReference: {fileID: 2054877819}
+      objectReference: {fileID: 789476899220139742}
     - target: {fileID: 789476899823806466, guid: a7b39f75a6598be4fb233770723f497b, type: 3}
       propertyPath: message
       value: 
@@ -96821,6 +96793,17 @@ MonoBehaviour:
       each encounter may offer.\""
   - hint: "\"Whether it be the springs to ascend or platforms to walk we all want
       to see you succeed.\u201D  "
+--- !u!114 &789476899220139742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 789476899823806469, guid: a7b39f75a6598be4fb233770723f497b, type: 3}
+  m_PrefabInstance: {fileID: 789476899220139739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789476899220139740}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde81327752b5d048bb368cba304038d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &891978894109556746
 GameObject:
   m_ObjectHideFlags: 0

@@ -176,7 +176,7 @@ public class HideObstructions : MonoBehaviour
     {
         foreach (var obstruction in Obstructions)
         {
-            obstruction.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+            obstruction.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
 
             if (obstruction.GetComponent<MeshCollider>())
             {
@@ -200,7 +200,7 @@ public class HideObstructions : MonoBehaviour
     {
         foreach (var obstruction in Obstructions)
         {
-            obstruction.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
+            obstruction.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.On;
 
             if (obstruction.GetComponent<MeshCollider>())
             {

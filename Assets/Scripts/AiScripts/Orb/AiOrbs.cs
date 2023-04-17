@@ -15,6 +15,7 @@ public class AiOrbs : Pushable
     Coroutine delay = null;
     [SerializeField]
     float detectDistance, movespeed, timeToDelay;
+    public float animationDetectDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -67,12 +68,16 @@ public class AiOrbs : Pushable
     // Detects distance from player or clone and chases
     void DistancePlayer()
     {
+        if(animationDetectDistance > detectDistance)
+        {
+            detectDistance = animationDetectDistance;
+        }
         RaycastHit hit;
         GameObject closer = null;
         float distance = 100;
         foreach(AbilityPush play in Object.FindObjectsOfType<AbilityPush>())
         {
-            if (Physics.Raycast(transform.position, play.gameObject.transform.position - transform.position, out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, play.gameObject.transform.position - transform.position, out hit, Mathf.Infinity, LayerMask.GetMask("Player", "Clone")))
             {
                 if (hit.transform.gameObject.GetComponent<AbilityPush>() != null) // Chase any object that can push (player or clone) in line of sight
                 {

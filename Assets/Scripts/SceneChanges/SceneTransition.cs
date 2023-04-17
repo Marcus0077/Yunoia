@@ -10,6 +10,8 @@ public class SceneTransition : MonoBehaviour
     string sceneToTransfer;
     [SerializeField]
     Levels level;
+    [SerializeField]
+    bool transferNow = false;
 
     private FadeBlack fadeBlack;
 
@@ -163,6 +165,9 @@ public class SceneTransition : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        if(transferNow)
+        {
+            ChangeScene();
+        }
     }
 }

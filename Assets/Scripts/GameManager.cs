@@ -468,7 +468,7 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(newObject, original.transform.position, newObject.transform.rotation);
         Destroy(original);
-        //yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4.5f);
     }
 
     public void StartDeath()

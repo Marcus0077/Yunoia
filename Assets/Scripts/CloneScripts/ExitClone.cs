@@ -195,10 +195,6 @@ public class ExitClone : MonoBehaviour
             // Tell player that clone is despawned and allow player to move again.
             summonClone.cloneSummoned = false;
             basicMovementPlayer.canMove = true;
-            
-            // Enable player abilities.
-            Player.GetComponent<Grapple>().enabled = true;
-            Player.GetComponent<AbilityPush>().enabled = true;
 
             //activeTimerText.text = "";
             //combatHandler.healthText.text = "";
@@ -222,6 +218,10 @@ public class ExitClone : MonoBehaviour
 
             // Finally, despawn the clone.
             Destroy(this.gameObject);
+
+            // Enable player abilities.
+            Player.GetComponent<Grapple>().enabled = true;
+            Player.GetComponent<AbilityPush>().enabled = true;
         }
         else
         {

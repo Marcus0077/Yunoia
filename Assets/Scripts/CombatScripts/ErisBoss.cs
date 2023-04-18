@@ -11,10 +11,13 @@ public class ErisBoss : MonoBehaviour
     public GameObject fallEris;
     public float health;
 
+    private GameObject EndScene;
+
     // Start is called before the first frame update
     void Awake()
     {
         health = 3.0f;
+        EndScene = GameObject.FindGameObjectWithTag("EndScene");
     }
 
     // Update is called once per frame
@@ -22,9 +25,14 @@ public class ErisBoss : MonoBehaviour
     {
         if (health <= 0 && !damageShield.activeInHierarchy)
         {
+            EndScene.SetActive(true);
             bossShield.SetActive(false);
 
             GameManager.Instance.StartEndCutscene(gameObject, fallEris);
+        }
+        else
+        {
+            EndScene.SetActive(false);
         }
 
         this.transform.LookAt(player);
@@ -45,6 +53,4 @@ public class ErisBoss : MonoBehaviour
 
         damageShield.SetActive(false);
     }
-
-    
 }

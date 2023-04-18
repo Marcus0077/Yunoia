@@ -9,10 +9,12 @@ public class SpawnAcceptance : MonoBehaviour
     public GameObject acceptTeleport;
 
     // Start is called before the first frame update
-    void Awake()
+
+    private void FixedUpdate()
     {
-        if (DataManager.gameData.levelCompletion[(int)Levels.DEN]
-            && DataManager.gameData.levelCompletion[(int)Levels.ANG]
+        acceptTeleport = GameObject.FindGameObjectWithTag("AcceptanceTeleport");
+
+        if (DataManager.gameData.levelCompletion[(int)Levels.ANG]
             && DataManager.gameData.levelCompletion[(int)Levels.BAR]
             && DataManager.gameData.levelCompletion[(int)Levels.DEP])
         {
@@ -23,5 +25,4 @@ public class SpawnAcceptance : MonoBehaviour
             acceptTeleport.SetActive(false);
         }
     }
-
 }

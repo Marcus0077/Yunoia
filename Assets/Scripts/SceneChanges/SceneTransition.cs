@@ -14,6 +14,8 @@ public class SceneTransition : MonoBehaviour
     bool transferNow = false;
 
     private FadeBlack fadeBlack;
+    private Animator anim;
+    private GameObject glassBreak;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +125,12 @@ public class SceneTransition : MonoBehaviour
                 {
                     sceneToTransfer = "DepressionOutro";
                 }
+                else if (SceneManager.GetActiveScene().name == "DenialFinal")
+                {
+                    glassBreak = GameObject.FindGameObjectWithTag("DenialEnd");
+                    anim = glassBreak.GetComponent<Animator>();
+                    anim.SetBool("End", true);
+                }
             }
 
             if (sceneToTransfer == "AcceptanceFinalLevel")
@@ -143,11 +151,16 @@ public class SceneTransition : MonoBehaviour
     public IEnumerator FadeInOutBlack(float waitTime)
     {
         GameManager.Instance.DisableInput();
+
+        if (SceneManager.GetActiveScene().name == "DenialFinal")
+        {
+            waitTime = 9.0f;
+        }
             
         fadeBlack.FadeToBlack(waitTime);
 
         yield return new WaitForSeconds(waitTime);
-        
+
         SceneManager.LoadScene(sceneToTransfer);
     }
     

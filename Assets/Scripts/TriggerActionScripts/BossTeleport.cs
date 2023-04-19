@@ -28,6 +28,7 @@ public class BossTeleport : MonoBehaviour
     public IEnumerator FadeInOutBlack(float waitTime)
     {
         gameManager.DisableInput();
+        controller.attackFrozen = true;
             
         blackScreen.FadeToBlack(waitTime);
 
@@ -50,6 +51,7 @@ public class BossTeleport : MonoBehaviour
         
         yield return new WaitForSeconds(waitTime);
 
+        controller.attackFrozen = false;
         controller.canAttack = true;
     }
 }

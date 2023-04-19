@@ -12,10 +12,9 @@ public class SceneTransition : MonoBehaviour
     Levels level;
     [SerializeField]
     bool transferNow = false;
+    bool onlyOnce = false;
 
     private FadeBlack fadeBlack;
-    private Animator anim;
-    private GameObject glassBreak;
 
     // Start is called before the first frame update
     void Start()
@@ -106,7 +105,7 @@ public class SceneTransition : MonoBehaviour
                 //DataManager.gameData.position.Set(11.73f, 0.0f, 10.0f);
             }
 
-            if(sceneToTransfer == "HubFinal")
+            if (sceneToTransfer == "HubFinal")
             {
                 GameManager.Instance.SetLevel(Levels.HUB);
                 checkpointData.position = new Vector3(3.218f, 43.83f, 11.162779f);
@@ -127,12 +126,9 @@ public class SceneTransition : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "DenialFinal")
                 {
-                    glassBreak = GameObject.FindGameObjectWithTag("DenialEnd");
-                    anim = glassBreak.GetComponent<Animator>();
-                    anim.SetBool("End", true);
+                    return;
                 }
             }
-
             if (sceneToTransfer == "AcceptanceFinalLevel")
             {
                 GameManager.Instance.SetLevel(Levels.ACC);
@@ -151,14 +147,11 @@ public class SceneTransition : MonoBehaviour
     public IEnumerator FadeInOutBlack(float waitTime)
     {
         GameManager.Instance.DisableInput();
-
-        if (SceneManager.GetActiveScene().name == "DenialFinal")
-        {
-            waitTime = 9.0f;
-        }
-            
+        //if (SceneManager.GetActiveScene().name == "DenialFinal")
+        //{
+        //    waitTime = 9.0f;
+        //}
         fadeBlack.FadeToBlack(waitTime);
-
         yield return new WaitForSeconds(waitTime);
 
         SceneManager.LoadScene(sceneToTransfer);
@@ -178,8 +171,10 @@ public class SceneTransition : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(transferNow)
+        if(transferNow && !onlyOnce)
         {
+            Debug.Log("ok");
+            onlyOnce = true;
             ChangeScene();
         }
     }

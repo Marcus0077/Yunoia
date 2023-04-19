@@ -58,6 +58,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject Player
+    {
+        get
+        {
+            if (player == null)
+                player = GameObject.FindGameObjectWithTag("Player");
+            return player;
+        }
+    }
+
     private bool isPuzzleCamOn;
 
     //Scene needs to be reloaded to turn off text color
@@ -419,7 +429,12 @@ public class GameManager : MonoBehaviour
 
     public void DisableInput()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+                return;
+        }
         player.GetComponent<BasicMovement>().playerControls.Disable();
         player.GetComponent<AbilityPush>().pushControls.Disable();
         player.GetComponent<Grapple>().grappleControls.Disable();
@@ -440,7 +455,12 @@ public class GameManager : MonoBehaviour
 
     public void EnableInput()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+                return;
+        }
         player.GetComponent<BasicMovement>().playerControls.Enable();
         player.GetComponent<AbilityPush>().pushControls.Enable();
         player.GetComponent<Grapple>().grappleControls.Enable();
@@ -478,7 +498,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator FadeThenDie()
     {
-        GameManager.Instance.dying = true;
+        GameObject.FindObjectOfType<PauseMenu>().DisableInput();
+        dying = true;
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
         {
             GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
@@ -486,7 +507,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
-        GameManager.Instance.dying = false;
+        dying = false;
     }
 }
 

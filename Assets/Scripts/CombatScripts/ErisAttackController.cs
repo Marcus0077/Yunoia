@@ -15,12 +15,12 @@ public class ErisAttackController : MonoBehaviour
 
     public bool canAttack = false;
     float fallVelocity = -8.0f;
-    float attackSpeed = 10.0f;
+    float attackSpeed = 8.0f;
 
     public bool hit = false;
     public bool inBossRoom = false;
     public bool attackFrozen = false;
-
+    int attacks = 0;
     public GameObject particles;
 
     // Start is called before the first frame update
@@ -93,12 +93,14 @@ public class ErisAttackController : MonoBehaviour
     private IEnumerator AttackCooldown()
     {
         canAttack = false;
-
+        attacks++;
+        int attackCount = attacks;
         yield return new WaitForSeconds(4.0f);
 
-        if (!hit)
+        if (!hit && attacks == attackCount)
         {
             canAttack = true;
+            attacks = 0;
         }
     }
 

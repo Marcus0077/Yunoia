@@ -10,6 +10,8 @@ public class ErisBoss : MonoBehaviour
     public Transform player;
     public GameObject fallEris;
     public float health;
+    public Color color;
+    Color origBossShieldColor;
 
     private GameObject EndScene;
 
@@ -18,6 +20,7 @@ public class ErisBoss : MonoBehaviour
     {
         health = 3.0f;
         EndScene = GameObject.FindGameObjectWithTag("EndScene");
+        origBossShieldColor = bossShield.GetComponent<ParticleSystemRenderer>().material.GetColor("_TintColor");
     }
 
     // Update is called once per frame
@@ -47,10 +50,17 @@ public class ErisBoss : MonoBehaviour
 
     private IEnumerator DamageShield()
     {
-        damageShield.SetActive(true);
+        //damageShield.SetActive(true);
+        //bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", color);
+        LeanTween.value(bossShield, origBossShieldColor, color, .5f).setOnUpdate((Color val) => { bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", val); });
+        yield return new WaitForSeconds(.5f);
+        LeanTween.value(bossShield, color, origBossShieldColor, .5f).setOnUpdate((Color val) => { bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", val); });
+        //damageShield.SetActive(false);
+        //bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", origBossShieldColor);
+    }
 
-        yield return new WaitForSeconds(0.5f);
-
-        damageShield.SetActive(false);
+    void UpdateMat(Color newColor)
+    {
+        
     }
 }

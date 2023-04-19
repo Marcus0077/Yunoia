@@ -11,18 +11,28 @@ public class TriggerEndScene : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (level == Levels.ACC)
         {
-            var checkpointData = new CheckpointData();
-            checkpointData.room = 1;
+            if (other.tag == "Player")
+            {
+                var checkpointData = new CheckpointData();
+                checkpointData.room = 1;
 
-            GameManager.Instance.CompleteLevel(level);
-            
-            GameManager.Instance.SetCheckpoint(checkpointData);
-            DataManager.gameData.checkpointed = false;
+                GameManager.Instance.CompleteLevel(level);
 
-            sceneToTransfer = "CutsceneEnd";
-            SceneManager.LoadScene(sceneToTransfer);
-        }      
+                GameManager.Instance.SetCheckpoint(checkpointData);
+                DataManager.gameData.checkpointed = false;
+
+                sceneToTransfer = "CutsceneEnd";
+                SceneManager.LoadScene(sceneToTransfer);
+            }
+        }
+        else if (level == Levels.DEN)
+        {
+            if (other.tag == "Player")
+            {
+                GetComponent<Animator>().SetTrigger("End");
+            }
+        }
     }
 }

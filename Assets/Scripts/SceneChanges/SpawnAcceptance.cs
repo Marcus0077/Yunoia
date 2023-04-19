@@ -12,7 +12,6 @@ public class SpawnAcceptance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        acceptTeleport = GameObject.FindGameObjectWithTag("AcceptanceTeleport");
 
         if (DataManager.gameData.levelCompletion[(int)Levels.ANG]
             && DataManager.gameData.levelCompletion[(int)Levels.BAR]

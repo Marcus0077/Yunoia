@@ -46,7 +46,7 @@ public class Door : MonoBehaviour
 
             if (activateText != null)
             {
-                Destroy(activateText);
+                Destroy(activateText.gameObject);
             }
 
             animator.SetTrigger("DoorOpen");

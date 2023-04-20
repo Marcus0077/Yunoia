@@ -32,7 +32,7 @@ public class NewSettingsController : MonoBehaviour
             AudioSource remove = new AudioSource();
             foreach (AudioSource audioSource in sources)
             {
-                if (audioSource.gameObject.name == "GameManager");
+                if (audioSource.gameObject.name == "GameManager" || audioSource.gameObject.name == "Main Camera") ;
                 {
                     remove = audioSource;
                 }
@@ -47,12 +47,14 @@ public class NewSettingsController : MonoBehaviour
         }
         else
         {
-            Source = new AudioSource[1];
+            Source = new AudioSource[2];
             Source[0] = GameManager.Instance.GetComponent<AudioSource>();
+            Source[1] = Camera.main.GetComponent<AudioSource>();
         }
         foreach (AudioSource audioSource in Source)
         {
-            audioSource.outputAudioMixerGroup = Mixer.FindMatchingGroups("Master")[0];
+            if(audioSource != null)
+                audioSource.outputAudioMixerGroup = Mixer.FindMatchingGroups("Master")[0];
         }
     }
 

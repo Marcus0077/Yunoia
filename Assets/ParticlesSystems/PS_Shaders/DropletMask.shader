@@ -15,7 +15,7 @@ Shader "DropletMask" {
             "Queue"="Transparent"
             "RenderType"="Transparent"
         }
-        GrabPass{ }
+        //GrabPass{ }
         Pass {
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite [_ZWriteMode]

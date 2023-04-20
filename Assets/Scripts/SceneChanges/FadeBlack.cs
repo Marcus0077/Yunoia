@@ -9,9 +9,9 @@ public class FadeBlack : MonoBehaviour
     public CanvasGroup text;
     private void Start()
     {
-        GameManager.Instance.BlockPlayerInput();
+        GameObject.FindObjectOfType<PauseMenu>().pause.Disable();
         FadeToTransparent(3f);
-        text.LeanAlpha(0, 3f).setOnComplete(() => { GameManager.Instance.EnablePlayerInput(); });
+        text.LeanAlpha(0, 3f).setOnComplete(() => { GameObject.FindObjectOfType<PauseMenu>().pause.Enable(); });
     }
 
      public void FadeToBlack(float waitTime)

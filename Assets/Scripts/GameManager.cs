@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
         texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
         camTurn = FindObjectOfType<LookAtCam>();
+        StopAllCoroutines();
     }
 
     public void FindCamTurn()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3472429437582756130}
   - component: {fileID: 5820776334881289808}
-  - component: {fileID: 5226355883921976916}
+  - component: {fileID: 429701920303678591}
   m_Layer: 0
   m_Name: joint13
   m_TagString: Untagged
@@ -42,13 +42,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722066750938195267}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5226355883921976916
+--- !u!114 &429701920303678591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,9 +57,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 722066750938195267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &1191986001472670491
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2456242668753012279}
   - component: {fileID: 4665339529785690002}
-  - component: {fileID: 3366942586150515145}
+  - component: {fileID: 1256365922728041514}
   m_Layer: 0
   m_Name: joint6
   m_TagString: Untagged
@@ -102,13 +103,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191986001472670491}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3366942586150515145
+--- !u!114 &1256365922728041514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,9 +118,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1191986001472670491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &1276023032758347207
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3409222493361177474}
   - component: {fileID: 8407487462592735379}
-  - component: {fileID: 8034661041092680509}
+  - component: {fileID: 6440906389119399969}
   m_Layer: 0
   m_Name: joint5
   m_TagString: Untagged
@@ -162,13 +164,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276023032758347207}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8034661041092680509
+--- !u!114 &6440906389119399969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,9 +179,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1276023032758347207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &1775226228542725537
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763163981696669293}
   - component: {fileID: 1588636693489391902}
-  - component: {fileID: 4834240635329746427}
+  - component: {fileID: 4512372863841022975}
   m_Layer: 0
   m_Name: joint1
   m_TagString: Untagged
@@ -222,13 +225,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775226228542725537}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4834240635329746427
+--- !u!114 &4512372863841022975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,9 +240,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775226228542725537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &2092318087264849595
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8694545505767661537}
   - component: {fileID: 6106038795871960207}
-  - component: {fileID: 4849399419888663499}
+  - component: {fileID: 1001970210891212817}
   m_Layer: 0
   m_Name: joint3
   m_TagString: Untagged
@@ -384,13 +388,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2404992582731822269}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4849399419888663499
+--- !u!114 &1001970210891212817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,9 +403,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2404992582731822269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &3020964235190195248
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4625535158199229352}
   - component: {fileID: 1709457440871082285}
-  - component: {fileID: 3027213012967803560}
+  - component: {fileID: 2843634081465582668}
   m_Layer: 0
   m_Name: joint15
   m_TagString: Untagged
@@ -444,13 +449,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3020964235190195248}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3027213012967803560
+--- !u!114 &2843634081465582668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,9 +464,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3020964235190195248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &3283375041191984762
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2113118937063163356}
   - component: {fileID: 1718495024692116654}
-  - component: {fileID: 9045734531298249290}
+  - component: {fileID: 2648418900523664699}
   m_Layer: 0
   m_Name: joint9
   m_TagString: Untagged
@@ -504,13 +510,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3283375041191984762}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9045734531298249290
+--- !u!114 &2648418900523664699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -519,9 +525,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3283375041191984762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &4309354273249160802
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 417654385432961779}
   - component: {fileID: 8799861154281823295}
-  - component: {fileID: 1592116801692351183}
+  - component: {fileID: 8308894576473989736}
   m_Layer: 0
   m_Name: joint2
   m_TagString: Untagged
@@ -564,13 +571,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4309354273249160802}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1592116801692351183
+--- !u!114 &8308894576473989736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -579,9 +586,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4309354273249160802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &4663593316977975784
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7687526055747461984}
   - component: {fileID: 8566695024249272898}
-  - component: {fileID: 5697902559361496928}
+  - component: {fileID: 387698456143977753}
   m_Layer: 0
   m_Name: joint14
   m_TagString: Untagged
@@ -624,13 +632,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4663593316977975784}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5697902559361496928
+--- !u!114 &387698456143977753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -639,9 +647,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4663593316977975784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &4857216988008298722
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6319760486083759558}
   - component: {fileID: 3446657009801865752}
-  - component: {fileID: 2163826997113634151}
+  - component: {fileID: 1013821234010144964}
   m_Layer: 0
   m_Name: joint16
   m_TagString: Untagged
@@ -684,13 +693,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4857216988008298722}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2163826997113634151
+--- !u!114 &1013821234010144964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -699,9 +708,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4857216988008298722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &5568784051894920218
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +774,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5568784051894920218}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c26966c3573f3f24189aab7b47a87bca, type: 3}
   m_Name: 
@@ -796,7 +806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3352145461223659623}
   - component: {fileID: 751643176015170002}
-  - component: {fileID: 1406885366029505975}
+  - component: {fileID: 4045344930504332434}
   m_Layer: 0
   m_Name: joint7
   m_TagString: Untagged
@@ -828,13 +838,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5713611546332136636}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1406885366029505975
+--- !u!114 &4045344930504332434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -843,9 +853,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5713611546332136636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &6691900175224008968
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 229066420843063486}
   - component: {fileID: 88092132128313878}
-  - component: {fileID: 7327837095236171237}
+  - component: {fileID: 2549088272694196749}
   m_Layer: 0
   m_Name: joint11
   m_TagString: Untagged
@@ -888,13 +899,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6691900175224008968}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7327837095236171237
+--- !u!114 &2549088272694196749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -903,9 +914,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691900175224008968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &7397065010899031055
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,7 +928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3893741445152681643}
   - component: {fileID: 5502661476721390907}
-  - component: {fileID: 3564851693637695205}
+  - component: {fileID: 1562897582141432962}
   m_Layer: 0
   m_Name: joint8
   m_TagString: Untagged
@@ -948,13 +960,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7397065010899031055}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3564851693637695205
+--- !u!114 &1562897582141432962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -963,9 +975,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7397065010899031055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &7797145937283223289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +1020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7859532046102965426}
   - component: {fileID: 3073767393143780048}
-  - component: {fileID: 632105223853575772}
+  - component: {fileID: 9122773408697191223}
   m_Layer: 0
   m_Name: joint12
   m_TagString: Untagged
@@ -1039,13 +1052,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8000317102603904485}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &632105223853575772
+--- !u!114 &9122773408697191223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1054,9 +1067,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8000317102603904485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &8481387049204113526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,7 +1081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7867099778952624799}
   - component: {fileID: 1224193995210229626}
-  - component: {fileID: 5199173864638047402}
+  - component: {fileID: 6322300688002634747}
   m_Layer: 0
   m_Name: joint10
   m_TagString: Untagged
@@ -1099,13 +1113,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8481387049204113526}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5199173864638047402
+--- !u!114 &6322300688002634747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1114,9 +1128,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8481387049204113526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}
 --- !u!1 &8718896659072037395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7232664019021522174}
   - component: {fileID: 411262026256721871}
-  - component: {fileID: 1157504832933954444}
+  - component: {fileID: 1443904647327748843}
   m_Layer: 0
   m_Name: joint4
   m_TagString: Untagged
@@ -1159,13 +1174,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8718896659072037395}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.006
   m_Height: 0.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1157504832933954444
+--- !u!114 &1443904647327748843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1174,6 +1189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8718896659072037395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0b87e8a8799784b8fc3a8c68d7f8fe, type: 3}
+  m_Script: {fileID: 11500000, guid: e649d72ada216e04396ecf519dbf1609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 5568784051894920218}

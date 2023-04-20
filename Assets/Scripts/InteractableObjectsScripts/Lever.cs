@@ -52,7 +52,8 @@ public class Lever : MonoBehaviour
     // Get references and initialize variables when levers spawn.
     void Start()
     {
-        //activateText.enabled = false;
+        if(activateText != null)
+            activateText.enabled = false;
 
         isActivated = false;
         isPlayer = false;
@@ -148,7 +149,8 @@ public class Lever : MonoBehaviour
     {
         if (Counterpart != null)
         {
-            //Counterpart.GetComponent<Lever>().activateText.enabled = false;
+            if(Counterpart.GetComponent<Lever>().activateText != null)
+                Counterpart.GetComponent<Lever>().activateText.enabled = false;
         }
 
         if (!isAiLever)
@@ -173,8 +175,8 @@ public class Lever : MonoBehaviour
                 }
             }
         }
-
-        //activateText.enabled = false;
+        if(activateText != null)
+            activateText.enabled = false;
     }
 
     // Resets lever sequence if both levers were not activated before time runs out.
@@ -196,7 +198,8 @@ public class Lever : MonoBehaviour
     {
         if (other.CompareTag("Player") && !Complete)
         {
-            //activateText.enabled = true;
+            if (activateText != null)
+                activateText.enabled = true;
             
             playerInteractions = other.GetComponent<PlayerInteractions>();
             playerInteractions.canPressLever = true;
@@ -205,8 +208,9 @@ public class Lever : MonoBehaviour
         }
         else if (other.CompareTag("Clone") && !Complete)
         {
-            //activateText.enabled = true;
-            
+            if (activateText != null)
+                activateText.enabled = true;
+
             cloneInteractions = other.GetComponent<CloneInteractions>();
             cloneInteractions.canPressLever = true;
 
@@ -220,7 +224,8 @@ public class Lever : MonoBehaviour
     {
         if (other.CompareTag("Player") && isPlayer)
         {
-            //activateText.enabled = false;
+            if (activateText != null) 
+                activateText.enabled = false;
             
             playerInteractions.canPressLever = false;
             
@@ -228,7 +233,8 @@ public class Lever : MonoBehaviour
         }
         else if (other.CompareTag("Clone") && isClone)
         {
-            //activateText.enabled = false;
+            if (activateText != null) 
+                activateText.enabled = false;
             
             cloneInteractions.canPressLever = false;
             

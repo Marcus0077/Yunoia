@@ -627,7 +627,7 @@ public class BasicMovement : MonoBehaviour, IAbility
         damageLoop = null;
     }
 
-    private IEnumerator Knockback(Transform other)
+    private IEnumerator Knockback(Transform other, bool kill)
     {
         knockedBack = true;
         Vector3 direction = transform.position - other.position;
@@ -637,20 +637,27 @@ public class BasicMovement : MonoBehaviour, IAbility
         GetComponent<Rigidbody>().AddForce(direction * 5, ForceMode.Impulse);
         yield return new WaitForSeconds(.5f);
         knockedBack = false;
-        yield return new WaitForSeconds(1.5f);
-        if (damageLoop == null)
-            damageLoop = StartCoroutine(Damaged());
+        if(kill)
+        {
+            GameManager.Instance.StartDeath();
+        }   
+        else
+        {
+            yield return new WaitForSeconds(1.5f);
+            if (damageLoop == null)
+                damageLoop = StartCoroutine(Damaged());
+        }
     }
 
     public void Hurt(Transform other)
     {
         if (isDamaged)
         {
-            GameManager.Instance.StartDeath();
+            StartCoroutine(Knockback(other, true));
         }
         else
         {
-            StartCoroutine(Knockback(other));
+            StartCoroutine(Knockback(other, false));
         }
     }
 

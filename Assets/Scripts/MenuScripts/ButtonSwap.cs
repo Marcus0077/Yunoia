@@ -8,6 +8,8 @@ public class ButtonSwap : MonoBehaviour
 {
     [SerializeField]
     Sprite keyboard, controller;
+    [SerializeField]
+    bool keyboardLong;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -20,7 +22,8 @@ public class ButtonSwap : MonoBehaviour
         {
             if(keyboard != null)
             {
-                GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x-5, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
+                if(keyboardLong)
+                    GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x-5, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
                 GetComponent<Image>().sprite = keyboard;
             }
         }

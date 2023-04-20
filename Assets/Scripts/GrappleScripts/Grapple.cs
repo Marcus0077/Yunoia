@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Grapple : MonoBehaviour, IAbility
 {
@@ -78,6 +81,9 @@ public class Grapple : MonoBehaviour, IAbility
 
     Animator anim;
 
+    public GameObject grappleIndicator;
+    private GameObject[] grapplePoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +94,25 @@ public class Grapple : MonoBehaviour, IAbility
         ResetSwingConditions();
 
         anim = GetComponentInChildren<Animator>();
+
+        if (grappleIndicator != null)
+        {
+            int i = 0;
+            grapplePoints = new GameObject[GameObject.FindGameObjectsWithTag("GrappleHookPoint").Length];
+            
+            while (i < GameObject.FindGameObjectsWithTag("GrappleHookPoint").Length)
+            {
+                grapplePoints[i] = GameObject.FindGameObjectsWithTag("GrappleHookPoint")[i];
+                i++;
+                
+                Debug.Log(i);
+            }
+
+            foreach (var point in grapplePoints)
+            {
+                Instantiate(grappleIndicator, point.transform.TransformPoint( point.GetComponent<SphereCollider>().center), quaternion.identity);
+            }
+        }
     }
 
     void FixedUpdate()

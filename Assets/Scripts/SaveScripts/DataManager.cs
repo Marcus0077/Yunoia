@@ -48,6 +48,7 @@ public class GameData
     public bool checkpointed = false;
     public CheckpointData[] checkpointDatas = new CheckpointData[System.Enum.GetValues(typeof(Levels)).Length];
     public bool[] levelCompletion = new bool[System.Enum.GetValues(typeof(Levels)).Length];
+    public PressurePlateSave[] pressurePlates = new PressurePlateSave[7];
 }
 
 [System.Serializable]
@@ -57,3 +58,9 @@ public class CheckpointData
     public Vector3 position = Vector3.zero;
 }
 
+[System.Serializable]
+public class PressurePlateSave
+{
+    public string name;
+    public float value;
+}

@@ -34,6 +34,7 @@ public class PlantDestroyer : MonoBehaviour
 
     public GameObject aiPrefab;
     private GameObject spawnedAI;
+    int indexOfSave = -1;
 
     private void Awake()
     {
@@ -43,8 +44,8 @@ public class PlantDestroyer : MonoBehaviour
         numCrystals = coCrystals.Length + 1;
         thisCrystalComplete = 0;
         crystalsComplete = 0;
-        Debug.Log(PlayerPrefs.GetFloat(prefName));
-        if (PlayerPrefs.GetFloat(prefName) >= 1)
+        indexOfSave = Array.FindIndex(DataManager.gameData.pressurePlates, f => f.name == prefName);
+        if (indexOfSave >= 0)
         {
             hasPuzzleCam = false;
             CompletePlate();
@@ -95,7 +96,18 @@ public class PlantDestroyer : MonoBehaviour
                 if(facelessList[i] == other.gameObject)
                 {
                     Debug.Log("found");
-                    PlayerPrefs.SetFloat(prefName, 1 + i);
+                    PressurePlateSave save = new PressurePlateSave();
+                    save.name = prefName;
+                    save.value = 1 + i;
+                    for(int j = 0; j < DataManager.gameData.pressurePlates.Length; j++)
+                    {
+                        if (DataManager.gameData.pressurePlates[j].name == null)
+                        {
+                            Debug.Log("Found Empty at " + j);
+                            DataManager.gameData.pressurePlates[j] = save;
+                            break;
+                        }
+                    }
                 }
             }
             this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
@@ -149,7 +161,7 @@ public class PlantDestroyer : MonoBehaviour
         
 
         this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
-        facelessList[(int)PlayerPrefs.GetFloat(prefName) - 1].SetActive(false);
+        facelessList[(int)DataManager.gameData.pressurePlates[indexOfSave].value - 1].SetActive(false);
         if (pPlateAnimator != null)
         {
             pPlateAnimator.SetBool("plateDown", true);

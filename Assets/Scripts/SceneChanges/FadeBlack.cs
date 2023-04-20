@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class FadeBlack : MonoBehaviour
 {
     public CanvasGroup text;
-    private void Awake()
+    private void Start()
     {
+        GameManager.Instance.BlockPlayerInput();
         FadeToTransparent(3f);
-        text.LeanAlpha(0, 5f);
+        text.LeanAlpha(0, 3f).setOnComplete(() => { GameManager.Instance.EnablePlayerInput(); });
     }
 
      public void FadeToBlack(float waitTime)

@@ -31,8 +31,13 @@ public class BasicMovement : MonoBehaviour, IAbility
     public float accelerationValue;
     public bool canMove;
     public bool isFrozen;
+    public bool knockedBack;
     public float moveStartTimeDivider;
-    
+
+    // Damage variables
+    public bool isDamaged;
+    Coroutine damageLoop;
+
     // Jump variables
     public LayerMask whatIsGround;
     public Transform groundPoint;
@@ -302,50 +307,52 @@ public class BasicMovement : MonoBehaviour, IAbility
     {
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
-        
-        if (canMove == true)
+        if(!knockedBack)
         {
-            if (isFrozen)
+            if (canMove == true)
             {
-                playerRB.constraints = RigidbodyConstraints.FreezeRotation;
-                isFrozen = false;
-            }
-            
-            if (SceneManager.GetActiveScene().name == "VSDenial")
-            {
-                moveDirection = Quaternion.AngleAxis(0, Vector3.right) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
-                playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
-            }
-            else if (grapple != null)
-            {
-                if(GameManager.Instance.camTurn != null && canRotateCam)
+                if (isFrozen)
                 {
-                    moveDirection = Quaternion.AngleAxis(FindObjectsOfType<LookAtCam>()[0].lookRotation.eulerAngles.y - 90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                    playerRB.constraints = RigidbodyConstraints.FreezeRotation;
+                    isFrozen = false;
                 }
-                else
-                {
-                    moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
-                }
-                
-                
 
-                if (grapple.grappleActive && !isGrounded)
+                if (SceneManager.GetActiveScene().name == "VSDenial")
                 {
-                    playerRB.velocity = new Vector3(0.0f, playerRB.velocity.y, -moveDirection.x * accelerationValue);
-                }
-                else
-                {
+                    moveDirection = Quaternion.AngleAxis(0, Vector3.right) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
                     playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
                 }
+                else if (grapple != null)
+                {
+                    if (GameManager.Instance.camTurn != null && canRotateCam)
+                    {
+                        moveDirection = Quaternion.AngleAxis(FindObjectsOfType<LookAtCam>()[0].lookRotation.eulerAngles.y - 90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                    }
+                    else
+                    {
+                        moveDirection = Quaternion.AngleAxis(-90, -Vector3.forward) * move.ReadValue<Vector2>().normalized * moveSpeed / (1 + CalcMinionMoveChange());
+                    }
+
+
+
+                    if (grapple.grappleActive && !isGrounded)
+                    {
+                        playerRB.velocity = new Vector3(0.0f, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+                    }
+                    else
+                    {
+                        playerRB.velocity = new Vector3(moveDirection.y * accelerationValue, playerRB.velocity.y, -moveDirection.x * accelerationValue);
+                    }
+                }
+
+                LookPlayer();
             }
-        
-            LookPlayer();
-        }
-        else
-        {
-            playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | 
-                                   RigidbodyConstraints.FreezeRotation;
-            isFrozen = true;
+            else
+            {
+                playerRB.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ |
+                                       RigidbodyConstraints.FreezeRotation;
+                isFrozen = true;
+            }
         }
         
         DashPlayer();
@@ -610,6 +617,48 @@ public class BasicMovement : MonoBehaviour, IAbility
         yield return new WaitForSeconds(0.68f);
 
         runSoundOneCanPlay = true;
+    }
+
+    private IEnumerator Damaged()
+    {
+        isDamaged = true;
+        yield return new WaitForSeconds(5f);
+        isDamaged = false;
+        damageLoop = null;
+    }
+
+    private IEnumerator Knockback(Transform other, bool kill)
+    {
+        knockedBack = true;
+        Vector3 direction = transform.position - other.position;
+        direction = new Vector3(direction.x, 0, direction.z);
+        direction.Normalize();
+        direction += Vector3.up;
+        GetComponent<Rigidbody>().AddForce(direction * 5, ForceMode.Impulse);
+        yield return new WaitForSeconds(.5f);
+        knockedBack = false;
+        if(kill)
+        {
+            GameManager.Instance.StartDeath();
+        }   
+        else
+        {
+            yield return new WaitForSeconds(1.5f);
+            if (damageLoop == null)
+                damageLoop = StartCoroutine(Damaged());
+        }
+    }
+
+    public void Hurt(Transform other)
+    {
+        if (isDamaged)
+        {
+            StartCoroutine(Knockback(other, true));
+        }
+        else
+        {
+            StartCoroutine(Knockback(other, false));
+        }
     }
 
     public void ResetRebind()

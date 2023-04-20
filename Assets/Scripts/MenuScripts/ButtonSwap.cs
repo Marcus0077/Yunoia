@@ -19,7 +19,10 @@ public class ButtonSwap : MonoBehaviour
         else
         {
             if(keyboard != null)
+            {
+                GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x-5, GetComponent<RectTransform>().localPosition.y, GetComponent<RectTransform>().localPosition.z);
                 GetComponent<Image>().sprite = keyboard;
+            }
         }
     }
 

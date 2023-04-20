@@ -22,6 +22,8 @@ public class ErisAttackController : MonoBehaviour
     public bool attackFrozen = false;
     int attacks = 0;
     public GameObject particles;
+    public GameObject particleAttack;
+    public ErisAttack attackSpawned;
 
     // Start is called before the first frame update
     void Awake()
@@ -37,10 +39,10 @@ public class ErisAttackController : MonoBehaviour
             {
                 if (!attackFrozen)
                 {
-                    ErisAttack attackSpawned = Instantiate(attackPrefab,
+                    attackSpawned = Instantiate(attackPrefab,
                         new Vector3(playerTrans.position.x, playerTrans.position.y + 20.0f, playerTrans.position.z),
                         Quaternion.identity);
-                    Instantiate(particles,
+                    particleAttack = Instantiate(particles,
                         new Vector3(playerTrans.position.x, playerTrans.position.y + 20.0f, playerTrans.position.z),
                         particles.transform.rotation);
                     attackSpawned.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, fallVelocity, 0.0f);
@@ -52,25 +54,35 @@ public class ErisAttackController : MonoBehaviour
         }
         else if (inBossRoom)
         {
-            if (canAttack)
+            if (canAttack && erisTrans != null)
             {
                 target = playerTrans;
 
                 if (!attackFrozen)
                 {
-                    ErisAttack attackSpawned = Instantiate(attackPrefab,
+                    if(attackSpawned == null)
+                    {
+                        attackSpawned = Instantiate(attackPrefab,
                         new Vector3(erisTrans.position.x, erisTrans.position.y, erisTrans.position.z),
                         Quaternion.identity);
-                    attackSpawned.transform.LookAt(target);
-                    GameObject particleAttack = Instantiate(particles,
+                        attackSpawned.transform.LookAt(target);
+                        attackSpawned.GetComponent<Rigidbody>().velocity = attackSpawned.transform.forward * attackSpeed;
+                        attackSpawned.controller = this;
+                    }
+                    particleAttack = Instantiate(particles,
                         new Vector3(erisTrans.position.x, erisTrans.position.y, erisTrans.position.z),
                         particles.transform.rotation);
                     particleAttack.transform.LookAt(target);
-                    attackSpawned.GetComponent<Rigidbody>().velocity = attackSpawned.transform.forward * attackSpeed;
-                    attackSpawned.controller = this;
                 }
 
                 StartCoroutine(AttackCooldown());
+            }
+            else if (attackFrozen)
+            {
+                if(particleAttack != null)
+                    Destroy(particleAttack);
+                if(attackSpawned != null)
+                    Destroy(attackSpawned);
             }
         }
 

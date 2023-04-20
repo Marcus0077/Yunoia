@@ -17,7 +17,7 @@ public class ErisAttack : MonoBehaviour
                 controller.hit = true;
                 Destroy(gameObject);
             }
-            else if (collider.CompareTag("Ground"))
+            else if (collider.CompareTag("Ground") || collider.gameObject.layer == LayerMask.NameToLayer("Scale") || collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
                 //Destroy(gameObject);
                 //Start explosion effect:

@@ -11,6 +11,8 @@ public class Teleport : MonoBehaviour
     private GameManager gameManager;
     private FadeBlack blackScreen;
 
+    public static bool isOpen = false;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -25,6 +27,8 @@ public class Teleport : MonoBehaviour
 
     public IEnumerator FadeInOutBlack(float waitTime)
     {
+        isOpen = true;
+
         gameManager.DisableInput();
             
         blackScreen.FadeToBlack(waitTime);
@@ -49,5 +53,13 @@ public class Teleport : MonoBehaviour
         blackScreen.FadeToTransparent(waitTime);
 
         gameManager.EnableInput();
+    }
+
+    void Update()
+    {
+        if(isOpen == true)
+        {
+            terrain.SetActive(true);
+        }
     }
 }

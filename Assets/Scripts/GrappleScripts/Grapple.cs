@@ -110,7 +110,9 @@ public class Grapple : MonoBehaviour, IAbility
 
             foreach (var point in grapplePoints)
             {
-                Instantiate(grappleIndicator, point.transform.TransformPoint( point.GetComponent<SphereCollider>().center), quaternion.identity);
+                GameObject particle = Instantiate(grappleIndicator, point.transform.TransformPoint( point.GetComponent<SphereCollider>().center), quaternion.identity);
+                particle.transform.parent = point.transform;
+                particle.transform.localScale = new Vector3(20, 20, 20);
             }
         }
     }

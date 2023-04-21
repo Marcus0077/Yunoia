@@ -6,15 +6,17 @@ public class CheckWin : MonoBehaviour
 {
     [SerializeField]
     Levels level;
+    [SerializeField]
+    GameObject portal;
     bool complete;
     // Start is called before the first frame update
     void Start()
     {
         complete = GameManager.Instance.GetLevelStatus(level);
         Debug.Log(GameManager.Instance.GetLevelStatus(level));
-        if(!complete)
+        if(complete)
         {
-            GetComponent<Renderer>().material.color *= .2f;
+            portal.SetActive(false);
         }
     }
 

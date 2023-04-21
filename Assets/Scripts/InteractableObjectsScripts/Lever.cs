@@ -130,8 +130,20 @@ public class Lever : MonoBehaviour
     {
         Complete = true;
 
-        if (!isSingleLever)
+        if (activateText != null)
+            activateText.enabled = false;
+        
+        if (GetComponentInChildren<ParticleSystem>() != null)
+            GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
+
+        if (Counterpart != null)
         {
+            if (Counterpart.GetComponent<Lever>().activateText != null)
+                Counterpart.GetComponent<Lever>().activateText.enabled = false;
+            
+            if (Counterpart.GetComponentInChildren<ParticleSystem>() != null)
+                Counterpart.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
+            
             Counterpart.GetComponent<Lever>().Complete = true;
         }
 
@@ -147,12 +159,6 @@ public class Lever : MonoBehaviour
     // Opens specified door if both levers have been activated before time runs out.
     void CompleteLeverSequence()
     {
-        if (Counterpart != null)
-        {
-            if(Counterpart.GetComponent<Lever>().activateText != null)
-                Counterpart.GetComponent<Lever>().activateText.enabled = false;
-        }
-
         if (!isAiLever)
         {
             if (Door.CompareTag("Door"))
@@ -175,8 +181,6 @@ public class Lever : MonoBehaviour
                 }
             }
         }
-        if(activateText != null)
-            activateText.enabled = false;
     }
 
     // Resets lever sequence if both levers were not activated before time runs out.
@@ -222,18 +226,18 @@ public class Lever : MonoBehaviour
     // and disables interaction for whichever one is exiting the trigger.
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && isPlayer)
+        if (other.CompareTag("Player"))
         {
-            if (activateText != null) 
+            if (activateText != null && !isClone) 
                 activateText.enabled = false;
             
             playerInteractions.canPressLever = false;
             
             isPlayer = false;
         }
-        else if (other.CompareTag("Clone") && isClone)
+        else if (other.CompareTag("Clone"))
         {
-            if (activateText != null) 
+            if (activateText != null && !isPlayer) 
                 activateText.enabled = false;
             
             cloneInteractions.canPressLever = false;

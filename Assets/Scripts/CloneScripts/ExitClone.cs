@@ -279,7 +279,8 @@ public class ExitClone : MonoBehaviour
             // do not deactivate it's text.
             if (!lever.isPlayer)
             {
-                //lever.activateText.enabled = false;
+                if (lever.activateText != null)
+                    lever.activateText.enabled = false;
             }
         }
 
@@ -291,7 +292,8 @@ public class ExitClone : MonoBehaviour
             // do not deactivate it's text.
             if (!door.isPlayer)
             {
-                door.activateText.enabled = false;
+                if (door.activateText != null)
+                    door.activateText.enabled = false;
             }
         }
 

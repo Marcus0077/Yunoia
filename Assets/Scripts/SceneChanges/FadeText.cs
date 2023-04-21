@@ -7,9 +7,17 @@ using UnityEngine.UI;
 public class FadeText : MonoBehaviour
 {
     public CanvasGroup text;
+    private static bool levelStarted = false;
     private void Awake()
     {
-        FadeToTransparent(5f);
+        if(!levelStarted)
+        {
+            StartCoroutine(FadeToTransparent(5f));
+        }
+        else if (levelStarted)
+        {
+            text.LeanAlpha(0, 0);
+        }
     }
 
      public void FadeToBlack(float waitTime)
@@ -17,8 +25,19 @@ public class FadeText : MonoBehaviour
         text.LeanAlpha(1, waitTime).setEaseInOutQuint();
     }
     
-    public void FadeToTransparent(float waitTime)
+    IEnumerator FadeToTransparent(float waitTime)
     {
         text.LeanAlpha(0, waitTime);
+
+        yield return new WaitForSeconds(5f);
+
+        levelStarted = true;
+        Debug.Log(levelStarted);
     } 
+
+    public void LevelFinished()
+    {
+        levelStarted = false;
+        Debug.Log(levelStarted);
+    }
 }

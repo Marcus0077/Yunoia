@@ -29,16 +29,20 @@ public class NewSettingsController : MonoBehaviour
         if(Source.Length > 1)
         {
             List<AudioSource> sources = new List<AudioSource>(FindObjectsOfType<AudioSource>());
-            AudioSource remove = new AudioSource();
+            List<AudioSource> remove = new List<AudioSource>();
             foreach (AudioSource audioSource in sources)
             {
                 if (audioSource.gameObject.name == "GameManager" || audioSource.gameObject.name == "Main Camera") ;
                 {
-                    remove = audioSource;
+                    remove.Add(audioSource);
+                    if(audioSource.gameObject.name == "Main Camera")
+                        Debug.Log(audioSource.gameObject.name);
                 }
             }
-            if(remove != null)
-                sources.Remove(remove);
+            foreach (AudioSource audioSource in remove)
+            {
+                sources.Remove(audioSource);
+            }
             Source = new AudioSource[sources.Count];
             for (int i = 0; i < sources.Count; i++)
             {
@@ -47,9 +51,18 @@ public class NewSettingsController : MonoBehaviour
         }
         else
         {
-            Source = new AudioSource[2];
-            Source[0] = GameManager.Instance.GetComponent<AudioSource>();
-            Source[1] = Camera.main.GetComponent<AudioSource>();
+            if(Camera.main.name == "Main Camera")
+            {
+                Source = new AudioSource[2];
+                Source[0] = GameManager.Instance.GetComponent<AudioSource>();
+                Source[1] = Camera.main.GetComponent<AudioSource>();
+            }
+            else
+            {
+                Source = new AudioSource[1];
+                Source[0] = GameManager.Instance.GetComponent<AudioSource>();
+            }
+            
         }
         foreach (AudioSource audioSource in Source)
         {

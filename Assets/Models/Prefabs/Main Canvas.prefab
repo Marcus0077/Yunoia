@@ -1652,7 +1652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671fe9f4506e497449d848005281b795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
 --- !u!1 &1499953887830966043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4753,6 +4752,7 @@ GameObject:
   - component: {fileID: 1499953888984781734}
   - component: {fileID: 1499953888984781730}
   - component: {fileID: 1499953888984781729}
+  - component: {fileID: 5115751793537537519}
   m_Layer: 5
   m_Name: ReturnToMainMenu
   m_TagString: Untagged
@@ -4863,7 +4863,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6439875574641085272}
+      - m_Target: {fileID: 5115751793537537519}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
         m_MethodName: ChangeVariableScene
         m_Mode: 5
@@ -4999,6 +4999,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5115751793537537519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499953888984781732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e400a112f35934347aad6b5fe555b700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToTransfer: HubFInal
+  level: 2
+  transferNow: 0
 --- !u!1 &1499953889087946386
 GameObject:
   m_ObjectHideFlags: 0

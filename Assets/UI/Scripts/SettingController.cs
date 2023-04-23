@@ -33,7 +33,7 @@ public class SettingController : MonoBehaviour
 
     public void SaveSoundSettings()
     {
-        PlayerPrefs.SetFloat(MasPref, masSlider.value);
+        //PlayerPrefs.SetFloat(MasPref, masSlider.value);
         PlayerPrefs.Save();
     }
 

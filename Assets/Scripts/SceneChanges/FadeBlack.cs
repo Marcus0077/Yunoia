@@ -9,7 +9,7 @@ public class FadeBlack : MonoBehaviour
     private void Start()
     {
         GameObject.FindObjectOfType<PauseMenu>().pause.Disable();
-        FadeToTransparent(3f);
+        LeanTween.color(GetComponent<RectTransform>(), Color.clear, 3f).setEaseInOutQuint().setOnComplete(() => { GameObject.FindObjectOfType<PauseMenu>().pause.Enable(); });
     }
 
      public void FadeToBlack(float waitTime)

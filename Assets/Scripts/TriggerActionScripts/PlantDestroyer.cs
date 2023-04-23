@@ -101,7 +101,7 @@ public class PlantDestroyer : MonoBehaviour
                     save.value = 1 + i;
                     for(int j = 0; j < DataManager.gameData.pressurePlates.Length; j++)
                     {
-                        if (DataManager.gameData.pressurePlates[j].name == null)
+                        if (DataManager.gameData.pressurePlates[j].name == null || DataManager.gameData.pressurePlates[j].name == "")
                         {
                             Debug.Log("Found Empty at " + j);
                             DataManager.gameData.pressurePlates[j] = save;

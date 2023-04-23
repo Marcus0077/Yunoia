@@ -510,6 +510,17 @@ public class GameManager : MonoBehaviour
         GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
         dying = false;
     }
+
+    public IEnumerator DelayDestroyCoroutine(GameObject go, float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(go);
+    }
+
+    public void DelayDestroy(GameObject go, float time)
+    {
+        StartCoroutine(DelayDestroyCoroutine(go, time));
+    }
 }
 
 public interface IAbility

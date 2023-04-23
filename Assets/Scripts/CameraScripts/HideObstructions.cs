@@ -165,6 +165,8 @@ public class HideObstructions : MonoBehaviour
     {
         foreach (var obstruction in Obstructions)
         {
+            if (obstruction == null)
+                continue;
             Color obstructionColor = obstruction.GetComponent<MeshRenderer>().material.color;
             obstructionColor.a = 0.25f;
 
@@ -176,6 +178,8 @@ public class HideObstructions : MonoBehaviour
     {
         foreach (var obstruction in Obstructions)
         {
+            if (obstruction == null)
+                continue;
             obstruction.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
 
             if (obstruction.GetComponent<MeshCollider>())
@@ -189,6 +193,8 @@ public class HideObstructions : MonoBehaviour
     {
         foreach (var obstruction in Obstructions)
         {
+            if (obstruction == null)
+                continue;
             Color obstructionColor = obstruction.GetComponent<MeshRenderer>().material.color;
             obstructionColor.a = 1f;
 
@@ -200,6 +206,8 @@ public class HideObstructions : MonoBehaviour
     {
         foreach (var obstruction in Obstructions)
         {
+            if (obstruction == null)
+                continue;
             obstruction.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.On;
 
             if (obstruction.GetComponent<MeshCollider>())

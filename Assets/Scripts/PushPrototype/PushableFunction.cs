@@ -6,7 +6,7 @@ using UnityEngine;
 public class PushableFunction : ScriptableObject
 {
     [SerializeField] // velocity: push force, maxVelocity: max speed, dragVelocity: friction force, returnDelay: seconds before returning
-    float velocity = 1, maxVelocity, dragVelocity, returnDelay;
+    float velocity = 1, maxVelocity, dragVelocity, returnDelay, destroyDelay = 0;
     [SerializeField] // reqCharge: Charge Level required to push, pushNumbers: number of pushes before maxVelocity is removed
     int reqCharge = 1, pushNumbers = 0;
     // activatable: runs functions inside this class, changeColor: -, destroy: destroys pushed object on completion of all tasks, animation: plays animation
@@ -176,7 +176,7 @@ public class PushableFunction : ScriptableObject
             {
                 if(destroy)
                 {
-                    Destroy(pushedObj);
+                    GameManager.Instance.DelayDestroy(pushedObj, destroyDelay);
                     return;
                 }
                 if(turnKinematicOff)

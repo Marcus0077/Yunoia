@@ -177,8 +177,10 @@ public class Lever : MonoBehaviour
                 foreach (var aiCounterpart in aiCounterparts)
                 {
                     aiCounterpart.GetComponent<AiMovement>().canAiMove = true;
-                    cageAnimator.SetBool("openedCage", true);
                 }
+                
+                cageAnimator.SetBool("openedCage", true);
+                Destroy(cageAnimator.gameObject.GetComponentInChildren<BoxCollider>());
             }
         }
     }

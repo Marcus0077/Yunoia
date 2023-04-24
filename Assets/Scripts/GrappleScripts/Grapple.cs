@@ -228,7 +228,8 @@ public class Grapple : MonoBehaviour, IAbility
             shoot.Play();
 
             anim.SetBool("isGrapple", true);
-            grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, this.transform.rotation);
+            shootTransform.LookAt(bestHookCenter);
+            grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, shootTransform.rotation);
 
             hook.Initialize(this, shootTransform);
             StartCoroutine(DestroyHookAfterLifetime());

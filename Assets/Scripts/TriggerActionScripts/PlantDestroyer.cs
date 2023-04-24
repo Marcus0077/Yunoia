@@ -41,9 +41,11 @@ public class PlantDestroyer : MonoBehaviour
         pPlateAnimator = GetComponent<Animator>();
         gameManager = GameManager.Instance;
         prefName = gameObject.name + gameManager.currentLevel;
+        
         numCrystals = coCrystals.Length + 1;
         thisCrystalComplete = 0;
         crystalsComplete = 0;
+        
         indexOfSave = Array.FindIndex(DataManager.gameData.pressurePlates, f => f.name == prefName);
         if (indexOfSave >= 0)
         {
@@ -55,11 +57,11 @@ public class PlantDestroyer : MonoBehaviour
     {
         if (hasPuzzleCam)
         {
-            float waitTime = 2.5f;
+            float waitTime = 3f;
 
             gameManager.ShowPuzzleWrapper(puzzleNum, waitTime);
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(waitTime-1.5f);
         }
 
         if (isMultipleCrystals)
@@ -68,7 +70,7 @@ public class PlantDestroyer : MonoBehaviour
             {
                 if (plant != null)
                 {
-                    Destroy(plant);
+                    plant.GetComponent<Animator>().SetTrigger("Retract");
                 }
             }
 
@@ -81,7 +83,7 @@ public class PlantDestroyer : MonoBehaviour
         {
             foreach (var plantDestroyer in plantToDestroy)
             {
-                Destroy(plantDestroyer);
+                plantDestroyer.GetComponent<Animator>().SetTrigger("Retract");
             }
         }
     }

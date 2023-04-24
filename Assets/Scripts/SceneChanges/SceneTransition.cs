@@ -126,13 +126,16 @@ public class SceneTransition : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "DenialFinal")
                 {
-                    return;
+                    sceneToTransfer = "DenialOutro";
                 }
             }
             if (sceneToTransfer == "AcceptanceFinalLevel")
             {
                 GameManager.Instance.SetLevel(Levels.ACC);
                 checkpointData.position = new Vector3(-10.74f, 45.0f, 27.74f);
+                //DataManager.gameData.position.Set(-10.74f, 45.0f, 27.74f);
+
+                sceneToTransfer = "AcceptanceIntro";
             }
 
             GameManager.Instance.SetCheckpoint(checkpointData);

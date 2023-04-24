@@ -190,7 +190,7 @@ public class ExitClone : MonoBehaviour
             this.GetComponent<AbilityPush>().DestroyShape();
             
             // Player clone destruction sound.
-            AudioSource.PlayClipAtPoint(destructSound, transform.position);
+            AudioSource.PlayClipAtPoint(destructSound, transform.position, GameManager.Instance.GetFloat(Settings.MAS) * GameManager.Instance.GetFloat(Settings.SFX));
 
             // Tell player that clone is despawned and allow player to move again.
             summonClone.cloneSummoned = false;

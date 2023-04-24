@@ -80,9 +80,9 @@ public class ErisAttackController : MonoBehaviour
             else if (attackFrozen)
             {
                 if(particleAttack != null)
-                    Destroy(particleAttack);
+                    Destroy(particleAttack.gameObject);
                 if(attackSpawned != null)
-                    Destroy(attackSpawned);
+                    Destroy(attackSpawned.gameObject);
             }
         }
 

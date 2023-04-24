@@ -233,7 +233,7 @@ public class Pushable : MonoBehaviour
         return data;
     }
 
-    public void Activate()
+    public virtual void Activate()
     {
 
     }

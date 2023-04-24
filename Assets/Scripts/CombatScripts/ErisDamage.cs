@@ -18,16 +18,31 @@ public class ErisDamage : MonoBehaviour
         bossAttack = GameObject.FindObjectOfType<ErisAttackController>();
     }
 
-    private void OnTriggerEnter(Collider collider)
+    public void DoDamage()
     {
-        if (collider.CompareTag("Player") && !used)
-        {
+        if (!used)
             StartCoroutine(CompletePuzzle());
-        }
     }
+
+    //private void OnTriggerEnter(Collider collider)
+    //{
+    //    if (collider.CompareTag("Player") && !used)
+    //    {
+    //        StartCoroutine(CompletePuzzle());
+    //    }
+    //}
+
     
     private IEnumerator CompletePuzzle()
     {
+        if(!used)
+        {
+            used = true;
+        }
+        else
+        {
+            yield break;
+        }
         float waitTime = 2.5f;
         bossAttack.attackFrozen = true;
         
@@ -35,7 +50,6 @@ public class ErisDamage : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
 
-        used = true;
         boss.ErisHurt();
 
         this.gameObject.GetComponentsInChildren<Renderer>()[0].material.SetColor("_EmissionColor", Color.black);

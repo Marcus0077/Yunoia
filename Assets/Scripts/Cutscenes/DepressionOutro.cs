@@ -42,7 +42,7 @@ public class DepressionOutro : MonoBehaviour
         aToSkip.SetActive(true);
         canSkip = true;
         
-        yield return new WaitForSeconds(13f);
+        yield return new WaitForSeconds(12f);
 
         SceneManager.LoadScene("HubFinal");
     }

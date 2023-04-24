@@ -32,7 +32,7 @@ public class NewSettingsController : MonoBehaviour
             List<AudioSource> remove = new List<AudioSource>();
             foreach (AudioSource audioSource in sources)
             {
-                if (audioSource.gameObject.name == "GameManager" || audioSource.gameObject.name == "Main Camera") ;
+                if (audioSource.gameObject.name == "GameManager" || audioSource.gameObject.name == "Main Camera")
                 {
                     remove.Add(audioSource);
                     if(audioSource.gameObject.name == "Main Camera")

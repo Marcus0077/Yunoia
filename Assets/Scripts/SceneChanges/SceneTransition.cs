@@ -16,6 +16,8 @@ public class SceneTransition : MonoBehaviour
 
     private FadeBlack fadeBlack;
 
+    public Rigidbody physicsBall;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -126,7 +128,7 @@ public class SceneTransition : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "DenialFinal")
                 {
-                    sceneToTransfer = "DenialOutro";
+                    StartCoroutine(endDenial());
                 }
             }
             if (sceneToTransfer == "AcceptanceFinalLevel")
@@ -142,18 +144,26 @@ public class SceneTransition : MonoBehaviour
             DataManager.gameData.checkpointed = false;
 
 
+            if (SceneManager.GetActiveScene().name != "DenialFinal")
             StartCoroutine(FadeInOutBlack(1.5f));
         }
 
+    }
+
+    private IEnumerator endDenial()
+    {
+        GameManager.Instance.DisableInput();
+        physicsBall.AddForce(new Vector3(0, 0, -100000));
+
+        yield return new WaitForSeconds(3);
+        
+        sceneToTransfer = "DenialOutro";
+        StartCoroutine(FadeInOutBlack(1.5f));
     }
     
     public IEnumerator FadeInOutBlack(float waitTime)
     {
         GameManager.Instance.DisableInput();
-        //if (SceneManager.GetActiveScene().name == "DenialFinal")
-        //{
-        //    waitTime = 9.0f;
-        //}
         fadeBlack.FadeToBlack(waitTime);
         yield return new WaitForSeconds(waitTime);
 

@@ -27,12 +27,12 @@ public class TriggerEndScene : MonoBehaviour
                 SceneManager.LoadScene(sceneToTransfer);
             }
         }
-        else if (level == Levels.DEN)
-        {
-            if (other.tag == "Player")
-            {
-                GetComponent<Animator>().SetTrigger("End");
-            }
-        }
+        // else if (level == Levels.DEN)
+        // {
+        //     if (other.tag == "Player")
+        //     {
+        //         GetComponent<Animator>().SetTrigger("End");
+        //     }
+        // }
     }
 }

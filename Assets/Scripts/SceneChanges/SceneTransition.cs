@@ -18,6 +18,10 @@ public class SceneTransition : MonoBehaviour
 
     public Rigidbody physicsBall;
 
+    // Audio variables.
+    public AudioSource audioSource;
+    public AudioClip glassSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -154,6 +158,8 @@ public class SceneTransition : MonoBehaviour
     {
         GameManager.Instance.DisableInput();
         physicsBall.AddForce(new Vector3(0, 0, -100000));
+        GetComponent<Animator>().SetTrigger("End");
+        audioSource.PlayOneShot(glassSound);
 
         yield return new WaitForSeconds(3);
         

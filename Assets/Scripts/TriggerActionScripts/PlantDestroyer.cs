@@ -71,6 +71,7 @@ public class PlantDestroyer : MonoBehaviour
                 if (plant != null)
                 {
                     plant.GetComponent<Animator>().SetTrigger("Retract");
+                    Destroy(plant.GetComponentInChildren<BoxCollider>());
                 }
             }
 
@@ -84,6 +85,7 @@ public class PlantDestroyer : MonoBehaviour
             foreach (var plantDestroyer in plantToDestroy)
             {
                 plantDestroyer.GetComponent<Animator>().SetTrigger("Retract");
+                Destroy(plantDestroyer.GetComponentInChildren<BoxCollider>());
             }
         }
     }
@@ -112,7 +114,9 @@ public class PlantDestroyer : MonoBehaviour
                     }
                 }
             }
+            
             this.GetComponent<SphereCollider>().enabled = !this.GetComponent<SphereCollider>().enabled;
+            
             if (pPlateAnimator != null)
             {
                 pPlateAnimator.SetBool("plateDown", true);
@@ -121,8 +125,6 @@ public class PlantDestroyer : MonoBehaviour
             if (!isMultipleCrystals)
             {
                 coAI = other.GameObject();
-                
-                Debug.Log("Puzzle Routine Plays."); 
                 StartCoroutine(CompletePuzzle());
             }
             else if (thisCrystalComplete == 0)
@@ -200,8 +202,10 @@ public class PlantDestroyer : MonoBehaviour
 
     private IEnumerator LoadHub()
     {
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(2f);
         GameObject.FindObjectOfType<FadeBlack>().FadeToBlack(1.5f);
+        yield return new WaitForSeconds(1.5f);
+        
         //GameManager.Instance.SetCheckpoint(Levels.HUB, new Vector3(0.92f, 47.07f, 19.93f));
         DataManager.gameData.checkpointed = false;
         //DataManager.gameData.position.Set(0.92f, 47.07f, 19.93f);

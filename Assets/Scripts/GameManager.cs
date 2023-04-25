@@ -73,12 +73,14 @@ public class GameManager : MonoBehaviour
     //Scene needs to be reloaded to turn off text color
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        dying = false;
         if (!textColor)
             return;
         texts = new List<TextMeshProUGUI>(FindObjectsOfType<TextMeshProUGUI>());
         texts.ForEach(text => text.color = ConvertFloatToHex(settings[(int)Settings.TXTCLR]));
         camTurn = FindObjectOfType<LookAtCam>();
         StopAllCoroutines();
+        Debug.Log("stopped");
     }
 
     public void FindCamTurn()
@@ -494,11 +496,13 @@ public class GameManager : MonoBehaviour
 
     public void StartDeath()
     {
-        StartCoroutine(FadeThenDie());
+        StartCoroutine(FadeThenDie());       
     }
 
     public IEnumerator FadeThenDie()
     {
+        if(dying)
+            yield break;
         GameObject.FindObjectOfType<PauseMenu>().DisableInput();
         dying = true;
         if (GameObject.FindObjectOfType<FadeBlack>() != null)
@@ -508,7 +512,6 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         GameObject.FindWithTag("MainCanvas").transform.Find("Lose Screen Object").gameObject.SetActive(true);
-        dying = false;
     }
 
     public IEnumerator DelayDestroyCoroutine(GameObject go, float time)

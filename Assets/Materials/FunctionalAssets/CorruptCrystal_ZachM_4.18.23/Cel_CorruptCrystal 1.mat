@@ -23,15 +23,18 @@ Material:
   m_Name: Cel_CorruptCrystal 1
   m_Shader: {fileID: 4800000, guid: e88aeddd2ef1f934d805981244872e27, type: 3}
   m_ValidKeywords:
+  - _EMISSION
   - _HALFTONESHAPE_DOT
   - _NORMALMAP
   - _OUTLINE
   - _RIMLIGHTING_ON
   - _SPECGLOSSMAP
   m_InvalidKeywords:
+  - _HAFTONESHAPES_DOT
   - _METALLICSPECGLOSSMAP
   - _SPECULARHIGHLIGHTS_OFF
-  m_LightmapFlags: 4
+  - _SPECULARHIGHTLIGHTS
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2050
@@ -89,6 +92,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _HatchingPatternMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: bf3e21c2023733843bdfe2bfd656e215, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -106,6 +113,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RampTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -131,6 +142,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Boolean_f9999c8db29c427d86a843c1a1c85720: 0
+    - ShadowPatternScale: 10
+    - Vector1_0f3ca3289daa40b4a7654cc64fd05ec1: 0
+    - Vector1_85d44c600d6c46b38d9c8065f25681ea: 0
+    - Vector1_c89cb8dc56774a9583c7b9c3a5725c4c: 0
+    - Vector1_e5b6f1488dec4326bd8bbd0e05156810: 0
+    - _AllToon_OverrideShadowColor: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BrushLowerCut: 0
@@ -156,6 +174,8 @@ Material:
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _HAFTONESHAPES: 0
+    - _HafltoneFadeDistance: 10
     - _HairSpecExponent: 128
     - _HairSpecNoiseStrength: 1
     - _HairSpecularSize: 0.8
@@ -165,10 +185,15 @@ Material:
     - _HalfToneIncludeReceivedShadow: 0
     - _HalfToneShape: 0
     - _HalfToneUvMode: 0
+    - _HalftoneDiffuseOffest: 0
     - _HalftoneFadeDistance: 10
     - _HalftoneFadeToColor: 0
+    - _HalftoneLightSizeFactor: 0
     - _HalftoneNoiseClip: 0.8
+    - _HalftoneScale: 0
+    - _HalftoneSize: 0.3
     - _HalftoneTilling: 8
+    - _HalftoneUseScreenSpaceUV: 0
     - _HatchingDensity: 1
     - _HatchingDiffuseOffset: 0
     - _HatchingDrawStrength: 1
@@ -184,19 +209,27 @@ Material:
     - _OutlineWidth: 5
     - _OverrideShadowColor: 0
     - _Parallax: 0.005
+    - _QueueControl: -1
     - _QueueOffset: 0
+    - _RIMLIGHTING: 0
     - _ReceiveShadows: 1
     - _RimEnabled: 1
     - _RimLightAlign: 0
     - _RimLightSmoothness: 0
+    - _RimLightSmootness: 0
     - _RimPower: 0.01
+    - _SPECULARHIGHTLIGHTS: 0
+    - _ShadowPatternSize: 0.3
     - _Shininess: 0
     - _SizeFalloff: 0
     - _Smoothness: 0.5
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SpecClipMaskScale: 1
+    - _SpecColor_1: 0.1
+    - _SpecFalloff: 0
     - _SpecShadowStrength: 1
+    - _SpecShadowStrenth: 1
     - _SpecSource: 0
     - _SpecularClipStrength: 0
     - _SpecularFalloff: 0.5
@@ -208,21 +241,26 @@ Material:
     - _StencilRef: 0
     - _StepViaRampTexture: 0
     - _Surface: 0
+    - _USERAMPCOLOR: 0
+    - _UseClipPattern: 0
+    - _UseNormalMap: 0
     - _UseRampColor: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalfToneColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HalftoneColor: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HatchingScale: {r: 15, g: 1, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}

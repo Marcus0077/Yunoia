@@ -8,6 +8,8 @@ public class CheckWin : MonoBehaviour
     Levels level;
     [SerializeField]
     GameObject portal;
+    [SerializeField]
+    GameObject postProcess;
     bool complete;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class CheckWin : MonoBehaviour
         if(complete)
         {
             portal.SetActive(false);
+            postProcess.SetActive(true);
         }
     }
 

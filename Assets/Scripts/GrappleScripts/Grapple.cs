@@ -58,12 +58,16 @@ public class Grapple : MonoBehaviour, IAbility
     public bool canYank = false;
     public bool yankReady = false;
     public bool canReverseSwing = true;
-    public  bool canApplyForce = true;
+    public bool canApplyForce = true;
     public bool forwardSwing = true;
     public bool needYankSwing = true;
     public bool recoverySwing = false;
     public bool initalSwingForce = false;
     float cdRemaining;
+
+    Vector3 dirFromPlayer;
+    float dotProd;
+    public Transform testAim;
 
     public InputActionAsset grappleControls;
     public InputAction shootHook, cancelHook, extendGrapple;
@@ -145,11 +149,18 @@ public class Grapple : MonoBehaviour, IAbility
 
         // If bestHook is initialized as a point other than the hook itself, 
         // check if the player and bestHook are within the determined radius
-        if (bestHook != hookBase)
+        if (bestHook != null && bestHook != hookBase)
         {
             if (Vector3.Distance(bestHookCenter, shootTransform.position) > radius)
             {
                 bestHook = null;
+            }
+            else
+            {
+                dirFromPlayer = (bestHookCenter - testAim.position).normalized;
+                dotProd = Vector3.Dot(dirFromPlayer, testAim.forward);
+
+                Debug.Log(dotProd);
             }
         }
 
@@ -224,15 +235,18 @@ public class Grapple : MonoBehaviour, IAbility
         // and the grapple is ready
         if (bestHook != null && hook == null && shootHook.WasPressedThisFrame() && ready == true)
         {
-            hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
-            shoot.Play();
+            if (dotProd > 0)
+            {
+                hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
+                shoot.Play();
 
-            anim.SetBool("isGrapple", true);
-            shootTransform.LookAt(bestHookCenter);
-            grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, shootTransform.rotation);
+                anim.SetBool("isGrapple", true);
+                shootTransform.LookAt(bestHookCenter);
+                grappleEffectDestroy = Instantiate(grappleEffect, shootTransform.position, shootTransform.rotation);
 
-            hook.Initialize(this, shootTransform);
-            StartCoroutine(DestroyHookAfterLifetime());
+                hook.Initialize(this, shootTransform);
+                StartCoroutine(DestroyHookAfterLifetime());
+            }
         }
 
         // Conditions for a Yank. These include being attached to a 'GrappleYank' point, 

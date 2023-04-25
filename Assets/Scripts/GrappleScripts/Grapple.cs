@@ -235,7 +235,7 @@ public class Grapple : MonoBehaviour, IAbility
         // and the grapple is ready
         if (bestHook != null && hook == null && shootHook.WasPressedThisFrame() && ready == true)
         {
-            if (dotProd > 0)
+            if (dotProd > -0.05)
             {
                 hook = Instantiate(hookPrefab, shootTransform.position, Quaternion.identity).GetComponent<Hook>();
                 shoot.Play();

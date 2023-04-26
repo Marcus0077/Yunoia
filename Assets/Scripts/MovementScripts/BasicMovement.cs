@@ -52,7 +52,8 @@ public class BasicMovement : MonoBehaviour, IAbility
     // Dash Variables
     private float dashCooldown;
     private int dashAccelerate;
-    
+    public GameObject dashParticle;
+
     // Camera Variables
     public string curCamState;
     public Animator stateDrivenCamAnimator;
@@ -459,7 +460,7 @@ public class BasicMovement : MonoBehaviour, IAbility
         {
             dashSound.Play();
             animator.SetBool("Dash", true);
-
+            Instantiate(dashParticle, transform.position, Quaternion.LookRotation(- transform.right), transform);
             dashAccelerate = 1;
             dashCooldown = 3f;
         }

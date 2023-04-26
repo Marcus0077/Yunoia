@@ -7,6 +7,19 @@ public class ErisAttack : MonoBehaviour
     public bool secondaryEffect;
     public ErisAttackController controller;
     public GameObject collisionParticles;
+    public AudioClip sound;
+
+    void Start()
+    {
+        if(!secondaryEffect)
+        {
+            AudioSource.PlayClipAtPoint(sound, GameManager.Instance.Player.transform.position, GameManager.Instance.GetFloat(Settings.MAS) * GameManager.Instance.GetFloat(Settings.SFX));
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(sound, transform.position, GameManager.Instance.GetFloat(Settings.MAS) * GameManager.Instance.GetFloat(Settings.SFX)); 
+        }
+    }
 
     public void OnTriggerEnter(Collider collider)
     {

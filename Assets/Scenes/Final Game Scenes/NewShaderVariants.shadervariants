@@ -23,7 +23,12 @@ ShaderVariantCollection:
   - first: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
-      - keywords: SHADOWS_DEPTH
+      - keywords: 
+        passType: 8
+  - first: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
         passType: 8
   - first: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
     second:
@@ -40,29 +45,21 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
-      - keywords: FOG_EXP2
-        passType: 0
   - first: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
       - keywords: 
-        passType: 0
-      - keywords: FOG_EXP2
         passType: 0
   - first: {fileID: 205, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
       - keywords: 
         passType: 0
-      - keywords: FOG_EXP2
-        passType: 0
-  - first: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+  - first: {fileID: 207, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
-      - keywords: PROCEDURAL_INSTANCING_ON _ALPHABLEND_ON
-        passType: 8
       - keywords: 
-        passType: 13
+        passType: 0
   - first: {fileID: 10490, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
@@ -110,10 +107,15 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
-  - first: {fileID: 18002, guid: 0000000000000000f000000000000000, type: 0}
+  - first: {fileID: 16000, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
       - keywords: 
+        passType: 0
+  - first: {fileID: 16001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: ADJUST_TO_LINEARSPACE
         passType: 0
   - first: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
     second:
@@ -123,8 +125,6 @@ ShaderVariantCollection:
   - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
     second:
       variants:
-      - keywords: 
-        passType: 0
       - keywords: BEVEL_ON GLOW_ON
         passType: 0
       - keywords: GLOW_ON
@@ -134,98 +134,32 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
-      - keywords: FOG_EXP2
-        passType: 0
   - first: {fileID: 4800000, guid: f3aeeb912d377044ab70cae27ffd1f78, type: 3}
     second:
       variants:
       - keywords: 
         passType: 0
-      - keywords: FOG_EXP2
+  - first: {fileID: 4800000, guid: 8580d4430d402364b9a4a9214e5e604b, type: 3}
+    second:
+      variants:
+      - keywords: LIGHTPROBE_SH
         passType: 0
   - first: {fileID: 4800000, guid: 4186641884395fa4297d5b5ac27b3d07, type: 3}
     second:
       variants:
       - keywords: 
         passType: 0
-      - keywords: FOG_EXP2
-        passType: 0
   - first: {fileID: 4800000, guid: 9dbba4bc2b46c9a4a9944de8358bad38, type: 3}
     second:
       variants:
       - keywords: 
-        passType: 8
-      - keywords: SHADOWS_DEPTH
         passType: 8
   - first: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
     second:
       variants:
       - keywords: 
         passType: 8
-      - keywords: INSTANCING_ON
-        passType: 8
       - keywords: 
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _EMISSION _MAIN_LIGHT_SHADOWS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _EMISSION _MAIN_LIGHT_SHADOWS _SURFACE_TYPE_TRANSPARENT
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _MAIN_LIGHT_SHADOWS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _MAIN_LIGHT_SHADOWS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 INSTANCING_ON _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ALPHAPREMULTIPLY_ON
-          _MAIN_LIGHT_SHADOWS _SURFACE_TYPE_TRANSPARENT
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
-          _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
-          _MAIN_LIGHT_SHADOWS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
-          _MAIN_LIGHT_SHADOWS _SURFACE_TYPE_TRANSPARENT
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _METALLICSPECGLOSSMAP _NORMALMAP _SPECULARHIGHLIGHTS_OFF
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _SURFACE_TYPE_TRANSPARENT
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _EMISSION
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP
-          _PARALLAXMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _NORMALMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _NORMALMAP _PARALLAXMAP
-        passType: 13
-      - keywords: INSTANCING_ON
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ALPHAPREMULTIPLY_ON
           _MAIN_LIGHT_SHADOWS _SURFACE_TYPE_TRANSPARENT
@@ -234,6 +168,7 @@ ShaderVariantCollection:
           _MAIN_LIGHT_SHADOWS
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION _MAIN_LIGHT_SHADOWS
+          _SURFACE_TYPE_TRANSPARENT
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ENVIRONMENTREFLECTIONS_OFF
           _MAIN_LIGHT_SHADOWS _SPECULARHIGHLIGHTS_OFF _SURFACE_TYPE_TRANSPARENT
@@ -243,40 +178,11 @@ ShaderVariantCollection:
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
           _METALLICSPECGLOSSMAP _NORMALMAP
         passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP _PARALLAXMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _METALLICSPECGLOSSMAP _NORMALMAP _SPECULARHIGHLIGHTS_OFF
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _NORMALMAP
-        passType: 13
       - keywords: _ADDITIONAL_LIGHTS _DETAIL_MULX2 _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _EMISSION
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _NORMALMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _NORMALMAP _PARALLAXMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP
-          _PARALLAXMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _NORMALMAP _PARALLAXMAP
-        passType: 13
-  - first: {fileID: 4800000, guid: ee7e4c9a5f6364b688a332c67fc32cca, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 8
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _METALLICSPECGLOSSMAP _NORMALMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _METALLICSPECGLOSSMAP _NORMALMAP
         passType: 13
   - first: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
     second:
@@ -286,15 +192,6 @@ ShaderVariantCollection:
       - keywords: PROCEDURAL_INSTANCING_ON _ALPHATEST_ON
         passType: 13
       - keywords: _ALPHATEST_ON
-        passType: 13
-  - first: {fileID: 4800000, guid: a5e1047f27bee462089b2bc3104f90fd, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 8
-      - keywords: 
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
         passType: 13
   - first: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
     second:
@@ -308,11 +205,6 @@ ShaderVariantCollection:
         passType: 0
       - keywords: _DEPTH_MSAA_2
         passType: 0
-  - first: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 4800000, guid: 65df88701913c224d95fc554db28381a, type: 3}
     second:
       variants:
@@ -325,8 +217,6 @@ ShaderVariantCollection:
         passType: 0
       - keywords: _BLOOM_LQ
         passType: 0
-      - keywords: _BLOOM_LQ _FILM_GRAIN
-        passType: 0
   - first: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
     second:
       variants:
@@ -335,57 +225,10 @@ ShaderVariantCollection:
   - first: {fileID: -6465566751694194690, guid: 9b4e681081e2b4c469111bb649e2f7ee, type: 3}
     second:
       variants:
-      - keywords: FOG_EXP2 INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _DECAL_NORMAL_BLEND_HIGH _MAIN_LIGHT_SHADOWS
-        passType: 13
       - keywords: INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _DECAL_NORMAL_BLEND_HIGH
           _MAIN_LIGHT_SHADOWS
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 13
-  - first: {fileID: 4800000, guid: 69c1f799e772cb6438f56c23efccb782, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 8
-      - keywords: INSTANCING_ON
-        passType: 8
-      - keywords: _ALPHATEST_ON
-        passType: 8
-      - keywords: 
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 INSTANCING_ON LIGHTMAP_ON _ADDITIONAL_LIGHTS
-          _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ALPHATEST_ON _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ALPHATEST_ON _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: INSTANCING_ON
-        passType: 13
-      - keywords: INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ALPHATEST_ON _MAIN_LIGHT_SHADOWS
-          _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ALPHATEST_ON _MAIN_LIGHT_SHADOWS
-          _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ALPHATEST_ON _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ALPHATEST_ON _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ALPHATEST_ON
         passType: 13
   - first: {fileID: -6465566751694194690, guid: 3739e562a03fc0b4982d8aa66cc50865, type: 3}
     second:
@@ -394,136 +237,21 @@ ShaderVariantCollection:
         passType: 8
       - keywords: 
         passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS
-        passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 13
-  - first: {fileID: 4800000, guid: 8fbe92a9edfe6074e841d6dd1509bc59, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 4800000, guid: 21322c8b137c66e49b86085d3c8161f6, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 8
-      - keywords: INSTANCING_ON
-        passType: 8
-      - keywords: _ALPHATEST_ON
-        passType: 8
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ALPHATEST_ON _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: INSTANCING_ON
-        passType: 13
-      - keywords: INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-          _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ALPHATEST_ON _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-        passType: 13
-  - first: {fileID: 4800000, guid: 0a7e590f3cf1d4ee8a8fab5b6eff09ef, type: 3}
-    second:
-      variants:
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 INSTANCING_ON LIGHTMAP_ON _ADDITIONAL_LIGHTS
-          _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS _NORMALMAP _TERRAIN_INSTANCED_PERPIXEL_NORMAL
         passType: 13
   - first: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
     second:
       variants:
       - keywords: 
         passType: 0
-      - keywords: FOG_EXP2
-        passType: 0
-  - first: {fileID: -6465566751694194690, guid: 2cddf2ee6a74aca44af00f5a49bd2cf1, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 8
-      - keywords: INSTANCING_ON
-        passType: 8
-      - keywords: 
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 13
   - first: {fileID: 4800000, guid: e88aeddd2ef1f934d805981244872e27, type: 3}
     second:
       variants:
       - keywords: 
         passType: 8
-      - keywords: INSTANCING_ON
-        passType: 8
       - keywords: _ALPHATEST_ON
         passType: 8
       - keywords: 
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _EMISSION _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-          _SPECGLOSSMAP
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP2 LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-          _SPECGLOSSMAP
-        passType: 13
-      - keywords: FOG_EXP2 INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-          _SPECGLOSSMAP
-        passType: 13
-      - keywords: FOG_EXP2 INSTANCING_ON _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS
-          _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ALPHAPREMULTIPLY_ON
-          _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
-          _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
-          _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-          _SPECGLOSSMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON _SPECGLOSSMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON _SPECULAR_COLOR
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _EMISSION _HALFTONESHAPE_DOT _NORMALMAP
-          _OUTLINE _RIMLIGHTING_ON _SPECGLOSSMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS
-          _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS
-          _OUTLINE _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE
-          _RIMLIGHTING_ON
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE
-          _RIMLIGHTING_ON _SPECGLOSSMAP
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE
-          _RIMLIGHTING_ON _SPECULAR_COLOR
-        passType: 13
-      - keywords: FOG_EXP2 _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _RIMLIGHTING_ON
-          _SPECGLOSSMAP
-        passType: 13
-      - keywords: INSTANCING_ON
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ALPHAPREMULTIPLY_ON
           _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _OUTLINE _RIMLIGHTING_ON
@@ -535,69 +263,29 @@ ShaderVariantCollection:
           _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON _SPECGLOSSMAP
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
           _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
           _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON _SPECGLOSSMAP
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _RIMLIGHTING_ON _SPECULAR_COLOR
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
-          _MAIN_LIGHT_SHADOWS _NORMALMAP _OUTLINE _SPECGLOSSMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
           _MAIN_LIGHT_SHADOWS _OUTLINE _RIMLIGHTING_ON
         passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _EMISSION _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE
-          _RIMLIGHTING_ON _SPECGLOSSMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _HALFTONESHAPE_DOT
+          _MAIN_LIGHT_SHADOWS _RIMLIGHTING_ON
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _NORMALMAP
-          _OUTLINE
+          _OUTLINE _RIMLIGHTING_ON
         passType: 13
       - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _OUTLINE
           _RIMLIGHTING_ON
         passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-          _SPECGLOSSMAP
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _OUTLINE _RIMLIGHTING_ON
-          _SPECULAR_COLOR
-        passType: 13
-      - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _NORMALMAP _RIMLIGHTING_ON
-          _SPECGLOSSMAP
+      - keywords: _ADDITIONAL_LIGHTS _HALFTONESHAPE_DOT _MAIN_LIGHT_SHADOWS _RIMLIGHTING_ON
         passType: 13
       - keywords: _ALPHATEST_ON
         passType: 13
       - keywords: _OUTLINE
         passType: 13
-  - first: {fileID: -6465566751694194690, guid: 4a0db16c6eb59de4ba0ad689af53024f, type: 3}
-    second:
-      variants:
-      - keywords: FOG_EXP2 INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
-          _MAIN_LIGHT_SHADOWS
-        passType: 0
-      - keywords: INSTANCING_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 0
-      - keywords: INSTANCING_ON
-        passType: 8
-      - keywords: 
-        passType: 13
-      - keywords: INSTANCING_ON
-        passType: 13
-  - first: {fileID: 4800000, guid: 62c7edef3bb07450aa076390e219a7a0, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 4800000, guid: c915cc2cff3b744dc8432d19f6928318, type: 3}
     second:
       variants:
@@ -611,8 +299,5 @@ ShaderVariantCollection:
   - first: {fileID: 4800000, guid: cd79ad756ee3e4d3f8fe6b417ef8c835, type: 3}
     second:
       variants:
-      - keywords: VF2_DEPTH_GRADIENT VF2_RECEIVE_SHADOWS VF2_SHAPE_BOX VF2_SURFACE
-          _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
-        passType: 13
       - keywords: VF2_SHAPE_BOX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
         passType: 13

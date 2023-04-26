@@ -39,7 +39,7 @@ public class Grapple : MonoBehaviour, IAbility
     [SerializeField] public Collider bestHook;
     public Collider playerCollider;
     public Vector3 bestHookCenter;
-    float radius = 9.0f;
+    float radius = 11.0f;
 
     [SerializeField] Rigidbody playerRB;
     [SerializeField] BasicMovement player;

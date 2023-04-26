@@ -141,7 +141,8 @@ public class SceneTransition : MonoBehaviour
                 checkpointData.position = new Vector3(-10.74f, 45.0f, 27.74f);
                 //DataManager.gameData.position.Set(-10.74f, 45.0f, 27.74f);
 
-                sceneToTransfer = "AcceptanceIntro";
+                //sceneToTransfer = "AcceptanceIntro";
+                sceneToTransfer = "AcceptanceFinalLevel";
             }
 
             GameManager.Instance.SetCheckpoint(checkpointData);
@@ -162,8 +163,9 @@ public class SceneTransition : MonoBehaviour
         audioSource.PlayOneShot(glassSound);
 
         yield return new WaitForSeconds(3);
-        
-        sceneToTransfer = "DenialOutro";
+
+        //sceneToTransfer = "DenialOutro";
+        sceneToTransfer = "HubFinal";
         StartCoroutine(FadeInOutBlack(1.5f));
     }
     

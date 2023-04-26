@@ -8,6 +8,13 @@ public class TriggerEndScene : MonoBehaviour
 {
     string sceneToTransfer;
     [SerializeField] Levels level;
+    
+    private FadeBlack fadeBlack;
+    
+    void Start()
+    {
+        fadeBlack = FindObjectOfType<FadeBlack>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -15,24 +22,25 @@ public class TriggerEndScene : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                var checkpointData = new CheckpointData();
-                checkpointData.room = 1;
-
-                GameManager.Instance.CompleteLevel(level);
-
-                GameManager.Instance.SetCheckpoint(checkpointData);
-                DataManager.gameData.checkpointed = false;
-
-                sceneToTransfer = "CutsceneEnd";
-                SceneManager.LoadScene(sceneToTransfer);
+                StartCoroutine(EndGame(2f));
             }
         }
-        // else if (level == Levels.DEN)
-        // {
-        //     if (other.tag == "Player")
-        //     {
-        //         GetComponent<Animator>().SetTrigger("End");
-        //     }
-        // }
+    }
+
+    private IEnumerator EndGame(float waitTime)
+    {
+        GameManager.Instance.DisableInput();
+        fadeBlack.FadeToBlack(waitTime);
+        yield return new WaitForSeconds(waitTime);
+
+        var checkpointData = new CheckpointData();
+        checkpointData.room = 1;
+
+        //GameManager.Instance.CompleteLevel(level);
+        GameManager.Instance.SetCheckpoint(checkpointData);
+        DataManager.gameData.checkpointed = false;
+        
+        sceneToTransfer = "CutsceneEnd";
+        SceneManager.LoadScene(sceneToTransfer);
     }
 }

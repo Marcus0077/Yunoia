@@ -43,6 +43,9 @@ public class ErisDamage : MonoBehaviour
         {
             yield break;
         }
+        
+        Destroy(gameObject.GetComponentInChildren<MeshRenderer>());
+        
         float waitTime = 2.5f;
         bossAttack.attackFrozen = true;
         
@@ -51,9 +54,7 @@ public class ErisDamage : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         boss.ErisHurt();
-        
-        //this.gameObject.GetComponentsInChildren<Renderer>()[0].material.SetColor("_EmissionColor", Color.black);
-        //this.gameObject.GetComponentsInChildren<Renderer>()[1].material.SetColor("_EmissionColor", Color.black);
+
         yield return new WaitForSeconds(waitTime);
 
         bossAttack.attackFrozen= false;

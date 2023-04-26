@@ -40,7 +40,7 @@ public class AngerMooseRun : MonoBehaviour
     {
         gameManager.DisableInput();
         
-        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 14f, 18);
+        VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 12f, 18);
         VCam1.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 30;
         
         yield return new WaitForSeconds(4f);
@@ -52,7 +52,7 @@ public class AngerMooseRun : MonoBehaviour
         {
             float t = timePassed / duration;
             
-            float y = Mathf.Lerp(14f, 3.5f, t);
+            float y = Mathf.Lerp(12f, 3.5f, t);
             float z = Mathf.Lerp(18f, 0f, t);
             float dis = Mathf.Lerp(30f, 12f, t);
 

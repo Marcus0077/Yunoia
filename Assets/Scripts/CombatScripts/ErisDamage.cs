@@ -52,12 +52,12 @@ public class ErisDamage : MonoBehaviour
 
         boss.ErisHurt();
         
-        Destroy(gameObject);
         //this.gameObject.GetComponentsInChildren<Renderer>()[0].material.SetColor("_EmissionColor", Color.black);
         //this.gameObject.GetComponentsInChildren<Renderer>()[1].material.SetColor("_EmissionColor", Color.black);
-
         yield return new WaitForSeconds(waitTime);
 
         bossAttack.attackFrozen= false;
+
+        Destroy(gameObject);
     }
 }

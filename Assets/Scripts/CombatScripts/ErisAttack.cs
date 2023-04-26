@@ -25,6 +25,7 @@ public class ErisAttack : MonoBehaviour
                 {
                     GameObject go = Instantiate(collisionParticles, gameObject.transform.position, gameObject.transform.rotation);
                     go.GetComponent<ErisAttack>().controller = controller;
+                    controller.attackSpawned = go.GetComponent<ErisAttack>();
                 }
                 Destroy(gameObject);
             }

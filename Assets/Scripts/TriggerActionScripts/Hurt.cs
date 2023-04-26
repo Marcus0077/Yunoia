@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Hurt : MonoBehaviour
 {
-    [SerializeField]
-    GameObject parent;
+    [SerializeField] GameObject parent;
+    [SerializeField] AudioSource hurtSound;
+
     // Actions to take place upon touching the collider
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,10 +16,20 @@ public class Hurt : MonoBehaviour
         {
             if (contact.otherCollider.CompareTag("Player"))
             {
+                if (hurtSound != null)
+                {
+                    hurtSound.Play();
+                }
+
                 GameManager.Instance.Player.GetComponent<BasicMovement>().Hurt(parent.transform);
             }
             else if (contact.otherCollider.CompareTag("Clone"))
             {
+                if (hurtSound != null)
+                {
+                    hurtSound.Play();
+                }
+                
                 GameObject.FindObjectOfType<ExitClone>().despawnClone = true;
             }
         }

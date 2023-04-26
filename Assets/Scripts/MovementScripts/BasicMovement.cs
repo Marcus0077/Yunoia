@@ -64,6 +64,7 @@ public class BasicMovement : MonoBehaviour, IAbility
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource runSoundOne;
     [SerializeField] private AudioSource runSoundTwo;
+    [SerializeField] private AudioSource hurtSound;
 
     private bool runSoundOneCanPlay = true;
     private bool runSoundTwoCanPlay = false;
@@ -654,10 +655,20 @@ public class BasicMovement : MonoBehaviour, IAbility
     {
         if (isDamaged)
         {
+            if (hurtSound != null)
+            {
+                hurtSound.Play();
+            }
+
             StartCoroutine(Knockback(other, true));
         }
         else
         {
+            if (hurtSound != null)
+            {
+                hurtSound.Play();
+            }
+            
             StartCoroutine(Knockback(other, false));
         }
     }

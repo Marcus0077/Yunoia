@@ -6,17 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class Death : MonoBehaviour
 {
+    [SerializeField] AudioSource hurtSound;
+
     // Actions to take place upon touching the collider
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            if (hurtSound != null)
+            {
+                hurtSound.Play();
+            }
+
             //StartCoroutine(FadeThenDie());
             GameObject.FindObjectOfType<PauseMenu>().DisableInput();
             FadetoBlack();
         }
         else if (other.CompareTag("Clone"))
         {
+            if (hurtSound != null)
+            {
+                hurtSound.Play();
+            }
+            
             GameObject.FindObjectOfType<ExitClone>().despawnClone = true;
         }
         else if (other.CompareTag("BoxScale"))
@@ -31,6 +43,7 @@ public class Death : MonoBehaviour
 
     public void FadetoBlack()
     {
+
         //StartCoroutine(FadeThenDie());
         GameManager.Instance.StartDeath();
     }

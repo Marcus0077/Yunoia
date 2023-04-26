@@ -8,6 +8,7 @@ public class ErisDamage : MonoBehaviour
     private ErisBoss boss;
     private ErisAttackController bossAttack;
     public int puzzleNum;
+    Animator anim;
 
     private bool used;
 
@@ -16,6 +17,7 @@ public class ErisDamage : MonoBehaviour
         used = false;
         boss = GameObject.FindObjectOfType<ErisBoss>();
         bossAttack = GameObject.FindObjectOfType<ErisAttackController>();
+        anim = boss.GetComponent<Animator>();
     }
 
     public void DoDamage()
@@ -32,7 +34,6 @@ public class ErisDamage : MonoBehaviour
     //    }
     //}
 
-    
     private IEnumerator CompletePuzzle()
     {
         if(!used)
@@ -45,19 +46,22 @@ public class ErisDamage : MonoBehaviour
         }
         
         Destroy(gameObject.GetComponentInChildren<MeshRenderer>());
-        
+
         float waitTime = 2.5f;
+
         bossAttack.attackFrozen = true;
         
         GameManager.Instance.ShowPuzzleWrapper(puzzleNum, waitTime);
-
+        
+        anim.SetTrigger("Hurt");
+        boss.StartCoroutine(boss.DamageShield());
         yield return new WaitForSeconds(waitTime);
 
         boss.ErisHurt();
 
         yield return new WaitForSeconds(waitTime);
 
-        bossAttack.attackFrozen= false;
+        bossAttack.attackFrozen = false;
 
         Destroy(gameObject);
     }

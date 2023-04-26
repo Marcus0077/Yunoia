@@ -12,6 +12,7 @@ public class ErisBoss : MonoBehaviour
     public float health;
     public Color color;
     Color origBossShieldColor;
+    Animator anim;
 
     private GameObject EndScene;
 
@@ -21,6 +22,7 @@ public class ErisBoss : MonoBehaviour
         health = 3.0f;
         EndScene = GameObject.FindGameObjectWithTag("EndScene");
         origBossShieldColor = bossShield.GetComponent<ParticleSystemRenderer>().material.GetColor("_TintColor");
+        anim = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,12 +46,11 @@ public class ErisBoss : MonoBehaviour
     public void ErisHurt()
     {
         health -= 1.0f;
-
-        StartCoroutine(DamageShield());
     }
 
-    private IEnumerator DamageShield()
+    public IEnumerator DamageShield()
     {
+        yield return new WaitForSeconds(1.2f);
         //damageShield.SetActive(true);
         //bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", color);
         LeanTween.value(bossShield, origBossShieldColor, color, .5f).setOnUpdate((Color val) => { bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", val); });
@@ -57,6 +58,7 @@ public class ErisBoss : MonoBehaviour
         LeanTween.value(bossShield, color, origBossShieldColor, .5f).setOnUpdate((Color val) => { bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", val); });
         //damageShield.SetActive(false);
         //bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", origBossShieldColor);
+        //anim.SetBool("Hurt", false);
     }
 
     void UpdateMat(Color newColor)

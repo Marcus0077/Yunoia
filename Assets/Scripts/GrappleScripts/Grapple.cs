@@ -109,7 +109,7 @@ public class Grapple : MonoBehaviour, IAbility
                 grapplePoints[i] = GameObject.FindGameObjectsWithTag("GrappleHookPoint")[i];
                 i++;
                 
-                Debug.Log(i);
+                //Debug.Log(i);
             }
 
             foreach (var point in grapplePoints)
@@ -160,7 +160,7 @@ public class Grapple : MonoBehaviour, IAbility
                 dirFromPlayer = (bestHookCenter - testAim.position).normalized;
                 dotProd = Vector3.Dot(dirFromPlayer, testAim.forward);
 
-                Debug.Log(dotProd);
+                //Debug.Log(dotProd);
             }
         }
 

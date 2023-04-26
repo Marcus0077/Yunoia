@@ -110,9 +110,10 @@ public class RebindingComponent : MonoBehaviour
     {
         for(int i = 1; i < actions.Length; i++)
         {
-            actions[i].ApplyBindingOverride(actions[0].bindings[0].overridePath, group : GameManager.Instance.controlScheme);
+            actions[i].ApplyBindingOverride(actions[0].bindings[(int)GameManager.Instance.settings[(int)Settings.CTRL]].overridePath, group : GameManager.Instance.controlScheme);
         }
         var rebinds = action.SaveBindingOverridesAsJson();
+        Debug.Log(actions[0].bindings[1].overridePath);
         PlayerPrefs.SetString("Rebinds", rebinds);
         OnEnable();
         dimmer.alpha = 0;

@@ -15,6 +15,8 @@ public class AngerMooseRun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.transform.position = new Vector3(-263.835571f,1.400056f,86.4534607f);
+        
         mooseAnimator = GetComponent<Animator>();
         gameManager = FindObjectOfType<GameManager>();
 

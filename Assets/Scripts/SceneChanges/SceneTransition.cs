@@ -54,7 +54,7 @@ public class SceneTransition : MonoBehaviour
         Time.timeScale = 1;
         StartCoroutine(FadeInOutBlackVariable(1.5f, sceneToTransfer));
     }
-
+    
     void OnTriggerEnter(Collider other)
     {
 

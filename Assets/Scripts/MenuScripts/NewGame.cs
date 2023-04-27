@@ -20,10 +20,10 @@ public class NewGame : MonoBehaviour
         }
         else
         {
-            text.text = "Start";
+            text.text = "Continue";
         }
     }
-
+    
     // Update is called once per frame
     void Update()
     {

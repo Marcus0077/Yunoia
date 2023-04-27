@@ -3,12 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
+
+        if (DataManager.gameData != null)
+        {
+            if (DataManager.gameData.levelCompletion[(int)Levels.ACC])
+            {
+                GameManager.Instance.NewGame();
+            }
+        }
     }
 
     // Sets prototype scene to active and set time scale to normal when play button is pressed.

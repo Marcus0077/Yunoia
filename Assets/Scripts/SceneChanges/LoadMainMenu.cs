@@ -34,7 +34,7 @@ public class LoadMainMenu : MonoBehaviour
             SceneManager.LoadScene("Main Menu");
         }
     }
-    
+
     private IEnumerator OpenMainMenu()
     {
         yield return new WaitForSeconds(3f);

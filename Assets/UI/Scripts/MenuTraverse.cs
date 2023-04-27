@@ -294,9 +294,12 @@ public class MenuTraverse : MonoBehaviour
     //Doesn't reset anything, just shows the effect of resetting without needing to back out
     public void ResetSettings()
     {
-        foreach (OnButtonHover button in buttons)
+        if (buttons != null)
         {
-            button.OnEnable();
+            foreach (OnButtonHover button in buttons)
+            {
+                button.OnEnable();
+            }
         }
     }
 }

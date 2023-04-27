@@ -55,7 +55,7 @@ public class ErisBoss : MonoBehaviour
         //damageShield.SetActive(true);
         //bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", color);
         LeanTween.value(bossShield, origBossShieldColor, color, .5f).setOnUpdate((Color val) => { bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", val); });
-        AudioSource.PlayClipAtPoint(hurtClip, player.position, GameManager.Instance.GetFloat(Settings.MAS) * GameManager.Instance.GetFloat(Settings.SFX));
+        //AudioSource.PlayClipAtPoint(hurtClip, player.position, GameManager.Instance.GetFloat(Settings.MAS) * GameManager.Instance.GetFloat(Settings.SFX));
         yield return new WaitForSeconds(.5f);
         LeanTween.value(bossShield, color, origBossShieldColor, .5f).setOnUpdate((Color val) => { bossShield.GetComponent<ParticleSystemRenderer>().material.SetColor("_TintColor", val); });
         //damageShield.SetActive(false);

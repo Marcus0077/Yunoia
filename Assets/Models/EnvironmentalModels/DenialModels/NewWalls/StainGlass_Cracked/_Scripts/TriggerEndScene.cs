@@ -36,7 +36,7 @@ public class TriggerEndScene : MonoBehaviour
         var checkpointData = new CheckpointData();
         checkpointData.room = 1;
 
-        //GameManager.Instance.CompleteLevel(level);
+        GameManager.Instance.CompleteLevel(level);
         GameManager.Instance.SetCheckpoint(checkpointData);
         DataManager.gameData.checkpointed = false;
         

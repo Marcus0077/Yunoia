@@ -242,7 +242,8 @@ public class Lever : MonoBehaviour
             if (activateText != null && !isPlayer) 
                 activateText.enabled = false;
             
-            cloneInteractions.canPressLever = false;
+            if (cloneInteractions != null)
+                cloneInteractions.canPressLever = false;
             
             isClone = false;
         }

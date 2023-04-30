@@ -42,7 +42,7 @@ public class AngerOutro : MonoBehaviour
         aToSkip.SetActive(true);
         canSkip = true;
         
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(7f);
 
         SceneManager.LoadScene("HubFinal");
     }

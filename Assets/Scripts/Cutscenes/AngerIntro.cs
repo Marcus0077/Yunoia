@@ -42,7 +42,7 @@ public class AngerIntro : MonoBehaviour
         aToSkip.SetActive(true);
         canSkip = true;
         
-        yield return new WaitForSeconds(18f);
+        yield return new WaitForSeconds(17f);
 
         SceneManager.LoadScene("AngerFinal");
     }

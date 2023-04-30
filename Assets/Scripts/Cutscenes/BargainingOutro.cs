@@ -42,7 +42,7 @@ public class BargainingOutro : MonoBehaviour
         aToSkip.SetActive(true);
         canSkip = true;
         
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(14f);
 
         SceneManager.LoadScene("HubFinal");
     }

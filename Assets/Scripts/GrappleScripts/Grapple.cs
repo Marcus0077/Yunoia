@@ -15,7 +15,7 @@ public class Grapple : MonoBehaviour, IAbility
     float recoveryPullSpeed = 0.36f;
 
     float initalHorizSpeed = 0.0f;
-    float horizSpeed = 10.0f;
+    float horizSpeed = 8.5f;
     float recoveryHorizSpeed = 10.0f;
 
     float yankSpeedStrong = 6.0f;
@@ -63,6 +63,7 @@ public class Grapple : MonoBehaviour, IAbility
     public bool needYankSwing = true;
     public bool recoverySwing = false;
     public bool initalSwingForce = false;
+    public bool groundedSwing = false;
     float cdRemaining;
 
     Vector3 dirFromPlayer;
@@ -123,7 +124,7 @@ public class Grapple : MonoBehaviour, IAbility
 
     void FixedUpdate()
     {
-        if (playerRB.position.y > maxSwingHeight)
+        if (playerRB.worldCenterOfMass.y > maxSwingHeight)
         {
             DestroyHook();
         }
@@ -135,11 +136,11 @@ public class Grapple : MonoBehaviour, IAbility
         }
 
         // Initializes maxSwingHeight for 'GrappleYank' points once in the air allowing for a reliable swing
-        if (yankReady && !player.isGrounded && needYankSwing)
+        /*if (yankReady && !player.isGrounded && needYankSwing)
         {
-            maxSwingHeight = playerRB.position.y + heightCapDistance;
+            maxSwingHeight = playerRB.position.y + heightCapDistance + 0.5f;
             needYankSwing = false;
-        }
+        }*/
 
         // Caps player player velocity according to SetMaxVelocity() on awake
         if (playerRB.velocity.sqrMagnitude > sqrMaxVelocity)
@@ -284,8 +285,14 @@ public class Grapple : MonoBehaviour, IAbility
         yankReady = false;
         forwardSwing = true;
 
+        if (player.isGrounded)
+        {
+            groundedSwing = true;
+        }
+
         stopDistanceFar = Vector3.Distance(transform.position, hook.transform.position) + 4.0f;
-        maxSwingHeight = playerRB.position.y + heightCapDistance;
+
+        setSwingHeight();
 
         if (canYank)
         {
@@ -295,6 +302,8 @@ public class Grapple : MonoBehaviour, IAbility
     // Destroys an active grapple
     public void DestroyHook()
     {
+        player.move.Enable();
+        
         if (hook == null)
         {
             return;
@@ -311,6 +320,22 @@ public class Grapple : MonoBehaviour, IAbility
         StopAllCoroutines();
 
         StartCoroutine(GrappleCooldown());
+    }
+
+    public void setSwingHeight()
+    {
+        if (groundedSwing)
+        {
+            maxSwingHeight = playerRB.worldCenterOfMass.y + heightCapDistance + 0.5f;
+        }
+        else if (playerRB.velocity.y > 0.0f)
+        {
+            maxSwingHeight = playerRB.worldCenterOfMass.y + 0.5f;
+        }
+        else
+        {
+            maxSwingHeight = playerRB.worldCenterOfMass.y + heightCapDistance;
+        }
     }
 
     // Failsafe that destroys the grapple a certain amount of time after shooting it when it
@@ -400,7 +425,7 @@ public class Grapple : MonoBehaviour, IAbility
         }
 
         // Once the player reaches maxSwingHeight mid swing, they have completed once cycle
-        if ((playerRB.position.y > maxSwingHeight) && canApplyForce)
+        if ((playerRB.worldCenterOfMass.y > maxSwingHeight) && canApplyForce)
         {
             // Temporary Coroutine Swap
             //StartCoroutine(ReverseSwing());
@@ -472,13 +497,26 @@ public class Grapple : MonoBehaviour, IAbility
     // Adds horizontal force for forward and backward swings relative to the player direction
     private void HorizontalSwing()
     {
+        player.move.Disable();
+
         if (recoverySwing)
         {
             playerRB.AddRelativeForce(recoveryHorizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
         }
         else if (forwardSwing)
         {
-            playerRB.AddRelativeForce(horizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
+            if (Vector3.Distance(transform.position, hook.transform.position) <= 4.0f)
+            {
+                playerRB.AddRelativeForce(0.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+            }
+            else if (groundedSwing)
+            {
+                playerRB.AddRelativeForce((horizSpeed + 1.5f), 0.0f, 0.0f, ForceMode.VelocityChange);
+            }
+            else
+            {
+                playerRB.AddRelativeForce(horizSpeed, 0.0f, 0.0f, ForceMode.VelocityChange);
+            }
         }
 
         /*else if (forwardSwing)
@@ -575,6 +613,7 @@ public class Grapple : MonoBehaviour, IAbility
         recoverySwing = false;
         swinging = false;
         yanking = false;
+        groundedSwing = false;
         //initalSwingForce = false;
         maxSwingHeight = float.MaxValue;
         lastPlayerPos = Vector3.zero;

@@ -330,7 +330,7 @@ public class Grapple : MonoBehaviour, IAbility
         }
         else if (playerRB.velocity.y > 0.0f)
         {
-            maxSwingHeight = playerRB.worldCenterOfMass.y + 0.5f;
+            maxSwingHeight = playerRB.worldCenterOfMass.y + 1.0f;
         }
         else
         {
@@ -432,7 +432,7 @@ public class Grapple : MonoBehaviour, IAbility
             //StartCoroutine(RemoveForce());
         }
 
-        if (player.isGrounded)
+        if (player.isGrounded && !swinging)
         {
             return;
         }
@@ -505,11 +505,11 @@ public class Grapple : MonoBehaviour, IAbility
         }
         else if (forwardSwing)
         {
-            if (Vector3.Distance(transform.position, hook.transform.position) <= 4.0f)
+            /*if (Vector3.Distance(transform.position, hook.transform.position) <= 4.0f)
             {
                 playerRB.AddRelativeForce(0.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
             }
-            else if (groundedSwing)
+            else */if (groundedSwing)
             {
                 playerRB.AddRelativeForce((horizSpeed + 1.5f), 0.0f, 0.0f, ForceMode.VelocityChange);
             }

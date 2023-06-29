@@ -432,7 +432,7 @@ public class Grapple : MonoBehaviour, IAbility
             //StartCoroutine(RemoveForce());
         }
 
-        if (player.isGrounded && !swinging)
+        if (player.isGrounded)
         {
             return;
         }
@@ -448,7 +448,7 @@ public class Grapple : MonoBehaviour, IAbility
             StartCoroutine(InitialSwingForce());
         }*/
 
-        if (playerRB.velocity.y < -5.0f)
+        if (playerRB.velocity.y < -5.0f && (Vector3.Distance(transform.position, hook.transform.position) > 4.0f))
         {
             recoverySwing = true;
             StartCoroutine(RecoverySwing());
@@ -505,11 +505,11 @@ public class Grapple : MonoBehaviour, IAbility
         }
         else if (forwardSwing)
         {
-            /*if (Vector3.Distance(transform.position, hook.transform.position) <= 4.0f)
+            if (Vector3.Distance(transform.position, hook.transform.position) <= 4.0f)
             {
-                playerRB.AddRelativeForce(0.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
+                playerRB.AddRelativeForce(3.0f, 0.0f, 0.0f, ForceMode.VelocityChange);
             }
-            else */if (groundedSwing)
+            else if (groundedSwing)
             {
                 playerRB.AddRelativeForce((horizSpeed + 1.5f), 0.0f, 0.0f, ForceMode.VelocityChange);
             }
